@@ -7,7 +7,7 @@
 # dc: Data Carpentry
 # lc: Library Carpentry
 # cp: Carpentries (to use for instructor traning for instance)
-carpentry: "swc"
+carpentry: "geo"
 
 # Overall title for pages.
 title: "GEO4962: The General Circulation of the Atmosphere"
@@ -43,6 +43,8 @@ lc_site: "https://librarycarpentry.org/"
 swc_github: "https://github.com/swcarpentry"
 swc_pages: "https://swcarpentry.github.io"
 swc_site: "https://software-carpentry.org"
+geo_pages: "https://www.mn.uio.no/geo/english/"
+geo_site: "https://www.mn.uio.no/geo/english/"
 template_repo: "https://github.com/carpentries/styles"
 training_site: "https://carpentries.github.io/instructor-training"
 workshop_repo: "https://github.com/carpentries/workshop-template"
