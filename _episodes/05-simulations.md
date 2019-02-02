@@ -13,9 +13,9 @@ keypoints:
 - "climate scenario"
 ---
 
+<img src="../fig/long_simulations.jpg">
 
 *   [Introduce model experiments](#introduce-model-experiments)
-*   
 
 # Introduce model experiments
 

@@ -18,7 +18,10 @@ keypoints:
 - "jupyterlab"
 - "psyplot, xarray, ipyleaflet"
 ---
+
 # Post-processing and Visualization
+
+<img src="../fig/visualization.png">
 
 You will be using both cruncher (cruncher.norstore.uio.no) and viz2 (viz2.norstore.uio.no) to post-process your data (cruncher) and visualize your data (viz2).  
 

@@ -16,8 +16,11 @@ keypoints:
 - "slurm"
 ---
 
+
 # First practical: get familiar with cesm
-  
+
+<img src="../fig/practicals.jpg">
+
 We do all the practicals on <font color="red">Abel</font>.  
 
 *   [Notur Initialization](#notur-initialization)
