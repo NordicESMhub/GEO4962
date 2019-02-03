@@ -23,7 +23,7 @@ keypoints:
 
 <img src="../fig/visualization.png">
 
-You will be using both cruncher (cruncher.norstore.uio.no) and viz2 (viz2.norstore.uio.no) to post-process your data (cruncher) and visualize your data (viz2).  
+You will be using both NIRD (login.nird.sigma2.no) and associated jupyterhub to post-process your data (NIRD) and visualize your data (jupyterhub).  
 
 *   [Visualize your model outputs with psyplot](#psyplot)
 *   [Post-processing workflow: example with the control experiment](#workflow)
@@ -71,7 +71,7 @@ You will be using both cruncher (cruncher.norstore.uio.no) and viz2 (viz2.norsto
 
 ### **NIRD**
 
-#### Setup on cruncher
+#### Setup on NIRD
 
 **nird**
 
@@ -90,7 +90,7 @@ module load ncl
 
 [nco](http://nco.sourceforge.net/)
 
-<font color="red">on cruncher</font>
+<font color="red">on NIRD</font>
 
 `
 
@@ -216,7 +216,7 @@ ncra -d time,1461.,1492\. f2000.T31T31.control.cam.h0.0004-01-*.nc f2000.T31T31.
 
 **f2000.T31T31.control-0005-01-monmean.nc**
 
-1.  Download [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) and transfer it to cruncher. Here we assume you have your vert_1.ncl script in **$HOME/GEO4962/control/**.
+1.  Download [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) and transfer it to NIRD. Here we assume you have your vert_1.ncl script in **$HOME/GEO4962/control/**.
 2.  Edit vert_1.ncl (use your favourite editor such as emacs) and change the input file name:/li>`
 
     <pre>fn  = "f2000.T31T31.control-0005-01-monmean.nc" ; define filename
@@ -224,7 +224,7 @@ ncra -d time,1461.,1492\. f2000.T31T31.control.cam.h0.0004-01-*.nc f2000.T31T31.
 
     `  
 
-3.  Then run your script with ncl <font color="red">on cruncher</font>:
+3.  Then run your script with ncl <font color="red">on NIRD</font>:
 
 `
 

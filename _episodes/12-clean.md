@@ -57,10 +57,10 @@ The currently available licences covering access to a dataset are: the Creative 
 A last section will appear on the same web page where you can choose how to upload your dataset. Click on "Project Area":  
 ![](../../images/uploadnorStore.png)  
 
-You will receive an email with some intructions to upload your dataset. The upload is initiated from the web interface and completed by running the command-line script "ArchiveDataset" on cruncher.norstore.uio.no.  
+You will receive an email with some intructions to upload your dataset. The upload is initiated from the web interface and completed by running the command-line script "ArchiveDataset" on login.nird.sigma2.no.  
 Once archived and your post-processing and visualization are done, you can [delete](clean.html) all the files stored on the norStore project area.  
 
-<font color="green">On norStore (cruncher.norstore.uio.no)</font>:`
+<font color="green">On norStore (login.nird.sigma2.no)</font>:`
 
 <pre>cd /projects/NS1000K/GEO4962/outputs/$USER/archive
 </pre>
@@ -124,7 +124,7 @@ If you are done with your post-processing and visualization, you can now [delete
 
  
 Once your experiments are archived on the [norStore archive](https://archive.norstore.no/), you can delete files on the norStore project area:  
-<font color="green">On norStore (cruncher.norstore.uio.no)</font>:  
+<font color="green">On norStore (login.nird.sigma2.no)</font>:  
 `
 
 <pre>rm -rf /projects/NS1000K/GEO4962/outputs/$USER/runs

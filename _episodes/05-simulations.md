@@ -226,7 +226,7 @@ rsync -avz /work/users/$USER/archive/f2000.T31T31.$EXPNAME $USER@login.nird.sigm
 </pre>
 
 `  
-Once the previous commands are successful, you are ready to [post-process and visualize](../../results.html) your data on cruncher.norstore.uio.no  
+Once the previous commands are successful, you are ready to [post-process and visualize](../../results.html) your data on login.nird.sigma2.no  
 
 However, as your simulation is stored on the norStore project area, you can now [archive your experiment](archive.html) on the norStore archive (long-term archive i.e. several years).
 
