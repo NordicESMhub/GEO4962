@@ -25,10 +25,10 @@ keypoints:
 
 You will be using both NIRD (login.nird.sigma2.no) and associated jupyterhub to post-process your data (NIRD) and visualize your data (jupyterhub).  
 
-*   [Visualize your model outputs with psyplot](#psyplot)
-*   [Post-processing workflow: example with the control experiment](#workflow)
-*   [SPARC Climatology](#sparc)
-*   [Exercice-1](#exercice1)
+*   [Visualize your model outputs with psyplot](#visualization-with-psyplot)
+*   [Post-processing workflow: example with the control experiment](#post-processing-workflow:-example-with-the-control-experiment)
+*   [SPARC Climatology](#sparc-climatology)
+*   [Exercice-1](#exercice-1)
 
 # Visualization with psyplot
 
@@ -36,12 +36,12 @@ You will be using both NIRD (login.nird.sigma2.no) and associated jupyterhub to 
 ### **Geographical map**
 
 
-<font color="red">
 
-*   Which Time did you plot?
-*   Which level did you plot?
 
-</font>
+-  <font color="red">Which Time did you plot?</font>
+-  <font color="red">Which level did you plot?</font>
+
+
 
 
 ### **Georeferenced Latitude-Vertical plot**
@@ -51,17 +51,15 @@ You will be using both NIRD (login.nird.sigma2.no) and associated jupyterhub to 
 
 <font color="red">On nird (login.nird.sigma2.no):</font>
 
-`
 
 <pre>cd /projects/NS1000K/GEO4962/outputs/archive/f2000.T31T31.control/atm/hist
 </pre>
 
-`
 
 <font color="red">
 
-*   How many years did we run?
-*   What is the output frequency?
+-   How many years did we run?
+-   What is the output frequency?
 
 </font>
 
