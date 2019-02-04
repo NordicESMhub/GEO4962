@@ -15,7 +15,7 @@ if [ ! -d "$HOME/cesm" ]; then
   cd $HOME/cesm/cesm1_2_2/scripts 
 
   if [ ! -d "/work/users/$LOGNAME/inputdata" ]; then
-    ./link_dirtree $CESM_HOME/inputdata /work/users/$LOGNAME/inputdata
+    ./link_dirtree $CESM_DATA /work/users/$LOGNAME/inputdata
   fi
 
   if [ ! -f "~/.ccsm_proj" ]; then
