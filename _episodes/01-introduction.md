@@ -58,7 +58,7 @@ From a Linux terminal:`
 Documentation on norStore facility can be found [here](https://www.sigma2.no/node/8).  
 
 Please note that these machines are not accessible outside the UIO networks. If you wish to login on abel or NIRD outside the UIO network, use [X2Go Client](http://www.mn.uio.no/geo/english/services/it/help/using-linux/x2go.html).  
-The source code we will be using is stored in /projects/NS1000K/GEO4962/cesm1_2_2/models/atm/cam:`
+The source code we will be using is stored (on NIRD) in /projects/NS1000K/GEO4962/cesm1_2_2/models/atm/cam:
 
 <pre>cd /projects/NS1000K/GEO4962/cesm1_2_2/models/atm/cam
 ls 
@@ -77,7 +77,7 @@ The full developers guidelines can be found [here](https://www2.cesm.ucar.edu/wo
 The source code for CAM 5.3 is located in the "src" and its sub-directories (the main parts are highlighted in bold):
 
 *   **control**: contains several Fortran 90 modules to control CAM 5\. That's a good starting point to explore CAM source code. Look for instance at cam_comp.F90:  
-    The main subroutines for controlling CAM 5 are:`
+    The main subroutines for controlling CAM 5 are:
 
     <pre>    .
         .
