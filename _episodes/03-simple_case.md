@@ -105,7 +105,6 @@ module load cesm/1.2.2
     *   short name: F_2000_CAM5
     *   long name: 2000_CAM5_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV  
     The notation for the compset longname is:  
-    `
 
     <pre>   TIME_ATM[%phys]_LND[%phys]_ICE[%phys]_OCN[%phys]_ROF[%phys]_GLC[%phys]_WAV[%phys][_BGC%phys]
     </pre>
@@ -151,7 +150,6 @@ For this tests (and all our simulations), we do not wish to have a "cold" start 
 
 <font color="red">On Abel:</font>
 
-
 <pre>./xmlchange RUN_TYPE=hybrid
 ./xmlchange RUN_REFCASE=f2000.T31T31.control
 ./xmlchange RUN_REFDATE=0009-01-01
@@ -165,7 +163,7 @@ We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFC
 
 </pre>
 
-To change the duration of our test simulation and set it to 1 month:`
+To change the duration of our test simulation and set it to 1 month:
 
 <pre>./xmlchange -file env_run.xml -id STOP_N -val 1
 ./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
@@ -189,19 +187,20 @@ After building CESM for your configuration, a new directory (and a set of sub-di
 ### Running a case
 
 Namelists can be changed before configuring and building CESM but it can also be done before running your test case. Then, you cannot use xmlchange and update the xml files, you need to directly change the namelist files.  
-The default history file from CAM is a monthly average. We can change the output frequency with the namelist variable **nhtfrq**
+
+The default history file from CAM is a monthly average, and this is what we are going to use in this lesson. 
+
+However, it is possible to change the output frequency with the namelist variable **nhtfrq**
 
 *   If nhtfrq=0, the file will be a monthly average
 *   If nhtfrq>0, frequency is input as number of timesteps.
 *   If nhtfrq<0, frequency is input as number of hours.
 
-For instance to change the history file from monthly average to daily average, we set the namelist variable nhtfrq = -24\. We also need to do the following changes (to copy restart files in your running directory, etc.):  
+(For instance to change the history file from monthly average to daily average, the namelist variable nhtfrq has to be set to -24\)
 
 <font color="red">On Abel:</font>
 
 We need to add two lines to the CAM5 namelist (called **user_nl_cice**):
-
-<font color="red">On Abel:</font> 
 
     cat >> user_nl_cice << EOF
     grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
@@ -210,7 +209,7 @@ We need to add two lines to the CAM5 namelist (called **user_nl_cice**):
 
 **[cat](http://www.linfo.org/cat.html)** is a unix shell command to display the content of files or combine and create files. Using >> followed by a filename (here user_nl_cam) means we wish to concatenate information to a file. If it does not exist, it is automatically created. Using << followed by a string (here EOF) means that the content we wish to concatenate is not in a file but written after EOF until another EOF is found.  
 
-Finally, we copy the control restart files (contains the state of the model at a given time so we can restart it). The files are stored on norStore; they were generated from a previous simulations where we have run the model for several years):  
+Finally, we have to copy the control restart files (contains the state of the model at a given time so we can restart it). The files are stored on norStore (they were generated from a previous simulation where the model was run for several years).
 
 <font color="red">On Abel:</font>
 
@@ -245,7 +244,7 @@ You can submit your test case to <font color="red">abel</font>:
 
 The script "f2000.T31T31.test.submit" submits a job to the job scheduler on abel. More information can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/).
 
-*   To monitor your job on <font color="red">abel:</font>
+*   To monitor your job on <font color="red">Abel:</font>
 
     <pre>squeue -u $USER
     </pre>
@@ -257,9 +256,11 @@ Full list of available commands and their usage can be found [here](http://www.u
 <font color="red">On Abel</font>: During your test case run, CAM-5.3 generates outputs in the "run" directory:  
 
 ![](../fig/rundir_test.png)  
-At the end of your run, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On abel this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
+At the end of your experiment, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On abel this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
 ![](../fig/archivedir_test.png)  
-Check your run was successful and generated all the necessary files you need for your analysis. <font color="red">On Abel:</font>
+Check your run was successful and generated all the necessary files you need for your analysis. 
+
+<font color="red">On Abel:</font>
 
 <pre>cd /work/users/$USER/f2000.T31T31.test/run
 ls -lrt
@@ -269,7 +270,9 @@ ls -lrt
 </pre>
 
 You should see a number of netCDF files (each of them ends with ".nc").  
-You can quickly visualize your data on abel (to make sure your simulation ran OK): <font color="red">On Abel:</font>
+You can quickly visualize your data on abel (to make sure your simulation ran OK).
+
+<font color="red">On Abel:</font>
 
 <pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
 module load ncview
