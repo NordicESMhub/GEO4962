@@ -18,21 +18,20 @@ keypoints:
 
 <img src="../fig/cesm01.jpg">
 
-The [Community Earth System Model](http://www2.cesm.ucar.edu/) (CESM) is a fully-coupled, global climate model that provides state-of-the-art computer simulations of the Earth's past, present, and future climate states.
+The [Community Earth System Model](http://www.cesm.ucar.edu/) (CESM) is a fully-coupled, global climate model that provides state-of-the-art computer simulations of the Earth's past, present, and future climate states.
 
-*   [CESM Web page](http://www2.cesm.ucar.edu/)
+*   [CESM Web page](http://www.cesm.ucar.edu/)
 *   [CESM User's Guide](http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/usersguide/book1.html)
-*   [CESM Supported Releases](https://www2.cesm.ucar.edu/models/current)
-*   [CESM scientifically validated configurations](https://www2.cesm.ucar.edu/models/scientifically-supported/)
+*   [CESM Supported Releases](https://www.cesm.ucar.edu/models/current)
+*   [CESM scientifically validated configurations](http://www.cesm.ucar.edu/models/scientifically-supported.html)
 *   [CESM Bulletin Board](http://bb.cgd.ucar.edu/)
-*   [CESM Support Policy](https://www2.cesm.ucar.edu/about/support)
+*   [CESM Support Policy](http://www.cesm.ucar.edu/about/support)
 
 
 ## Community Atmosphere Model
 
 *   [Community Atmosphere Model (CAM5, CAM-CHEM, WACCM)](http://www.cesm.ucar.edu/models/cesm1.2/cam/)
 *   [CAM-5.3 User's Guide](http://www.cesm.ucar.edu/models/cesm1.2/cam/docs/ug5_3/index.html)
-*   [CAM 5.3 Source code overview](#cam5)
 
 * * *
 
@@ -45,7 +44,7 @@ Some facts about CESM:
 *   Written in Fortran 90
 *   About 900 000 lines of Fortran 90 code
 *   About 12,000 lines of perl and shell scripts that configure, build, and run the model
-*   Parallelized with [MPI](http://www.mpi-forum.org/) (Message Passing Interface) and [OpenMP](http://openmp.org/wp/) (Open Multi-Processing)
+*   Parallelized with [MPI](http://www.mpi-forum.org/) (Message Passing Interface) and [OpenMP](http://openmp.org/) (Open Multi-Processing)
 *   To keep track of code changes, CESM developers currently use [subversion](https://subversion.apache.org/). However, some components use [git](https://git-scm.com/).
 *   Fortran Coding standard as well as style rules are enforced and anyone wishing to contribute to the Community Atmosphere Model must comply to these [rules](http://www.cesm.ucar.edu/working_groups/Software/dev_guide/dev_guide/node7.html).
 
