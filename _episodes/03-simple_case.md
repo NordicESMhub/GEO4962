@@ -109,8 +109,8 @@ module load cesm/1.2.2
     <pre>   TIME_ATM[%phys]_LND[%phys]_ICE[%phys]_OCN[%phys]_ROF[%phys]_GLC[%phys]_WAV[%phys][_BGC%phys]
     </pre>
 
-    The compset longname has the specified order:  
-    **atm, lnd, ice, ocn, river, glc wave cesm-options**  
+    The compset longname has the specified order: **atm, lnd, ice, ocn, river, glc wave cesm-options**  
+    
     Where:
 
     <pre>   TIME = Time period (e.g. 2000, 20TR, RCP8...)
@@ -138,7 +138,7 @@ module load cesm/1.2.2
 
 *   **mach**: specifies the machine where CESM will be compiled and run. We will be running CESM on abel (a set of scripts for abel can be found in $HOME/cesm/cesm1_2_2/scripts/ccsm_utils/Machines)
 
-Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresponding to our new case (<font color="red">On Abel:</font>)
+Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresponding to our new case (<font color="red">on Abel:</font>)
 
 
 <pre>cd ~/cesm_case/f2000.T31T31.test
@@ -155,7 +155,7 @@ For this tests (and all our simulations), we do not wish to have a "cold" start 
 ./xmlchange RUN_REFDATE=0009-01-01
 </pre>
 
-We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFCASE, etc.) defined in xml files. All the xml files contained in your test case directory will be used by cesm_setup to generate your configuration setup (Fortran namelist, etc.):  
+We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFCASE, etc.) defined in xml files. All the xml files contained in your test case directory will be used by cesm_setup to generate your configuration setup (Fortran namelist, etc.). 
 
 <font color="red">On Abel</font>:  
 
@@ -196,7 +196,12 @@ However, it is possible to change the output frequency with the namelist variabl
 *   If nhtfrq>0, frequency is input as number of timesteps.
 *   If nhtfrq<0, frequency is input as number of hours.
 
-(For instance to change the history file from monthly average to daily average, the namelist variable nhtfrq has to be set to -24\)
+*For instance if we wanted to change the history file from monthly average to daily average, we would have to set the namelist variable **nhtfrq** to -24.*
+
+The coupled CICE model requires a minimum of two files to run:
+
+*    **grid_file** is a binary or netcdf file containing grid information such as the latitude, longitude, grid cell area, etc.
+*    **kmt_file** is a binary or netcdf file containing land mask information. This points to the ocean model KMT file or the depths of the ocean columns.
 
 <font color="red">On Abel:</font>
 
@@ -216,7 +221,6 @@ Finally, we have to copy the control restart files (contains the state of the mo
 <pre>scp login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/run/f2000.T31T31.control.*.0009-01-01-00000.nc  /work/users/$USER/f2000.T31T31.test/run/.
 scp login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/run/rpointer.* /work/users/$USER/f2000.T31T31.test/run/.
 </pre>
-
 
 Now we wish to run our model and as it may run for several days, we need to use the batch scheduler (SLURM) from abel. Its role is to dispatch jobs to be run on the cluster. It reads information given in your job command file (named here f2000.T31T31.test.run). This file contains information on the number of processors to use (ntasks), the amount of memory per processor (mem-per-cpu) and the maximum amount of time you wish to allow for your job (time).  
 
