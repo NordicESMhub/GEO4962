@@ -32,9 +32,9 @@ You will be using both NIRD (login.nird.sigma2.no) and associated jupyterhub to 
 
 # Copy your output files from Abel to your virtual machine
 
-Start a new **Terminal** on your Jupyter (this will be referred to hereafter as your "Jupyter terminal") and type the following commands.
+Start a new **Terminal** on your JupyterHub (this will be referred to hereafter as your "JupyterHub terminal") and type the following commands.
 
-<font color="blue">On the Jupyter terminal:</font>
+<font color="blue">On the JupyterHub terminal:</font>
 
 <pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER
 
@@ -43,7 +43,7 @@ Start a new **Terminal** on your Jupyter (this will be referred to hereafter as 
 
 # Visualization with psyplot
 
-Start a new **python3** notebook on your Jupyter and type the following commands.
+Start a new **python3** notebook on your JupyterHub and type the following commands.
 
 <font color="green">On jupyter:</font>
 
