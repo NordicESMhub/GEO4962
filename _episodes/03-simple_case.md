@@ -55,6 +55,8 @@ git clone https://github.com/NordicESMhub/GEO4962.git
 
 cd $HOME/GEO4962/setup
 
+git checkout master
+
 chmod u+rwx geo4962_notur.bash
 
 ./geo4962_notur.bash
