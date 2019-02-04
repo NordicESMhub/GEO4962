@@ -1,19 +1,19 @@
 ---
-title: "Get familiar with cesm"
+title: "Get familiar with CESM and the computing environment"
 teaching: 0
 exercises: 0
 questions:
-- "How to setup CESM on abel?"
+- "How to setup CESM on Abel?"
 - "How to run a cesm case?"
 - "How to monitor my cesm case?"
 objectives:
-- "Learn to setup cesm on abel"
-- "Learn to run and monitor a simple cesm case on abel"
+- "Learn to setup cesm on Abel"
+- "Learn to run and monitor a simple cesm case on Abel"
 keypoints:
-- "cesm"
+- "CESM"
 - "High-Performance Computing"
-- "abel"
-- "slurm"
+- "Abel"
+- "SLURM"
 ---
 
 
@@ -42,7 +42,8 @@ To run CAM-5.3 on abel, we will use:
 *   NetCDF library (netcdf4.3.3.1)
 *   MPI (intel openmpi 1.8.3)
 
-To be able to compile and run CESM on abel, no changes to the source code were necessary; we just had to adapt a few scripts for setting the compilers and libraries used by CESM.  
+To be able to compile and run CESM on abel, no changes to the source code are necessary; we just have to adapt a few scripts for setting the compilers and libraries used by CESM.  
+
 To simplify and allow you to run CESM as quickly as possible, we have prepared a set-up script geo4962_notur.bash.  
 
 <font color="red">On Abel:</font>  
@@ -71,7 +72,9 @@ The script above copies the source code in $HOME/cesm/cesm_1_2_2 and creates sym
 
 Now that you have the CESM source code in $HOME/cesm/cesm_1_2_2, you can have a first look at the code.  
 ![](../fig/tree_source.png)  
-We will build and run CAM in its standalone configuration i.e. without all the other components.  
+
+We will build and run CAM in its *standalone* configuration i.e. without having all the other components **active**.  
+
 The basic workflow to run the CESM code is the following:
 
 *   Create a New Case
@@ -80,8 +83,9 @@ The basic workflow to run the CESM code is the following:
 *   Run the Model and Output Data Flow
 
 To create a new case, we will be using create_newcase script. It is located in $HOME/cesm/cesm1_2_2/scripts.  
-There are many options and we won't discuss all of them. To get the full usage of create_newcase (<font color="red">On Abel</font>):  
+There are many options and we won't discuss all of them. The online help provides information about how get the full usage of create_newcase.
 
+(<font color="red">On Abel</font>):  
 
 <pre>./create_newcase --help
 </pre>
@@ -95,6 +99,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![](..
 #
 # Simulation 1: short simulation
 #
+
 module load cesm/1.2.2
 
 ./create_newcase -case ~/cesm_case/f2000.T31T31.test -res T31_T31 -compset F_2000_CAM5 -mach abel
@@ -118,7 +123,7 @@ module load cesm/1.2.2
     <pre>   TIME_ATM[%phys]_LND[%phys]_ICE[%phys]_OCN[%phys]_ROF[%phys]_GLC[%phys]_WAV[%phys][_BGC%phys]
     </pre>
 
-    The compset longname has the specified order: **atm, lnd, ice, ocn, river, glc wave cesm-options**  
+    The compset longname has the specified order: **atm, lnd, ice, ocn, river, glc wave cesm-options**.  
     
     Where:
 
@@ -133,8 +138,10 @@ module load cesm/1.2.2
        BGC  = optional BGC scenario
     </pre>
 
-    The OPTIONAL %phys attributes specify submodes of the given system  
-    The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html).  
+    The OPTIONAL %phys attributes specify submodes of the given system.
+    
+    The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html). 
+    
     In our case we have:
     *   TIME = 2000: we are running our model for present days
     *   ATM = CAM5: we will be using CAM5 for the atmospheric component
@@ -149,7 +156,7 @@ module load cesm/1.2.2
 
 Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresponding to our new case.
 
-<font color="red">on Abel:</font>
+<font color="red">On Abel:</font>
 
 <pre>cd ~/cesm_case/f2000.T31T31.test
 </pre>
@@ -172,7 +179,7 @@ We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFC
 <pre>ls *.xml
 </pre>
 
-To change the duration of our test simulation and set it to 1 month:
+To change the duration of our test simulation in the file **env_run.xml** only and set it to 1 month:
 
 <pre>./xmlchange -file env_run.xml -id STOP_N -val 1
 ./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
@@ -196,7 +203,7 @@ After building CESM for your configuration, a new directory (and a set of sub-di
 
 Namelists can be changed before configuring and building CESM but it can also be done before running your test case. Then, you cannot use xmlchange and update the xml files, you need to directly change the namelist files.  
 
-The default history file from CAM is a monthly average, and this is what we are going to use in this lesson. 
+The default history file from CAM is a *monthly* average, and this is what we are going to use in this lesson. 
 
 However, it is possible to change the output frequency with the namelist variable **nhtfrq**
 
@@ -211,9 +218,9 @@ The coupled CICE model requires a minimum of two files to run:
 *    **grid_file** is a binary or netcdf file containing grid information such as the latitude, longitude, grid cell area, etc.
 *    **kmt_file** is a binary or netcdf file containing land mask information. This points to the ocean model KMT file or the depths of the ocean columns.
 
-<font color="red">On Abel:</font>
+We therefore need to add two lines to the CAM5 namelist called **user_nl_cice**.
 
-We need to add two lines to the CAM5 namelist (called **user_nl_cice**):
+<font color="red">On Abel:</font>
 
     cat >> user_nl_cice << EOF
     grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
@@ -232,7 +239,9 @@ scp login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.con
 
 Now we wish to run our model and as it may run for several days, we need to use the batch scheduler (SLURM) from abel. Its role is to dispatch jobs to be run on the cluster. It reads information given in your job command file (named here f2000.T31T31.test.run). This file contains information on the number of processors to use (ntasks), the amount of memory per processor (mem-per-cpu) and the maximum amount of time you wish to allow for your job (time).  
 
-Check what is in your current job command file (f2000.T31T31.test.run):
+Check what is in your current job command file (f2000.T31T31.test.run).
+
+<font color="red">On Abel:</font>
 
 <pre>#SBATCH --job-name=f2000.T31T31.test
 #SBATCH --time=08:59:00
@@ -257,7 +266,7 @@ You can now submit your test case.
 
 The script "f2000.T31T31.test.submit" submits a job to the job scheduler on abel. More information can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/).
 
-*   To monitor your job on <font color="red">Abel:</font>
+To monitor your job on <font color="red">Abel:</font>
 
     <pre>squeue -u $USER
     </pre>
@@ -266,10 +275,10 @@ Full list of available commands and their usage can be found [here](http://www.u
 
 ### Check the 1 month test run
 
-<font color="red">On Abel</font>: During your test case run, CAM-5.3 generates outputs in the "run" directory:  
+<font color="red">On Abel:</font> during your test case run, CAM-5.3 generates outputs in the "run" directory:  
 
 ![](../fig/rundir_test.png)  
-At the end of your experiment, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On abel this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
+At the end of your experiment, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On Abel this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
 ![](../fig/archivedir_test.png)  
 Check your run was successful and generated all the necessary files you need for your analysis. 
 
@@ -283,7 +292,7 @@ ls -lrt
 </pre>
 
 You should see a number of netCDF files (each of them ends with ".nc").  
-You can quickly visualize your data on abel (to make sure your simulation ran OK).
+You can quickly visualize your data (to make sure your simulation ran OK).
 
 <font color="red">On Abel:</font>
 
@@ -300,7 +309,8 @@ Here, PS (2D variable) is plotted.
 
 First make sure your run was successful and check all the necessary output files were generated.  
 
-To post-process and visualize your model outputs, it is VERY IMPORTANT you move them from Abel to norStore. Remember that all model outputs are generated in a semi-temporary directory and all your files will be removed after a few weeks!  
+To post-process and visualize your model outputs, it is VERY IMPORTANT you move them from Abel to norStore. Remember that all model outputs are generated in a semi-temporary directory and all your files will be removed after a few weeks! 
+
 If you haven't set-up your SSH keys, the next commands (ssh and [rsync](http://www.tecmint.com/rsync-local-remote-file-synchronization-commands/)) will require you to enter your Unix password.  
 
 <font color="red">On Abel:</font>
