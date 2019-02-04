@@ -312,11 +312,11 @@ Here, the surface temperature TS (selected among the 2D variables) is displayed.
 
 Click on the magnification button (**M X4**) to set how much expansion the image undergoes.
 
-Try to plot other variables like the three-dimensional air temperature **T**, for example, and select the vertical level you want to see between 3.64 hPa (top of the model) and 992.56 hPa (bottom) in this instance.
+Try to plot other variables like the three-dimensional air temperature field **T**, for example, and select the vertical level you want to see between 3.64 hPa (top of the model) and 992.56 hPa (bottom), in this instance.
 
 ### Move your files on NIRD
 
-First make sure your run was successful and check all the necessary output files were generated.  
+First make sure your run was successful and check all the necessary output files were produced.  
 
 To post-process and visualize your model outputs, it is VERY IMPORTANT you move them from Abel to norStore. Remember that all model outputs are generated in a semi-temporary directory and all your files will be removed after a few weeks! 
 
