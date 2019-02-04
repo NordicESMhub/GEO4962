@@ -186,7 +186,7 @@ If we do not want the dates to start from 0001-01-01 we need to specify the star
 <pre>./xmlchange RUN_STARTDATE=0009-01-01
 </pre>
 
-To change the duration of our test simulation in the file **env_run.xml** only and set it to 1 month:
+We are also going to change the duration of our test simulation in the file **env_run.xml** and set it to 1 month only.
 
 <font color="red">On Abel:</font>  
 
