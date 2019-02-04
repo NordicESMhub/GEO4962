@@ -90,7 +90,6 @@ The 4 main arguments of create_newcase are explained on the figure below: ![](..
 
 <font color="red">On Abel:</font>
 
-
 <pre>cd $HOME/cesm/cesm1_2_2/scripts
 
 #
@@ -148,8 +147,9 @@ module load cesm/1.2.2
 
 *   **mach**: specifies the machine where CESM will be compiled and run. We will be running CESM on abel (a set of scripts for abel can be found in $HOME/cesm/cesm1_2_2/scripts/ccsm_utils/Machines)
 
-Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresponding to our new case (<font color="red">on Abel:</font>)
+Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresponding to our new case.
 
+<font color="red">on Abel:</font>
 
 <pre>cd ~/cesm_case/f2000.T31T31.test
 </pre>
@@ -170,7 +170,6 @@ We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFC
 <font color="red">On Abel</font>:  
 
 <pre>ls *.xml
-
 </pre>
 
 To change the duration of our test simulation and set it to 1 month:
@@ -186,7 +185,6 @@ Now we are ready to set-up our model configuration and build the cesm executable
 <pre>./cesm_setup
 
 ./f2000.T31T31.test.build
-
 </pre>
  
 After building CESM for your configuration, a new directory (and a set of sub-directories) are created in /work/users/$USERS/f2000.T31T31.test:
@@ -252,7 +250,6 @@ You can now submit your test case.
 
 <pre>    
 ./f2000.T31T31.test.submit
-
 </pre>
 
 
