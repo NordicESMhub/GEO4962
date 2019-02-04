@@ -85,7 +85,7 @@ The basic workflow to run the CESM code is the following:
 To create a new case, we will be using create_newcase script. It is located in $HOME/cesm/cesm1_2_2/scripts.  
 There are many options and we won't discuss all of them. The online help provides information about how get the full usage of create_newcase.
 
-(<font color="red">On Abel</font>):  
+<font color="red">On Abel:</font>  
 
 <pre>./create_newcase --help
 </pre>
@@ -174,12 +174,14 @@ For this tests (and all our simulations), we do not wish to have a "cold" start 
 
 We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFCASE, etc.) defined in xml files. All the xml files contained in your test case directory will be used by cesm_setup to generate your configuration setup (Fortran namelist, etc.). 
 
-<font color="red">On Abel</font>:  
+<font color="red">On Abel:</font>  
 
 <pre>ls *.xml
 </pre>
 
 To change the duration of our test simulation in the file **env_run.xml** only and set it to 1 month:
+
+<font color="red">On Abel:</font>  
 
 <pre>./xmlchange -file env_run.xml -id STOP_N -val 1
 ./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
@@ -257,8 +259,7 @@ You can now submit your test case.
 
 <font color="red">On Abel:</font>
 
-<pre>    
-./f2000.T31T31.test.submit
+<pre>./f2000.T31T31.test.submit
 </pre>
 
 
@@ -268,8 +269,8 @@ The script "f2000.T31T31.test.submit" submits a job to the job scheduler on abel
 
 To monitor your job on <font color="red">Abel:</font>
 
-    <pre>squeue -u $USER
-    </pre>
+<pre>squeue -u $USER
+</pre>
 
 Full list of available commands and their usage can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/queue-system.html).
 
@@ -297,7 +298,9 @@ You can quickly visualize your data (to make sure your simulation ran OK).
 <font color="red">On Abel:</font>
 
 <pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
+
 module load ncview
+
 ncview f2000.T31T31.test.cam.h0.0001-01-31-00000.nc
 </pre>
 
