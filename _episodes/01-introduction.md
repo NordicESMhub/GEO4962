@@ -103,7 +103,7 @@ The source code for CAM 5.3 is located in the "src" and its sub-directories (the
         .
         </pre>
 
-    `
+    
 *   **dynamics**: source code for the different dynamical core options.
 *   **physics**: model physics (for instance check physics/cam directory)
 *   **advection**
