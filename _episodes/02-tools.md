@@ -41,9 +41,9 @@ keypoints:
 
 This is what will mostly be used during this course.
 
-[The best distribution of Python for scientific use is the Anaconda distribution](https://www.continuum.io/downloads)
+[The Python distribution that we recommend for scientific use is Anaconda](https://www.anaconda.com/distribution/)
 
-[Interactive data visualization with python](https://psyplot.readthedocs.io/en/latest/)
+[Interactive data visualization with Python](https://psyplot.readthedocs.io/en/latest/)
 
 [Example netCDF programs](http://www.unidata.ucar.edu/software/netcdf/examples/programs/)
 
