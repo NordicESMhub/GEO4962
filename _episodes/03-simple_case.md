@@ -49,7 +49,9 @@ To simplify and allow you to run CESM as quickly as possible, we have prepared a
 
 <pre>cd $HOME
 
-git clone https://github.uio.no/annefou/GEO4962.git
+**module load git**
+git clone https://github.com/NordicESMhub/GEO4962.git
+
 cd $HOME/GEO4962/setup
 
 ./geo4962_notur.bash
@@ -236,7 +238,9 @@ Check what is in your current job command file (f2000.T31T31.test.run):
 </pre>
 
 The lines starting with **#SBATCH** are not comments but SLURM directives.  
-You can submit your test case to <font color="red">abel</font>:
+You can now submit your test case.
+
+<font color="red">On Abel:</font>
 
 <pre>    
 ./f2000.T31T31.test.submit
