@@ -32,9 +32,9 @@ You will be using both NIRD (login.nird.sigma2.no) and associated jupyterhub to 
 
 # Copy your output files from Abel to your virtual machine
 
-Start a new **Terminal** on your Jupyter and copy the following commands.
+Start a new **Terminal** on your Jupyter (this will be referred to hereafter as your "Virtual Machine" or "VM terminal") and type the following commands.
 
-<font color="blue">On the VM:</font>
+<font color="blue">On the VM terminal:</font>
 
 <pre>rsync -avzu --progress YOUR_USER_NAME@abe.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio
 
@@ -43,7 +43,7 @@ Start a new **Terminal** on your Jupyter and copy the following commands.
 
 # Visualization with psyplot
 
-Start a new python3 notebook on your Jupyter and copy the following commands.
+Start a new **python3** notebook on your Jupyter and type the following commands.
 
 <font color="green">On jupyter:</font>
 
@@ -55,15 +55,17 @@ filename = path + 'f2000.T31T31.test.cam.h0.0009-01.nc'
 p = psy.plot.mapplot(filename, name='TS')
 </pre>
 
-### **Geographical map**
+In the same way add another cell below the plot and try to display the air temperature field (T) instead of the surface temperature (TS).
 
+<font color="green">On jupyter:</font>
 
-
+<pre>q = psy.plot.mapplot(filename, name='T')
+<pre>
 
 -  <font color="red">Which Time did you plot?</font>
 -  <font color="red">Which level did you plot?</font>
 
-
+### **Geographical map**
 
 
 ### **Georeferenced Latitude-Vertical plot**
