@@ -179,7 +179,7 @@ We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFC
 <pre>ls *.xml
 </pre>
 
-To change the starting data of our test simulation (otherwise the first simulated day will be 0001-01-01):
+If we do not want the first day in our experiment to be 0001-01-01 we need to change the starting data of our test simulation.
 
 <font color="red">On Abel:</font>  
 
