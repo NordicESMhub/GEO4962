@@ -7,7 +7,7 @@ questions:
 objectives:
 - "panoply, python, ncl, nco, cdo, etc."
 keypoints:
-- ""
+- "Some of the tools available to manipulate netCDF files"
 ---
 
 
