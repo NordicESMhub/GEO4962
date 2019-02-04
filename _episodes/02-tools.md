@@ -3,7 +3,7 @@ title: "Tools"
 teaching: 0
 exercises: 0
 questions:
-- "tools"
+- "Tools"
 objectives:
 - "panoply, python, ncl, nco, cdo, etc."
 keypoints:
