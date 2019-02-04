@@ -49,12 +49,12 @@ Some facts about CESM:
 *   Fortran Coding standard as well as style rules are enforced and anyone wishing to contribute to the Community Atmosphere Model must comply to these [rules](http://www.cesm.ucar.edu/working_groups/Software/dev_guide/dev_guide/node7.html).
 
 To browse and explore CAM5.3 source code, you can login on NIRD.  
-From a Linux terminal:`
+From a Linux terminal:
 
 <pre>ssh -Y $LOGNAME@login.nird.sigma2.no
 </pre>
 
-`where $LOGNAME is your UIO username (replace it by your own username!)  
+where $LOGNAME is your UIO username (replace it by your own username!)  
 Documentation on norStore facility can be found [here](https://www.sigma2.no/node/8).  
 
 Please note that these machines are not accessible outside the UIO networks. If you wish to login on abel or NIRD outside the UIO network, use [X2Go Client](http://www.mn.uio.no/geo/english/services/it/help/using-linux/x2go.html).  
@@ -64,7 +64,7 @@ The source code we will be using is stored (on NIRD) in /projects/NS1000K/GEO496
 ls 
 </pre>
 
-`
+
 
 *   **bld**: scripts ro generate makefiles and dependencies for compiling CAM5
 *   **chem_proc**: MOZART [chemical preprocessor](http://www.cesm.ucar.edu/working_groups/Chemistry/chemistry.preprocessor.pdf)
