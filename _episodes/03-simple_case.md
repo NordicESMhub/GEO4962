@@ -49,7 +49,8 @@ To simplify and allow you to run CESM as quickly as possible, we have prepared a
 
 <pre>cd $HOME
 
-**module load git**
+module load git
+
 git clone https://github.com/NordicESMhub/GEO4962.git
 
 cd $HOME/GEO4962/setup
