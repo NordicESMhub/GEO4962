@@ -53,13 +53,16 @@ module load git
 
 git clone https://github.com/NordicESMhub/GEO4962.git
 
-cd $HOME/GEO4962/setup
+cd $HOME/GEO4962
 
 git checkout master
+
+cd setup
 
 chmod u+rwx geo4962_notur.bash
 
 ./geo4962_notur.bash
+
 </pre>
 
 The script above copies the source code in $HOME/cesm/cesm_1_2_2 and creates symbolic links for the input data necessary to run our model configuration in /work/users/$USER/inputdata. Input data can be large this is why we create symbolic links instead of making several copies (one per user). The main copy is located in $CESM_DATA (CESM_DATA is an environment variable that is defined when executing geo4962_notur.bash).  
