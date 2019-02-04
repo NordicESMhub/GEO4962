@@ -10,7 +10,7 @@ The course gives a broad overview about the general circulation of the atmospher
 
 **Learning outcome**
 
-After finishing this course, students should understand;
+After finishing this course, students should understand:
 
 - Tropospheric Circulation,
 - Brewer Dobson Circulation,
