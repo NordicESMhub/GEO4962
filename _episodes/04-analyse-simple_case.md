@@ -32,11 +32,11 @@ You will be using both NIRD (login.nird.sigma2.no) and associated jupyterhub to 
 
 # Copy your output files from Abel to your virtual machine
 
-Start a new **Terminal** on your Jupyter (this will be referred to hereafter as your "Virtual Machine" or "VM terminal") and type the following commands.
+Start a new **Terminal** on your Jupyter (this will be referred to hereafter as your "Jupyter terminal") and type the following commands.
 
-<font color="blue">On the VM terminal:</font>
+<font color="blue">On the Jupyter terminal:</font>
 
-<pre>rsync -avzu --progress YOUR_USER_NAME@abe.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio
+<pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER
 
 </pre>
 
