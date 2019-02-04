@@ -276,7 +276,7 @@ Full list of available commands and their usage can be found [here](http://www.u
 
 ### Check the 1 month test run
 
-<font color="red">On Abel:</font> during your test case run, CAM-5.3 generates outputs in the "run" directory:  
+On Abel during your test case run, CAM-5.3 generates outputs in the "run" directory:  
 
 ![](../fig/rundir_test.png)  
 At the end of your experiment, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On Abel this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
@@ -305,8 +305,14 @@ ncview f2000.T31T31.test.cam.h0.0001-01-31-00000.nc
 </pre>
 
 If you click on 3D or 4D to select a variable, your data should appear:  
+
 ![](../fig/ncview_D2.png)  
-Here, PS (2D variable) is plotted.  
+
+Here, the surface temperature TS (selected among the 2D variables) is displayed.  
+
+Click on the magnification button (**M X4**) to set how much expansion the image undergoes.
+
+Try to plot other variables like the three-dimensional air temperature **T**, for example, and select the vertical level you want to see between 3.64 hPa (top of the model) and 992.56 hPa (bottom) in this instance.
 
 ### Move your files on NIRD
 
