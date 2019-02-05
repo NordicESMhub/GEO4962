@@ -73,13 +73,8 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 <pre>cd /projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist
 </pre>
 
-<font color="red">
-
--   How many years did we run?
-
--   What is the output frequency?
-
-</font>
+-  <font color="red">How many years did we run?</font>
+-  <font color="red">What is the output frequency?</font>
 
 
 
@@ -135,13 +130,8 @@ ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0004-12.nc $HOME/GEO4962/co
 ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/TU_f2000.T31T31.control.cam.h0.0005-01.nc
 </pre>
 
-
-<font color="red">
-
-*   Use panoply to visualize your new netCDF files
-*   Use a shell loop to extract T and U (and hyam, hybm and PS) from all the model outputs (control experiment) and store the resulting netCDF files in $HOME/GEO4962/control/
-
-</font>
+-  <font color="red">Use panoply to visualize your new netCDF files</font>
+-  <font color="red">Use a shell loop to extract T and U (and hyam, hybm and PS) from all the model outputs (control experiment) and store the resulting netCDF files in $HOME/GEO4962/control/</font>
 
 (Example of solution: for file in *.nc; do ncks -v T,U,hyam,hybm,PS $file $HOME/GEO4962/control/TU_$file; done)
 
