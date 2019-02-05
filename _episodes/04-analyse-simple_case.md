@@ -133,12 +133,16 @@ Back to **ncks**, several variables can be extracted at the same time.
 ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_TU.nc
 </pre>
 
+
 <font color="red">
 
 *   Use panoply to visualize your new netCDF files
 *   Use a shell loop to extract T and U (and hyam, hybm and PS) from all the model outputs (control experiment) and store the resulting netCDF files in $HOME/GEO4962/control/
 
 </font>
+
+*(Solution example: for file in *.nc; do ncks -v T,U,hyam,hybm,PS $file $HOME/GEO4962/control/TU_$file; done)*
+
 
 ##### Compute yearly or zonal means
 
