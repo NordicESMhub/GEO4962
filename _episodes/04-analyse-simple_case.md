@@ -6,7 +6,7 @@ questions:
 - "What is a control run?"
 - "How to use ncl to interpolate on pressure levels?"
 - "How to start Python in the Jupyter notebook?"
-- "How to analyze and visualize CESM outputs with python?"
+- "How to analyze and visualize CESM outputs with panoply and python?"
 objectives:
 - "Learn about the control run"
 - "Learn to use ncl to interpole data on pressure levels"
@@ -37,7 +37,6 @@ Start a new **Terminal** on your JupyterHub (this will be referred to hereafter 
 <font color="blue">On the JupyterHub terminal:</font>
 
 <pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER
-
 </pre>
 
 
@@ -74,13 +73,14 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 <pre>cd /projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist
 </pre>
 
-
 <font color="red">
 
 -   How many years did we run?
+
 -   What is the output frequency?
 
 </font>
+
 
 
 1.  [Selection of variables of interest and visualization](#Selection-of-variables-of-interest-and-visualization)
@@ -96,7 +96,7 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 <pre>export PATH=/projects/NS1000K/panoply/4.4.3/:$PATH
 </pre>
 
-*Note: the modules cdo and ncl are already loaded by default.*
+*Notes: this is to allow you to use panoply (without installing it), also the modules cdo and ncl are already loaded by default.*
 
 
 #### Selection of variables of interest and visualization
@@ -108,7 +108,7 @@ Here we are going to use [ncks](http://nco.sourceforge.net/nco.html#ncks-netCDF-
 <font color="red">On NIRD:</font>
 
 <pre>mkdir -p $HOME/GEO4962/control
-ncks -v T f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_T.nc
+ncks -v T f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/T_f2000.T31T31.control.cam.h0.0005-01.nc
 </pre>
 
 We are now going to use **panoply** to visualize the temperature field.
@@ -117,7 +117,7 @@ We are now going to use **panoply** to visualize the temperature field.
 
 <pre>panoply.sh</pre>
 
-This opens a window where you can select the file that was just created (f2000.T31T31.control.cam.h0.0005-01_T.nc) in the directory $HOME/GEO4962/control. 
+This opens a window where you can select the file that was just created (T_f2000.T31T31.control.cam.h0.0005-01.nc) in the directory $HOME/GEO4962/control. 
 
 Then double click on the line with "   T       Temperature       Geo2D   " and click on the **Create** button.
 
@@ -129,8 +129,10 @@ Back to **ncks**, several variables can be extracted at the same time.
 
 <font color="red">On NIRD:</font>
 
-<pre>ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0004-12.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0004-12_TU.nc
-ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_TU.nc
+<pre>
+ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0003-03.nc $HOME/GEO4962/control/TU_f2000.T31T31.control.cam.h0.0003-03.nc
+ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0004-12.nc $HOME/GEO4962/control/TU_f2000.T31T31.control.cam.h0.0004-12.nc
+ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/TU_f2000.T31T31.control.cam.h0.0005-01.nc
 </pre>
 
 
@@ -141,7 +143,7 @@ ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/co
 
 </font>
 
-(Solution example: for file in *.nc; do ncks -v T,U,hyam,hybm,PS $file $HOME/GEO4962/control/TU_$file; done)
+(Example of solution: for file in *.nc; do ncks -v T,U,hyam,hybm,PS $file $HOME/GEO4962/control/TU_$file; done)
 
 
 ##### Compute yearly or zonal means
