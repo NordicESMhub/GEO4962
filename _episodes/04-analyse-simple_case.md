@@ -55,11 +55,12 @@ filename = path + 'f2000.T31T31.test.cam.h0.0009-01.nc'
 p = psy.plot.mapplot(filename, name='TS')
 </pre>
 
-In the same way add another cell below the plot and try to display the air temperature field (T) instead of the surface temperature (TS).
+In the same way add another cell below the plot and try to display the zonal wind (U) instead of the surface temperature (TS).
+Contrary to TS which depends only on two horizontal dimensions (namely latitude and longitude) plus time, for U there is an additional dimension (along the vertical), hence we also have to specify a vertical level (between 0 and 29) to make our plot. 
 
 <font color="green">On jupyter:</font>
 
-<pre>q = psy.plot.mapplot(filename, name='T')
+<pre>q = psy.plot.mapplot(filename, name='U', dims={'lev': 29})
 <pre>
 
 -  <font color="red">Which Time did you plot?</font>
