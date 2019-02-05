@@ -94,10 +94,9 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 <font color="red">On NIRD:</font>
 
 <pre>export PATH=/projects/NS1000K/panoply/4.4.3/:$PATH
-
-*Note: the modules cdo and ncl are already loaded by default.*
 </pre>
 
+*Note: the modules cdo and ncl are already loaded by default.*
 
 
 #### Selection of variables of interest and visualization
@@ -112,13 +111,15 @@ Here we are going to use [ncks](http://nco.sourceforge.net/nco.html#ncks-netCDF-
 ncks -v T f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_T.nc
 </pre>
 
-We are now going to use **panoply** to visualize this temperature:
+We are now going to use **panoply** to visualize the temperature field.
 
 <font color="red">On NIRD:</font>
 
 <pre>panoply.sh</pre>
 
 This opens a window for you to select the files that was just created (f2000.T31T31.control.cam.h0.0005-01_T.nc) in the directory $HOME/GEO4962/control. Then double click on the line with "   T       Temperature       Geo2D   " and click on the **Create** button.
+
+<img src="../fig/panoply.png">
 
 Several variables can be extracted at the same time:
 
