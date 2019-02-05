@@ -83,7 +83,7 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 </font>
 
 
-1.  [Selection of variables of interest](#Selection-of-variables-of-interest)
+1.  [Selection of variables of interest and visualization](#Selection-of-variables-of-interest-and-visualization)
 2.  [Computation of yearly or zonal mean](#Computation-of-yearly-or-zonal-means)
 3.  [Conversion from Sigma coordinates to pressure levels](#Conversion-from-Sigma-coordinates-to-pressure-levels)
 
@@ -100,7 +100,7 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 
 
 
-#### Selection of variables of interest
+#### Selection of variables of interest and visualization
 
 Here we are going to use [ncks](http://nco.sourceforge.net/nco.html#ncks-netCDF-Kitchen-Sink).
 
@@ -111,6 +111,14 @@ Here we are going to use [ncks](http://nco.sourceforge.net/nco.html#ncks-netCDF-
 <pre>mkdir -p $HOME/GEO4962/control
 ncks -v T f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_T.nc
 </pre>
+
+We are now going to use **panoply** to visualize this temperature:
+
+<font color="red">On NIRD:</font>
+
+<pre>panoply.sh</pre>
+
+This opens a window for you to select the files that was just created (f2000.T31T31.control.cam.h0.0005-01_T.nc) in the directory $HOME/GEO4962/control. Then double click on the line with "   T       Temperature       Geo2D   " and click on the **Create** button.
 
 Several variables can be extracted at the same time:
 
