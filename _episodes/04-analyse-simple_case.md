@@ -82,9 +82,10 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 
 </font>
 
-1.  [Select variables of interest](#Select-variables-of-interest)
-2.  [Compute yearly or zonal mean](#Compute-yearly-or-zonal-means)
-3.  [Convert to pressure levels and visualize](#Convert-to-pressure-levels)
+
+1.  [Selection of variables of interest](#Selection-of-variables-of-interest)
+2.  [Computation of yearly or zonal mean](#Computation-of-yearly-or-zonal-means)
+3.  [Conversion from Sigma coordinates to pressure levels](#Conversion-from-Sigma-coordinates-to-pressure-levels)
 
 ### **NIRD**
 
@@ -99,22 +100,22 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 
 
 
-#### Select variables of interest
+#### Selection of variables of interest
 
-[ncks](http://nco.sourceforge.net/nco.html#ncks-netCDF-Kitchen-Sink)
+Here we are going to use [ncks](http://nco.sourceforge.net/nco.html#ncks-netCDF-Kitchen-Sink).
 
-[nco](http://nco.sourceforge.net/)
+**ncks** stands for "NetCDF Kitchen Sink" and it will allow us to extract a subset of the data (for instance to produce a new netCDF file containing only the temperature variable T) from an input-file (in this example the file corresponds to the month of January of the 5th year simulated).
 
 <font color="red">On NIRD:</font>
 
 <pre>mkdir -p $HOME/GEO4962/control
-ncks -v T f2000.T31T31.control.cam.h0.0005-01-11-00000.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01-11-00000_T.nc
+ncks -v T f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_T.nc
 </pre>
 
-and
+Several variables can be extracted at the same time:
 
-<pre>ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0004-12-12-00000.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0004-12-12-00000_TU.nc
-ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01-11-00000.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01-11-00000_TU.nc
+<pre>ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0004-12.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0004-12_TU.nc
+ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_TU.nc
 </pre>
 
 [T and U on pressure levels](#h2P)
