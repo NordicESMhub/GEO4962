@@ -66,15 +66,9 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 -  <font color="red">Which Time did you plot?</font>
 -  <font color="red">Which level did you plot?</font>
 
-### **Geographical map**
-
-
-### **Georeferenced Latitude-Vertical plot**
-
-
 # Post-processing workflow: example with the control experiment
 
-<font color="red">On nird (login.nird.sigma2.no):</font>
+<font color="red">On NIRD (login.nird.sigma2.no):</font>
 
 
 <pre>cd /projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist
@@ -96,11 +90,11 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 
 #### Setup on NIRD
 
-**nird**
+<font color="red">On NIRD:</font>
 
 <pre>export PATH=/projects/NS1000K/panoply/4.4.3/:$PATH
-module load cdo
-module load ncl
+
+*Note: the modules cdo and ncl are already loaded by default.*
 </pre>
 
 
@@ -111,12 +105,13 @@ module load ncl
 
 [nco](http://nco.sourceforge.net/)
 
-<font color="red">on NIRD</font>
-
+<font color="red">On NIRD:</font>
 
 <pre>mkdir -p $HOME/GEO4962/control
 ncks -v T f2000.T31T31.control.cam.h0.0005-01-11-00000.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01-11-00000_T.nc
 </pre>
+
+and
 
 <pre>ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0004-12-12-00000.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0004-12-12-00000_TU.nc
 ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01-11-00000.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01-11-00000_TU.nc
