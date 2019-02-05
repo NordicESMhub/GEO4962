@@ -160,6 +160,29 @@ Now depending on your experiment case, you would have either to change the namel
 *   [Super El Nino](SST/index.html)
 *   [Lowering Himalaya mountains](himalaya_tibetan/index.html)
 
+### Model timing data
+
+A summary timing output file is produced after every CESM run. On Abel and in our case this file is placed in /work/users/$USER/archive/f2000.T31T31.$EXPNAME/cpl/logs and is nammed cpl.log.$date.gz (where $date is a datestamp set by CESM at runtime).
+
+This file contains information which is useful for *load balancing a case* (i.e., to optimize the processor layout for a given model configuration, compset, grid, etc. such that the cost and throughput will be optimal).
+
+For this lesson we will concentrate on the last few lines in the file and in particular the number of simulated years per computational day, which will help us evaluate the wallclock time required for long runs.
+
+<font color="red">On Abel:</font>
+
+<pre>vi cpl.log.190205-144355.gz
+
+(seq_mct_drv): ===============       SUCCESSFUL TERMINATION OF CPL7-CCSM ===============
+(seq_mct_drv): ===============        at YMD,TOD =    90201       0      ===============
+(seq_mct_drv): ===============  # simulated days (this run) =    31.000  ===============
+(seq_mct_drv): ===============  compute time (hrs)          =     0.347  ===============
+(seq_mct_drv): ===============  # simulated years / cmp-day =     5.873  ===============
+(seq_mct_drv): ===============  pes min memory highwater  (MB)   50.429  ===============
+(seq_mct_drv): ===============  pes max memory highwater  (MB)  517.162  ===============
+(seq_mct_drv): ===============  pes min memory last usage (MB)   -0.001  ===============
+(seq_mct_drv): ===============  pes max memory last usage (MB)   -0.001  ===============
+<pre>
+
 ### Long experiment (14 months)
 
 As for the previous exercice, you will work **in pairs** for this practical and you will **analyze the model outputs in pairs**.  
