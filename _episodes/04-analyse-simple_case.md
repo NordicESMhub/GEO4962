@@ -77,7 +77,7 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 <font color="red">On nird (login.nird.sigma2.no):</font>
 
 
-<pre>cd /projects/NS1000K/GEO4962/outputs/archive/f2000.T31T31.control/atm/hist
+<pre>cd /projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist
 </pre>
 
 
@@ -88,9 +88,9 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 
 </font>
 
-1.  [Select variables of interest](#Select)
-2.  [Compute monthly/yearly/zonal mean](#mean)
-3.  [Convert to Pressure levels and visualize](#h2P)
+1.  [Select variables of interest](#Select-variables-of-interest)
+2.  [Compute yearly or zonal mean](#Compute-yearly-or-zonal-means)
+3.  [Convert to pressure levels and visualize](#Convert-to-pressure-levels)
 
 ### **NIRD**
 
@@ -131,7 +131,7 @@ ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01-11-00000.nc $HOME/G
 
 </font>
 
-##### Compute monthly/yearly mean
+##### Compute yearly or zonal means
 
 ###### Monthly mean
 
