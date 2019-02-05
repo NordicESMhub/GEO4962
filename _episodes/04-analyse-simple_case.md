@@ -117,7 +117,9 @@ We are now going to use **panoply** to visualize the temperature field.
 
 <pre>panoply.sh</pre>
 
-This opens a window for you to select the files that was just created (f2000.T31T31.control.cam.h0.0005-01_T.nc) in the directory $HOME/GEO4962/control. Then double click on the line with "   T       Temperature       Geo2D   " and click on the **Create** button.
+This opens a window where you can select the file that was just created (f2000.T31T31.control.cam.h0.0005-01_T.nc) in the directory $HOME/GEO4962/control. 
+
+Then double click on the line with "   T       Temperature       Geo2D   " and click on the **Create** button.
 
 <img src="../fig/panoply.png">
 
