@@ -181,7 +181,7 @@ For this lesson we will concentrate on the last few lines in the file and in par
 (seq_mct_drv): ===============  pes max memory highwater  (MB)  517.162  ===============
 (seq_mct_drv): ===============  pes min memory last usage (MB)   -0.001  ===============
 (seq_mct_drv): ===============  pes max memory last usage (MB)   -0.001  ===============
-<pre>
+</pre>
 
 ### Long experiment (14 months)
 
