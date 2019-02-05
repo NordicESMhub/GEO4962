@@ -10,12 +10,11 @@ objectives:
 - "Run a long experiment (14 months)"
 - "Analyze long experiment"
 keypoints:
-- "climate scenario"
+- "Evaluate various climate scenarii"
+- "Start an experiment from a control run"
 ---
 
 <img src="../fig/long_simulations.jpg">
-
-*   [Introduce model experiments](#introduce-model-experiments)
 
 # Introduce model experiments
 
@@ -25,18 +24,19 @@ First choose your teammate: you will have to work together to set-up and run you
 
 ## Experiments
 
-The goal is to run the experiment of your choice (to choose from the list below) for 14 months, starting on 1st of January until 1st of March the following year. For this use the same restart file you used for the test experiment. 
+The goal is to run the experiment of your choice (to cherry pick from the list below) for a duration of 14 months, starting on 1st of January until 1st of March the following year. For this you will take the same restart file you already used for the test experiment of the previous practicals.
 
-Each of the 4 experiments is given an experiment name: 
+Each of the 4 experiments is given an explicit name: 
 
-1.  **EXPNAME=CO2**:Doubling of CO2 (change CO2 value to 800 ppm > change the name list)
-2.  **EXPNAME=sea_ice**: Melt of Arctic sea ice (set sea ice fraction to zero North of 40N > change the input data set)
-3.  **EXPNAME=SST**: Super El Nino (add +6 K to tropical Central and East Pacific SST from 5S to 5N, 180W to 85W > change the input data set)
-4.  **EXPNAME=himalaya**: Lowering of Himalaya Mountains and Tibetan Plateau (set surface Geopotential to 0 from 25N to 40N and 70E to 100E > change the input data set)
+1.  **EXPNAME = CO2**:Doubling of CO2 (change CO2 value to 800 ppm > change the name list)
+2.  **EXPNAME = sea_ice**: Melt of Arctic sea ice (set sea ice fraction to zero North of 40N > change the input data set)
+3.  **EXPNAME = SST**: Super El Nino (add +6 K to tropical Central and East Pacific SST from 5S to 5N, 180W to 85W > change the input data set)
+4.  **EXPNAME = himalaya**: Lowering of Himalaya Mountains and Tibetan Plateau (set surface Geopotential to 0 from 25N to 40N and 70E to 100E > change the input data set)
 
-Make sure you define an environment variable EXPNAME, every time you login <font color="red">on Abel</font>:  
+Make sure you define an environment variable EXPNAME, **every time** you login <font color="red">on Abel</font>:  
 
-    # define an environment variable for your experiment (CO2, sea_ice, SST, himalaya)
+    # define an environment variable for your experiment (CO2, sea_ice, SST or himalaya)
+    
     export EXPNAME=CO2
 
 Here is the list of tasks to perform for the experiment of your choice:  
@@ -44,13 +44,15 @@ Here is the list of tasks to perform for the experiment of your choice:
 1.  [Create a new case for your experiment](#Create-a-new-case-for-your-experiment)
 2.  [Setup experiment duration (5 days)](#Setup-your-new-experiment-duration)
 3.  [Changing namelist or dataset](#Changing-namelist-or-dataset)
-3.  [Long experiment (14 months)](#Long-experiment-(14-months)
+4.  [Long experiment (14 months)](#Long-experiment-(14-months)
 
 ### Create a new case for your experiment
 
-Use an appropriate name for your new experiment depending on your experiment (doubling CO2, Sea ice, etc.). Suggested **EXPNAME** are given above.  
+Use an appropriate name for your new experiment depending on what you selected (doubling CO2, sea_ice, etc.). 
 
-Create a new case always involve executing create_newcase.  
+Suggested **EXPNAME** were given above.  
+
+To create a new case always involve executing the command create_newcase.  
 
 <font color="red">On Abel:</font>
 
@@ -74,7 +76,7 @@ Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.$EXPNAME cor
 cd ~/cesm_case/f2000.T31T31.$EXPNAME
 </pre>
 
-As before we start from the control experiment.
+As before we start a hybrid run from the control experiment.
 
 <font color="red">On Abel:</font> 
 
@@ -83,17 +85,16 @@ As before we start from the control experiment.
 ./xmlchange RUN_REFDATE=0009-01-01
 </pre>
 
-We also need to define the**START DATE** for the control experiment (that will make it easier to compare the outputs of the experiment with those of the same month from the control run).
+We also need to define the **START DATE** for your experiment (that will make it easier to compare the outputs of the experiment with those of the same month from the control run).
 
 <font color="red">On Abel:</font> 
 
-<pre>./xmlchange RUN_TYPE=hybrid
-./xmlchange RUN_STARTDATE=0009-01-01
+<pre>./xmlchange RUN_STARTDATE=0009-01-01
 </pre>
 
 ### Setup your new experiment duration
 
-Before running the long simulation (14 months), you would like to check your new settings on a short experiment. 
+Before running the long simulation (14 months), it is sensible to check your new settings on a short experiment that will take only a few minutes to run, to make sure everything is done as you expected (and if not, to correct any mistake). 
 
 You will run 5 days first, check the results and then restart the same experiment for 14 months.  
 
@@ -116,7 +117,6 @@ Now we are ready to set-up the model configuration and build the cesm executable
 # Make sure EXPNAME is set properly!
 
 ./f2000.T31T31.$EXPNAME.build
-
 </pre>
 
 The default history file from CAM is a monthly average. We can change the output frequency with the namelist variable **nhtfrq**
@@ -156,14 +156,16 @@ Now depending on your experiment case, you would have either to change the namel
 *   [Super El Nino](SST/index.html)
 *   [Lowering Himalaya mountains](himalaya_tibetan/index.html)
 
-# Long experiment (14 months)
+### Long experiment (14 months)
 
 As for the previous exercice, you will work **in pairs** for this practical and you will **analyze the model outputs in pairs**.  
 You will be using your previous experiment ~/cesm_case/f2000.T31T31.$EXPNAME (EXPNAME should be set depending on your experiment!) and run 14 months.  
 
-### Set a new duration for your experiment
+#### Set a new duration for your experiment
 
-Make sure you set the duration of your experiment properly. Here we wish to run 14 months from the control restart experiment but as it is a long run, we rather split it into chuncks of 1 month.
+Make sure you set the duration of your experiment properly. Here we wish to run 14 months from the control restart experiment but as it is a long run, we rather split it into chuncks of 1 month. 
+
+*Note that splitting an experiment into smaller chunks is good practice: this way if something happens and the experiment crashes (disk quota exceeded, hardware issue, etc.) everything will not be lost and it will be possible to resume the run from the latest set of restart files.*
 
 <font color="red">On Abel:</font>
 
@@ -176,6 +178,7 @@ cd ~/cesm_case/f2000.T31T31.$EXPNAME
 </pre>
 
 To perform a 14 months experiment, we would need to repeat this one month experiment 14 times. 
+
 For this purpose there is a CESM option called RESUBMIT.
 
 <font color="red">On Abel:</font>
@@ -186,7 +189,7 @@ For this purpose there is a CESM option called RESUBMIT.
 
 By setting this option, CAM5 will be running one month of simulation (once submitted) and automatically resubmit the next 13 months.  
 
-### Adjust parameters for your long batch submission
+#### Adjust parameters for your long batch submission
 
 Before submitting your experiment (f2000.T31T31.$EXPNAME.submit), you need to adjust [wall clock time](https://en.wikipedia.org/wiki/Wall-clock_time) and adjust CPU resources.  
 
@@ -219,14 +222,13 @@ Make sure you define EXPNAME properly (it depends on your experiment).
 export EXPNAME=CO2
 </pre>
 
-Then copy files from abel to norStore project area.
+Then copy the archived files from abel to the norStore project area.
+
+*It is sometimes sensible to also copy the run files and even the case directory, but that should not be necessary for this lesson.*
 
 <font color="red">On Abel:</font>
 
-<pre>ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/runs'
-ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/archive'
-
-rsync -avz /work/users/$USER/f2000.T31T31.$EXPNAME $USER@login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/$USER/runs/.
+<pre>ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/archive'
 
 rsync -avz /work/users/$USER/archive/f2000.T31T31.$EXPNAME $USER@login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/$USER/archive/.
 </pre>
