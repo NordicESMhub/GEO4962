@@ -28,10 +28,14 @@ The goal is to run the experiment of your choice (to cherry pick from the list b
 
 Each of the 4 experiments is given an explicit name: 
 
-1.  **EXPNAME = CO2**:Doubling of CO2 (change CO2 value to 800 ppm > change the name list)
-2.  **EXPNAME = sea_ice**: Melt of Arctic sea ice (set sea ice fraction to zero North of 40N > change the input data set)
-3.  **EXPNAME = SST**: Super El Nino (add +6 K to tropical Central and East Pacific SST from 5S to 5N, 180W to 85W > change the input data set)
-4.  **EXPNAME = himalaya**: Lowering of Himalaya Mountains and Tibetan Plateau (set surface Geopotential to 0 from 25N to 40N and 70E to 100E > change the input data set)
+1.  **EXPNAME = CO2**
+              Doubling of CO2 (change CO2 value to 800 ppm > change the name list)
+2.  **EXPNAME = sea_ice**
+              Melt of Arctic sea ice (set sea ice fraction to zero North of 40N > change the input data set)
+3.  **EXPNAME = SST**
+              Super El Nino (add +6 K to tropical Central and East Pacific SST from 5S to 5N, 180W to 85W > change the input data set)
+4.  **EXPNAME = himalaya**
+              Lowering of Himalaya Mountains and Tibetan Plateau (set surface Geopotential to 0 from 25N to 40N and 70E to 100E > change the input data set)
 
 Make sure you define an environment variable EXPNAME, **every time** you login <font color="red">on Abel</font>:  
 
