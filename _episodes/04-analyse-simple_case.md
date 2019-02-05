@@ -125,13 +125,13 @@ Then double click on the line with "   T       Temperature       Geo2D   " and c
 
 Explore other types of plot with panoply.
 
-Back to **ncks**, several variables can be extracted at the same time:
+Back to **ncks**, several variables can be extracted at the same time.
+
+<font color="red">On NIRD:</font>
 
 <pre>ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0004-12.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0004-12_TU.nc
 ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/control/f2000.T31T31.control.cam.h0.0005-01_TU.nc
 </pre>
-
-[T and U on pressure levels](#h2P)
 
 <font color="red">
 
