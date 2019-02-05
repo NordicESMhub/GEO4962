@@ -147,8 +147,8 @@ EOF
 
 # Make sure EXPNAME is set properly!      
 
-scp login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/run/f2000.T31T31.control.*.0009-01-01-00000.nc  /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
-scp login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/run/rpointer.* /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
+scp login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/rest/0009-01-01-00000/f2000.T31T31.control.*.0009-01-01-00000.nc  /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
+scp login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/rest/0009-01-01-00000/rpointer.* /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
 </pre>
 
 Now depending on your experiment case, you would have either to change the namelist or to change the input dataset.
