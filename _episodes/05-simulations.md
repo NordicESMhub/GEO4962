@@ -48,7 +48,7 @@ Here is the list of tasks to perform for the experiment of your choice:
 1.  [Create a new case for your experiment](#Create-a-new-case-for-your-experiment)
 2.  [Setup experiment duration (5 days)](#Setup-your-new-experiment-duration)
 3.  [Changing namelist or dataset](#Changing-namelist-or-dataset)
-4.  [Long experiment (14 months)](#Long-experiment-(14-months)
+4.  [Long experiment (14 months)](#Long-experiment-(14-months))
 
 ### Create a new case for your experiment
 
