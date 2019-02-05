@@ -61,7 +61,7 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 <font color="green">On jupyter:</font>
 
 <pre>q = psy.plot.mapplot(filename, name='U', dims={'lev': 29})
-<pre>
+</pre>
 
 -  <font color="red">Which Time did you plot?</font>
 -  <font color="red">Which level did you plot?</font>
