@@ -1,17 +1,18 @@
 ---
-title: "Model experiments"
+title: "Running your experiments and analyzing your results"
 teaching: 0
 exercises: 0
 questions:
-- "How to define a climate experiment?"
-- "How to run long experiments?"
+- "How to submit your short run?"
+- "How to continue your run"
 objectives:
-- "Choose a scenario"
-- "Run a long experiment (14 months)"
-- "Analyze long experiment"
+- "Be able to do a quick run to test an experiment"
+- "If successful resubmit the same experiment for a longer period"
+- "Analyze the outputs from your experiment"
 keypoints:
-- "Evaluate various climate scenarii"
-- "Start an experiment from a control run"
+- "Start an experiment from a spinup"
+- "Continue an existing experiment"
+- "Evaluate the CPU time required for a long run"
 ---
 
 ## Before submitting your experiment, make sure you adjust the <a href="wallclock.html">wall clock time</a>!
