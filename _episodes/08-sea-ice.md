@@ -64,30 +64,5 @@ Finally, we can copy the changed SST data file to the run directory.
 <pre>cp sst_HadOIBl_bc_48x96_clim_sea_ice.nc /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
 </pre>
 
-Before submitting your experiment, make sure you adjust the <a href="wallclock.html">wall clock time</a>!
-
-Now you are ready to submit your simulation.
-
-<font color="red">On Abel:</font>
-
-<pre>cd ~/cesm_case/f2000.T31T31.$EXPNAME
-
-./f2000.T31T31.$EXPNAME.submit
-
-squeue -u $USER
-</pre>
-
-If your simulation is **unsuccessful** you have to understand what happened!
-
-There are in particular log files in the run directory (/work/users/$USER/f2000.T31T31.$EXPNAME/run/) which can provide some clues, although the error messages are not always explicit...
-
-Open the latest log file with your favorit text editor (vi, emacs, etc.) and try to search for keywords like "ERROR" or "Error" or "error" (remember that the search is case sensitive).
-
-Then fixe any identified bug.
-
-If your short simulation has **finished without crashing**, check the outputs: were your changes taken into account? Do you get significant results?
-
-If you are happy with your short run, you can setup your <a href="simulations.html">long run (14 months) experiment</a>.
-
 {% include links.md %}
 
