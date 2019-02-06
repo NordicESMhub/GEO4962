@@ -298,7 +298,7 @@ An easy way to do this is to calculate the difference between for example the su
 
 # Copy your output files from Abel to your virtual machine
 
-Start a new **Terminal** on your JupyterHub and transfer your data (do not forget to replace *YOUR_USER_NAME* by your actual user name and *YOUR_EXPERIMENT* by your actual experiment name).
+Start a new **Terminal** on your JupyterHub and transfer your data. Do not forget to replace *YOUR_USER_NAME* by your actual user name and *YOUR_EXPERIMENT* by your actual experiment name (you have to do this because the Virtual machine and Abel are different systems, therefore all the environment variables that were defined on Abel are not known here).
 
 <font color="blue">On the JupyterHub terminal:</font>
 
