@@ -36,7 +36,7 @@ Start a new **Terminal** on your JupyterHub (this will be referred to hereafter 
 
 <font color="blue">On the JupyterHub terminal:</font>
 
-<pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER
+<pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER/f2000.T31T31.test/
 </pre>
 
 
@@ -53,6 +53,8 @@ filename = path + 'f2000.T31T31.test.cam.h0.0009-01.nc'
 
 p = psy.plot.mapplot(filename, name='TS')
 </pre>
+
+<img src="../fig/TS_F2000_CAM5_T31T31_control-0009-01.png">
 
 In the same way add another cell below the plot and try to display the zonal wind (U) instead of the surface temperature (TS).
 Contrary to TS which depends only on two horizontal dimensions (namely latitude and longitude) plus time, for U there is an additional dimension (along the vertical), hence we also have to specify a vertical level (between 0 and 29) to make our plot. 
