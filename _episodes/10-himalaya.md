@@ -11,58 +11,44 @@ keypoints:
 ---
 ### **Himalaya Mountains**: how to update input dataset?
 
-Copy surface geopotential file to your case directory:  
-<font color="red">On Abel</font>:  
-`
+Copy the original surface geopotential file into your case directory.
+
+<font color="red">On Abel:</font>
 
 <pre>export EXPNAME=himalaya
 cd ~/cesm_case/f2000.T31T31.$EXPNAME
 
 cp /work/users/$USER/inputdata/atm/cam/topo/USGS-gtopo30_48x96_c050520.nc .
-
 </pre>
 
-`  
+Use nco utilities to edit the values in the file (http://nco.sourgeforce.net).
+We will use a function called ncap2 – (netCDF Arithmetic Averager) single line command below.
 
-Use nco utilities to edit values on the file (http://nco.sourgeforce.net) We will use a function called ncap2 – (netCDF Arithmetic Averager) single line command below  
-
-<font color="red">On Abel</font>:  
-`
+<font color="red">On Abel:</font>
 
 <pre>module load nco
 
 ncap2 -O -s 'lat2d[lat,lon]=lat ; lon2d[lat,lon]=lon' -s 'omask=(lat2d >= 30.0 && lat2d <= 50.0) && (lon2d >=70.0 && lon2d <= 100.0)' -s 'PHIS=(PHIS*(1-omask))' USGS-gtopo30_48x96_c050520.nc  USGS-gtopo30_48x96_c050520_$EXPNAME.nc
-
 </pre>
 
-`Apply this change`
+Apply this change.
+
+<font color="red">On Abel:</font>
 
 <pre>echo "bnd_topo = './USGS-gtopo30_48x96_c050520_$EXPNAME.nc'" >> user_nl_cam 	
 
 ./preview_namelists
 
 grep topo /work/users/$USER/f2000.T31T31.$EXPNAME/run/atm_in
-
 </pre>
 
-`Copy changed surface geopotential data file to run directory`
+Copy the modified surface geopotential data file into your run directory.
+
+<font color="red">On Abel:</font>
 
 <pre>cp USGS-gtopo30_48x96_c050520_$EXPNAME.nc /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
 </pre>
 
-`  
-Before submitting your experiment, make sure you adjust the [wall clock time](wallclock.html)! Now you are ready to submit your simulation:  
-<font color="red">On Abel</font>:  
-`
-
-<pre>cd ~/cesm_case/f2000.T31T31.$EXPNAME
-
-./f2000.T31T31.$EXPNAME.submit
-</pre>
-
-`  
-Once your short simulation is done, check the outputs: were your changes taken into account? Do you get significant results?  
-If you are happy with your short run, you can setup your [long run (14 months) experiment](simulations.html).
 
 {% include links.md %}
 
