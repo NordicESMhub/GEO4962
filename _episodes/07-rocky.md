@@ -49,6 +49,8 @@ grep topo /work/users/$USER/f2000.T31T31.$EXPNAME/run/atm_in
 
 Copy the changed surface geopotential data file into the run directory.
 
+<font color="red">On Abel:</font>
+
 <pre>cp USGS-gtopo30_48x96_c050520_$EXPNAME.nc /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
 </pre>
 
