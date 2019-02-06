@@ -203,6 +203,9 @@ For this lesson we will concentrate on the last few lines in the file and in par
 (seq_mct_drv): ===============  pes max memory last usage (MB)   -0.001  ===============
 </pre>
 
+*Here the throughput was 5.873 simulated years / cmp-day and it took 0.347 * 60 ~ 21 minutes to run the first month. Assuming that the other months will take approximately the same time, that represents about 3 months per hour and a bit more than 4 hours for 12 months.*
+
+
 ### Long experiment (14 months)
 
 As for the previous exercice, you will work **in pairs** for this practical and you will **analyze the model outputs in pairs**.  
