@@ -43,7 +43,9 @@ ncap2 -O -s 'lat2d[lat,lon]=lat ; lon2d[lat,lon]=lon' -s 'omask=(lat2d >= -5.0 &
     </pre>
 
 
-Process env_run.xml to make namelist changes effective (create namelist files)
+Process env_run.xml to make namelist changes effective (create namelist files).
+
+<font color="red">On Abel:</font>
 
 <pre>./preview_namelists
 </pre>
