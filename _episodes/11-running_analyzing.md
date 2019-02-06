@@ -102,15 +102,7 @@ For this purpose there is a CESM option called RESUBMIT.
 </pre>
 
 
-By setting this option, CAM5 will be running one month of simulation (once submitted) and automatically resubmit the next 13 months.  
-
-#### Adjust parameters for your long batch submission
-
-Before submitting your experiment (f2000.T31T31.$EXPNAME.submit), you need to adjust [wall clock time](https://en.wikipedia.org/wiki/Wall-clock_time) and adjust CPU resources.  
-
-As each chunk will run 1 month of your experiment, you need to assess the duration of a one month simulation. 
-
-For more information on how to update the wall clock time for your CAM5 simulation, go [here](wallclock.html).  
+By setting this option, CAM5 will be running one month of simulation (once submitted) and automatically resubmit the next 12 months.  
 
 <font color="red">On Abel:</font>
 <pre>cd ~/cesm_case/f2000.T31T31.$EXPNAME
@@ -119,11 +111,11 @@ For more information on how to update the wall clock time for your CAM5 simulati
 </pre>
 
 
-Regularly check your experiment (and associated generated output files) and once it is fully done, [store your model outputs on norStore](norstore.html).
+Regularly check your experiment (and any generated output files) and once it is fully done, [store your model outputs on norStore](norstore.html).
 
 # Store model outputs on norStore
 
-First make sure your run was successful and check all the necessary output files were generated.  
+First make sure that your run was successful and check all the necessary output files were generated.  
 
 To post-process and visualize your model outputs, it is VERY IMPORTANT you move them from Abel to norStore. Remember that all model outputs are generated in a semi-temporary directory and all your files will be removed after a few weeks!  
 
@@ -193,6 +185,12 @@ diff.psy.plot.mapplot(title="Surface temperature [K]\nF2000_CAM5_T31T31-0009-01\
 </pre>
 
 <img src="../fig/TS_F2000_CAM5_T31T31_control-sea_ice-0009-01.png">
+
+Psyplot is a high level tool which offers a convenient means to easily and quickly create plots directly from the netCDF file. However for customized graphs and more advanced analyse one usually uses lower level python packages.
+
+## Using python
+
+
 
 {% include links.md %}
 
