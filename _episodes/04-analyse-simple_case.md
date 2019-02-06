@@ -67,7 +67,7 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 
 <img src="../fig/U29_F2000_CAM5_T31T31_control-0009-01.png">
 
--  <font color="red">Which Time did you plot?</font>
+-  <font color="red">Which time did you plot?</font>
 -  <font color="red">Which level did you plot?</font>
 
 # Post-processing workflow: example with the control experiment
