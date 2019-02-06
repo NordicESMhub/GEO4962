@@ -51,7 +51,7 @@ Start a new **python3** notebook on your JupyterHub and type the following comma
 path = 'GEO4962/outputs/runs/f2000.T31T31.test/atm/hist/'
 filename = path + 'f2000.T31T31.test.cam.h0.0009-01.nc'
 
-p = psy.plot.mapplot(filename, name='TS')
+p = psy.plot.mapplot(filename, name='TS', title="Surface temperature [K]\nF2000_CAM5_T31T31_test-0009-01")
 </pre>
 
 <img src="../fig/TS_F2000_CAM5_T31T31_control-0009-01.png">
@@ -61,8 +61,11 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 
 <font color="green">On jupyter:</font>
 
-<pre>q = psy.plot.mapplot(filename, name='U', dims={'lev': 29})
+<pre>q = psy.plot.mapplot(filename, name='U', dims={'lev': 29}, title="Zonal wind [m/s]\nF2000_CAM5_T31T31_test-0009-01")
 </pre>
+
+
+<img src="../fig/U29_F2000_CAM5_T31T31_control-0009-01.png">
 
 -  <font color="red">Which Time did you plot?</font>
 -  <font color="red">Which level did you plot?</font>
@@ -135,7 +138,7 @@ ncks -v T,U,hyam,hybm,PS f2000.T31T31.control.cam.h0.0005-01.nc $HOME/GEO4962/co
 -  <font color="red">Use panoply to visualize your new netCDF files</font>
 -  <font color="red">Use a shell loop to extract T and U (and hyam, hybm and PS) from all the model outputs (control experiment) and store the resulting netCDF files in $HOME/GEO4962/control/</font>
 
-(Example of solution: for file in *.nc; do ncks -v T,U,hyam,hybm,PS $file $HOME/GEO4962/control/TU_$file; done)
+(Example of solution (to run from the folder containing the .nc files): for file in *.nc; do ncks -v T,U,hyam,hybm,PS $file $HOME/GEO4962/control/TU_$file; done)
 
 
 ##### Compute yearly or zonal means
