@@ -11,92 +11,47 @@ keypoints:
 ---
 
 <h3 id="dataset"><b>Rocky Mountains</b>: how to update input dataset?</h3>
-<br>
 
 Copy surface geopotential file to your case directory:
 
-<br>
-<font color="red">On Abel</font>:
-<br>
-<code>
+
+<font color="red">On Abel:</font>
+
 <pre>
 export EXPNAME=rocky
 cd ~/cesm_case/f2000.T31T31.$EXPNAME
 
 cp /work/users/$USER/inputdata/atm/cam/topo/USGS-gtopo30_48x96_c050520.nc .
-
 </pre>
-</code>
-<br>
-<br>
+
 Use nco utilities to edit values on the file (http://nco.sourgeforce.net)
 
 We will use a function called ncap2 – (netCDF Arithmetic Averager) single line command below
 
+<font color="red">On Abel:</font>
 
-<br>
-
-<br>
-<font color="red">On Abel</font>:
-<br>
-<code>
-<pre>
-module load nco
-
-
+<pre>module load nco
 
 ncap2 -O -s 'lat2d[lat,lon]=lat ; lon2d[lat,lon]=lon' -s 'omask=(lat2d >= 30.0 && lat2d <= 50.0) && (lon2d >=235.0 && lon2d <= 260.0)' -s 'PHIS=(PHIS*(1-omask))' USGS-gtopo30_48x96_c050520.nc  USGS-gtopo30_48x96_c050520_$EXPNAME.nc
-
-
 </pre>
-</code>
 
-Apply this change
+Apply this change and add it to user_nl_cam.
 
-<code>
-<pre>
-echo "bnd_topo = './USGS-gtopo30_48x96_c050520_$EXPNAME.nc'" >> user_nl_cam 	
+<font color="red">On Abel:</font>
+
+<pre>echo "bnd_topo = './USGS-gtopo30_48x96_c050520_$EXPNAME.nc'" >> user_nl_cam 	
 
 ./preview_namelists
 
 grep topo /work/users/$USER/f2000.T31T31.$EXPNAME/run/atm_in
-
-
 </pre>
-</code>
 
 
-Copy changed surface geopotential data file to run directory
+Copy the changed surface geopotential data file into the run directory.
 
-
-<code>
-<pre>
-cp USGS-gtopo30_48x96_c050520_$EXPNAME.nc /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
+<pre>cp USGS-gtopo30_48x96_c050520_$EXPNAME.nc /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
 </pre>
-</code>
 
-<br>
-
-Before submitting your experiment, make sure you adjust the <a href="wallclock.html">wall clock time</a>!
-
-Now you are ready to submit your simulation:
-<br>
-<font color="red">On Abel</font>:
-<br>
-
-<code>
-<pre>
-cd ~/cesm_case/f2000.T31T31.$EXPNAME
-
-./f2000.T31T31.$EXPNAME.submit
-</pre>
-</code>
-<br>
-Once your short simulation is done, check the outputs: were your changes taken into account? Do you get significant results?
-<br>
-If you are happy with your short run, you can setup your <a href="simulations.html">long run (14 months) experiment</a>.
-<br>
-<br>
 
 {% include links.md %}
 
