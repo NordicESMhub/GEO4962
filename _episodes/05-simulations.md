@@ -155,10 +155,10 @@ Now depending on your experiment case, you would have either to change the namel
 
 ### Changing namelist or dataset 
 
-*   [Doubling CO2](06-CO2/index.html)
-*   [Melt of Artic sea ice](08-sea-ice/index.html)
-*   [Super El Nino](09-sst/index.html)
-*   [Lowering Himalaya mountains](10-himalaya/index.html)
+*   [Doubling CO2](../06-CO2/index.html)
+*   [Melt of Artic sea ice](../08-sea-ice/index.html)
+*   [Super El Nino](../09-sst/index.html)
+*   [Lowering Himalaya mountains](../10-himalaya/index.html)
 
 ### Model timing data
 
