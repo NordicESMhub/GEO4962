@@ -46,7 +46,7 @@ Make sure you define an environment variable EXPNAME, **every time** you login <
 Here is the list of tasks to perform for the experiment of your choice:  
 
 1.  [Create a new case for your experiment](#Create-a-new-case-for-your-experiment)
-2.  [Setup experiment duration (5 days)](#Setup-your-new-experiment-duration)
+2.  [Setup experiment duration (1 month)](#Setup-your-new-experiment-duration)
 3.  [Changing namelist or dataset](#Changing-namelist-or-dataset)
 4.  [Long experiment (14 months)](#Long-experiment-(14-months))
 
@@ -108,8 +108,8 @@ Here we wish to run 5 days from the control experiment first.
 
 <font color="red">On Abel:</font> 
 
-<pre>./xmlchange -file env_run.xml -id STOP_N -val 5
-./xmlchange -file env_run.xml -id STOP_OPTION -val ndays
+<pre>./xmlchange -file env_run.xml -id STOP_N -val 1
+./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
 </pre>
 
 Now we are ready to set-up the model configuration and build the cesm executable.  
@@ -123,7 +123,7 @@ Now we are ready to set-up the model configuration and build the cesm executable
 ./f2000.T31T31.$EXPNAME.build
 </pre>
 
-The default history file from CAM is a monthly average. We can change the output frequency with the namelist variable **nhtfrq**
+The default history file from CAM is a monthly average but it is possible to change the output frequency with the namelist variable **nhtfrq**
 
 *   If nhtfrq = 0, the file will be a monthly average
 *   If nhtfrq > 0, frequency is input as number of timesteps
@@ -131,14 +131,9 @@ The default history file from CAM is a monthly average. We can change the output
 
 For instance to change the history file from monthly average to daily average, we set the namelist variable nhtfrq = -24\. 
 
-We also need to copy restart files in your running directory, etc.:  
+We also need to copy restart files in your running directory, etc.
 
 <font color="red">On Abel:</font>
-
-<pre>cat >> user_nl_cam << EOF
-nhtfrq = 0,-24
-fincl2 = 'T', 'U', 'V', 'PS', 'OMEGA'
-EOF
 
 cat >> user_nl_cice << EOF
 grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
@@ -155,10 +150,10 @@ Now depending on your experiment case, you would have either to change the namel
 
 ### Changing namelist or dataset 
 
-*   [Doubling CO2](../06-CO2/index.html)
-*   [Melt of Artic sea ice](../08-sea-ice/index.html)
-*   [Super El Nino](../09-sst/index.html)
-*   [Lowering Himalaya mountains](../10-himalaya/index.html)
+*   [Doubling CO2](06-CO2/index.html)
+*   [Melt of Artic sea ice](08-sea-ice/index.html)
+*   [Super El Nino](09-sst/index.html)
+*   [Lowering Himalaya mountains](10-himalaya/index.html)
 
 ### Model timing data
 
@@ -172,6 +167,7 @@ For this lesson we will concentrate on the last few lines in the file and in par
 
 <pre>vi cpl.log.190205-144355.gz
 
+.......................
 (seq_mct_drv): ===============       SUCCESSFUL TERMINATION OF CPL7-CCSM ===============
 (seq_mct_drv): ===============        at YMD,TOD =    90201       0      ===============
 (seq_mct_drv): ===============  # simulated days (this run) =    31.000  ===============
@@ -190,27 +186,31 @@ You will be using your previous experiment ~/cesm_case/f2000.T31T31.$EXPNAME (EX
 
 #### Set a new duration for your experiment
 
-Make sure you set the duration of your experiment properly. Here we wish to run 14 months from the control restart experiment but as it is a long run, we rather split it into chuncks of 1 month. 
+Make sure you set the duration of your experiment properly. Here we wish to run 14 months from the control restart experiment but as it is a long run, we would rather continue to split it into chuncks of 1 month. 
 
-*Note that splitting an experiment into smaller chunks is good practice: this way if something happens and the experiment crashes (disk quota exceeded, hardware issue, etc.) everything will not be lost and it will be possible to resume the run from the latest set of restart files.*
+*Note that splitting an experiment into small chunks is good practice: this way if something happens and the experiment crashes (disk quota exceeded, hardware issue, etc.) everything will not be lost and it will be possible to resume the run from the latest set of restart files.*
 
 <font color="red">On Abel:</font>
 
 <pre># Set EXPNAME properly
 
 cd ~/cesm_case/f2000.T31T31.$EXPNAME
-
-./xmlchange -file env_run.xml -id STOP_N -val 1
-./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
 </pre>
 
-To perform a 14 months experiment, we would need to repeat this one month experiment 14 times. 
+Since we have already the first month done, we are going to continue the experiment instead of starting from scratch.
+
+<font color="red">On Abel:</font>
+
+<pre>./xmlchange CONTINUE_RUN=TRUE
+</pre>
+
+To perform a 14 months experiment, we would need to repeat this one month experiment 13 times. 
 
 For this purpose there is a CESM option called RESUBMIT.
 
 <font color="red">On Abel:</font>
 
-<pre>./xmlchange -file env_run.xml -id RESUBMIT -val 14
+<pre>./xmlchange -file env_run.xml -id RESUBMIT -val 13
 </pre>
 
 
