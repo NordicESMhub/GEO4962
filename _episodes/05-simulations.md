@@ -135,7 +135,7 @@ We also need to copy restart files in your running directory, etc.
 
 <font color="red">On Abel:</font>
 
-cat >> user_nl_cice << EOF
+<pre>cat >> user_nl_cice << EOF
 grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
 kmt_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
 EOF
@@ -266,6 +266,46 @@ Once the previous commands are successful, you are ready to [post-process and vi
 However, as your simulation is stored on the norStore project area, you can now [archive your experiment](archive.html) on the norStore archive (long-term archive i.e. several years).
 
 # Post processing and visualization
+
+You can always compare the results of your experiments to the control run, at any time (i.e., this applies for both the short and long runs).
+
+An easy way to do this is to calculate the difference between for example the surface temperature field issued from the control run and that from your new experiment.
+
+# Copy your output files from Abel to your virtual machine
+
+Start a new **Terminal** on your JupyterHub and transfer your data (do not forget to replace *YOUR_USER_NAME* by your actual user name and *YOUR_EXPERIMENT* by your actual experiment name).
+
+<font color="blue">On the JupyterHub terminal:</font>
+
+<pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.YOUR_EXPERIMENT/ /opt/uio/GEO4962/$USER/f2000.T31T31.YOUR_EXPERIMENT/
+</pre>
+
+# Visualization with psyplot
+
+Start a new **python3** notebook on your JupyterHub and type the following commands (in this example the *USER* is jeani and we have the first month of data from the sea ice experiment).
+
+<font color="green">On jupyter:</font>
+
+<pre>import psyplot.project as psy
+
+month = '0009-01'
+
+path = 'GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/'
+filename = path + 'f2000.T31T31.control.cam.h0.' + month + '.nc'
+dsc = xr.open_dataset(filename, decode_cf=False)
+Sc = dsc['TS'][0,:,:]
+
+path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+filename = path + 'f2000.T31T31.sea_ice.cam.h0.' + month + '.nc'
+dssi = xr.open_dataset(filename, decode_cf=False)
+TSsi = dssi['TS'][0,:,:]
+
+diff = TSc - TSsi
+
+diff.psy.plot.mapplot(title="Surface temperature [K]\nF2000_CAM5_T31T31-0009-01\nControl-Sea_Ice")
+</pre>
+
+<img src="../fig/TS_F2000_CAM5_T31T31_control-sea_ice-0009-01.png">
 
 {% include links.md %}
 
