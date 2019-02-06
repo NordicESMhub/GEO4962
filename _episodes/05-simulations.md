@@ -100,11 +100,9 @@ We also need to define the **START DATE** for your experiment (that will make it
 
 Before running the long simulation (14 months), it is sensible to check your new settings on a short experiment that will take only a few minutes to run, to make sure everything is done as you expected (and if not, to correct any mistake). 
 
-You will run 5 days first, check the results and then restart the same experiment for 14 months.  
+You will run 1 month first, check the results and then restart the same experiment for several months.  
 
 Make sure you set the duration of your experiments properly. 
-
-Here we wish to run 5 days from the control experiment first.  
 
 <font color="red">On Abel:</font> 
 
