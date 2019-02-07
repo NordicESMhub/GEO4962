@@ -200,10 +200,6 @@ Start a new **python3** notebook on your JupyterHub.
 
 %matplotlib inline
 
-import xarray as xr
-
-%matplotlib inline
-
 month = '0009-01'
 path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
 experiment = 'f2000.T31T31.sea_ice'
