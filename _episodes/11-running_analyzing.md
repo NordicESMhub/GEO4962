@@ -9,10 +9,12 @@ objectives:
 - "Be able to do a quick run to test an experiment"
 - "If successful resubmit the same experiment for a longer period"
 - "Analyze the outputs from your experiment"
+- "Prepare graphs using python"
 keypoints:
 - "Start an experiment from a spinup"
 - "Continue an existing experiment"
 - "Evaluate the CPU time required for a long run"
+- "Make custom plots"
 ---
 
 Now you are ready to submit your simulation.
