@@ -190,7 +190,61 @@ Psyplot is a high level tool which offers a convenient means to easily and quick
 
 ## Using python
 
+Start a new **python3** notebook on your JupyterHub.
 
+<font color="green">On jupyter:</font>
+
+<pre>import xarray as xr
+import numpy as np
+import cartopy.crs as ccrs
+from cartopy.util import add_cyclic_point
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+
+path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+experiment = 'f2000.T31T31.sea_ice'
+month = '0009-01'
+
+filename = path + experiment + '.cam.h0.' + month + '.nc'
+
+dset = xr.open_dataset(filename, decode_cf=False)
+TSsi = dset['TS'][0,:,:]
+lat = dset['lat'][:]
+lon = dset['lon'][:]
+dset.close()
+
+TSmin = 200
+TSmax = 350
+TSrange = np.linspace(TSmin, TSmax, 16, endpoint=True)
+
+TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi, coord=lon)
+
+fig = plt.figure(figsize=[8, 8])
+ax = plt.axes(projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))
+cs = ax.contourf(lon_cyclic, lat, TS_cyclic_si,
+             transform=ccrs.PlateCarree(),
+             levels=TSrange,
+             extend='max',
+             cmap='jet')
+ax.set_title(experiment + '-' + month + '\n' + TSsi.long_name)
+ax.coastlines()
+ax.gridlines()
+
+fig.colorbar(cs, shrink=0.8, label=TSsi.units)
+
+fig.savefig('Sea_ice-' + month)
+</pre>
+You can now use the command [savefig](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html) to save the current figure into a file.
+
+<font color="green">On jupyter:</font>
+
+<pre>fig.savefig('Sea_ice-' + month)
+</pre>
+
+<img src="../fig/Sea_ice-0009-01.png">
+
+(See 
 
 {% include links.md %}
 
