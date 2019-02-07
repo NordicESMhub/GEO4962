@@ -15,8 +15,6 @@ keypoints:
 - "Evaluate the CPU time required for a long run"
 ---
 
-## Before submitting your experiment, make sure you adjust the <a href="wallclock.html">wall clock time</a>!
-
 Now you are ready to submit your simulation.
 
 <font color="red">On Abel:</font>
@@ -37,8 +35,6 @@ Open the latest log file with your favorit text editor (vi, emacs, etc.) and try
 Then correct any identified bug.
 
 If your short simulation has **finished without crashing**, check the outputs: were your changes taken into account? Do you get significant results?
-
-If you are happy with your short run, you can setup your <a href="simulations.html">long run (14 months) experiment</a>.
 
 ### Model timing data
 
@@ -232,8 +228,6 @@ ax.coastlines()
 ax.gridlines()
 
 fig.colorbar(cs, shrink=0.8, label=TSsi.units)
-
-fig.savefig('Sea_ice-' + month)
 </pre>
 You can now use the command [savefig](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html) to save the current figure into a file.
 
