@@ -188,9 +188,65 @@ diff.psy.plot.mapplot(title="Surface temperature [K]\nF2000_CAM5_T31T31-0009-01\
 
 Psyplot is a high level tool which offers a convenient means to easily and quickly create plots directly from the netCDF file. However for customized graphs and more advanced analyse one usually uses lower level python packages.
 
-## Using python
+## Making bespoke graphs with python
+
+Let's make a basic contour plot with python.
 
 Start a new **python3** notebook on your JupyterHub.
+
+<font color="green">On jupyter:</font>
+
+<pre>import xarray as xr
+
+%matplotlib inline
+
+import xarray as xr
+
+%matplotlib inline
+
+month = '0009-01'
+path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+experiment = 'f2000.T31T31.sea_ice'
+filename = path + experiment + '.cam.h0.' + month + '.nc'
+
+dset = xr.open_dataset(filename, decode_cf=False)
+TSsi = dset['TS'][0,:,:]
+dset.close()
+</pre>
+
+So far that is similar to what we did before to define the path and filename for the data and read the surface temperature values.
+
+Now we can make a contour plot with a single command.
+
+<font color="green">On jupyter:</font>
+
+<pre>TSsi.plot.contourf()
+</pre>
+
+to obtain this:
+
+<img src="../fig/Basic-plot.png">
+
+This figure is not very usefull: we do not know which projection was used, there is no coastline, we would rather have a proper title, etc.
+
+To do that we need to add bit more information.
+
+<font color="green">On jupyter:</font>
+
+<pre>import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=180))
+TSsi.plot.contourf(ax=ax,
+                   transform=ccrs.PlateCarree())
+ax.set_title(experiment + '-' + month + '\n' + TSsi.long_name)
+ax.coastlines()
+ax.gridlines()
+</pre>
+
+This is a slightly better plot, we are getting closer to what we had with psyplot...
+
+<img src="../fig/Better-plot.png">
+
 
 <font color="green">On jupyter:</font>
 
