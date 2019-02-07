@@ -246,7 +246,8 @@ This is a slightly better plot, we are getting closer to what we had with psyplo
 
 <font color="green">On jupyter:</font>
 
-<pre>import xarray as xr
+<pre>
+import xarray as xr
 import numpy as np
 import cartopy.crs as ccrs
 from cartopy.util import add_cyclic_point
@@ -273,15 +274,15 @@ TSrange = np.linspace(TSmin, TSmax, 16, endpoint=True)
 TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi, coord=lon)
 
 fig = plt.figure(figsize=[8, 8])
-ax = plt.axes(projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))
-cs = ax.contourf(lon_cyclic, lat, TS_cyclic_si,
+ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  # specify (nrows, ncols, axnum)
+ax.set_title(experiment + '-' + month + '\n' + TSsi.long_name)
+ax.coastlines()
+ax.gridlines()
+cs=ax.contourf(lon_cyclic, lat, TS_cyclic_si,
              transform=ccrs.PlateCarree(),
              levels=TSrange,
              extend='max',
              cmap='jet')
-ax.set_title(experiment + '-' + month + '\n' + TSsi.long_name)
-ax.coastlines()
-ax.gridlines()
 
 fig.colorbar(cs, shrink=0.8, label=TSsi.units)
 </pre>
@@ -289,7 +290,7 @@ You can now use the command [savefig](https://matplotlib.org/api/_as_gen/matplot
 
 <font color="green">On jupyter:</font>
 
-<pre>fig.savefig('Sea_ice-' + month)
+<pre>fig.savefig(experiment + '-' + month + '.png')
 </pre>
 
 <img src="../fig/Sea_ice-0009-01.png">
