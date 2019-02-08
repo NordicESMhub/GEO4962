@@ -331,6 +331,8 @@ fig.savefig(experiment + '-' + month + '.png')
 
 ### Create multiple plots in the same figure
 
+<font color="green">On jupyter:</font>
+
 ~~~
 import xarray as xr
 import numpy as np
@@ -383,6 +385,52 @@ fig.colorbar(cs, cax=cbar_ax, label=TSsi.units)
 ~~~
 {: .language-python}
 
+
+### Create interactive plots with ipyleaflet
+
+Instead of plotting the horizontal wind components (U and V) as contours there are ways to create more dynamic plots. The ipyleaflet project is one example that offers a custom interactive map control that allows a user to display and manipulate geographic data within a Jupyter Notebook.
+
+<font color="green">On jupyter:</font>
+
+~~~
+from ipyleaflet import Map, Velocity, TileLayer, basemaps, basemap_to_tiles
+import xarray as xr
+import os
+import glob
+from ipywidgets import IntSlider
+from ipywidgets.embed import embed_minimal_html
+
+pattern = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/f2000.T31T31.sea_ice.cam.h0.*-*.nc'
+filenames=glob.glob(pattern)
+filenames.sort()
+dset = xr.open_mfdataset(filenames, decode_cf=False)
+
+# Center on Oslo
+m = Map(center=(59+55/60, 10+44/60), zoom=10, 
+        interpolation='nearest', basemap=basemaps.Hydda.Base)
+display_options = {
+    'velocityType': 'Global Wind',
+    'displayPosition': 'bottomleft',
+    'displayEmptyString': 'No wind data'}
+    
+month=1
+# Level 4 roughly corresponds to 25mb
+wind = Velocity(data=dset[['U','V']].isel(lev=4, time=month-1),
+                zonal_speed='U',
+                meridional_speed='V',
+                latitude_dimension='lat',
+                longitude_dimension='lon',
+                velocity_scale=0.00,
+                max_velocity=2,
+                display_options=display_options)
+m += wind
+m    
+~~~
+{: .language-python}
+
+And here is a static example of what you should see (although it shoon your screen the widget will give you more options):
+
+<img src="../fig/ipyleaflet-Oslo.png">
 
 {% include links.md %}
 
