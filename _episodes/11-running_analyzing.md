@@ -428,7 +428,7 @@ m
 ~~~
 {: .language-python}
 
-And here is a static example of what you should see (although it shoon your screen the widget will give you more options):
+And here is a static example of what you should see, although on your screen the widget will give you more options:
 
 <img src="../fig/ipyleaflet-Oslo.png">
 
