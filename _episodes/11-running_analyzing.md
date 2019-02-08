@@ -23,12 +23,15 @@ Now you are ready to submit your simulation on Abel.
 
 <font color="red">On Abel:</font>
 
-<pre>cd ~/cesm_case/f2000.T31T31.$EXPNAME
+~~~
+cd ~/cesm_case/f2000.T31T31.$EXPNAME
 
 ./f2000.T31T31.$EXPNAME.submit
 
 squeue -u $USER
-</pre>
+~~~
+{: .language-bash}
+
 
 If your simulation is **unsuccessful** you have to understand what happened!
 
@@ -50,7 +53,8 @@ For this lesson we will concentrate on the last few lines in the file and in par
 
 <font color="red">On Abel:</font>
 
-<pre>vi cpl.log.190205-144355.gz
+~~~
+vi cpl.log.190205-144355.gz
 
 .......................
 (seq_mct_drv): ===============       SUCCESSFUL TERMINATION OF CPL7-CCSM ===============
@@ -62,9 +66,10 @@ For this lesson we will concentrate on the last few lines in the file and in par
 (seq_mct_drv): ===============  pes max memory highwater  (MB)  517.162  ===============
 (seq_mct_drv): ===============  pes min memory last usage (MB)   -0.001  ===============
 (seq_mct_drv): ===============  pes max memory last usage (MB)   -0.001  ===============
-</pre>
+~~~
+{: .language-bash}
 
-*Here the throughput was 5.873 simulated years / cmp-day and it took 0.347 * 60 ~ 21 minutes to run the first month. Assuming that the other months will take approximately the same time, that represents about 3 months per hour and a bit more than 4 hours for 12 months.*
+_Here the throughput was 5.873 simulated years / cmp-day and it took 0.347 * 60 ~ 21 minutes to run the first month. Assuming that the other months will take approximately the same time, that represents about 3 months per hour and a bit more than 4 hours for 12 months._
 
 
 ### Long experiment (14 months)
@@ -80,17 +85,23 @@ Make sure you set the duration of your experiment properly. Here we wish to run 
 
 <font color="red">On Abel:</font>
 
-<pre># Set EXPNAME properly
+~~~
+# Set EXPNAME properly
 
 cd ~/cesm_case/f2000.T31T31.$EXPNAME
-</pre>
+~~~
+{: .language-bash}
+
 
 Since we have already the first month done, we are going to continue the experiment instead of starting from scratch.
 
 <font color="red">On Abel:</font>
 
-<pre>./xmlchange CONTINUE_RUN=TRUE
-</pre>
+~~~
+./xmlchange CONTINUE_RUN=TRUE
+~~~
+{: .language-bash}
+
 
 To perform a 14 months experiment, we would need to repeat this one month experiment 13 times. 
 
@@ -98,17 +109,22 @@ For this purpose there is a CESM option called RESUBMIT.
 
 <font color="red">On Abel:</font>
 
-<pre>./xmlchange -file env_run.xml -id RESUBMIT -val 13
-</pre>
+~~~
+./xmlchange -file env_run.xml -id RESUBMIT -val 13
+~~~
+{: .language-bash}
 
 
 By setting this option, CAM5 will be running one month of simulation (once submitted) and automatically resubmit the next 12 months.  
 
 <font color="red">On Abel:</font>
-<pre>cd ~/cesm_case/f2000.T31T31.$EXPNAME
+
+~~~
+cd ~/cesm_case/f2000.T31T31.$EXPNAME
 
 ./f2000.T31T31.$EXPNAME.submit
-</pre>
+~~~
+{: .language-bash}
 
 
 Regularly check your experiment (and any generated output files) and once it is fully done, [store your model outputs on norStore](norstore.html).
@@ -125,9 +141,11 @@ Make sure you define EXPNAME properly (it depends on your experiment).
 
 <font color="red">On Abel:</font>
 
-<pre># If you are running CO2 experiment (otherwise adjust: sea_ice, SST, rocky)
+~~~
+# If you are running CO2 experiment (otherwise adjust: sea_ice, SST, rocky)
 export EXPNAME=CO2
-</pre>
+~~~
+{: .language-bash}
 
 Then copy the archived files from abel to the norStore project area.
 
@@ -135,10 +153,12 @@ Then copy the archived files from abel to the norStore project area.
 
 <font color="red">On Abel:</font>
 
-<pre>ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/archive'
+~~~
+ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/archive'
 
 rsync -avz /work/users/$USER/archive/f2000.T31T31.$EXPNAME $USER@login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/$USER/archive/.
-</pre>
+~~~
+{: .language-bash}
 
 Once the previous commands are successful, you are ready to [post-process and visualize](../../results.html) your data on login.nird.sigma2.no  
 
@@ -156,8 +176,10 @@ Start a new **Terminal** on your JupyterHub and transfer your data. Do not forge
 
 <font color="blue">On the JupyterHub terminal:</font>
 
-<pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.YOUR_EXPERIMENT/ /opt/uio/GEO4962/$USER/f2000.T31T31.YOUR_EXPERIMENT/
-</pre>
+~~~
+rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.YOUR_EXPERIMENT/ /opt/uio/GEO4962/$USER/f2000.T31T31.YOUR_EXPERIMENT/
+~~~
+{: .language-bash}
 
 # Visualization with psyplot
 
@@ -165,7 +187,8 @@ Start a new **python3** notebook on your JupyterHub and type the following comma
 
 <font color="green">On jupyter:</font>
 
-<pre>import psyplot.project as psy
+~~~
+import psyplot.project as psy
 
 month = '0009-01'
 
@@ -182,7 +205,8 @@ TSsi = dssi['TS'][0,:,:]
 diff = TSc - TSsi
 
 diff.psy.plot.mapplot(title="Surface temperature [K]\nF2000_CAM5_T31T31-0009-01\nControl-Sea_Ice")
-</pre>
+~~~
+{: .language-python}
 
 <img src="../fig/TS_F2000_CAM5_T31T31_control-sea_ice-0009-01.png">
 
@@ -196,7 +220,8 @@ Start a new **python3** notebook on your JupyterHub.
 
 <font color="green">On jupyter:</font>
 
-<pre>import xarray as xr
+~~~
+import xarray as xr
 
 %matplotlib inline
 
@@ -208,7 +233,8 @@ filename = path + experiment + '.cam.h0.' + month + '.nc'
 dset = xr.open_dataset(filename, decode_cf=False)
 TSsi = dset['TS'][0,:,:]
 dset.close()
-</pre>
+~~~
+{: .language-python}
 
 So far that is similar to what we did before to define the path and filename for the data and read the surface temperature values.
 
@@ -216,8 +242,10 @@ Now we can make a contour plot with a single command.
 
 <font color="green">On jupyter:</font>
 
-<pre>TSsi.plot.contourf()
-</pre>
+~~~
+TSsi.plot.contourf()
+~~~
+{: .language-python}
 
 to obtain this:
 
@@ -229,7 +257,8 @@ To do that we need to add bit more information.
 
 <font color="green">On jupyter:</font>
 
-<pre>import matplotlib.pyplot as plt
+~~~
+import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=180))
 TSsi.plot.contourf(ax=ax,
@@ -237,7 +266,8 @@ TSsi.plot.contourf(ax=ax,
 ax.set_title(experiment + '-' + month + '\n' + TSsi.long_name)
 ax.coastlines()
 ax.gridlines()
-</pre>
+~~~
+{: .language-python}
 
 This is a slightly better plot, we are getting closer to what we had with psyplot...
 
@@ -246,7 +276,7 @@ This is a slightly better plot, we are getting closer to what we had with psyplo
 
 <font color="green">On jupyter:</font>
 
-<pre>
+~~~
 import xarray as xr
 import numpy as np
 import cartopy.crs as ccrs
@@ -285,17 +315,74 @@ cs=ax.contourf(lon_cyclic, lat, TS_cyclic_si,
              cmap='jet')
 
 fig.colorbar(cs, shrink=0.8, label=TSsi.units)
-</pre>
+~~~
+{: .language-python}
+
 You can now use the command [savefig](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html) to save the current figure into a file.
 
 <font color="green">On jupyter:</font>
 
-<pre>fig.savefig(experiment + '-' + month + '.png')
-</pre>
+~~~
+fig.savefig(experiment + '-' + month + '.png')
+~~~
+{: .language-python}
 
 <img src="../fig/Sea_ice-0009-01.png">
 
-(See 
+### Create multiple plots in the same figure
+
+~~~
+import xarray as xr
+import numpy as np
+import cartopy.crs as ccrs
+from cartopy.util import add_cyclic_point
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+
+path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+experiment = 'f2000.T31T31.sea_ice'
+
+
+fig = plt.figure(figsize=[20, 8])
+
+for month in range(1,7):
+    filename = path + experiment + '.cam.h0.0009-0' + str(month) + '.nc'
+
+    dset = xr.open_dataset(filename, decode_cf=False)
+    TSsi = dset['TS'][0,:,:]
+    lat = dset['lat'][:]
+    lon = dset['lon'][:]
+    dset.close()
+
+    if month == 1:
+        fig.suptitle(experiment + '-0009'+'\n' + TSsi.long_name)
+
+    TSmin = 200
+    TSmax = 350
+    TSrange = np.linspace(TSmin, TSmax, 16, endpoint=True)
+
+    TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi, coord=lon)
+
+    ax = fig.add_subplot(2, 3, month, projection=ccrs.Mollweide())  # specify (nrows, ncols, axnum)
+    ax.set_title("month " + str(month))
+    ax.coastlines()
+    ax.gridlines()
+    cs=ax.contourf(lon_cyclic, lat, TS_cyclic_si,
+             transform=ccrs.PlateCarree(),
+             levels=TSrange,
+             extend='max',
+             cmap='jet')
+
+# adjust subplots so we keep a bit of space on the right for the colorbar    
+fig.subplots_adjust(right=0.8)
+# Specify where to place the colorbar
+cbar_ax = fig.add_axes([0.85, 0.15, 0.02, 0.7])
+# Add a unique colorbar to the figure
+fig.colorbar(cs, cax=cbar_ax, label=TSsi.units)
+~~~
+{: .language-python}
+
 
 {% include links.md %}
 
