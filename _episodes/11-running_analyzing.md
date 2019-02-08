@@ -430,7 +430,7 @@ m
 
 And here is a static example of what you should see, although on your screen the widget will give you more options:
 
-<iframe width="600" height="400" src="../fig/widget.html" frameborder="0" allowfullscreen></iframe>​
+<iframe width="600" height="400" src="../files/widget.html" frameborder="0" allowfullscreen></iframe>​
 
 {% include links.md %}
 
