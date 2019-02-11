@@ -98,7 +98,7 @@ The following file systems exist on abel:
 NorStore facility is divided in two parts:
 
 *   Active data, which are processed or being analysed, are stored in the [Project Area](https://www.sigma2.no/content/project-data-storage).
-*   When the data are no longer expected to change and/or results have been published, the data should normally be made accessible to the public. Data can be transferred to the [NorStore Archive](https://www.sigma2.no/content/national-research-data-archive) from the Project area or directly uploaded.
+*   When the data are no longer expected to change and/or results have been published, the data should normally be made accessible to the public. Data can be transferred to the NorStore Archive from the Project area or directly uploaded.
 
 When running the CAM-5.3 model on abel, the model outputs are generated and stored in the temporary working area (/work/users/$LOGNAME). As mentioned earlier, the working area on Abel is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
 Model outputs will have to be moved from Abel working area (/work/users/$LOGNAME) to the norStore project area. You can use scp to copy your data from Abel to NorStore but the detailed procedure will be explained later.  
