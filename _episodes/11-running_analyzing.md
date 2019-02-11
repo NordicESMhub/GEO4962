@@ -236,7 +236,8 @@ dset.close()
 ~~~
 {: .language-python}
 
-So far that is similar to what we did before to define the path and filename for the data and read the surface temperature values.
+So far that is similar to what we did before to define the path and filename for the data and read the surface 
+temperature values.
 
 Now we can make a contour plot with a single command.
 
@@ -251,7 +252,7 @@ to obtain this:
 
 <img src="../fig/Basic-plot.png">
 
-This figure is not very usefull: we do not know which projection was used, there is no coastline, we would rather have a proper title, etc.
+This figure is not very useful: we do not know which projection was used, there is no coastline, we would rather have a proper title, etc.
 
 To do that we need to add bit more information.
 
@@ -273,6 +274,10 @@ This is a slightly better plot, we are getting closer to what we had with psyplo
 
 <img src="../fig/Better-plot.png">
 
+### Change the default projection
+
+It is very often convenient to visualize using a different projection than the original data:
+
 
 <font color="green">On jupyter:</font>
 
@@ -293,30 +298,90 @@ filename = path + experiment + '.cam.h0.' + month + '.nc'
 
 dset = xr.open_dataset(filename, decode_cf=False)
 TSsi = dset['TS'][0,:,:]
-lat = dset['lat'][:]
-lon = dset['lon'][:]
 dset.close()
 
-TSmin = 200
-TSmax = 350
-TSrange = np.linspace(TSmin, TSmax, 16, endpoint=True)
+TSmin = 220
+TSmax = 320
 
-TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi, coord=lon)
 
 fig = plt.figure(figsize=[8, 8])
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  # specify (nrows, ncols, axnum)
-ax.set_title(experiment + '-' + month + '\n' + TSsi.long_name)
+
+TSsi.plot.contourf(ax=ax,
+                      transform=ccrs.PlateCarree(), 
+                      extend='max',
+                      cmap='jet', vmin=TSmin, vmax = TSmax)
+
+ax.set_title(experiment + '-' + month + '\n')
 ax.coastlines()
 ax.gridlines()
-cs=ax.contourf(lon_cyclic, lat, TS_cyclic_si,
-             transform=ccrs.PlateCarree(),
-             levels=TSrange,
-             extend='max',
-             cmap='jet')
-
-fig.colorbar(cs, shrink=0.8, label=TSsi.units)
 ~~~
 {: .language-python}
+
+
+<img src="../fig/Sea_ice-0009-01_nowrap.png">
+
+> ## wrap around longitudes
+> 
+> 
+> <font color="green">On jupyter:</font>
+>
+> ~~~
+> 
+> # get longitude min and max
+> print(TSsi.lon.min(), TSsi.lon.max())
+> ~~~
+> {: .language-python}
+>
+> To fill the gap, we can wrap around longitudes i.e. add a new longitude band at 360. equals to 0.
+>
+> ~~~
+> import xarray as xr
+> import numpy as np
+> import cartopy.crs as ccrs
+> from cartopy.util import add_cyclic_point
+> import matplotlib.pyplot as plt
+> 
+> %matplotlib inline
+> 
+> path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+> experiment = 'f2000.T31T31.sea_ice'
+> month = '0009-01'
+> 
+> filename = path + experiment + '.cam.h0.' + month + '.nc'
+> 
+> dset = xr.open_dataset(filename, decode_cf=False)
+> TSsi = dset['TS'][0,:,:]
+> dset.close()
+> 
+> TSmin = 220
+> TSmax = 320
+> 
+> # max longitude is 356.25 so we add another longitude 360. (= 0.)  
+> TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi.values, coord=TSsi.lon)
+> # Create a new xarray with the new arrays
+> TSsi_cy = xr.DataArray(TS_cyclic_si, coords={'lat':TSsi.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
+>                        attrs = TSsi.attrs )
+> 
+> fig = plt.figure(figsize=[8, 8])
+> ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  # specify (nrows, ncols, axnum)
+> 
+> TSsi_cy.plot.contourf(ax=ax,
+>                       transform=ccrs.PlateCarree(), 
+>                       extend='max',
+>                       cmap='jet', vmin=TSmin, vmax = TSmax)
+> 
+> ax.set_title(experiment + '-' + month + '\n')
+> ax.coastlines()
+> ax.gridlines()
+> 
+> ~~~
+> {: .language-python}
+>
+> 
+> <img src="../fig/Sea_ice-0009-01.png">
+{: .callout}
+
 
 You can now use the command [savefig](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html) to save the current figure into a file.
 
@@ -327,7 +392,65 @@ fig.savefig(experiment + '-' + month + '.png')
 ~~~
 {: .language-python}
 
-<img src="../fig/Sea_ice-0009-01.png">
+### contourf versus pcolormesh
+
+So far, we used *contourf* to visualize our data but we can also use *pcolormesh*.
+
+> ## Change *contourf* by *pcolormesh* 
+>
+> Change *contourf* by *pcolormesh* in the previous plot.
+> 
+> What do you observe?
+> 
+> > ## Solution
+> > ~~~
+> > import xarray as xr
+> > import numpy as np
+> > import cartopy.crs as ccrs
+> > from cartopy.util import add_cyclic_point
+> > import matplotlib.pyplot as plt
+> > 
+> > %matplotlib inline
+> > 
+> > path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+> > experiment = 'f2000.T31T31.sea_ice'
+> > month = '0009-01'
+> > 
+> > filename = path + experiment + '.cam.h0.' + month + '.nc'
+> > 
+> > dset = xr.open_dataset(filename, decode_cf=False)
+> > TSsi = dset['TS'][0,:,:]
+> > dset.close()
+> > 
+> > TSmin = 220
+> > TSmax = 320
+> > 
+> > # max longitude is 356.25 so we add another longitude 360. (= 0.)  
+> > TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi.values, coord=TSsi.lon)
+> > # Create a new xarray with the new arrays
+> > TSsi_cy = xr.DataArray(TS_cyclic_si, coords={'lat':TSsi.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
+> >                        attrs = TSsi.attrs )
+> > 
+> > fig = plt.figure(figsize=[8, 8])
+> > ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  # specify (nrows, ncols, axnum)
+> > 
+> > TSsi_cy.plot.pcolormesh(ax=ax,
+> >                       transform=ccrs.PlateCarree(), 
+> >                       extend='max',
+> >                       cmap='jet', vmin=TSmin, vmax = TSmax)
+> > 
+> > ax.set_title(experiment + '-' + month + '\n')
+> > ax.coastlines()
+> > ax.gridlines()
+> > ~~~
+> > {: .language-python}
+> >
+> > 
+> > <img src="../fig/Sea_ice-0009-01_pcolormesh.png">
+> >
+> {: .solution}
+{: .challenge}
+
 
 ### Create multiple plots in the same figure
 
@@ -347,6 +470,8 @@ experiment = 'f2000.T31T31.sea_ice'
 
 
 fig = plt.figure(figsize=[20, 8])
+TSmin = 220
+TSmax = 320
 
 for month in range(1,7):
     filename = path + experiment + '.cam.h0.0009-0' + str(month) + '.nc'
@@ -357,25 +482,24 @@ for month in range(1,7):
     lon = dset['lon'][:]
     dset.close()
 
-    if month == 1:
-        fig.suptitle(experiment + '-0009'+'\n' + TSsi.long_name)
-
-    TSmin = 200
-    TSmax = 350
-    TSrange = np.linspace(TSmin, TSmax, 16, endpoint=True)
-
-    TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi, coord=lon)
+    TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi.values, coord=TSsi.lon)
+    TSsi_cy = xr.DataArray(TS_cyclic_si, coords={'lat':TSsi.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
+                            attrs = TSsi.attrs )
 
     ax = fig.add_subplot(2, 3, month, projection=ccrs.Mollweide())  # specify (nrows, ncols, axnum)
-    ax.set_title("month " + str(month))
+
+    cs = TSsi_cy.plot.contourf(ax=ax,
+                      transform=ccrs.PlateCarree(), 
+                      extend='max',
+                      cmap='jet', vmin=TSmin, vmax = TSmax, add_colorbar=False)
+
+    ax.set_title( 'month ' + str(month) + '\n')
     ax.coastlines()
     ax.gridlines()
-    cs=ax.contourf(lon_cyclic, lat, TS_cyclic_si,
-             transform=ccrs.PlateCarree(),
-             levels=TSrange,
-             extend='max',
-             cmap='jet')
+    
 
+fig.suptitle(experiment + '-0009'+'\n' + TSsi.long_name, fontsize=24)
+    
 # adjust subplots so we keep a bit of space on the right for the colorbar    
 fig.subplots_adjust(right=0.8)
 # Specify where to place the colorbar
@@ -385,6 +509,7 @@ fig.colorbar(cs, cax=cbar_ax, label=TSsi.units)
 ~~~
 {: .language-python}
 
+<img src="../fig/Sea_ice-0009-01-06.png">
 
 ### Create interactive plots with ipyleaflet
 

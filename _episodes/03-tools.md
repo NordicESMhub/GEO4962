@@ -1,5 +1,5 @@
 ---
-title: "Tools"
+title: "Overview of analysis and visualization tools for netCDF data"
 teaching: 0
 exercises: 0
 questions:

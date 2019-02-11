@@ -6,14 +6,23 @@ questions:
 - "How to setup CESM on Abel?"
 - "How to run a cesm case?"
 - "How to monitor my cesm case?"
+- "What does CESM produce?"
+- "What is netCDF data format?"
+- "How to quickly inspect and visualize netCDF data files?"
 objectives:
 - "Learn to setup cesm on Abel"
 - "Learn to run and monitor a simple cesm case on Abel"
+- "Learn about netCDF data format"
+- "Learn to inspect a netCDF file"
+- "Learn to quickly visualize a netCDF file"
 keypoints:
 - "CESM"
 - "High-Performance Computing"
 - "Abel"
 - "SLURM"
+- "netCDF"
+- "ncdump"
+- "ncview"
 ---
 
 
@@ -27,8 +36,10 @@ We do all the practicals on <font color="red">Abel</font>.
 *   [Create a New case](#create-a-new-case)
 *   [Running a case](#running-a-case)
 *   [Monitor your test run](#monitor-your-test-run)
-*   [Check the 1 month test run](#check-the-1-month-test-run)
-*   [Move your files on NIRD](#move-your-files-on-nird).
+*   [First look at your 1 month test run](#first-look-at-your-1-month-test-run)
+	*   [What is a netCDF file](#What-is-a-netcdf-file)
+	*   [Inspect a netCDF file](#inspect-a-netcdf-file)
+	*   [Quick visualization of a netCDF file](#quick-visualization-of-a-netcdf-file)
 
 
 ### Notur Initialization
@@ -48,7 +59,8 @@ To simplify and allow you to run CESM as quickly as possible, we have prepared a
 
 <font color="red">On Abel:</font>  
 
-<pre>cd $HOME
+~~~
+cd $HOME
 
 module load git
 
@@ -64,7 +76,8 @@ chmod u+rwx geo4962_notur.bash
 
 ./geo4962_notur.bash
 
-</pre>
+~~~
+{: .language-bash}
 
 The script above copies the source code in $HOME/cesm/cesm_1_2_2 and creates symbolic links for the input data necessary to run our model configuration in /work/users/$USER/inputdata. Input data can be large this is why we create symbolic links instead of making several copies (one per user). The main copy is located in $CESM_DATA (CESM_DATA is an environment variable that is defined when executing geo4962_notur.bash).  
 
@@ -87,14 +100,17 @@ There are many options and we won't discuss all of them. The online help provide
 
 <font color="red">On Abel:</font>  
 
-<pre>./create_newcase --help
-</pre>
+~~~
+./create_newcase --help
+~~~
+{: .language-bash}
 
 The 4 main arguments of create_newcase are explained on the figure below: ![](../fig/newcase.png)  
 
 <font color="red">On Abel:</font>
 
-<pre>cd $HOME/cesm/cesm1_2_2/scripts
+~~~
+cd $HOME/cesm/cesm1_2_2/scripts
 
 #
 # Simulation 1: short simulation
@@ -103,8 +119,8 @@ The 4 main arguments of create_newcase are explained on the figure below: ![](..
 module load cesm/1.2.2
 
 ./create_newcase -case ~/cesm_case/f2000.T31T31.test -res T31_T31 -compset F_2000_CAM5 -mach abel
-</pre>
-
+~~~
+{: .language-bash}
 
 
 *   **case**: specifies the name and location of the case being created. It creates a new case in $HOME/cesm_case and its name is f2000.T32T31.test
@@ -158,8 +174,10 @@ Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresp
 
 <font color="red">On Abel:</font>
 
-<pre>cd ~/cesm_case/f2000.T31T31.test
-</pre>
+~~~
+cd ~/cesm_case/f2000.T31T31.test
+~~~
+{: .language-bash}
 
 Check the content of the directory and browse the sub-directories:  
 ![](../fig/casedir_test.png)  
@@ -167,41 +185,51 @@ For this tests (and all our simulations), we do not wish to have a "cold" start 
 
 <font color="red">On Abel:</font>
 
-<pre>./xmlchange RUN_TYPE=hybrid
+~~~
+./xmlchange RUN_TYPE=hybrid
 ./xmlchange RUN_REFCASE=f2000.T31T31.control
 ./xmlchange RUN_REFDATE=0009-01-01
-</pre>
+~~~
+{: .language-bash}
 
 We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFCASE, etc.) defined in xml files. All the xml files contained in your test case directory will be used by cesm_setup to generate your configuration setup (Fortran namelist, etc.). 
 
 <font color="red">On Abel:</font>  
 
-<pre>ls *.xml
-</pre>
+~~~
+ls *.xml
+~~~
+{: .language-bash}
 
 If we do not want the dates to start from 0001-01-01 we need to specify the starting date of our test simulation.
 
 <font color="red">On Abel:</font>  
 
-<pre>./xmlchange RUN_STARTDATE=0009-01-01
-</pre>
+~~~
+./xmlchange RUN_STARTDATE=0009-01-01
+~~~
+{: .language-bash}
 
 We are also going to change the duration of our test simulation in the file **env_run.xml** and set it to 1 month only.
 
 <font color="red">On Abel:</font>  
 
-<pre>./xmlchange -file env_run.xml -id STOP_N -val 1
+~~~
+./xmlchange -file env_run.xml -id STOP_N -val 1
 ./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
-</pre>
+~~~
+{: .language-bash}
 
 Now we are ready to set-up our model configuration and build the cesm executable.  
 
 <font color="red">On Abel:</font>
 
-<pre>./cesm_setup
+~~~
+./cesm_setup
 
 ./f2000.T31T31.test.build
-</pre>
+~~~
+{: .language-bash}
  
 After building CESM for your configuration, a new directory (and a set of sub-directories) are created in /work/users/$USERS/f2000.T31T31.test:
 
@@ -252,14 +280,17 @@ Check what is in your current job command file (f2000.T31T31.test.run).
 
 <font color="red">On Abel:</font>
 
-<pre>#SBATCH --job-name=f2000.T31T31.test
+~~~
+#SBATCH --job-name=f2000.T31T31.test
 #SBATCH --time=08:59:00
 #SBATCH --ntasks=32
 #SBATCH --account=nn1000k
 #SBATCH --mem-per-cpu=4G
 #SBATCH --cpus-per-task=1
 #SBATCH --output=slurm.out
-</pre>
+~~~
+{: .language-bash}
+
 
 The lines starting with **#SBATCH** are not comments but SLURM directives.  
 You can now submit your test case.
@@ -281,7 +312,8 @@ To monitor your job on <font color="red">Abel:</font>
 
 Full list of available commands and their usage can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/queue-system.html).
 
-### Check the 1 month test run
+
+### First look at your 1 month test run
 
 On Abel during your test case run, CAM-5.3 generates outputs in the "run" directory:  
 
@@ -298,6 +330,16 @@ ls -lrt
 cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
 ls -lrt
 </pre>
+
+#### What is a netCDF file?
+
+TO BE DONE
+
+#### Inspect a netCDF file
+
+TO BE DONE
+
+#### Quick visualization of a netCDF file
 
 You should see a number of netCDF files (each of them ends with ".nc").  
 You can quickly visualize your data (to make sure your simulation ran OK).
