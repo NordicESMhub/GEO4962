@@ -2,7 +2,7 @@
 title: Setup
 ---
 
-Setup instructions will be send by email to all participants with information on:
+Setup instructions will be sent by email to all participants with information on:
 
 - How to get an account for computational resources with [Notur](https://www.metacenter.no/user/application/form/notur/) and project NN1000K
 - How to get an account for storage resources with [NIRD/Norstore](https://www.metacenter.no/user/application/form/norstore/) and project NS1000K
