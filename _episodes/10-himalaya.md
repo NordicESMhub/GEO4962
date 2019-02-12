@@ -9,6 +9,8 @@ objectives:
 keypoints:
 - "Himalaya"
 ---
+<img src="../fig/Himalaya.png">
+
 ### **Himalaya Mountains**: how to update input dataset?
 
 Copy the original surface geopotential file into your case directory.
