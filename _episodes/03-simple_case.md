@@ -333,11 +333,45 @@ ls -lrt
 
 #### What is a netCDF file?
 
-TO BE DONE
+Netcdf stands for “network Common Data Form”. It is self-describing, portable, metadata friendly, supported by many languages
+(including fortran, C/C++, Matlab, python, NCL, IDL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in parcitula NCO and CDO).
 
 #### Inspect a netCDF file
 
-TO BE DONE
+NetCDF files are often too big to open directly (with your favorite text editor, for instance), however one can look at the **content** of a netCDF file instead, for example to *dump* the **header** of one of the netCDF history files.
+
+<font color="red">On Abel:</font>
+
+<pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
+ncdump -h f2000.T31T31.test.cam.h0.0001-01.nc
+
+netcdf f2000.T31T31.control.cam.h0.0001-01 {
+dimensions:
+	lat = 48 ;
+	lon = 96 ;
+	time = UNLIMITED ; // (1 currently)
+	nbnd = 2 ;
+	chars = 8 ;
+	lev = 30 ;
+	ilev = 31 ;
+variables:
+	double lev(lev) ;
+		lev:long_name = "hybrid level at midpoints (1000*(A+B))" ;
+		lev:units = "level" ;
+		lev:positive = "down" ;
+		lev:standard_name = "atmosphere_hybrid_sigma_pressure_coordinate" ;
+		lev:formula_terms = "a: hyam b: hybm p0: P0 ps: PS" ;
+	double hyam(lev) ;
+		hyam:long_name = "hybrid A coefficient at layer midpoints" ;
+	double hybm(lev) ;
+		hybm:long_name = "hybrid B coefficient at layer midpoints" ;
+	double ilev(ilev) ;
+		ilev:long_name = "hybrid level at interfaces (1000*(A+B))" ;
+		ilev:units = "level" ;
+		ilev:positive = "down" ;
+		ilev:standard_name = "atmosphere_hybrid_sigma_pressure_coordinate" ;
+		ilev:formula_terms = "a: hyai b: hybi p0: P0 ps: PS" ;
+</pre>
 
 #### Quick visualization of a netCDF file
 
