@@ -417,23 +417,5 @@ Click on the magnification button (**M X4**) to set how much expansion the image
 
 Try to plot other variables like the three-dimensional air temperature field **T**, for example, and select the vertical level you want to see between 3.64 hPa (top of the model) and 992.56 hPa (bottom), in this instance.
 
-### Move your files on NIRD
-
-First make sure your run was successful and check all the necessary output files were produced.  
-
-To post-process and visualize your model outputs, it is VERY IMPORTANT you move them from Abel to norStore. Remember that all model outputs are generated in a semi-temporary directory and all your files will be removed after a few weeks! 
-
-If you haven't set-up your SSH keys, the next commands (ssh and [rsync](http://www.tecmint.com/rsync-local-remote-file-synchronization-commands/)) will require you to enter your Unix password.  
-
-<font color="red">On Abel:</font>
-
-<pre>ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/runs'
-ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/archive'
-
-rsync -avz /work/users/$USER/f2000.T31T31.test $USER@login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/$USER/runs/.
-
-rsync -avz /work/users/$USER/archive/f2000.T31T31.test $USER@login.nird.sigma2.no:/projects/NS1000K/GEO4962/outputs/$USER/archive/.
-</pre>
-
 {% include links.md %}
 
