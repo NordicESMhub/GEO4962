@@ -345,7 +345,7 @@ NetCDF files are often too big to open directly (with your favorite text editor,
 <pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
 ncdump -h f2000.T31T31.test.cam.h0.0001-01.nc
 
-netcdf f2000.T31T31.control.cam.h0.0001-01 {
+netcdf f2000.T31T31.test.cam.h0.0001-01 {
 dimensions:
 	lat = 48 ;
 	lon = 96 ;
@@ -371,6 +371,7 @@ variables:
 		ilev:positive = "down" ;
 		ilev:standard_name = "atmosphere_hybrid_sigma_pressure_coordinate" ;
 		ilev:formula_terms = "a: hyai b: hybi p0: P0 ps: PS" ;
+    ....
 </pre>
 
 #### Quick visualization of a netCDF file
