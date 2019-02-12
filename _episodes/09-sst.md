@@ -9,6 +9,8 @@ objectives:
 keypoints:
 - "SST"
 ---
+<img src="../fig/SST.png">
+
 ### **SST**: how to update input dataset?
 
 Copy the original SST file into your case directory.
