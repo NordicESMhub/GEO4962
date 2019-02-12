@@ -553,7 +553,7 @@ m
 ~~~
 {: .language-python}
 
-And here is a static example of what you should see, although on your screen the widget will give you more options:
+And here is an example of what you should get on your screen, with the widget giving you more options than with a static plot (to zoom in / out and see a different region):
 
 <iframe width="600" height="400" src="../files/widget.html" frameborder="0" allowfullscreen></iframe>​
 
