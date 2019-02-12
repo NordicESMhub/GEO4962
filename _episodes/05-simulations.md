@@ -30,16 +30,18 @@ Each of the 4 experiments is given an explicit name:
 
 1.  **EXPNAME = CO2**
               Doubling of CO2 (change CO2 value to 800 ppm > change the name list)
-2.  **EXPNAME = sea_ice**
+2.  **EXPNAME = rockies**
+              Lowering of Rocky Mountains (set surface Geopotential to 0 from 30N to 50N and 235E to 260E > 
+3.  **EXPNAME = sea_ice**
               Melt of Arctic sea ice (set sea ice fraction to zero North of 40N > change the input data set)
-3.  **EXPNAME = SST**
+4.  **EXPNAME = SST**
               Super El Nino (add +6 K to tropical Central and East Pacific SST from 5S to 5N, 180W to 85W > change the input data set)
-4.  **EXPNAME = himalaya**
-              Lowering of Himalaya Mountains and Tibetan Plateau (set surface Geopotential to 0 from 25N to 40N and 70E to 100E > change the input data set)
+5.  **EXPNAME = himalaya**
+              Lowering of Himalaya Mountains and Tibetan Plateau (set surface Geopotential to 0 from 30N to 50N and 70E to 100E > change the input data set)
 
 Make sure you define an environment variable EXPNAME, **every time** you login <font color="red">on Abel</font>:  
 
-    # define an environment variable for your experiment (CO2, sea_ice, SST or himalaya)
+    # define an environment variable for your experiment (CO2, rockies, sea_ice, SST or himalaya)
     
     export EXPNAME=CO2
 
@@ -62,7 +64,7 @@ To create a new case always involve executing the command create_newcase.
 
 <pre>cd $HOME/cesm/cesm1_2_2/scripts
 
-# Adjust EXPNAME depending on your experiment (CO2, sea_ice, SST, himalaya)
+# Adjust EXPNAME depending on your experiment (CO2, rockies, sea_ice, SST, himalaya)
 
 export EXPNAME=CO2
 #
