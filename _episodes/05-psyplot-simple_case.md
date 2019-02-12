@@ -6,11 +6,9 @@ questions:
 - "How to start/stop Jupyter notebooks in the Jupyterhub?"
 - "How to analyze and visualize CESM outputs with python?"
 - "What is the vertical coordinate in CESM?" 
-- "How to interpolate on pressure levels?"
 objectives:
 - "Learn about the Jupyter ecosystem"
 - "Learn to analyze CESM CAM outputs with the test run"
-- "Learn to interpolate data on pressure levels"
 - "Learn about python packages for Earth System Modelling"
 keypoints:
 - "jupyterlab"
@@ -271,9 +269,6 @@ plt.ylim(top=3)
 
 
 <img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_mean_lon_log10_adjust.png">
-
-
-## Interpolate to pressure levels
 
 {% include links.md %}
 
