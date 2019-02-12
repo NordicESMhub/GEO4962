@@ -135,6 +135,7 @@ print(returned_value)
 ~~~
 {: .language-python}
 
+with the ncl script [vertical_interpolation.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl).
 Then we can plot T:
 
 ~~~
