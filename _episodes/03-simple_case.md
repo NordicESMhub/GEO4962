@@ -374,7 +374,7 @@ variables:
     ....
 </pre>
 
-#### Quick visualization of a netCDF file
+#### A detailed look at one netCDF variable
 
 <font color="red">On Abel:</font>
 
