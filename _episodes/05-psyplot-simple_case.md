@@ -22,20 +22,19 @@ keypoints:
 
 
 *   [Introduction to Jupyterhub and JupyterLab](#introduction-to-jupyterhub-and-jupyterlab)
-		* [Login to the JupyterHub](#login-to-the-jupyterhub)
-		* [Start and stop your server](#start-and-stop-your-server)
-		* [JupyterLab](#jupyterlab)
+	* [Login to the JupyterHub](#login-to-the-jupyterhub)
+	* [Start and stop your server](#start-and-stop-your-server)
+	* [JupyterLab](#jupyterlab)
 *   [Copy your output files from Abel to the virtual machine](#copy-your-output-files-from-abel-to-the-virtual-machine)
 *   [Map visualization with psyplot](#map-visualization-with-psyplot)
 *   [Customize your maps](#customize-your-plots)
-		* [Set figure size](#set-figure-size)
-		* [Plot 4D-fields such as Temperature](#plot-4d-fields-such-as-temperature)
-		* [Change map projection](#change-map-projection)
+	* [Set figure size](#set-figure-size)
+	* [Plot 4D-fields such as Temperature](#plot-4d-fields-such-as-temperature)
+	* [Change map projection](#change-map-projection)
 *   [Georeferenced Latitude-Vertical plot](#georeferenced-latitude-vertical-plot)	
-		* [2D plot for one longitude point](#2d-plot-for-one-longitude-point)
-		* [2D plot over averaged longitudes](#2d-plot-over-averaged-longitudes)
+	* [2D plot for one longitude point](#2d-plot-for-one-longitude-point)
+	* [2D plot over averaged longitudes](#2d-plot-over-averaged-longitudes)
 *   [CESM vertical coordinate system](#cesm-vertical-coordinate-system)
-*   [Interpolate to pressure levels](#interpolate-to-pressure-levels)
 
 # Introduction to Jupyterhub and JupyterLab
 
@@ -183,6 +182,8 @@ We select *lon=0* and to use psyplot, we create a new *xarray* using latitudes a
 ~~~
 import xarray as xr
 
+mpl.rcParams['figure.figsize'] = [10., 8.]
+
 ds = psy.open_dataset(filename)
 
 # Create a new dataset over latitudes and levels
@@ -193,7 +194,9 @@ T_cross_section = xr.Dataset(
     attrs = ds['T'].attrs)
 
 # Plot
-psy.plot.plot2d(T_cross_section, name='T', clabel='{desc}')
+psy.plot.plot2d(T_cross_section, name='T', clabel='{desc}', 
+				xlabel=ds.lat.attrs['long_name'], 
+				ylabel=ds.lev.attrs['long_name'])
 ~~~
 {: .language-python}
 
@@ -217,7 +220,8 @@ Tmean=xr.Dataset(
 print(Tmean)
 
 # Plot the cross section
-psy.plot.plot2d(Tmean, name='T', clabel=Tmean.attrs['units'])
+psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.attrs['units'],
+               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
 ~~~
 {: .language-python}
 
@@ -228,7 +232,8 @@ psy.plot.plot2d(Tmean, name='T', clabel=Tmean.attrs['units'])
 
 ~~~
 # To revert vertical axis
-psy.plot.plot2d(Tmean, name='T', clabel='{desc}')
+psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.attrs['units'],
+               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
 
 # Invert vertical axis
 import matplotlib.pyplot as plt
@@ -244,7 +249,9 @@ usually use the log to plot it as it is more intuitive to analyze. For this, go 
 change the units of the vertical axis from "scalar" to "Log10". 
 
 ~~~
-psy.plot.plot2d(Tmean, name='T', clabel='{desc}')
+psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.attrs['units'],
+               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
+
 # Invert vertical axis
 plt.ylim(plt.ylim()[::-1])
 # 'symlog' scaling, however, handles negative values nicely
@@ -258,7 +265,9 @@ plt.yscale('symlog')
 We can also adjust the top of the figure:
 
 ~~~
-psy.plot.plot2d(Tmean, name='T', plot='contourf', clabel='{desc}')
+psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'],plot='contourf', clabel=Tmean.attrs['units'],
+               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
+
 # Invert vertical axis
 plt.ylim(plt.ylim()[::-1])
 # 'symlog' scaling, however, handles negative values nicely
