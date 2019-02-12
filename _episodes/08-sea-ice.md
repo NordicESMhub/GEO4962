@@ -9,6 +9,7 @@ objectives:
 keypoints:
 - "sea-ice"
 ---
+<img src="../fig/Sea_Ice.png">
 
 <h3 id="dataset"><b>Sea-ice</b>: how to update the input dataset?</h3>
 
