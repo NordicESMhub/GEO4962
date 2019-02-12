@@ -9,6 +9,7 @@ objectives:
 keypoints:
 - "Rocky"
 ---
+<img src="../fig/Rockies.png">
 
 <h3 id="dataset"><b>Rocky Mountains</b>: how to update input dataset?</h3>
 
