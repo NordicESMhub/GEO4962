@@ -376,6 +376,25 @@ variables:
 
 #### Quick visualization of a netCDF file
 
+<font color="red">On Abel:</font>
+
+<pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
+module load ncl
+ncl
+
+ Copyright (C) 1995-2014 - All Rights Reserved
+ University Corporation for Atmospheric Research
+ NCAR Command Language Version 6.2.0
+ The use of this software is governed by a License Agreement.
+ See http://www.ncl.ucar.edu/ for more details.
+
+ncl 0> f1 = addfile("f2000.T31T31.test.cam.h0.0001-01.nc", "r")
+ncl 1> var1 = f1->TS
+ncl 2> printVarSummary(var1)</pre>
+![](../fig/ncdump-h.png)  
+
+#### Quick visualization of a netCDF file
+
 You should see a number of netCDF files (each of them ends with ".nc").  
 You can quickly visualize your data (to make sure your simulation ran OK).
 
