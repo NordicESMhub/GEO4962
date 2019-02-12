@@ -11,7 +11,7 @@ keypoints:
 ---
 <img src="../fig/Rockies.png">
 
-<h3 id="dataset"><b>Rocky Mountains</b>: how to update input dataset?</h3>
+<h3 id="dataset"><b>Rocky Mountains</b>: how to update the input dataset?</h3>
 
 Copy surface geopotential file to your case directory:
 
