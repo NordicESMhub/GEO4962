@@ -29,7 +29,7 @@ The goal is to run the experiment of your choice (to cherry pick from the list b
 Each of the 4 experiments is given an explicit name: 
 
 1.  **EXPNAME = CO2**
-              Doubling of CO2 (change CO2 value to 800 ppm > change the name list)
+              Quadrupling of CO2 (change CO2 value to 1467 ppm > change the name list)
 2.  **EXPNAME = rockies**
               Lowering of Rocky Mountains (set surface Geopotential to 0 from 30N to 50N and 235E to 260E > 
 3.  **EXPNAME = sea_ice**
@@ -150,7 +150,7 @@ Now depending on your experiment case, you would have either to change the namel
 
 ### Changing namelist or dataset 
 
-*   [Doubling CO2](../09-CO2/index.html)
+*   [Quadrupling CO2](../09-CO2/index.html)
 *   [Lowering Rocky mountains](../10-rocky/index.html)
 *   [Melt of Artic sea ice](../11-sea-ice/index.html)
 *   [Super El Nino](../12-sst/index.html)
