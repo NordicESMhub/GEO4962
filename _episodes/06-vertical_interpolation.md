@@ -85,10 +85,100 @@ psy.plot.mapplot(T850, name='T850', title='Temperature (K) at 850 mb')
 
 <img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_850mb.png">
 
+
+> ## Create a map plot for the zonal wind (U) at **850 mb**
+> 
+> Make a similar plot with **U**, using the same structure and code as for **T**.
+>
+> > ## Solution
+> > ~~~
+> > import xarray as xr
+> > import numpy as np
+> >  
+> > pnew = [850.]
+> > 
+> > U    = (cfile.variables["U"][:,:,:,:])
+> > UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+> >  
+> > ntime, output_levels, nlat, nlon = UonP.shape
+> > 
+> > UonP[UonP==1e30] = np.NaN
+> > U850=xr.Dataset(
+> >         {'U850': (('lat','lon'), UonP[0,0,:,:])},
+> >         {'lat':  lats,
+> >          'lon':  lons})
+> > 
+> > # plot using psyplot
+> > psy.plot.mapplot(U850, name='U850', title='Zonal wind (m/s) at 850 mb')
+> > ~~~
+> > {: .language-python}
+> >
+> > <img src="../fig/U_F2000_CAM5_T31T31_test-0009-01_850mb.png"> 
+> >
+> {: .solution}
+{: .challenge}
+
 ### Georeferenced Latitude-Vertical plot on pressure levels
 
+Let's go back to Georeferenced Latitude-Vertical plots but now we wish the vertical axis to
+represent pressure levels and not hybrid sigma pressure levels.
+
+We will first plot the zonal wind (U):
+
+~~~
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+
+pnew = [1000., 900., 850., 700., 600, 500., 400., 300., 100., 30., 10.]
+
+UonP = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+
+ntime, output_levels, nlat, nlon = UonP.shape
+
+~~~
+{: .language-python}
+
+In this example *pnew* is an array containing pressure levels and we interpolate U on these levels to 
+generate a new array called *UonP*.
+ 
+Then we average *UonP* along all the longitudes and generate a new array called *Umean*:
+
+~~~
+UonP[UonP==1e30] = np.NaN
+print(UonP.mean(axis=3).shape,lats.shape)
+Umean=xr.Dataset(
+       {'U': (('lev','lat'), UonP.mean(axis=3)[0,:,:])},
+       {'lev':  np.asarray(pnew),
+        'lat':  lats})
+~~~
+{: .language-python}
+		
+We can now plot *Umean*:
+
+~~~
+U_cross_section = xr.Dataset(
+    {'U': ds['U'].isel(time=0).mean(dim='lon')},
+    {'lat':  ds.lat, 'lev': ds.lev_p}, 
+    attrs = ds['U'].attrs)
+
+psy.plot.plot2d(U_cross_section, name='U', plot='contourf', 
+                title="Georeferenced Latitude-Vertical plot", 
+                clabel="Zonal wind (m/s)",
+                xlabel='latitude',
+                ylabel='pressure (mb)'
+               )
+plt.ylim(plt.ylim()[::-1])
+plt.yscale('symlog')
+plt.ylim(bottom=1000)
+plt.ylim(top=10)
+~~~
+{: .language-python}
+
+<img src="../fig/U_F2000_CAM5_T31T31_test-0009-01_pressure_py.png">
+
 > ## Create a Georeferenced Latitude-Vertical plot on the following pressure levels:
-> pnew = [900., 850., 700., 600, 500., 400., 300., 100., 30., 10.]
+> pnew = [850., 700., 600, 500., 400., 300., 100., 30., 10.]
 > 
 > - What do you observe? 
 > - Is there anything wrong?
@@ -97,7 +187,7 @@ psy.plot.mapplot(T850, name='T850', title='Temperature (K) at 850 mb')
 > > ~~~
 > > import xarray as xr
 > > import numpy as np
-> > import matplotlib as plt
+> > import matplotlib.pyplot as plt
 > > 
 > > pnew = [850., 700., 600, 500., 400., 300., 100., 30., 10.]
 > > 
@@ -106,16 +196,25 @@ psy.plot.mapplot(T850, name='T850', title='Temperature (K) at 850 mb')
 > > ntime, output_levels, nlat, nlon = Tnew.shape
 > > 
 > > Tnew[Tnew==1e30] = np.NaN
-> > print(Tnew.mean(axis=3).shape,lats.shape)
+> >
 > > Tmean=xr.Dataset(
 > >        {'T': (('lev','lat'), Tnew.mean(axis=3)[0,:,:])},
 > >        { 'lev':  np.asarray(pnew),
 > >        'lat':  lats})
+> > 
+> > psy.plot.plot2d(Tmean, name='T', plot='contourf')
+> > # Invert vertical axis
+> > plt.ylim(plt.ylim()[::-1])
+> > plt.ylim(top=10.)
+> > plt.ylim(bottom=900.)
+> > plt.xlim(left=-90)
+> > plt.xlim(right=90)
 > > ~~~
 > > {: .language-python}
->
-> <img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_vertint.png"> 
->
+> >
+> > <img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_vertint.png"> 
+> >
+> {: .solution}
 {: .challenge}
 
 Here, we show you how to use [ncl](https://www.ncl.ucar.edu/Document/Tools/) to interpolate T and U fields to 
