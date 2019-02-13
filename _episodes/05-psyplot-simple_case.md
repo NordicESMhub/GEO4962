@@ -237,7 +237,7 @@ Contrary to TS which depends only on two horizontal dimensions (namely latitude 
 {: .challenge}
 
 
-In the same way add another cell below the plot and try to display the zonal wind (U) instead of the surface temperature (TS).
+Now, add another cell below the plot and try to display the zonal wind (U) instead of the surface temperature (TS).
 As for T, U has an additional dimension (along the vertical), hence we also have to specify a vertical level 
 (between 0 and 29) to make our plot. 
 
