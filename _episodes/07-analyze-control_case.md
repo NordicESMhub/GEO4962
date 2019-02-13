@@ -18,7 +18,8 @@ keypoints:
 *   [What is a climatology?](#what-is-a-climatology)
 	*   [SPARC Climatology](#sparc-climatology)
 *   [Compare the control run to the SPARC climatology](#compare-the-control-run-to-the-sparc-climatology)
-*   [Exercice-1](#exercice-1)
+	*   [Methodology](#methodology)
+	*   [Exercice-1](#exercice-1)
 
 # What is a control run?
 
@@ -34,180 +35,125 @@ start your future experiments at year 9 and further compare your simulation outp
 The control run model outputs are accessible from the Jupyterhub; for instance, from a Terminal:
 
 ~~~
-ls -lrt $HOME/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist
+ls $HOME/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist
 ~~~
 {: .language-bash}
 
 ~~~
-total 4266528
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 15:08 f2000.T31T31.control.cam.h0.0001-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 15:37 f2000.T31T31.control.cam.h0.0001-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 15:57 f2000.T31T31.control.cam.h0.0001-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 16:16 f2000.T31T31.control.cam.h0.0001-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 16:37 f2000.T31T31.control.cam.h0.0001-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 16:56 f2000.T31T31.control.cam.h0.0001-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 17:17 f2000.T31T31.control.cam.h0.0001-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 17:37 f2000.T31T31.control.cam.h0.0001-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 17:56 f2000.T31T31.control.cam.h0.0001-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 18:16 f2000.T31T31.control.cam.h0.0001-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 18:36 f2000.T31T31.control.cam.h0.0001-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 28 18:56 f2000.T31T31.control.cam.h0.0001-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 08:13 f2000.T31T31.control.cam.h0.0002-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 08:31 f2000.T31T31.control.cam.h0.0002-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 08:51 f2000.T31T31.control.cam.h0.0002-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 09:11 f2000.T31T31.control.cam.h0.0002-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 09:31 f2000.T31T31.control.cam.h0.0002-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 09:51 f2000.T31T31.control.cam.h0.0002-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 10:11 f2000.T31T31.control.cam.h0.0002-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 10:31 f2000.T31T31.control.cam.h0.0002-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 10:51 f2000.T31T31.control.cam.h0.0002-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 11:11 f2000.T31T31.control.cam.h0.0002-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 11:31 f2000.T31T31.control.cam.h0.0002-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 11:51 f2000.T31T31.control.cam.h0.0002-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 12:11 f2000.T31T31.control.cam.h0.0003-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 12:29 f2000.T31T31.control.cam.h0.0003-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 12:50 f2000.T31T31.control.cam.h0.0003-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 13:09 f2000.T31T31.control.cam.h0.0003-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 13:30 f2000.T31T31.control.cam.h0.0003-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 13:49 f2000.T31T31.control.cam.h0.0003-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 14:09 f2000.T31T31.control.cam.h0.0003-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 14:30 f2000.T31T31.control.cam.h0.0003-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 14:50 f2000.T31T31.control.cam.h0.0003-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 15:11 f2000.T31T31.control.cam.h0.0003-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 15:31 f2000.T31T31.control.cam.h0.0003-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 15:51 f2000.T31T31.control.cam.h0.0003-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 17:13 f2000.T31T31.control.cam.h0.0004-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 17:32 f2000.T31T31.control.cam.h0.0004-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 17:53 f2000.T31T31.control.cam.h0.0004-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 18:13 f2000.T31T31.control.cam.h0.0004-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 18:34 f2000.T31T31.control.cam.h0.0004-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 18:53 f2000.T31T31.control.cam.h0.0004-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 19:13 f2000.T31T31.control.cam.h0.0004-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 19:33 f2000.T31T31.control.cam.h0.0004-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 19:53 f2000.T31T31.control.cam.h0.0004-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 20:13 f2000.T31T31.control.cam.h0.0004-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 20:32 f2000.T31T31.control.cam.h0.0004-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 20:52 f2000.T31T31.control.cam.h0.0004-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 21:20 f2000.T31T31.control.cam.h0.0005-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 21:38 f2000.T31T31.control.cam.h0.0005-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 21:58 f2000.T31T31.control.cam.h0.0005-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 22:18 f2000.T31T31.control.cam.h0.0005-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 22:38 f2000.T31T31.control.cam.h0.0005-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 22:57 f2000.T31T31.control.cam.h0.0005-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 23:17 f2000.T31T31.control.cam.h0.0005-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 23:36 f2000.T31T31.control.cam.h0.0005-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 29 23:56 f2000.T31T31.control.cam.h0.0005-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 00:15 f2000.T31T31.control.cam.h0.0005-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 00:35 f2000.T31T31.control.cam.h0.0005-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 00:54 f2000.T31T31.control.cam.h0.0005-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 01:13 f2000.T31T31.control.cam.h0.0006-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 01:31 f2000.T31T31.control.cam.h0.0006-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 01:50 f2000.T31T31.control.cam.h0.0006-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 02:09 f2000.T31T31.control.cam.h0.0006-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 02:29 f2000.T31T31.control.cam.h0.0006-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 02:48 f2000.T31T31.control.cam.h0.0006-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 03:08 f2000.T31T31.control.cam.h0.0006-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 03:28 f2000.T31T31.control.cam.h0.0006-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 03:48 f2000.T31T31.control.cam.h0.0006-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 04:08 f2000.T31T31.control.cam.h0.0006-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 04:27 f2000.T31T31.control.cam.h0.0006-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 04:48 f2000.T31T31.control.cam.h0.0006-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 05:10 f2000.T31T31.control.cam.h0.0007-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 05:29 f2000.T31T31.control.cam.h0.0007-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 05:50 f2000.T31T31.control.cam.h0.0007-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 06:10 f2000.T31T31.control.cam.h0.0007-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 06:30 f2000.T31T31.control.cam.h0.0007-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 06:50 f2000.T31T31.control.cam.h0.0007-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 07:11 f2000.T31T31.control.cam.h0.0007-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 07:32 f2000.T31T31.control.cam.h0.0007-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 07:52 f2000.T31T31.control.cam.h0.0007-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 08:13 f2000.T31T31.control.cam.h0.0007-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 08:33 f2000.T31T31.control.cam.h0.0007-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 08:54 f2000.T31T31.control.cam.h0.0007-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 09:15 f2000.T31T31.control.cam.h0.0008-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 09:34 f2000.T31T31.control.cam.h0.0008-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 09:55 f2000.T31T31.control.cam.h0.0008-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 10:15 f2000.T31T31.control.cam.h0.0008-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 10:36 f2000.T31T31.control.cam.h0.0008-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 10:57 f2000.T31T31.control.cam.h0.0008-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 11:17 f2000.T31T31.control.cam.h0.0008-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 11:38 f2000.T31T31.control.cam.h0.0008-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 11:59 f2000.T31T31.control.cam.h0.0008-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 12:20 f2000.T31T31.control.cam.h0.0008-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 12:40 f2000.T31T31.control.cam.h0.0008-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 13:01 f2000.T31T31.control.cam.h0.0008-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 13:25 f2000.T31T31.control.cam.h0.0009-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 13:44 f2000.T31T31.control.cam.h0.0009-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 14:05 f2000.T31T31.control.cam.h0.0009-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 14:26 f2000.T31T31.control.cam.h0.0009-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 14:47 f2000.T31T31.control.cam.h0.0009-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 15:08 f2000.T31T31.control.cam.h0.0009-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 15:30 f2000.T31T31.control.cam.h0.0009-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 15:51 f2000.T31T31.control.cam.h0.0009-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 16:12 f2000.T31T31.control.cam.h0.0009-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 16:34 f2000.T31T31.control.cam.h0.0009-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 16:55 f2000.T31T31.control.cam.h0.0009-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 17:17 f2000.T31T31.control.cam.h0.0009-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 17:38 f2000.T31T31.control.cam.h0.0010-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 17:58 f2000.T31T31.control.cam.h0.0010-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 18:19 f2000.T31T31.control.cam.h0.0010-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 18:40 f2000.T31T31.control.cam.h0.0010-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 19:01 f2000.T31T31.control.cam.h0.0010-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 19:22 f2000.T31T31.control.cam.h0.0010-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 19:44 f2000.T31T31.control.cam.h0.0010-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 20:05 f2000.T31T31.control.cam.h0.0010-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 20:27 f2000.T31T31.control.cam.h0.0010-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 20:50 f2000.T31T31.control.cam.h0.0010-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 21:11 f2000.T31T31.control.cam.h0.0010-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 21:32 f2000.T31T31.control.cam.h0.0010-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 21:53 f2000.T31T31.control.cam.h0.0011-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 22:11 f2000.T31T31.control.cam.h0.0011-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 22:30 f2000.T31T31.control.cam.h0.0011-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 22:50 f2000.T31T31.control.cam.h0.0011-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 23:09 f2000.T31T31.control.cam.h0.0011-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 23:29 f2000.T31T31.control.cam.h0.0011-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 30 23:49 f2000.T31T31.control.cam.h0.0011-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 00:08 f2000.T31T31.control.cam.h0.0011-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 00:28 f2000.T31T31.control.cam.h0.0011-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 00:48 f2000.T31T31.control.cam.h0.0011-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 01:07 f2000.T31T31.control.cam.h0.0011-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 01:27 f2000.T31T31.control.cam.h0.0011-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 01:47 f2000.T31T31.control.cam.h0.0012-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 02:04 f2000.T31T31.control.cam.h0.0012-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 02:24 f2000.T31T31.control.cam.h0.0012-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 02:44 f2000.T31T31.control.cam.h0.0012-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 03:03 f2000.T31T31.control.cam.h0.0012-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 03:23 f2000.T31T31.control.cam.h0.0012-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 03:43 f2000.T31T31.control.cam.h0.0012-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 04:03 f2000.T31T31.control.cam.h0.0012-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 04:22 f2000.T31T31.control.cam.h0.0012-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 04:42 f2000.T31T31.control.cam.h0.0012-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 05:02 f2000.T31T31.control.cam.h0.0012-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 05:22 f2000.T31T31.control.cam.h0.0012-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 05:41 f2000.T31T31.control.cam.h0.0013-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 05:58 f2000.T31T31.control.cam.h0.0013-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 06:16 f2000.T31T31.control.cam.h0.0013-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 06:33 f2000.T31T31.control.cam.h0.0013-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 06:51 f2000.T31T31.control.cam.h0.0013-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 07:09 f2000.T31T31.control.cam.h0.0013-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 07:27 f2000.T31T31.control.cam.h0.0013-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 07:45 f2000.T31T31.control.cam.h0.0013-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 08:03 f2000.T31T31.control.cam.h0.0013-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 08:21 f2000.T31T31.control.cam.h0.0013-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 08:38 f2000.T31T31.control.cam.h0.0013-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 08:57 f2000.T31T31.control.cam.h0.0013-12.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 09:15 f2000.T31T31.control.cam.h0.0014-01.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 09:31 f2000.T31T31.control.cam.h0.0014-02.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 09:49 f2000.T31T31.control.cam.h0.0014-03.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 10:07 f2000.T31T31.control.cam.h0.0014-04.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 10:26 f2000.T31T31.control.cam.h0.0014-05.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 10:43 f2000.T31T31.control.cam.h0.0014-06.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 11:02 f2000.T31T31.control.cam.h0.0014-07.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 11:20 f2000.T31T31.control.cam.h0.0014-08.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 11:38 f2000.T31T31.control.cam.h0.0014-09.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 11:56 f2000.T31T31.control.cam.h0.0014-10.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 12:14 f2000.T31T31.control.cam.h0.0014-11.nc
--rw-r--r-- 1 ubuntu geo4962 26003512 Jan 31 12:32 f2000.T31T31.control.cam.h0.0014-12.nc
+
+f2000.T31T31.control.cam.h0.0001-01.nc  f2000.T31T31.control.cam.h0.0005-09.nc  f2000.T31T31.control.cam.h0.0010-05.nc
+f2000.T31T31.control.cam.h0.0001-02.nc  f2000.T31T31.control.cam.h0.0005-10.nc  f2000.T31T31.control.cam.h0.0010-06.nc
+f2000.T31T31.control.cam.h0.0001-03.nc  f2000.T31T31.control.cam.h0.0005-11.nc  f2000.T31T31.control.cam.h0.0010-07.nc
+f2000.T31T31.control.cam.h0.0001-04.nc  f2000.T31T31.control.cam.h0.0005-12.nc  f2000.T31T31.control.cam.h0.0010-08.nc
+f2000.T31T31.control.cam.h0.0001-05.nc  f2000.T31T31.control.cam.h0.0006-01.nc  f2000.T31T31.control.cam.h0.0010-09.nc
+f2000.T31T31.control.cam.h0.0001-06.nc  f2000.T31T31.control.cam.h0.0006-02.nc  f2000.T31T31.control.cam.h0.0010-10.nc
+f2000.T31T31.control.cam.h0.0001-07.nc  f2000.T31T31.control.cam.h0.0006-03.nc  f2000.T31T31.control.cam.h0.0010-11.nc
+f2000.T31T31.control.cam.h0.0001-08.nc  f2000.T31T31.control.cam.h0.0006-04.nc  f2000.T31T31.control.cam.h0.0010-12.nc
+f2000.T31T31.control.cam.h0.0001-09.nc  f2000.T31T31.control.cam.h0.0006-05.nc  f2000.T31T31.control.cam.h0.0011-01.nc
+f2000.T31T31.control.cam.h0.0001-10.nc  f2000.T31T31.control.cam.h0.0006-06.nc  f2000.T31T31.control.cam.h0.0011-02.nc
+f2000.T31T31.control.cam.h0.0001-11.nc  f2000.T31T31.control.cam.h0.0006-07.nc  f2000.T31T31.control.cam.h0.0011-03.nc
+f2000.T31T31.control.cam.h0.0001-12.nc  f2000.T31T31.control.cam.h0.0006-08.nc  f2000.T31T31.control.cam.h0.0011-04.nc
+f2000.T31T31.control.cam.h0.0002-01.nc  f2000.T31T31.control.cam.h0.0006-09.nc  f2000.T31T31.control.cam.h0.0011-05.nc
+f2000.T31T31.control.cam.h0.0002-02.nc  f2000.T31T31.control.cam.h0.0006-10.nc  f2000.T31T31.control.cam.h0.0011-06.nc
+f2000.T31T31.control.cam.h0.0002-03.nc  f2000.T31T31.control.cam.h0.0006-11.nc  f2000.T31T31.control.cam.h0.0011-07.nc
+f2000.T31T31.control.cam.h0.0002-04.nc  f2000.T31T31.control.cam.h0.0006-12.nc  f2000.T31T31.control.cam.h0.0011-08.nc
+f2000.T31T31.control.cam.h0.0002-05.nc  f2000.T31T31.control.cam.h0.0007-01.nc  f2000.T31T31.control.cam.h0.0011-09.nc
+f2000.T31T31.control.cam.h0.0002-06.nc  f2000.T31T31.control.cam.h0.0007-02.nc  f2000.T31T31.control.cam.h0.0011-10.nc
+f2000.T31T31.control.cam.h0.0002-07.nc  f2000.T31T31.control.cam.h0.0007-03.nc  f2000.T31T31.control.cam.h0.0011-11.nc
+f2000.T31T31.control.cam.h0.0002-08.nc  f2000.T31T31.control.cam.h0.0007-04.nc  f2000.T31T31.control.cam.h0.0011-12.nc
+f2000.T31T31.control.cam.h0.0002-09.nc  f2000.T31T31.control.cam.h0.0007-05.nc  f2000.T31T31.control.cam.h0.0012-01.nc
+f2000.T31T31.control.cam.h0.0002-10.nc  f2000.T31T31.control.cam.h0.0007-06.nc  f2000.T31T31.control.cam.h0.0012-02.nc
+f2000.T31T31.control.cam.h0.0002-11.nc  f2000.T31T31.control.cam.h0.0007-07.nc  f2000.T31T31.control.cam.h0.0012-03.nc
+f2000.T31T31.control.cam.h0.0002-12.nc  f2000.T31T31.control.cam.h0.0007-08.nc  f2000.T31T31.control.cam.h0.0012-04.nc
+f2000.T31T31.control.cam.h0.0003-01.nc  f2000.T31T31.control.cam.h0.0007-09.nc  f2000.T31T31.control.cam.h0.0012-05.nc
+f2000.T31T31.control.cam.h0.0003-02.nc  f2000.T31T31.control.cam.h0.0007-10.nc  f2000.T31T31.control.cam.h0.0012-06.nc
+f2000.T31T31.control.cam.h0.0003-03.nc  f2000.T31T31.control.cam.h0.0007-11.nc  f2000.T31T31.control.cam.h0.0012-07.nc
+f2000.T31T31.control.cam.h0.0003-04.nc  f2000.T31T31.control.cam.h0.0007-12.nc  f2000.T31T31.control.cam.h0.0012-08.nc
+f2000.T31T31.control.cam.h0.0003-05.nc  f2000.T31T31.control.cam.h0.0008-01.nc  f2000.T31T31.control.cam.h0.0012-09.nc
+f2000.T31T31.control.cam.h0.0003-06.nc  f2000.T31T31.control.cam.h0.0008-02.nc  f2000.T31T31.control.cam.h0.0012-10.nc
+f2000.T31T31.control.cam.h0.0003-07.nc  f2000.T31T31.control.cam.h0.0008-03.nc  f2000.T31T31.control.cam.h0.0012-11.nc
+f2000.T31T31.control.cam.h0.0003-08.nc  f2000.T31T31.control.cam.h0.0008-04.nc  f2000.T31T31.control.cam.h0.0012-12.nc
+f2000.T31T31.control.cam.h0.0003-09.nc  f2000.T31T31.control.cam.h0.0008-05.nc  f2000.T31T31.control.cam.h0.0013-01.nc
+f2000.T31T31.control.cam.h0.0003-10.nc  f2000.T31T31.control.cam.h0.0008-06.nc  f2000.T31T31.control.cam.h0.0013-02.nc
+f2000.T31T31.control.cam.h0.0003-11.nc  f2000.T31T31.control.cam.h0.0008-07.nc  f2000.T31T31.control.cam.h0.0013-03.nc
+f2000.T31T31.control.cam.h0.0003-12.nc  f2000.T31T31.control.cam.h0.0008-08.nc  f2000.T31T31.control.cam.h0.0013-04.nc
+f2000.T31T31.control.cam.h0.0004-01.nc  f2000.T31T31.control.cam.h0.0008-09.nc  f2000.T31T31.control.cam.h0.0013-05.nc
+f2000.T31T31.control.cam.h0.0004-02.nc  f2000.T31T31.control.cam.h0.0008-10.nc  f2000.T31T31.control.cam.h0.0013-06.nc
+f2000.T31T31.control.cam.h0.0004-03.nc  f2000.T31T31.control.cam.h0.0008-11.nc  f2000.T31T31.control.cam.h0.0013-07.nc
+f2000.T31T31.control.cam.h0.0004-04.nc  f2000.T31T31.control.cam.h0.0008-12.nc  f2000.T31T31.control.cam.h0.0013-08.nc
+f2000.T31T31.control.cam.h0.0004-05.nc  f2000.T31T31.control.cam.h0.0009-01.nc  f2000.T31T31.control.cam.h0.0013-09.nc
+f2000.T31T31.control.cam.h0.0004-06.nc  f2000.T31T31.control.cam.h0.0009-02.nc  f2000.T31T31.control.cam.h0.0013-10.nc
+f2000.T31T31.control.cam.h0.0004-07.nc  f2000.T31T31.control.cam.h0.0009-03.nc  f2000.T31T31.control.cam.h0.0013-11.nc
+f2000.T31T31.control.cam.h0.0004-08.nc  f2000.T31T31.control.cam.h0.0009-04.nc  f2000.T31T31.control.cam.h0.0013-12.nc
+f2000.T31T31.control.cam.h0.0004-09.nc  f2000.T31T31.control.cam.h0.0009-05.nc  f2000.T31T31.control.cam.h0.0014-01.nc
+f2000.T31T31.control.cam.h0.0004-10.nc  f2000.T31T31.control.cam.h0.0009-06.nc  f2000.T31T31.control.cam.h0.0014-02.nc
+f2000.T31T31.control.cam.h0.0004-11.nc  f2000.T31T31.control.cam.h0.0009-07.nc  f2000.T31T31.control.cam.h0.0014-03.nc
+f2000.T31T31.control.cam.h0.0004-12.nc  f2000.T31T31.control.cam.h0.0009-08.nc  f2000.T31T31.control.cam.h0.0014-04.nc
+f2000.T31T31.control.cam.h0.0005-01.nc  f2000.T31T31.control.cam.h0.0009-09.nc  f2000.T31T31.control.cam.h0.0014-05.nc
+f2000.T31T31.control.cam.h0.0005-02.nc  f2000.T31T31.control.cam.h0.0009-10.nc  f2000.T31T31.control.cam.h0.0014-06.nc
+f2000.T31T31.control.cam.h0.0005-03.nc  f2000.T31T31.control.cam.h0.0009-11.nc  f2000.T31T31.control.cam.h0.0014-07.nc
+f2000.T31T31.control.cam.h0.0005-04.nc  f2000.T31T31.control.cam.h0.0009-12.nc  f2000.T31T31.control.cam.h0.0014-08.nc
+f2000.T31T31.control.cam.h0.0005-05.nc  f2000.T31T31.control.cam.h0.0010-01.nc  f2000.T31T31.control.cam.h0.0014-09.nc
+f2000.T31T31.control.cam.h0.0005-06.nc  f2000.T31T31.control.cam.h0.0010-02.nc  f2000.T31T31.control.cam.h0.0014-10.nc
+f2000.T31T31.control.cam.h0.0005-07.nc  f2000.T31T31.control.cam.h0.0010-03.nc  f2000.T31T31.control.cam.h0.0014-11.nc
+f2000.T31T31.control.cam.h0.0005-08.nc  f2000.T31T31.control.cam.h0.0010-04.nc  f2000.T31T31.control.cam.h0.0014-12.nc
+jupyter-annefou@resbaz:~/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist$ ls
+f2000.T31T31.control.cam.h0.0001-01.nc  f2000.T31T31.control.cam.h0.0005-09.nc  f2000.T31T31.control.cam.h0.0010-05.nc
+f2000.T31T31.control.cam.h0.0001-02.nc  f2000.T31T31.control.cam.h0.0005-10.nc  f2000.T31T31.control.cam.h0.0010-06.nc
+f2000.T31T31.control.cam.h0.0001-03.nc  f2000.T31T31.control.cam.h0.0005-11.nc  f2000.T31T31.control.cam.h0.0010-07.nc
+f2000.T31T31.control.cam.h0.0001-04.nc  f2000.T31T31.control.cam.h0.0005-12.nc  f2000.T31T31.control.cam.h0.0010-08.nc
+f2000.T31T31.control.cam.h0.0001-05.nc  f2000.T31T31.control.cam.h0.0006-01.nc  f2000.T31T31.control.cam.h0.0010-09.nc
+f2000.T31T31.control.cam.h0.0001-06.nc  f2000.T31T31.control.cam.h0.0006-02.nc  f2000.T31T31.control.cam.h0.0010-10.nc
+f2000.T31T31.control.cam.h0.0001-07.nc  f2000.T31T31.control.cam.h0.0006-03.nc  f2000.T31T31.control.cam.h0.0010-11.nc
+f2000.T31T31.control.cam.h0.0001-08.nc  f2000.T31T31.control.cam.h0.0006-04.nc  f2000.T31T31.control.cam.h0.0010-12.nc
+f2000.T31T31.control.cam.h0.0001-09.nc  f2000.T31T31.control.cam.h0.0006-05.nc  f2000.T31T31.control.cam.h0.0011-01.nc
+f2000.T31T31.control.cam.h0.0001-10.nc  f2000.T31T31.control.cam.h0.0006-06.nc  f2000.T31T31.control.cam.h0.0011-02.nc
+f2000.T31T31.control.cam.h0.0001-11.nc  f2000.T31T31.control.cam.h0.0006-07.nc  f2000.T31T31.control.cam.h0.0011-03.nc
+f2000.T31T31.control.cam.h0.0001-12.nc  f2000.T31T31.control.cam.h0.0006-08.nc  f2000.T31T31.control.cam.h0.0011-04.nc
+f2000.T31T31.control.cam.h0.0002-01.nc  f2000.T31T31.control.cam.h0.0006-09.nc  f2000.T31T31.control.cam.h0.0011-05.nc
+f2000.T31T31.control.cam.h0.0002-02.nc  f2000.T31T31.control.cam.h0.0006-10.nc  f2000.T31T31.control.cam.h0.0011-06.nc
+f2000.T31T31.control.cam.h0.0002-03.nc  f2000.T31T31.control.cam.h0.0006-11.nc  f2000.T31T31.control.cam.h0.0011-07.nc
+f2000.T31T31.control.cam.h0.0002-04.nc  f2000.T31T31.control.cam.h0.0006-12.nc  f2000.T31T31.control.cam.h0.0011-08.nc
+f2000.T31T31.control.cam.h0.0002-05.nc  f2000.T31T31.control.cam.h0.0007-01.nc  f2000.T31T31.control.cam.h0.0011-09.nc
+f2000.T31T31.control.cam.h0.0002-06.nc  f2000.T31T31.control.cam.h0.0007-02.nc  f2000.T31T31.control.cam.h0.0011-10.nc
+f2000.T31T31.control.cam.h0.0002-07.nc  f2000.T31T31.control.cam.h0.0007-03.nc  f2000.T31T31.control.cam.h0.0011-11.nc
+f2000.T31T31.control.cam.h0.0002-08.nc  f2000.T31T31.control.cam.h0.0007-04.nc  f2000.T31T31.control.cam.h0.0011-12.nc
+f2000.T31T31.control.cam.h0.0002-09.nc  f2000.T31T31.control.cam.h0.0007-05.nc  f2000.T31T31.control.cam.h0.0012-01.nc
+f2000.T31T31.control.cam.h0.0002-10.nc  f2000.T31T31.control.cam.h0.0007-06.nc  f2000.T31T31.control.cam.h0.0012-02.nc
+f2000.T31T31.control.cam.h0.0002-11.nc  f2000.T31T31.control.cam.h0.0007-07.nc  f2000.T31T31.control.cam.h0.0012-03.nc
+f2000.T31T31.control.cam.h0.0002-12.nc  f2000.T31T31.control.cam.h0.0007-08.nc  f2000.T31T31.control.cam.h0.0012-04.nc
+f2000.T31T31.control.cam.h0.0003-01.nc  f2000.T31T31.control.cam.h0.0007-09.nc  f2000.T31T31.control.cam.h0.0012-05.nc
+f2000.T31T31.control.cam.h0.0003-02.nc  f2000.T31T31.control.cam.h0.0007-10.nc  f2000.T31T31.control.cam.h0.0012-06.nc
+f2000.T31T31.control.cam.h0.0003-03.nc  f2000.T31T31.control.cam.h0.0007-11.nc  f2000.T31T31.control.cam.h0.0012-07.nc
+f2000.T31T31.control.cam.h0.0003-04.nc  f2000.T31T31.control.cam.h0.0007-12.nc  f2000.T31T31.control.cam.h0.0012-08.nc
+f2000.T31T31.control.cam.h0.0003-05.nc  f2000.T31T31.control.cam.h0.0008-01.nc  f2000.T31T31.control.cam.h0.0012-09.nc
+f2000.T31T31.control.cam.h0.0003-06.nc  f2000.T31T31.control.cam.h0.0008-02.nc  f2000.T31T31.control.cam.h0.0012-10.nc
+f2000.T31T31.control.cam.h0.0003-07.nc  f2000.T31T31.control.cam.h0.0008-03.nc  f2000.T31T31.control.cam.h0.0012-11.nc
+f2000.T31T31.control.cam.h0.0003-08.nc  f2000.T31T31.control.cam.h0.0008-04.nc  f2000.T31T31.control.cam.h0.0012-12.nc
+f2000.T31T31.control.cam.h0.0003-09.nc  f2000.T31T31.control.cam.h0.0008-05.nc  f2000.T31T31.control.cam.h0.0013-01.nc
+f2000.T31T31.control.cam.h0.0003-10.nc  f2000.T31T31.control.cam.h0.0008-06.nc  f2000.T31T31.control.cam.h0.0013-02.nc
+f2000.T31T31.control.cam.h0.0003-11.nc  f2000.T31T31.control.cam.h0.0008-07.nc  f2000.T31T31.control.cam.h0.0013-03.nc
+f2000.T31T31.control.cam.h0.0003-12.nc  f2000.T31T31.control.cam.h0.0008-08.nc  f2000.T31T31.control.cam.h0.0013-04.nc
+f2000.T31T31.control.cam.h0.0004-01.nc  f2000.T31T31.control.cam.h0.0008-09.nc  f2000.T31T31.control.cam.h0.0013-05.nc
+f2000.T31T31.control.cam.h0.0004-02.nc  f2000.T31T31.control.cam.h0.0008-10.nc  f2000.T31T31.control.cam.h0.0013-06.nc
+f2000.T31T31.control.cam.h0.0004-03.nc  f2000.T31T31.control.cam.h0.0008-11.nc  f2000.T31T31.control.cam.h0.0013-07.nc
+f2000.T31T31.control.cam.h0.0004-04.nc  f2000.T31T31.control.cam.h0.0008-12.nc  f2000.T31T31.control.cam.h0.0013-08.nc
+f2000.T31T31.control.cam.h0.0004-05.nc  f2000.T31T31.control.cam.h0.0009-01.nc  f2000.T31T31.control.cam.h0.0013-09.nc
+f2000.T31T31.control.cam.h0.0004-06.nc  f2000.T31T31.control.cam.h0.0009-02.nc  f2000.T31T31.control.cam.h0.0013-10.nc
+f2000.T31T31.control.cam.h0.0004-07.nc  f2000.T31T31.control.cam.h0.0009-03.nc  f2000.T31T31.control.cam.h0.0013-11.nc
+f2000.T31T31.control.cam.h0.0004-08.nc  f2000.T31T31.control.cam.h0.0009-04.nc  f2000.T31T31.control.cam.h0.0013-12.nc
+f2000.T31T31.control.cam.h0.0004-09.nc  f2000.T31T31.control.cam.h0.0009-05.nc  f2000.T31T31.control.cam.h0.0014-01.nc
+f2000.T31T31.control.cam.h0.0004-10.nc  f2000.T31T31.control.cam.h0.0009-06.nc  f2000.T31T31.control.cam.h0.0014-02.nc
+f2000.T31T31.control.cam.h0.0004-11.nc  f2000.T31T31.control.cam.h0.0009-07.nc  f2000.T31T31.control.cam.h0.0014-03.nc
+f2000.T31T31.control.cam.h0.0004-12.nc  f2000.T31T31.control.cam.h0.0009-08.nc  f2000.T31T31.control.cam.h0.0014-04.nc
+f2000.T31T31.control.cam.h0.0005-01.nc  f2000.T31T31.control.cam.h0.0009-09.nc  f2000.T31T31.control.cam.h0.0014-05.nc
+f2000.T31T31.control.cam.h0.0005-02.nc  f2000.T31T31.control.cam.h0.0009-10.nc  f2000.T31T31.control.cam.h0.0014-06.nc
+f2000.T31T31.control.cam.h0.0005-03.nc  f2000.T31T31.control.cam.h0.0009-11.nc  f2000.T31T31.control.cam.h0.0014-07.nc
+f2000.T31T31.control.cam.h0.0005-04.nc  f2000.T31T31.control.cam.h0.0009-12.nc  f2000.T31T31.control.cam.h0.0014-08.nc
+f2000.T31T31.control.cam.h0.0005-05.nc  f2000.T31T31.control.cam.h0.0010-01.nc  f2000.T31T31.control.cam.h0.0014-09.nc
+f2000.T31T31.control.cam.h0.0005-06.nc  f2000.T31T31.control.cam.h0.0010-02.nc  f2000.T31T31.control.cam.h0.0014-10.nc
+f2000.T31T31.control.cam.h0.0005-07.nc  f2000.T31T31.control.cam.h0.0010-03.nc  f2000.T31T31.control.cam.h0.0014-11.nc
+f2000.T31T31.control.cam.h0.0005-08.nc  f2000.T31T31.control.cam.h0.0010-04.nc  f2000.T31T31.control.cam.h0.0014-12.nc
 ~~~
 {: .output}
 
@@ -235,7 +181,24 @@ The monthly zonal wind climatology is derived from the UARS Reference Atmosphere
 
 <img src="https://www.sparc-climate.org/wp-content/uploads/sites/5/2018/01/DC-TZWClim-zonal_wind_anim.gif">
 
+[NCAR's Climate Data Guide](https://climatedataguide.ucar.edu/) (CDG) provides more information (search SPARC) including strengths and weaknesses of assorted data sets.
+
 # Compare the control run to the SPARC climatology
+
+## Methodology
+
+
+## Exercice-1
+
+1.  <font color="red">How well does CAM5 (T31/L30, 5 yr control run) represent observations?</font>
+
+1.  Select T,U,hyam,hybm,PS (use ncks) for all the model outputs of the control experiment (/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist). Save these new output files in the directory $HOME/GEO4962/control/.
+2.  Use ncra to get an average for all the January months. Repeat it for each month (February to December).
+3.  Use [zonal_2.ncl](http://www.ncl.ucar.edu/Applications/Scripts/zonal_2.ncl) and [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) to get a zonal mean and interpolate to pressure levels. Make sure you choose your pressure levels (change the variable **pnew** in [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) so you can easily compare with SPARC climatology).
+4.  You may use [sparc_2.ncl](https://www.ncl.ucar.edu/Applications/Scripts/sparc_2.ncl) to get plots similar to those we got with the SPARC climatology. You can also use panoply (or python).
+
+<font color="red">Fulfill the first exercise until the next practical on March 3, 2019!</font>
+
 
 <font color="red">On NIRD (login.nird.sigma2.no):</font>
 
@@ -344,17 +307,6 @@ The desired pressure levels defined in the script are:
 This script also produces 3 contour plots showing the temperature at 850mb, 500mb and 200mb:
 
 <img src="../fig/T850-500-200.png">
-
-#### Exercice-1
-
-1.  <font color="red">How well does CAM5 (T31/L30, 5 yr control run) represent observations?</font>
-
-1.  Select T,U,hyam,hybm,PS (use ncks) for all the model outputs of the control experiment (/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist). Save these new output files in the directory $HOME/GEO4962/control/.
-2.  Use ncra to get an average for all the January months. Repeat it for each month (February to December).
-3.  Use [zonal_2.ncl](http://www.ncl.ucar.edu/Applications/Scripts/zonal_2.ncl) and [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) to get a zonal mean and interpolate to pressure levels. Make sure you choose your pressure levels (change the variable **pnew** in [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) so you can easily compare with SPARC climatology).
-4.  You may use [sparc_2.ncl](https://www.ncl.ucar.edu/Applications/Scripts/sparc_2.ncl) to get plots similar to those we got with the SPARC climatology. You can also use panoply (or python).
-
-<font color="red">Fulfill the first exercise until the next practical on March 3, 2019!</font>
 
 {% include links.md %}
 
