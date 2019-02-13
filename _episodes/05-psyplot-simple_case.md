@@ -43,6 +43,16 @@ and corresponding password; please let us know otherwise.
 
 ## Login to the JupyterHub
 
+
+<img src="../fig/jupyterhub_login.png">
+
+> ## Tips
+> Before getting to the username/password login page, your browser may warn you about the security
+> of the website and get a message such as "This site is not secure". In order to bypass this security message,
+> you need to accept to proceed. Let us know if you still have problems to login.
+>
+{: .callout}
+ 
 ## Start and stop your server
 
 ## JupyterLab
