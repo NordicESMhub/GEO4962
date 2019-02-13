@@ -44,8 +44,10 @@ and corresponding password; please let us know otherwise.
 ## Login to the JupyterHub
 
 
-<img src="../fig/jupyterhub_login.png">
+<img src="../fig/jupyterhub_login.png" width="400">
 
+Use the username and password you have received and **sign In**.
+ 
 > ## Tips
 > Before getting to the username/password login page, your browser may warn you about the security
 > of the website and get a message such as "This site is not secure". In order to bypass this security message,
@@ -55,11 +57,94 @@ and corresponding password; please let us know otherwise.
  
 ## Start and stop your server
 
+When you manage to successfully login to the Jupyterhub, you should have the following panels:
+
+<img src="../fig/jupyterhub_panels.png" width="600">
+
+To start/stop your server, clock on **Control Panel**:
+
+<img src="../fig/jupyterhub_start_stop_server.png" width="600">
+
+When your server is not running, the button "Stop My Server" does not appear and you only see the button "My Server".
+
+- To stop your server, click on "Stop My Server"
+- To start your server, click on "My Server"
+
+> ## Important note
+>
+> Make sure you stop your server once you have finished your session so it can release resources for next time. 
+>
+{: .callout}
+
 ## JupyterLab
+
+By default, jupyterhub presents you the standard Jupyter user interface layout but you can also access the new 
+web-based user interface for Project Jupyter that is called [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/).
+
+For this replace **tree?** in the web address you have in your browser tab by **lab**. Then you should get:
+
+<img src="../fig/jupyterlab.png" width="600">
+
+### Menu Bar
+
+The menu bar at the top of JupyterLab has top-level menus that expose actions available in JupyterLab with 
+their keyboard shortcuts. The default menus are:
+
+- **File**: actions related to files and directories
+- **Edit**: actions related to editing documents and other activities
+- **View**: actions that alter the appearance of JupyterLab
+- **Run**: actions for running code in different activities such as notebooks and code consoles
+- **Kernel**: actions for managing kernels, which are separate processes for running code
+- **Tabs**: a list of the open documents and activities in the dock panel
+- **Settings**: common settings and an advanced settings editor
+- **Help**: a list of JupyterLab and kernel help links
+
+### Left Sidebar
+The left sidebar contains a number of commonly-used tabs, such as a file browser, a list of running 
+kernels and terminals, the command palette, and a list of tabs in the main work area:
+
+<img src="../fig/jupyterlab_file_browser.png" width="600">
+
+If you move your mouse on the other icon of this left sidebar, a short information is given on its functionality.
+
+If you click on the "running man" icon, you can see what is currently running on your server and you can click on 
+"SHUTDOWN" to stop a running Python notebook or Terminal.
+
+<img src="../fig/jupyterlab_running.png" width="600">
+
+> ## Tips
+>
+> To access to **Control Panel**, you would need to go back to the standard Jupyter user interface layout which
+> you can access by entering the Jupyterhub address given in the email in your browser tab (i.e. without your username and tree?).
+{: .callout}
+
 
 ### Create a new python 3 notebook
 
+Go back to the **File Browser** left sidebar tab and in the launcher select **Python 3** under the Notebook 
+section:
+
+<img src="../fig/jupyterlab_start_notebook.png" width="500">
+
+By default, your new notebook is named as "**Untitled.ipynb**":
+
+- **ipynb** is the extension for any Jupyter notebook and you should make sure all your notebook gets this extension (otherwise it is not recognized as a Jupyter notebook)
+- you can rename your jupyter notebook with the tab "File --> Rename Notebook...".
+
+
 ### Start a new Terminal
+
+Similarly, you can start a new Terminal by clicking on "Terminal" in the Launcher. 
+
+<img src="../fig/jupyterlab_start_terminal.png" width="500">
+
+
+> ## Tips
+> If the **Launcher** tab does not exist 
+> anymore in your JupyterLab, you can start a new one in "**File** --> **New Launcher**".
+{: .callout}
+
+
 
 # Copy your output files from Abel to the virtual machine
 
