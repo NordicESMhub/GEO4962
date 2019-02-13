@@ -66,7 +66,7 @@ ls
 
 
 
-*   **bld**: scripts ro generate makefiles and dependencies for compiling CAM5
+*   **bld**: scripts to generate makefiles and dependencies for compiling CAM5
 *   **chem_proc**: MOZART [chemical preprocessor](http://www.cesm.ucar.edu/working_groups/Chemistry/chemistry.preprocessor.pdf)
 *   **doc**: change log
 *   **src**: source code for CAM5

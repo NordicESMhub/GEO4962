@@ -103,7 +103,7 @@ NorStore facility is divided in two parts:
 When running the CAM-5.3 model on abel, the model outputs are generated and stored in the temporary working area (/work/users/$LOGNAME). As mentioned earlier, the working area on Abel is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
 Model outputs will have to be moved from Abel working area (/work/users/$LOGNAME) to the norStore project area. You can use scp to copy your data from Abel to NorStore but the detailed procedure will be explained later.  
 
-### what is a Research Data Archive?
+### What is a Research Data Archive?
 
 Data archiving is the practice of moving data to a separate storage device that is no longer needed for everyday business operations but
 may occasionally need to be accessed. 
