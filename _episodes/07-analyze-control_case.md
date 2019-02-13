@@ -284,6 +284,114 @@ plt.xlim(right=Tmean.lat.max())
 
 <img src="../fig/SPARC_U_py_january.png">
 
+### Multiple plots 
+
+Here we give an example to generate 12 subplots (one per month) for the zonal wind:
+
+~~~
+import xarray as xr
+import matplotlib as mpl
+import psyplot.project as psy
+import matplotlib.pyplot as plt
+import numpy as np
+import calendar
+
+%matplotlib inline
+
+mpl.rcParams['figure.figsize'] = [10., 8.]
+
+filename = "GEO4962/SPARC/SPARC.wind_temp.nc"
+ds = psy.open_dataset(filename)
+
+fig = plt.figure(figsize=[25, 18])
+for month in range(1,13):
+    ax = fig.add_subplot(3, 4, month)  # specify (nrows, ncols, axnum)
+
+    levels=np.arange(-70,110,10)
+
+    cs=ds.WIND.isel(month=month-1).plot.contourf(ax=ax,extend='both',
+                      cmap='jet', vmin=-70, vmax = 100, add_colorbar=False, levels= levels)
+
+    # Invert vertical axis
+    plt.ylim(plt.ylim()[::-1])
+    # 'symlog' scaling, however, handles negative values nicely
+    plt.yscale('log')
+    ax.set_title(label = calendar.month_name[month])
+    ax.set_ylim(top=5.0e-5)
+    ax.set_ylim(bottom=1000.)
+    ax.set_xlim(left=ds.WIND.lat.min())
+    ax.set_xlim(right=ds.WIND.lat.max())
+    
+fig.suptitle(ds.WIND.attrs['long_name'], fontsize=24)
+    
+# adjust subplots so we keep a bit of space on the right for the colorbar    
+fig.subplots_adjust(right=0.8, wspace=0.3, hspace=0.5)
+# Specify where to place the colorbar
+cbar_ax = fig.add_axes([0.85, 0.15, 0.02, 0.7])
+# Add a unique colorbar to the figure
+fig.colorbar(cs, cax=cbar_ax, label=ds.WIND.attrs['units'])
+~~~
+{: .language-python}
+
+<img src="../fig/SPARC_U_py_all_months.png">
+
+> ## Make a multiple for the SPARC temperature
+>
+> Make the same kind of multiple but for the temperature instead. 
+>
+> > ## Solution
+> > 
+> > ~~~
+> > import xarray as xr
+> > import matplotlib as mpl
+> > import psyplot.project as psy
+> > import matplotlib.pyplot as plt
+> > import numpy as np
+> > import calendar
+> > 
+> > %matplotlib inline
+> > 
+> > mpl.rcParams['figure.figsize'] = [10., 8.]
+> > 
+> > filename = "GEO4962/SPARC/SPARC.wind_temp.nc"
+> > ds = psy.open_dataset(filename)
+> > 
+> > fig = plt.figure(figsize=[25, 18])
+> > for month in range(1,13):
+> >     ax = fig.add_subplot(3, 4, month)  # specify (nrows, ncols, axnum)
+> > 
+> >     levels=np.arange(140,320,10)
+> > 
+> >     cs=ds.TEMP.isel(month=month-1).plot.contourf(ax=ax,extend='both',
+> >                       cmap='jet', vmin=140, vmax = 310, add_colorbar=False, levels= levels)
+> > 
+> >     # Invert vertical axis
+> >     plt.ylim(plt.ylim()[::-1])
+> >     # 'symlog' scaling, however, handles negative values nicely
+> >     plt.yscale('log')
+> >     ax.set_title(label = calendar.month_name[month])
+> >     ax.set_ylim(top=0.005)
+> >     ax.set_ylim(bottom=1000.)
+> >     ax.set_xlim(left=ds.TEMP.lat.min())
+> >     ax.set_xlim(right=ds.TEMP.lat.max())
+> >     
+> > fig.suptitle(ds.TEMP.attrs['long_name'], fontsize=24)
+> >     
+> > # adjust subplots so we keep a bit of space on the right for the colorbar    
+> > fig.subplots_adjust(right=0.8, wspace=0.3, hspace=0.5)
+> > # Specify where to place the colorbar
+> > cbar_ax = fig.add_axes([0.85, 0.15, 0.02, 0.7])
+> > # Add a unique colorbar to the figure
+> > fig.colorbar(cs, cax=cbar_ax, label=ds.TEMP.attrs['units'])
+> > ~~~
+> > {: .language-python}
+> >
+> > <img src="../fig/SPARC_T_py_all_months.png">
+> > 
+> {: .solution}
+>
+{: .challenge}
+
 # Compare the control run to the SPARC climatology
 
 ## Methodology
