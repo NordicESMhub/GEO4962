@@ -12,6 +12,7 @@ objectives:
 keypoints:
 - "Evaluate various climate scenarii"
 - "Start an experiment from a control run"
+- "For PhD students: define, numerically implement and scientifically evaluate their own *extreme* geo-engineering solution to conteract doubling CO2"
 ---
 
 <img src="../fig/long_simulations.jpg">
