@@ -230,6 +230,26 @@ psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.at
 
 ## CESM vertical coordinate system
 
+The vertical coordinate is a **hybrid sigma-pressure system**. 
+
+The hybrid coordinate was developed by 
+[Simmons and Strüfing, 1981](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/qj.49710945905) 
+in order to provide a general framework for a vertical coordinate which is terrain following at 
+the Earth’s surface, but reduces to a pressure coordinate at some point above the surface.
+
+In this system, the upper regions 
+of the atmosphere are discretized by pressure only. Lower vertical levels use 
+the sigma (i.e. p/ps) vertical coordinate smoothly merged in, with the lowest levels being 
+pure sigma. A schematic representation of the hybrid vertical coordinate and vertical indexing is 
+presented below. 
+
+<img src="../fig/hybrid_sigma_pressure_coordinates.png" height="400">
+
+More information can be found in [Description of the NCAR Community Atmosphere Model (CAM 3.0)](http://www.cesm.ucar.edu/models/atm-cam/docs/description/description.pdf).
+
+The values at the top of the model are then pressure values (mb) so it is clear that we need to revert the
+vertical axis to get the lower values at the top and the highest values at the bottom:
+
 ~~~
 # To revert vertical axis
 psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.attrs['units'],
