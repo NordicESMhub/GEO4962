@@ -69,11 +69,11 @@ Abel is a cluster machine:
 *   OS: Linux Environment, 64 bit Centos 6
 
 Abel is a large machine (cluster) made of more than 10000 nodes (collection of machines linked together via an efficient network). On one single node, there are 16 cores and a total of 64 GB of shared memory. This shared memory can be accessed by all the processors of one single node but a processor on another node cannot access it. The image below attempts to summarize these two concepts (shared vs. distributed memory):  
-![](../../images/shared_distributedRAM.png)  
+![](../fig/shared_distributedRAM.png)  
 To manage efficiently the machine, it runs under the control of a batch system. The fact is that one single program does not usually use the full machine (1392 CPUs) but many users can fill the machine very quickly with several "small" programs.  
 The opposite of a batch job is interactive processing, in which a user enters individual commands to be processed immediately. This is what you are used to when working on your laptop or any UIO servers (such as sverdrup.uio.no).  
 We need to use a batch system to make sure all the resources are well utilized and this is the role of the job scheduler to decide where to run user "jobs". Its role is to optimize the resources and to try to run as many user jobs as possible. It can be seen as a tetris game (see image below) where each block represents a user job.  
-![](../../images/tetris.png)  
+![](../fig/tetris.png)  
 All user jobs must be submitted to the cluster through this batch system. Abel uses [SLURM](https://en.wikipedia.org/wiki/Slurm_Workload_Manager) (Portable Batch System). The submitted jobs are then routed into a number of queues (depending on the needed resources, e.g. runtime) and sorted according to some priority scheme.  
 A job will run when the required resources become available.  
 More information on the Batch system on Abel can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/queue-system.html).  

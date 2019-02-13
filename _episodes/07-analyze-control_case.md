@@ -97,63 +97,6 @@ f2000.T31T31.control.cam.h0.0005-05.nc  f2000.T31T31.control.cam.h0.0010-01.nc  
 f2000.T31T31.control.cam.h0.0005-06.nc  f2000.T31T31.control.cam.h0.0010-02.nc  f2000.T31T31.control.cam.h0.0014-10.nc
 f2000.T31T31.control.cam.h0.0005-07.nc  f2000.T31T31.control.cam.h0.0010-03.nc  f2000.T31T31.control.cam.h0.0014-11.nc
 f2000.T31T31.control.cam.h0.0005-08.nc  f2000.T31T31.control.cam.h0.0010-04.nc  f2000.T31T31.control.cam.h0.0014-12.nc
-jupyter-annefou@resbaz:~/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist$ ls
-f2000.T31T31.control.cam.h0.0001-01.nc  f2000.T31T31.control.cam.h0.0005-09.nc  f2000.T31T31.control.cam.h0.0010-05.nc
-f2000.T31T31.control.cam.h0.0001-02.nc  f2000.T31T31.control.cam.h0.0005-10.nc  f2000.T31T31.control.cam.h0.0010-06.nc
-f2000.T31T31.control.cam.h0.0001-03.nc  f2000.T31T31.control.cam.h0.0005-11.nc  f2000.T31T31.control.cam.h0.0010-07.nc
-f2000.T31T31.control.cam.h0.0001-04.nc  f2000.T31T31.control.cam.h0.0005-12.nc  f2000.T31T31.control.cam.h0.0010-08.nc
-f2000.T31T31.control.cam.h0.0001-05.nc  f2000.T31T31.control.cam.h0.0006-01.nc  f2000.T31T31.control.cam.h0.0010-09.nc
-f2000.T31T31.control.cam.h0.0001-06.nc  f2000.T31T31.control.cam.h0.0006-02.nc  f2000.T31T31.control.cam.h0.0010-10.nc
-f2000.T31T31.control.cam.h0.0001-07.nc  f2000.T31T31.control.cam.h0.0006-03.nc  f2000.T31T31.control.cam.h0.0010-11.nc
-f2000.T31T31.control.cam.h0.0001-08.nc  f2000.T31T31.control.cam.h0.0006-04.nc  f2000.T31T31.control.cam.h0.0010-12.nc
-f2000.T31T31.control.cam.h0.0001-09.nc  f2000.T31T31.control.cam.h0.0006-05.nc  f2000.T31T31.control.cam.h0.0011-01.nc
-f2000.T31T31.control.cam.h0.0001-10.nc  f2000.T31T31.control.cam.h0.0006-06.nc  f2000.T31T31.control.cam.h0.0011-02.nc
-f2000.T31T31.control.cam.h0.0001-11.nc  f2000.T31T31.control.cam.h0.0006-07.nc  f2000.T31T31.control.cam.h0.0011-03.nc
-f2000.T31T31.control.cam.h0.0001-12.nc  f2000.T31T31.control.cam.h0.0006-08.nc  f2000.T31T31.control.cam.h0.0011-04.nc
-f2000.T31T31.control.cam.h0.0002-01.nc  f2000.T31T31.control.cam.h0.0006-09.nc  f2000.T31T31.control.cam.h0.0011-05.nc
-f2000.T31T31.control.cam.h0.0002-02.nc  f2000.T31T31.control.cam.h0.0006-10.nc  f2000.T31T31.control.cam.h0.0011-06.nc
-f2000.T31T31.control.cam.h0.0002-03.nc  f2000.T31T31.control.cam.h0.0006-11.nc  f2000.T31T31.control.cam.h0.0011-07.nc
-f2000.T31T31.control.cam.h0.0002-04.nc  f2000.T31T31.control.cam.h0.0006-12.nc  f2000.T31T31.control.cam.h0.0011-08.nc
-f2000.T31T31.control.cam.h0.0002-05.nc  f2000.T31T31.control.cam.h0.0007-01.nc  f2000.T31T31.control.cam.h0.0011-09.nc
-f2000.T31T31.control.cam.h0.0002-06.nc  f2000.T31T31.control.cam.h0.0007-02.nc  f2000.T31T31.control.cam.h0.0011-10.nc
-f2000.T31T31.control.cam.h0.0002-07.nc  f2000.T31T31.control.cam.h0.0007-03.nc  f2000.T31T31.control.cam.h0.0011-11.nc
-f2000.T31T31.control.cam.h0.0002-08.nc  f2000.T31T31.control.cam.h0.0007-04.nc  f2000.T31T31.control.cam.h0.0011-12.nc
-f2000.T31T31.control.cam.h0.0002-09.nc  f2000.T31T31.control.cam.h0.0007-05.nc  f2000.T31T31.control.cam.h0.0012-01.nc
-f2000.T31T31.control.cam.h0.0002-10.nc  f2000.T31T31.control.cam.h0.0007-06.nc  f2000.T31T31.control.cam.h0.0012-02.nc
-f2000.T31T31.control.cam.h0.0002-11.nc  f2000.T31T31.control.cam.h0.0007-07.nc  f2000.T31T31.control.cam.h0.0012-03.nc
-f2000.T31T31.control.cam.h0.0002-12.nc  f2000.T31T31.control.cam.h0.0007-08.nc  f2000.T31T31.control.cam.h0.0012-04.nc
-f2000.T31T31.control.cam.h0.0003-01.nc  f2000.T31T31.control.cam.h0.0007-09.nc  f2000.T31T31.control.cam.h0.0012-05.nc
-f2000.T31T31.control.cam.h0.0003-02.nc  f2000.T31T31.control.cam.h0.0007-10.nc  f2000.T31T31.control.cam.h0.0012-06.nc
-f2000.T31T31.control.cam.h0.0003-03.nc  f2000.T31T31.control.cam.h0.0007-11.nc  f2000.T31T31.control.cam.h0.0012-07.nc
-f2000.T31T31.control.cam.h0.0003-04.nc  f2000.T31T31.control.cam.h0.0007-12.nc  f2000.T31T31.control.cam.h0.0012-08.nc
-f2000.T31T31.control.cam.h0.0003-05.nc  f2000.T31T31.control.cam.h0.0008-01.nc  f2000.T31T31.control.cam.h0.0012-09.nc
-f2000.T31T31.control.cam.h0.0003-06.nc  f2000.T31T31.control.cam.h0.0008-02.nc  f2000.T31T31.control.cam.h0.0012-10.nc
-f2000.T31T31.control.cam.h0.0003-07.nc  f2000.T31T31.control.cam.h0.0008-03.nc  f2000.T31T31.control.cam.h0.0012-11.nc
-f2000.T31T31.control.cam.h0.0003-08.nc  f2000.T31T31.control.cam.h0.0008-04.nc  f2000.T31T31.control.cam.h0.0012-12.nc
-f2000.T31T31.control.cam.h0.0003-09.nc  f2000.T31T31.control.cam.h0.0008-05.nc  f2000.T31T31.control.cam.h0.0013-01.nc
-f2000.T31T31.control.cam.h0.0003-10.nc  f2000.T31T31.control.cam.h0.0008-06.nc  f2000.T31T31.control.cam.h0.0013-02.nc
-f2000.T31T31.control.cam.h0.0003-11.nc  f2000.T31T31.control.cam.h0.0008-07.nc  f2000.T31T31.control.cam.h0.0013-03.nc
-f2000.T31T31.control.cam.h0.0003-12.nc  f2000.T31T31.control.cam.h0.0008-08.nc  f2000.T31T31.control.cam.h0.0013-04.nc
-f2000.T31T31.control.cam.h0.0004-01.nc  f2000.T31T31.control.cam.h0.0008-09.nc  f2000.T31T31.control.cam.h0.0013-05.nc
-f2000.T31T31.control.cam.h0.0004-02.nc  f2000.T31T31.control.cam.h0.0008-10.nc  f2000.T31T31.control.cam.h0.0013-06.nc
-f2000.T31T31.control.cam.h0.0004-03.nc  f2000.T31T31.control.cam.h0.0008-11.nc  f2000.T31T31.control.cam.h0.0013-07.nc
-f2000.T31T31.control.cam.h0.0004-04.nc  f2000.T31T31.control.cam.h0.0008-12.nc  f2000.T31T31.control.cam.h0.0013-08.nc
-f2000.T31T31.control.cam.h0.0004-05.nc  f2000.T31T31.control.cam.h0.0009-01.nc  f2000.T31T31.control.cam.h0.0013-09.nc
-f2000.T31T31.control.cam.h0.0004-06.nc  f2000.T31T31.control.cam.h0.0009-02.nc  f2000.T31T31.control.cam.h0.0013-10.nc
-f2000.T31T31.control.cam.h0.0004-07.nc  f2000.T31T31.control.cam.h0.0009-03.nc  f2000.T31T31.control.cam.h0.0013-11.nc
-f2000.T31T31.control.cam.h0.0004-08.nc  f2000.T31T31.control.cam.h0.0009-04.nc  f2000.T31T31.control.cam.h0.0013-12.nc
-f2000.T31T31.control.cam.h0.0004-09.nc  f2000.T31T31.control.cam.h0.0009-05.nc  f2000.T31T31.control.cam.h0.0014-01.nc
-f2000.T31T31.control.cam.h0.0004-10.nc  f2000.T31T31.control.cam.h0.0009-06.nc  f2000.T31T31.control.cam.h0.0014-02.nc
-f2000.T31T31.control.cam.h0.0004-11.nc  f2000.T31T31.control.cam.h0.0009-07.nc  f2000.T31T31.control.cam.h0.0014-03.nc
-f2000.T31T31.control.cam.h0.0004-12.nc  f2000.T31T31.control.cam.h0.0009-08.nc  f2000.T31T31.control.cam.h0.0014-04.nc
-f2000.T31T31.control.cam.h0.0005-01.nc  f2000.T31T31.control.cam.h0.0009-09.nc  f2000.T31T31.control.cam.h0.0014-05.nc
-f2000.T31T31.control.cam.h0.0005-02.nc  f2000.T31T31.control.cam.h0.0009-10.nc  f2000.T31T31.control.cam.h0.0014-06.nc
-f2000.T31T31.control.cam.h0.0005-03.nc  f2000.T31T31.control.cam.h0.0009-11.nc  f2000.T31T31.control.cam.h0.0014-07.nc
-f2000.T31T31.control.cam.h0.0005-04.nc  f2000.T31T31.control.cam.h0.0009-12.nc  f2000.T31T31.control.cam.h0.0014-08.nc
-f2000.T31T31.control.cam.h0.0005-05.nc  f2000.T31T31.control.cam.h0.0010-01.nc  f2000.T31T31.control.cam.h0.0014-09.nc
-f2000.T31T31.control.cam.h0.0005-06.nc  f2000.T31T31.control.cam.h0.0010-02.nc  f2000.T31T31.control.cam.h0.0014-10.nc
-f2000.T31T31.control.cam.h0.0005-07.nc  f2000.T31T31.control.cam.h0.0010-03.nc  f2000.T31T31.control.cam.h0.0014-11.nc
-f2000.T31T31.control.cam.h0.0005-08.nc  f2000.T31T31.control.cam.h0.0010-04.nc  f2000.T31T31.control.cam.h0.0014-12.nc
 ~~~
 {: .output}
 
@@ -182,6 +125,164 @@ The monthly zonal wind climatology is derived from the UARS Reference Atmosphere
 <img src="https://www.sparc-climate.org/wp-content/uploads/sites/5/2018/01/DC-TZWClim-zonal_wind_anim.gif">
 
 [NCAR's Climate Data Guide](https://climatedataguide.ucar.edu/) (CDG) provides more information (search SPARC) including strengths and weaknesses of assorted data sets.
+
+## Plotting SPARC climatology
+
+### Plotting SPARC climatology using *ncl*
+
+The SPARC climatology **T** and **U* is stored in a file called **SPARC.wind_temp.nc** and can be found 
+on the Jupyterhub.
+
+In the Jupyterhub Terminal:
+
+~~~
+cd $HOME/GEO4962/SPARC
+ls
+~~~
+{: .language-bash}
+
+~~~
+-rw-r--r-- 1 jupyter-annefou jupyter-annefou   4173 Feb 13 12:40 sparc_2.ncl
+-rw-r--r-- 1 jupyter-annefou jupyter-annefou 131512 Feb 13 12:43 sparc_temp.ascii
+-rw-r--r-- 1 jupyter-annefou jupyter-annefou   4764 Feb 13 12:46 sparc_1.ncl
+-rw-r--r-- 1 jupyter-annefou jupyter-annefou 229149 Feb 13 12:47 sparc_wind.ascii
+-rw-r--r-- 1 jupyter-annefou jupyter-annefou 157840 Feb 13 12:47 SPARC.wind_temp.nc
+-rw-r--r-- 1 jupyter-annefou jupyter-annefou 337206 Feb 13 12:47 sparc.000001.png
+-rw-r--r-- 1 jupyter-annefou jupyter-annefou 480321 Feb 13 12:47 sparc.000002.png
+~~~
+{: .output}
+
+where:
+
+- [sparc_temp.ascii](ftp://sparc-ftp1.ceda.ac.uk/sparc/ref_clim/randel/temp_wind/temp.ascii) and [sparc_wind.ascii](ftp://sparc-ftp1.ceda.ac.uk/sparc/ref_clim/randel/temp_wind/wind.ascii) are two text files containing then temperature and zonal wind, respectively.
+- [sparc_1.ncl](https://www.ncl.ucar.edu/Applications/Scripts/sparc_1.ncl) is an ncl script that reads sparc_temp.ascii and sparc_wind.ascii and write the temperature and zonal wind (u) in a netCDF file called SPARC.wind_temp.nc
+- A ncl script is available in the same directory ([sparc_2.ncl](https://www.ncl.ucar.edu/Applications/Scripts/sparc_2.ncl)) and can be used to generate two plots (png file):
+	- sparc.000001.png contains the Monthly temperature climatology (K)	
+		<img src="../fig/sparc.000001.png">
+		
+	- sparc.000002.png contains the Monthly zonal wind climatology (m/s)
+		<img src="../fig/sparc.000002.png">
+	
+
+To be able to run these ncl scripts, open a Terminal on the Jupyterhub:
+
+- First copy the entire SPARC directory in your HOME area:
+
+~~~
+cp -R $HOME/GEO4962/SPARC $HOME/.
+~~~
+{: .language.bash}
+
+Then go to the new SPARC directory you have copied:
+
+~~~
+cd $HOME/SPARC
+~~~
+{: .language.bash}
+
+and run ncl:
+
+~~~
+ncl sparc_2.ncl
+~~~
+{: .language.bash}
+
+This will generate the two images (png files) that you can open in your jupyterLab to visualize them.
+
+## Plotting SPARC climatology using *python*
+
+### Open SPARC climatology netCDF file
+
+~~~
+import xarray as xr
+import matplotlib as mpl
+import psyplot.project as psy
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+
+mpl.rcParams['figure.figsize'] = [10., 8.]
+
+filename = "GEO4962/SPARC/SPARC.wind_temp.nc"
+ds = psy.open_dataset(filename)
+ds
+~~~
+{: .language-python}
+
+~~~
+<xarray.Dataset>
+Dimensions:   (lat: 41, lev_temp: 33, lev_wind: 46, month: 12)
+Coordinates:
+  * lev_wind  (lev_wind) float32 1000.0 681.29193 ... 3.1622778e-05
+  * lat       (lat) float32 -80.0 -76.0 -72.0 -68.0 ... 68.0 72.0 76.0 80.0
+  * month     (month) int32 1 2 3 4 5 6 7 8 9 10 11 12
+  * lev_temp  (lev_temp) float32 1000.0 681.29193 ... 0.006812923 0.004641587
+Data variables:
+    WIND      (lev_wind, lat, month) float32 ...
+    TEMP      (lev_temp, lat, month) float32 ...
+Attributes:
+    creation_date:  Wed Feb 13 12:47:23 UTC 2019
+    creator:        D. Shea, NCAR
+    Conventions:    None
+    referencese:    \nRandel, W.J. et al., (2004)                            ...
+    WWW_data:       http://www.sparc-climate.org/data-center/data-access/refe...
+    WWW:            http://www.sparc-climate.org/
+    README:         ftp://sparc-ftp1.ceda.ac.uk/sparc/ref_clim/randel/temp_wi...
+    title:          SPARC Intercomparison of Middle Atmosphere Climatologies
+~~~
+{: .output}
+
+### SPARC climatology: Plot Temperature 
+
+~~~
+# plot for January (month=0)
+Tmean=xr.Dataset(
+       {'TEMP': ds['TEMP'].isel(month=0)},
+       {'lat':  ds.lat, 'lev_temp': ds.lev_temp}, 
+        attrs = ds['TEMP'].attrs)
+
+#Convert month number (0+1) to name i.e. January
+psy.plot.plot2d(Tmean, name='TEMP', title=Tmean.attrs['long_name'] + ' (' + calendar.month_name[1]+ ')' ,plot='contourf', clabel=Tmean.attrs['units'],
+               xlabel=Tmean.lat.attrs['long_name'], ylabel=Tmean.lev_temp.attrs['long_name'])
+
+# Invert vertical axis
+plt.ylim(plt.ylim()[::-1])
+# 'symlog' scaling, however, handles negative values nicely
+plt.yscale('log')
+plt.ylim(top=0.005)
+plt.ylim(bottom=1000.)
+plt.xlim(left=Tmean.lat.min())
+plt.xlim(right=Tmean.lat.max())
+~~~
+{: .language-python}
+
+<img src="../fig/SPARC_T_py_january.png">
+
+
+### SPARC climatology: Plot zonal wind
+
+~~~
+Umean=xr.Dataset(
+       {'WIND': ds['WIND'].isel(month=0)},
+       {'lat':  ds.lat, 'lev_wind': ds.lev_wind}, 
+        attrs = ds['WIND'].attrs)
+
+psy.plot.plot2d(Umean, name='WIND', title=Umean.attrs['long_name'] + ' (' + calendar.month_name[1]+ ')',plot='contourf', clabel=Umean.attrs['units'],
+               xlabel=Umean.lat.attrs['long_name'], ylabel=Umean.lev_wind.attrs['long_name'])
+
+# Invert vertical axis
+plt.ylim(plt.ylim()[::-1])
+# 'symlog' scaling, however, handles negative values nicely
+plt.yscale('log')
+plt.ylim(top=5.0e-5)
+plt.ylim(bottom=1000.)
+plt.xlim(left=Tmean.lat.min())
+plt.xlim(right=Tmean.lat.max())
+~~~
+{: .language-python}
+
+
+<img src="../fig/SPARC_U_py_january.png">
 
 # Compare the control run to the SPARC climatology
 
