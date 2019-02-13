@@ -18,7 +18,23 @@ keypoints:
 
 # Introduce model experiments
 
-You will work **in pairs** for this practical and you will **analyze the model outputs in pairs**.  
+**Master students will work in pairs** for this practical and are to choose an experiment, adapt the namelist or make dataset changes following one of the predefined scenarii, then **analyze the model outputs in pairs**. 
+
+However, for **PhD students** a more challenging exercise will be to define their own **geo-engineering solution** in order to **counteract the effect of doubling CO2**. 
+
+This original geo-engineering solution must be **scientifically sound**, although it can be “extreme” (to some extent) and does not necessarily have to be feasible in the real world from a practical point of view.
+
+The PhD students have to think about the **numerical implementation** of their solution in the model.
+
+PhD students will also work in pairs and will use the **same model version** (CESM1.2.2 with CAM 5.3) but can set-up a more appropriate compset if needed.
+
+In a first phase PhD students will have to **investigate several possible options** and assess their likely pros and cons.
+
+That may require a **sensitivity analysis** and involve running short experiments (no more than 1 month each).
+
+The PhD students will then quickly **present their favorite scenario for approval** before starting the actual simulations.
+
+In a second phase the PhD students will run their experiment for a total of 14 months and analyze their results to evaluate the **effectiveness of the solution tested**, identify a region where the impact is most significant and quantify the changes.
 
 First choose your teammate: you will have to work together to set-up and run your experiment so make sure one of you has access to Abel.  
 
