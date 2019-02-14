@@ -1059,7 +1059,7 @@ Attributes:
 {: .output}
 
 You can notice that your arrays are [dask](http://docs.dask.org/en/latest/array.html) arrays and they will
-be chunked (split) when loading in memory. This allows to manipulate large amount of data in parallel and/or where
+be chunked (split) when loading in memory. This allows to manipulate large amounts of data in parallel and/or where
 the memory of your computer is not very large. As part of this course, we will not give you more details about it but feel free to ask us
 if you are interested.
 
