@@ -178,7 +178,7 @@ plt.ylim(top=10)
 
 <img src="../fig/U_F2000_CAM5_T31T31_test-0009-01_pressure_py.png">
 
-> ## Create a Georeferenced Latitude-Vertical plot on the following pressure levels:
+> ## Create a Georeferenced Latitude-Vertical **temperature** plot on the following pressure levels:
 > pnew = [850., 700., 600, 500., 400., 300., 100., 30., 10.]
 > 
 > - What do you observe? 
