@@ -74,8 +74,8 @@ Tnew[Tnew==1e30] = np.NaN
 print(Tnew.mean(axis=3).shape,lats.shape)
 T850=xr.Dataset(
        {'T850': (('lat','lon'), Tnew[0,0,:,:])},
-       {'lons':  ds.lon,
-       'lats':  ds.lat})
+       {'lons':  lons,
+       'lats':   lats})
 
 # plot using psyplot
 
