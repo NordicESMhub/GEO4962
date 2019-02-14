@@ -138,12 +138,15 @@ import matplotlib.pyplot as plt
 
 pnew = [1000., 900., 850., 700., 600, 500., 400., 300., 100., 30., 10.]
 
+kxtrp = True                          # True=extrapolate
 UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
 
 ntime, output_levels, nlat, nlon = UonP.shape
 
 ~~~
 {: .language-python}
+
+You will notice that here we used **kxtrp = True** in order to **extrapolate** when the pressure level is outside of the range of psrf (the array of surface pressures).
 
 In this example *pnew* is an array containing pressure levels and we interpolate U on these levels to 
 generate a new array called *UonP*.
@@ -185,6 +188,9 @@ plt.ylim(top=10)
 > - Is there anything wrong?
 >
 > > ## Solution
+> >
+> > Note: In the plot below we do not use a log scale for the vertical axis in order to highlight the issue with missing values.
+> >
 > > ~~~
 > > import xarray as xr
 > > import numpy as np
