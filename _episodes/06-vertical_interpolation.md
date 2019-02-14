@@ -225,7 +225,10 @@ plt.ylim(top=10)
 {: .challenge}
 
 Here, we show you how to use [ncl](https://www.ncl.ucar.edu/Document/Tools/) to interpolate T and U fields to 
-a list of pressure levels and store the resulting field in a new netCDF file:
+a list of pressure levels and store the resulting field in a new netCDF file.
+
+> ## First we need to get the ncl script [vertical_interpolation.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl) (for instance using the wget command from a terminal).
+{: .callout}
 
 
 ~~~
@@ -241,7 +244,6 @@ print(returned_value)
 ~~~
 {: .language-python}
 
-with the ncl script [vertical_interpolation.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl).
 Then we can plot T:
 
 ~~~
