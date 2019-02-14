@@ -1294,7 +1294,7 @@ Data variables:
 You can use *to_netcdf* xarray method:
 ~~~
 # To select variables and store to netCDF
-dy[['T', 'U','hyam','hybm','PS']].to_netcdf("f2000.T31T31.control.cam.h0_TUmean.nc")
+dy[['T', 'U','hyam','hybm','PS','PHIS','P0']].to_netcdf("f2000.T31T31.control.cam.h0_TUmean.nc")
 ~~~
 {: .language-python}
 
