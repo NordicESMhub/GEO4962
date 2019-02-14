@@ -244,7 +244,7 @@ print(returned_value)
 ~~~
 {: .language-python}
 
-Then we can plot T:
+A *returned value* different from **0** means that there has been an error somewhere (which will have to be fixed), otherwise we can plot the temperature values read from the newly created file:
 
 ~~~
 import xarray as xr
