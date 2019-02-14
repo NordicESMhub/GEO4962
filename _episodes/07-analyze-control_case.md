@@ -1301,7 +1301,7 @@ dy[['T', 'U','hyam','hybm','PS']].to_netcdf("f2000.T31T31.control.cam.h0_TUmean.
 
 ### How to interpolate hybrid sigma pressure levels to pressure levels?
 
-Then you can use [ncl](https://www.ncl.ucar.edu/) and the script we have [vertical_interpolation_yearly.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/files/vertical_interpolation_yearly.ncl) 
+Then you can use [ncl](https://www.ncl.ucar.edu/) and the script [vertical_interpolation_yearly.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/files/vertical_interpolation_yearly.ncl) 
 that we have prepared. 
 
 To make sure the files created by [vertical_interpolation_yearly.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/files/vertical_interpolation_yearly.ncl) do not exist, we can remove them:
