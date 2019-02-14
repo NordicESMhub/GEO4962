@@ -692,12 +692,21 @@ Now that we are familiar with the SPARC climatology, we are ready to analyze the
 make comparison with it. This is the goal of the first exercise you will have to fulfill. 
 
 
-## Which variables to analyze and why?
+To help you:
+- we summarize the [methodology](#methodology) you can follow (please note that there is not one
+unique way to analyze and plot, and you should feel free to divert from the methodology given)
+- we give you some [instructions](#exercise) with a list of questions you need to answer
+
+
+## Methodology
+
+
+### Which variables to analyze and why?
 
 You can analyze many variables from the control run to check its validity but at least **T** and **U** (zonal wind) as
 these two variables are the one contained in the SPARC climatology. 
 
-## How to compute yearly means from the control run?
+### How to compute yearly means from the control run?
 
 The first years of the control run may not be scientifically representative (we call it the spin up time) 
 and we will disregard the first 4 years of the control run for our analysis.
@@ -1278,42 +1287,66 @@ Data variables:
 {: .callout}
 
 
-## How to save the results in a new netCDF file?
+### How to save the results in a new netCDF file?
 
 You can use *to_netcdf* xarray method:
 ~~~
-# To select variables and average over all the longitude
-
-dymean=dy[['T', 'U','hyam','hybm','PS']].mean(dim='lon')
-dymean.to_netcdf("f2000.T31T31.control.cam.h0_TUmean.nc")
+# To select variables and store to netCDF
+dy[['T', 'U','hyam','hybm','PS']].to_netcdf("f2000.T31T31.control.cam.h0_TUmean.nc")
 ~~~
 {: .language-python}
 
-## How to interpolate hybrid sigma pressure levels to pressure levels?
+
+### How to interpolate hybrid sigma pressure levels to pressure levels?
+
+Then you can use [ncl](https://www.ncl.ucar.edu/) and the script we have [vertical_interpolation_yearly.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/files/vertical_interpolation_yearly.ncl) 
+that we have prepared. 
+
+To make sure the files created by [vertical_interpolation_yearly.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/files/vertical_interpolation_yearly.ncl) do not exist, we can remove them:
 
 
-To help you:
-- we summarize the [methodology](#methodology) you can follow (please note that there is not one
-unique way to analyze and plot, and you should feel free to divert from the methodology given)
-- we give you some [instructions](#exercise) with a list of questions you need to answer
+In Terminal on Jupyterhub:
 
-## Methodology
+~~~
+for i in {1..12}
+ do 
+  rm -rf f2000.T31T31.control.cam.h0_TUmean_pl_$i.nc
+done
+~~~
+{: .language-bash}
 
 
+We have used a loop written in *bash* shell. For more about the bash shell, look at the 
+[Carpentries](https://carpentries.org/) lesson on [The Unix Shell](http://swcarpentry.github.io/shell-novice/).
 
-1.  Select T,U,hyam,hybm,PS (use ncks) for all the model outputs of the control experiment (/projects/NS1000K/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist). Save these new output files in the directory $HOME/GEO4962/control/.
-2.  Use ncra to get an average for all the January months. Repeat it for each month (February to December).
-3.  Use [zonal_2.ncl](http://www.ncl.ucar.edu/Applications/Scripts/zonal_2.ncl) and [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) to get a zonal mean and interpolate to pressure levels. Make sure you choose your pressure levels (change the variable **pnew** in [vert_1.ncl](http://www.ncl.ucar.edu/Applications/Scripts/vert_1.ncl) so you can easily compare with SPARC climatology).
-4.  You may use [sparc_2.ncl](https://www.ncl.ucar.edu/Applications/Scripts/sparc_2.ncl) to get plots similar to those we got with the SPARC climatology. You can also use panoply (or python).
+Then, still in the same Terminal on JupyterHub:
 
+
+~~~
+ncl vertical_interpolation_yearly.ncl
+ls f2000.T31T31.control.cam.h0_TUmean_pl_*.nc
+~~~
+{: .language-bash}
+
+~~~
+f2000.T31T31.control.cam.h0_TUmean_pl_1.nc   f2000.T31T31.control.cam.h0_TUmean_pl_2.nc  f2000.T31T31.control.cam.h0_TUmean_pl_6.nc
+f2000.T31T31.control.cam.h0_TUmean_pl_10.nc  f2000.T31T31.control.cam.h0_TUmean_pl_3.nc  f2000.T31T31.control.cam.h0_TUmean_pl_7.nc
+f2000.T31T31.control.cam.h0_TUmean_pl_11.nc  f2000.T31T31.control.cam.h0_TUmean_pl_4.nc  f2000.T31T31.control.cam.h0_TUmean_pl_8.nc
+f2000.T31T31.control.cam.h0_TUmean_pl_12.nc  f2000.T31T31.control.cam.h0_TUmean_pl_5.nc  f2000.T31T31.control.cam.h0_TUmean_pl_9.nc
+~~~
+{: .output}
+
+You are now ready to visualize U and T from your control run and start the exercise which consists in comparing
+the control run with the SPARC climatology.
 
 > ## Exercise
 > 
-> <font color="red">How well does CAM5 (T31/L30, 5 yr control run) represent the SPARC climatology?</font>
+> <font color="red">How well does CAM5 (T31/L30, control run) represent the SPARC climatology?</font>
 > 
 > To answer to this question:
 > - write a Python 3 Jupyter notebook and name it **exercise_sparc_vs_control_YOURNAME.ipynb** where you need to
 > replace **YOURNAME** by your name!
+> - Follow the methodology given in this lesson and compare the results from the control run and the SPARC climatology.
 > - send it by email to the instructors/teachers 
 > - if you wish you can also upload it in the private github repository [GEO4962-students-2019](https://github.com/NordicESMhub/GEO4962-students-2019). <font color="red">It is a private repository
 > where only students and instructors from GEO4962 year 2019 have access</font>. It is only used to share assignments within
