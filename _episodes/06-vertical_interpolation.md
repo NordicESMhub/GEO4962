@@ -15,9 +15,11 @@ keypoints:
 
 ### Interpolate to one pressure level
 
-Py**NGL** ("pingle") is a python language module for generating high-quality, 2D visualizations of scientific data. It is built on top of the same "ressource" model used in the NCAR Command Language.
+PyNGL (Python NCL Graphics Library) is a python interface to the same core graphics as NCL (NCAR Command Language) for visualization and data processing.
 
-Py**NIO** ("pie nee oh") is a python module used for reading and writting netCDF files, among others.
+PyNIO (Python Interface for Geoscientific Data Input/Output) is a python package that allows read and/or write access to a variety of data formats using an interface modeled on netCDF.
+
+Note: These PyNGL & PyNIO libraries are still under developpement and therefore not yet fully operational (i.e., not all the functionalities were implemented).
 
 ~~~
 import Ngl
