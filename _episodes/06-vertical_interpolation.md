@@ -138,7 +138,7 @@ import matplotlib.pyplot as plt
 
 pnew = [1000., 900., 850., 700., 600, 500., 400., 300., 100., 30., 10.]
 
-UonP = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
 
 ntime, output_levels, nlat, nlon = UonP.shape
 
@@ -163,12 +163,7 @@ Umean=xr.Dataset(
 We can now plot *Umean*:
 
 ~~~
-U_cross_section = xr.Dataset(
-    {'U': ds['U'].isel(time=0).mean(dim='lon')},
-    {'lat':  ds.lat, 'lev': ds.lev_p}, 
-    attrs = ds['U'].attrs)
-
-psy.plot.plot2d(U_cross_section, name='U', plot='contourf', 
+psy.plot.plot2d(Umean, name='U', plot='contourf', 
                 title="Georeferenced Latitude-Vertical plot", 
                 clabel="Zonal wind (m/s)",
                 xlabel='latitude',
