@@ -227,7 +227,15 @@ plt.ylim(top=10)
 Here, we show you how to use [ncl](https://www.ncl.ucar.edu/Document/Tools/) to interpolate T and U fields to 
 a list of pressure levels and store the resulting field in a new netCDF file.
 
-> ## First we need to get the ncl script [vertical_interpolation.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl) (for instance using the wget command from a terminal).
+The main advantage of using *ncl* as opposed to the current (non-operational) PyNGL and PyNIO is that you have access to an improved interpolation routine called *vinth2p_ecmwf* which deals nicely with extrapolation for some variables (in particular the temperature).
+
+> ## First we need to get the ncl script [vertical_interpolation.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl) 
+> For instance using the wget command (on the Jupyterhub Terminal):
+> ~~~
+> wget https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl
+> ~~~
+> {: .language-bash}
+>
 {: .callout}
 
 
