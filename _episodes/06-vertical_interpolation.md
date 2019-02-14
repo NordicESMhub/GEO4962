@@ -15,6 +15,10 @@ keypoints:
 
 ### Interpolate to one pressure level
 
+Py**NGL** ("pingle") is a python language module for generating high-quality, 2D visualizations of scientific data. It is built on top of the same "ressource" model used in the NCAR Command Language.
+
+Py**NIO** ("pie nee oh") is a python module used for reading and writting netCDF files, among others.
+
 ~~~
 import Ngl
 import Nio
