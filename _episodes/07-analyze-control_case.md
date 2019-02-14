@@ -340,6 +340,8 @@ psy.plot.mapplot(filename, name='TS', title="Surface temperature [K]\nF2000_CAM5
 <img src="../fig/TS_F2000_CAM5_T31T31_control-0005-01.png"> 
 
 ~~~
+import numpy as np
+import xarray as xr
 import Ngl
 import Nio
 import matplotlib.pyplot as plt
