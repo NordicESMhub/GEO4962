@@ -728,7 +728,7 @@ import glob
 import os
 %matplotlib inline
 
-files =  glob.glob(os.path.join("GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/", 'f2000.T31T31.control.cam.h0.*'))
+files =  glob.glob(os.path.join("/opt/uio/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/", 'f2000.T31T31.control.cam.h0.*'))
 # sort files so they appear by year/month
 files.sort()
 # Select files from year 5 and beyond
