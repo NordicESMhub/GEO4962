@@ -1,5 +1,5 @@
 ---
-title: "From hybrid sigma-pressure levels to pressure levels"
+title: "From hybrid sigma-pressure (model) levels to pressure levels"
 teaching: 0
 exercises: 0
 questions:
@@ -11,7 +11,7 @@ keypoints:
 - "pressure levels"
 ---
 
-# Interpolate to pressure levels
+# Interpolate from model levels to pressure levels
 
 ### Interpolate to one pressure level
 
