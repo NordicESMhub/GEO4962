@@ -20,6 +20,8 @@ You may try to use other web browser but we cannot guarantee that all functional
 
 You cannot use Safari for the Jupyterhub, so make sure you install a recent version of [google-chrome](https://www.google.com/chrome/).
 
+On Abel remember to set the language environment variable to export LC_ALL=$LANG
+
 
 ## Windows users
 
