@@ -3,7 +3,7 @@ title: "Introduction"
 teaching: 0
 exercises: 0
 questions:
-- "What is CESM?"
+- "What is a climate model (CESM)?"
 objectives:
 - "Learn about CESM"
 keypoints:
