@@ -555,7 +555,9 @@ m
 
 And here is an example of what you should get on your screen, with the widget giving you more options than with a static plot (to zoom in / out and see a different region):
 
-<iframe width="600" height="400" src="../files/widget.html" frameborder="0" allowfullscreen></iframe>​
+<img src="../fig/ipyleaflet-Oslo.png">
+
+<iframe width="600" height="400" src="../files/widget.html" frameborder="0" allowfullscreen></iframe>
 
 {% include links.md %}
 
