@@ -4,13 +4,13 @@ teaching: 0
 exercises: 0
 questions:
 - "How to setup CESM on Abel?"
-- "How to run a cesm case?"
-- "How to monitor my cesm case?"
+- "How to run a CESM case?"
+- "How to monitor my CESM case?"
 - "What does CESM produce?"
 - "What is netCDF data format?"
 - "How to quickly inspect and visualize netCDF data files?"
 objectives:
-- "Learn to setup cesm on Abel"
+- "Learn to setup CESM on Abel"
 - "Learn to run and monitor a simple cesm case on Abel"
 - "Learn about netCDF data format"
 - "Learn to inspect a netCDF file"
