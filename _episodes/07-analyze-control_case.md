@@ -130,7 +130,7 @@ import matplotlib as mpl
 # Set figure size for all our plots
 mpl.rcParams['figure.figsize'] = [10., 8.]
 
-path = 'GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/'
+path = '/opt/uio/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/'
 filename = path + 'f2000.T31T31.control.cam.h0.0005-01.nc'
 print(filename)
 
@@ -500,7 +500,7 @@ import calendar
 
 mpl.rcParams['figure.figsize'] = [10., 8.]
 
-filename = "GEO4962/SPARC/SPARC.wind_temp.nc"
+filename = "/opt/uio/GEO4962/SPARC/SPARC.wind_temp.nc"
 ds = psy.open_dataset(filename)
 ds
 ~~~
@@ -597,7 +597,7 @@ import calendar
 
 mpl.rcParams['figure.figsize'] = [10., 8.]
 
-filename = "GEO4962/SPARC/SPARC.wind_temp.nc"
+filename = "/opt/uio/GEO4962/SPARC/SPARC.wind_temp.nc"
 ds = psy.open_dataset(filename)
 
 fig = plt.figure(figsize=[25, 18])
@@ -650,7 +650,7 @@ fig.colorbar(cs, cax=cbar_ax, label=ds.WIND.attrs['units'])
 > > 
 > > mpl.rcParams['figure.figsize'] = [10., 8.]
 > > 
-> > filename = "GEO4962/SPARC/SPARC.wind_temp.nc"
+> > filename = "/opt/uio/GEO4962/SPARC/SPARC.wind_temp.nc"
 > > ds = psy.open_dataset(filename)
 > > 
 > > fig = plt.figure(figsize=[25, 18])
