@@ -186,7 +186,7 @@ and using *psy.plot.mapplot*:
 # get your username from the environment variable USER
 username = os.getenv('USER')
 # specify the path where your test simulation is stored
-path = 'GEO4962/' + username + '/f2000.T31T31.test/atm/hist/'
+path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.test/atm/hist/'
 filename = path + 'f2000.T31T31.test.cam.h0.0009-01.nc'
 print(filename)
 
