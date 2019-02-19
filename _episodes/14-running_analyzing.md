@@ -288,6 +288,7 @@ It is very often convenient to visualize using a different projection than the o
 <font color="green">On jupyter:</font>
 
 ~~~
+import os
 import xarray as xr
 import numpy as np
 import cartopy.crs as ccrs
@@ -296,7 +297,9 @@ import matplotlib.pyplot as plt
 
 %matplotlib inline
 
-path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+username = os.getenv('USER')
+
+path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.sea_ice/atm/hist/'
 experiment = 'f2000.T31T31.sea_ice'
 month = '0009-01'
 
