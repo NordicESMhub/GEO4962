@@ -345,6 +345,7 @@ ax.gridlines()
 > To fill the gap, we can wrap around longitudes i.e. add a new longitude band at 360. equals to 0.
 >
 > ~~~
+> import os
 > import xarray as xr
 > import numpy as np
 > import cartopy.crs as ccrs
@@ -353,7 +354,8 @@ ax.gridlines()
 > 
 > %matplotlib inline
 > 
-> path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+> username = os.getenv('USER')
+> path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.sea_ice/atm/hist/'
 > experiment = 'f2000.T31T31.sea_ice'
 > month = '0009-01'
 > 
