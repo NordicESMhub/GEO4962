@@ -233,7 +233,7 @@ Now we are ready to set-up our model configuration and build the cesm executable
  
 After building CESM for your configuration, a new directory (and a set of sub-directories) are created in /work/users/$USERS/f2000.T31T31.test:
 
-*   **bld**: contains the object and CESM executable for your configuration
+*   **bld**: contains the object and CESM executable (called **cesm.exe**) for your configuration
 *   **run**: this directory will be used during your simulation run to generate output files, etc.
 
 ### Running a case
