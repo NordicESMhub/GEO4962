@@ -188,16 +188,19 @@ Start a new **python3** notebook on your JupyterHub and type the following comma
 <font color="green">On jupyter:</font>
 
 ~~~
+import os
+import xarray as xr
 import psyplot.project as psy
 
 month = '0009-01'
+username = os.getenv('USER')
 
 path = '/opt/uio/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/'
 filename = path + 'f2000.T31T31.control.cam.h0.' + month + '.nc'
 dsc = xr.open_dataset(filename, decode_cf=False)
-Sc = dsc['TS'][0,:,:]
+TSc = dsc['TS'][0,:,:]
 
-path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.sea_ice/atm/hist/'
 filename = path + 'f2000.T31T31.sea_ice.cam.h0.' + month + '.nc'
 dssi = xr.open_dataset(filename, decode_cf=False)
 TSsi = dssi['TS'][0,:,:]
