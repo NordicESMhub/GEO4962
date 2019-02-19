@@ -192,12 +192,12 @@ import psyplot.project as psy
 
 month = '0009-01'
 
-path = 'GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/'
+path = '/opt/uio/GEO4962/outputs/runs/f2000.T31T31.control/atm/hist/'
 filename = path + 'f2000.T31T31.control.cam.h0.' + month + '.nc'
 dsc = xr.open_dataset(filename, decode_cf=False)
 Sc = dsc['TS'][0,:,:]
 
-path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
 filename = path + 'f2000.T31T31.sea_ice.cam.h0.' + month + '.nc'
 dssi = xr.open_dataset(filename, decode_cf=False)
 TSsi = dssi['TS'][0,:,:]
@@ -226,7 +226,7 @@ import xarray as xr
 %matplotlib inline
 
 month = '0009-01'
-path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
 experiment = 'f2000.T31T31.sea_ice'
 filename = path + experiment + '.cam.h0.' + month + '.nc'
 
@@ -290,7 +290,7 @@ import matplotlib.pyplot as plt
 
 %matplotlib inline
 
-path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
 experiment = 'f2000.T31T31.sea_ice'
 month = '0009-01'
 
@@ -344,7 +344,7 @@ ax.gridlines()
 > 
 > %matplotlib inline
 > 
-> path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+> path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
 > experiment = 'f2000.T31T31.sea_ice'
 > month = '0009-01'
 > 
@@ -412,7 +412,7 @@ So far, we used *contourf* to visualize our data but we can also use *pcolormesh
 > > 
 > > %matplotlib inline
 > > 
-> > path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+> > path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
 > > experiment = 'f2000.T31T31.sea_ice'
 > > month = '0009-01'
 > > 
@@ -465,7 +465,7 @@ import matplotlib.pyplot as plt
 
 %matplotlib inline
 
-path = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
 experiment = 'f2000.T31T31.sea_ice'
 
 
@@ -525,7 +525,7 @@ import glob
 from ipywidgets import IntSlider
 from ipywidgets.embed import embed_minimal_html
 
-pattern = 'GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/f2000.T31T31.sea_ice.cam.h0.*-*.nc'
+pattern = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/f2000.T31T31.sea_ice.cam.h0.*-*.nc'
 filenames=glob.glob(pattern)
 filenames.sort()
 dset = xr.open_mfdataset(filenames, decode_cf=False)
