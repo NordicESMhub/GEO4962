@@ -43,7 +43,7 @@ Some facts about CESM:
 
 *   Written in Fortran 90
 *   About 900 000 lines of Fortran 90 code
-*   About 12,000 lines of perl and shell scripts that configure, build, and run the model
+*   About 12,000 lines of scripts that configure, build, and run the model
 *   Parallelized with [MPI](http://www.mpi-forum.org/) (Message Passing Interface) and [OpenMP](http://openmp.org/) (Open Multi-Processing)
 *   To keep track of code changes, CESM developers currently use [subversion](https://subversion.apache.org/). However, some components use [git](https://git-scm.com/).
 *   Fortran Coding standard as well as style rules are enforced and anyone wishing to contribute to the Community Atmosphere Model must comply to these [rules](http://www.cesm.ucar.edu/working_groups/Software/dev_guide/dev_guide/node7.html).
