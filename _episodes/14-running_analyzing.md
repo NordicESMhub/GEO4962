@@ -224,12 +224,15 @@ Start a new **python3** notebook on your JupyterHub.
 <font color="green">On jupyter:</font>
 
 ~~~
+import os
 import xarray as xr
 
 %matplotlib inline
 
 month = '0009-01'
-path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+username = os.getenv('USER')
+
+path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.sea_ice/atm/hist/'
 experiment = 'f2000.T31T31.sea_ice'
 filename = path + experiment + '.cam.h0.' + month + '.nc'
 
