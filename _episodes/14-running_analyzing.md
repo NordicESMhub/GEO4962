@@ -183,7 +183,7 @@ rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/arc
 
 # Visualization with psyplot
 
-Start a new **python3** notebook on your JupyterHub and type the following commands (in this example the *USER* is jeani and we have the first month of data from the sea ice experiment).
+Start a new **python3** notebook on your JupyterHub and type the following commands (in this example we assume we have the first month of data from the sea ice experiment).
 
 <font color="green">On jupyter:</font>
 
