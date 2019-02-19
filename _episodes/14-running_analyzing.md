@@ -471,6 +471,7 @@ So far, we used *contourf* to visualize our data but we can also use *pcolormesh
 <font color="green">On jupyter:</font>
 
 ~~~
+import os
 import xarray as xr
 import numpy as np
 import cartopy.crs as ccrs
@@ -479,9 +480,10 @@ import matplotlib.pyplot as plt
 
 %matplotlib inline
 
-path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
-experiment = 'f2000.T31T31.sea_ice'
+username = os.getenv('USER')
 
+path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.sea_ice/atm/hist/'
+experiment = 'f2000.T31T31.sea_ice'
 
 fig = plt.figure(figsize=[20, 8])
 TSmin = 220
@@ -539,7 +541,9 @@ import glob
 from ipywidgets import IntSlider
 from ipywidgets.embed import embed_minimal_html
 
-pattern = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/f2000.T31T31.sea_ice.cam.h0.*-*.nc'
+username = os.getenv('USER')
+
+pattern = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.sea_ice/atm/hist/f2000.T31T31.sea_ice.cam.h0.*-*.nc'
 filenames=glob.glob(pattern)
 filenames.sort()
 dset = xr.open_mfdataset(filenames, decode_cf=False)
