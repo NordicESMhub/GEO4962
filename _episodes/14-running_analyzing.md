@@ -415,6 +415,7 @@ So far, we used *contourf* to visualize our data but we can also use *pcolormesh
 > 
 > > ## Solution
 > > ~~~
+> > import os
 > > import xarray as xr
 > > import numpy as np
 > > import cartopy.crs as ccrs
@@ -423,7 +424,9 @@ So far, we used *contourf* to visualize our data but we can also use *pcolormesh
 > > 
 > > %matplotlib inline
 > > 
-> > path = '/opt/uio/GEO4962/jupyter-jeani/f2000.T31T31.sea_ice/atm/hist/'
+> > username = os.getenv('USER')
+> > 
+> > path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.sea_ice/atm/hist/'
 > > experiment = 'f2000.T31T31.sea_ice'
 > > month = '0009-01'
 > > 
