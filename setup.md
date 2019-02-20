@@ -20,8 +20,19 @@ You may try to use other web browser but we cannot guarantee that all functional
 
 You cannot use Safari for the Jupyterhub, so make sure you install a recent version of [google-chrome](https://www.google.com/chrome/).
 
-On Abel remember to set the language environment variable to export LC_ALL=$LANG
+In order to avoid issues with the local environment language/keyboard variables when login on Abel from your Mac you can either:
+  Option A)
+   On your Mac
+     - Open a terminal
+     - Go into the **Preferences**
+     - Then into the **Advanced** tab for the terminal settings profile (Basic)
+     - At the bottom **untick** the option to Set local environment variables on startup*
+      (Note that this only affects new terminals, not those that are already open)
 
+  Option B)
+    On Abel
+      - Set the language environment variable with the command **export LC_ALL=$LANG**
+      - At the bottom **untick** the option to Set local environment variables on startup*
 
 ## Windows users
 
