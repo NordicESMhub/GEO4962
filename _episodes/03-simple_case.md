@@ -333,7 +333,7 @@ ls -lrt
 #### What is a netCDF file?
 
 Netcdf stands for “network Common Data Form”. It is self-describing, portable, metadata friendly, supported by many languages
-(including fortran, C/C++, Matlab, python, NCL, IDL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in parcitula NCO and CDO).
+(including fortran, C/C++, Matlab, python, NCL, IDL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in particular NCO and CDO).
 
 #### Inspect a netCDF file
 
