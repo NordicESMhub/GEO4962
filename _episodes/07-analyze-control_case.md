@@ -632,9 +632,9 @@ fig.colorbar(cs, cax=cbar_ax, label=ds.WIND.attrs['units'])
 
 <img src="../fig/SPARC_U_py_all_months.png">
 
-> ## Make a multiple for the SPARC temperature
+> ## Make a multiple plot for the SPARC temperature
 >
-> Make the same kind of multiple but for the temperature instead. 
+> Make the same kind of multiple plot but for the temperature instead. 
 >
 > > ## Solution
 > > 
@@ -1072,7 +1072,7 @@ By default, **time** has not been decoded properly:
 ~~~
 {: .output}
 
-It appears as a *float64* and is not well understood as a time but it is easy to correct it. Here is one 
+It appears as a *float64* and is not recognized as a time but it is easy to correct it. Here is one 
 way to do it afterwards:
 
 ~~~
