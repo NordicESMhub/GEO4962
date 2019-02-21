@@ -144,8 +144,6 @@ Similarly, you can start a new Terminal by clicking on "Terminal" in the Launche
 > anymore in your JupyterLab, you can start a new one in "**File** --> **New Launcher**".
 {: .callout}
 
-
-
 # Copy your output files from Abel to the virtual machine
 
 Start a new **Terminal** on your JupyterHub (this will be referred to hereafter as your "JupyterHub terminal") and type the following commands.
@@ -339,6 +337,164 @@ pure sigma. A schematic representation of the hybrid vertical coordinate and ver
 presented below. 
 
 <img src="../fig/hybrid_sigma_pressure_coordinates.png" height="400">
+
+The CESM system is defined such that closer to the earth's surface, the levels more closely resemble a pure sigma level, while the higher up you go, the more the levels are like pressure levels.
+
+The formula to use to determine the pressure at the edge of the layer K is : 
+
+<img src="../fig/sigma_levels.png" width="220">
+
+where Ps is the surface pressure and A and B are coefficients defined at each model level and stored in the netCDF model outputs.
+
+Let's have a look at the values of A and B:
+
+~~~
+print(ds.dyam)
+~~~
+{: .language-python}
+
+~~~ 
+<xarray.DataArray 'hyam' (lev: 30)>
+array([0.003643, 0.007595, 0.014357, 0.024612, 0.038268, 0.054595, 0.072012,
+       0.087821, 0.103317, 0.121547, 0.142994, 0.168225, 0.178231, 0.170324,
+       0.161023, 0.15008 , 0.137207, 0.122062, 0.104245, 0.084979, 0.066502,
+       0.050197, 0.037189, 0.028432, 0.022209, 0.016407, 0.011075, 0.006255,
+       0.001989, 0.      ])
+Coordinates:
+  * lev      (lev) float64 3.643 7.595 14.36 24.61 ... 936.2 957.5 976.3 992.6
+Attributes:
+    long_name:  hybrid A coefficient at layer midpoints
+~~~
+{: .output}
+
+
+~~~
+print(ds.dybm)
+~~~
+{: .language-python}
+
+~~~ 
+<xarray.DataArray 'hybm' (lev: 30)>
+array([0.      , 0.      , 0.      , 0.      , 0.      , 0.      , 0.      ,
+       0.      , 0.      , 0.      , 0.      , 0.      , 0.019677, 0.062504,
+       0.112888, 0.172162, 0.241894, 0.323931, 0.420442, 0.5248  , 0.624888,
+       0.713208, 0.78367 , 0.831103, 0.864811, 0.896237, 0.925124, 0.951231,
+       0.974336, 0.992556])
+Coordinates:
+  * lev      (lev) float64 3.643 7.595 14.36 24.61 ... 936.2 957.5 976.3 992.6
+Attributes:
+    long_name:  hybrid B coefficient at layer midpoints
+~~~
+{: .output}
+
+If we print these coefficients A and B and the level, we can clearly understand why at the top of the atmosphere, we have 
+pure pressure levels (B=0) and pure sigma levels at the bottom (A=0):
+
+~~~ 
+print("lev     A          B")
+for lev, a, b in zip (range(1,ds.dims['lev']+1), ds.hyam.values, ds.hybm.values):
+    print(lev, 1000*a, 1000*b)
+~~~
+{: .language-python}
+
+~~~
+lev     A          B
+1 3.64346569404006 0.0
+2 7.594819646328688 0.0
+3 14.356632251292467 0.0
+4 24.612220004200935 0.0
+5 38.26829977333546 0.0
+6 54.59547974169254 0.0
+7 72.01245054602623 0.0
+8 87.82123029232025 0.0
+9 103.31712663173676 0.0
+10 121.54724076390266 0.0
+11 142.99403876066208 0.0
+12 168.22507977485657 0.0
+13 178.2306730747223 19.677413627505302
+14 170.32432556152344 62.50429339706898
+15 161.02290898561478 112.8879077732563
+16 150.08028596639633 172.16161638498306
+17 137.20685988664627 241.89404398202896
+18 122.06193804740906 323.93063604831696
+19 104.24471274018288 420.44246196746826
+20 84.97915416955948 524.7995406389236
+21 66.50169566273689 624.8877346515656
+22 50.19678920507431 713.2076919078827
+23 37.188658490777016 783.6697101593018
+24 28.431948274374008 831.1028182506561
+25 22.20897749066353 864.8112714290619
+26 16.40738220885396 896.2371647357941
+27 11.074557900428772 925.1238405704498
+28 6.2549535650759935 951.230525970459
+29 1.9894090946763754 974.3359982967377
+30 0.0                992.556095123291
+~~~
+{: .output}
+
+
+We multiplied A and B by *1000* so that values at the top of the atmosphere are in **mb** (3.64mb).
+
+So if we compute the pressure at the lowest model level in Oslo:
+
+~~~
+PS_oslo = ds['PS'].isel(time=0).sel(lat=60., lon=10.75, method='nearest')/100. # to convert from Pascal to mb
+p_bottom_oslo = ds.hyam[29] + ds.hybm[29]*PS_oslo
+print("Oslo (mb)")
+print("PS = ", PS_oslo.values, " Lowest model level = ", p_bottom_oslo.values)
+~~~ 
+{: .language-python}
+
+~~~
+Oslo (mb)
+PS =  991.536640625  Lowest model level =  984.155736190416
+~~~
+{: .output}
+
+So the pressure at the lowest model level is not that far from the surface pressure in Oslo.
+
+> ## And what about the Mount Everest?
+> Compute the pressure value at the lowest model level (close to the surface) for lat=28 and lon=86.5 (Everest top)
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > PS_everest = ds['PS'].isel(time=0).sel(lat=28., lon=86.5, method='nearest')/100. # to convert in mb
+> > print(PS_everest)
+> > ~~~
+> > {: .language-python}
+> > 
+> > ~~~
+> > <xarray.DataArray 'PS' ()>
+> > array(750.189687)
+> > Coordinates:
+> >     time     object 0009-02-01 00:00:00
+> >     lat      float64 27.83
+> >     lon      float64 86.25
+> > ~~~
+> > {: .output}
+> > 
+> > And now we compute the pressure at the lowest model level:
+> > 
+> > ~~~
+> > p_bottom_everest = ds.hyam[29] + ds.hybm[29]*PS_everest
+> > print(p_bottom_everest)
+> > ~~~
+> > {: .language-python}
+> > 
+> > ~~~
+> > <xarray.DataArray ()>
+> > array(744.605347)
+> > Coordinates:
+> >     lev      float64 992.6
+> >     time     object 0009-02-01 00:00:00
+> >     lat      float64 27.83
+> >     lon      float64 86.25
+> > ~~~
+> > {: .output}
+> > This clearly shows that the lowest pressure value we have at the top of Mount Everest is 744 mb, quite different from the corresponding sigma level.
+> {: .solution}
+{: .challenge}
 
 More information can be found in [Description of the NCAR Community Atmosphere Model (CAM 3.0)](http://www.cesm.ucar.edu/models/atm-cam/docs/description/description.pdf).
 
