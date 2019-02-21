@@ -1,7 +1,7 @@
 ---
 title: "Overview of the Computing and storage infrastructure"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 15
 questions:
 - "Where do we run a climate model?"
 - "What is a High-Performance Computer?"

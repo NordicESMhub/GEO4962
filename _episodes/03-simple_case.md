@@ -1,7 +1,7 @@
 ---
 title: "Get familiar with CESM and the computing environment"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 60
 questions:
 - "How to setup CESM on Abel?"
 - "How to run a CESM case?"

@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-teaching: 0
+teaching: 30
 exercises: 0
 questions:
 - "What is a climate model (CESM)?"
