@@ -21,10 +21,20 @@ PyNIO (Python Interface for Geoscientific Data Input/Output) is a python package
 
 Note: These PyNGL & PyNIO libraries are still under developpement and therefore not yet fully operational (i.e., not all the functionalities were implemented).
 
-### [Ngl.vinth2p](https://www.pyngl.ucar.edu/Functions/Ngl.vinth2p.shtml) 
+In this section we are going to use [Ngl.vinth2p](https://www.pyngl.ucar.edu/Functions/Ngl.vinth2p.shtml). 
 
-We are going to use this PyNGL function to interpolate CCSM hybrid coordinates to pressure coordinates.
+- This PyNGL function interpolates CCSM hybrid coordinates to pressure coordinates.
 
+- The type of interpolation is currently a variant of transformed pressure coordinates with the interpolation type specified by intyp. 
+
+- All hybrid coordinate values are transformed to pressure values. 
+
+- If the input data (to be interpolated) is on midlevels, then hyam/hybm coefficients should be supplied; 
+- If the input data is on interfaces, then hyai/hybi) coefficients should be supplied.
+
+This is the exact routine used within the CCSM Processor. 
+
+Note that the units for psrf *(the reference surface pressure)* are **Pascals (Pa)** whereas the units for pnew *(one-dimensional NumPy array of output pressure levels)* and p0 *(scalar value equal to surface reference pressure)* are **millibars (mb)**. 
 
 ~~~
 import Ngl
