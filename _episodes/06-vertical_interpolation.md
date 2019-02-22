@@ -21,6 +21,11 @@ PyNIO (Python Interface for Geoscientific Data Input/Output) is a python package
 
 Note: These PyNGL & PyNIO libraries are still under developpement and therefore not yet fully operational (i.e., not all the functionalities were implemented).
 
+### [Ngl.vinth2p](https://www.pyngl.ucar.edu/Functions/Ngl.vinth2p.shtml) 
+
+We are going to use this PyNGL function to interpolate CCSM hybrid coordinates to pressure coordinates.
+
+
 ~~~
 import Ngl
 import Nio
@@ -62,10 +67,10 @@ lats = cfile.variables["lat"][:]
 lons = cfile.variables["lon"][:]
 
 #  Do the interpolation.
-intyp = 2                              # 1=linear, 2=log, 3=log-log
-kxtrp = False                          # True=extrapolate
+intyp = 1                              # 1=linear, 2=log, 3=log-log
+kxtrp = False                          # True=extrapolate (when the output pressure level is outside of the range of psrf)
   
-Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 
 ntime, output_levels, nlat, nlon = Tnew.shape
 print("vinth2p: shape of returned array   = [{:1d},{:1d},{:2d},{:3d}]".format(*Tnew.shape))
@@ -104,7 +109,7 @@ psy.plot.mapplot(T850, name='T850', title='Temperature (K) at 850 mb')
 > > pnew = [850.]
 > > 
 > > U    = (cfile.variables["U"][:,:,:,:])
-> > UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+> > UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 > >  
 > > ntime, output_levels, nlat, nlon = UonP.shape
 > > 
@@ -138,8 +143,10 @@ import matplotlib.pyplot as plt
 
 pnew = [1000., 900., 850., 700., 600, 500., 400., 300., 100., 30., 10.]
 
+intyp = 1                             # 1=linear, 2=log, 3=log-log
 kxtrp = True                          # True=extrapolate
-UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+
+UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 
 ntime, output_levels, nlat, nlon = UonP.shape
 
@@ -198,6 +205,9 @@ plt.ylim(top=10)
 > > 
 > > pnew = [850., 700., 600, 500., 400., 300., 100., 30., 10.]
 > > 
+> > intyp = 1                             # 1=linear, 2=log, 3=log-log
+> > kxtrp = True                          # True=extrapolate
+> >
 > > Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
 > > 
 > > ntime, output_levels, nlat, nlon = Tnew.shape
