@@ -32,8 +32,6 @@ In this section we are going to use [Ngl.vinth2p](https://www.pyngl.ucar.edu/Fun
   - If the input data (i.e., to be interpolated) is on midlevels, then hyam/hybm coefficients should be supplied; 
   - If the input data is on interfaces, then hyai/hybi coefficients should be supplied.
 
-This is the exact routine used within the CCSM Processor. 
-
 Note that the unit for psrf *(the surface pressure at each grid point)* is **Pascals (Pa)** whereas the unit for pnew *(lists of output pressure levels)* and p0 *(scalar value equal to surface reference pressure)* is **millibars (mb)**. 
 
 ~~~
