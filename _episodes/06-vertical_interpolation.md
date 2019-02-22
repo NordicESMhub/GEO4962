@@ -23,7 +23,7 @@ Note: These PyNGL & PyNIO libraries are still under developpement and therefore 
 
 In this section we are going to use [Ngl.vinth2p](https://www.pyngl.ucar.edu/Functions/Ngl.vinth2p.shtml). 
 
-- This PyNGL function interpolates CCSM hybrid coordinates to pressure coordinates.
+- This PyNGL function interpolates CESM hybrid coordinates (i.e., model levels) to pressure coordinates.
 
 - The type of interpolation is currently a variant of transformed pressure coordinates with the interpolation type specified by intyp. 
 
