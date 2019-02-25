@@ -92,7 +92,7 @@ print("  number of longitudes    = {:4d}".format((nlon)))
 Tnew[Tnew==1e30] = np.NaN
 print(Tnew.mean(axis=3).shape,lats.shape)
 T850=xr.Dataset(
-       {'T850': (('lat','lon'), Tnew[0,0,:,:])},
+       {'T850': (('lats','lons'), Tnew[0,0,:,:])},
        {'lons':  lons,
        'lats':   lats})
 
