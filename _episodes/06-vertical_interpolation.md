@@ -216,7 +216,7 @@ plt.ylim(top=10)
 > > intyp = 1                             # 1=linear, 2=log, 3=log-log
 > > kxtrp = True                          # True=extrapolate
 > >
-> > Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+> > Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 > > 
 > > ntime, output_levels, nlat, nlon = Tnew.shape
 > > 
