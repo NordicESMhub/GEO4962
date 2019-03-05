@@ -362,11 +362,11 @@ lats = cfile.variables["lat"][:]
 lons = cfile.variables["lon"][:]
 
 #  Do the interpolation.
-intyp = 2                              # 1=linear, 2=log, 3=log-log
+intyp = 1                              # 1=linear, 2=log, 3=log-log
 kxtrp = True                          # True=extrapolate
   
 
-UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,1,P0mb,1,kxtrp)
+UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 
 
 UonP[UonP==1e30] = np.NaN
