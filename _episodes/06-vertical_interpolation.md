@@ -80,21 +80,10 @@ kxtrp = False                          # True=extrapolate (when the output press
   
 Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 
-ntime, output_levels, nlat, nlon = Tnew.shape
-print("vinth2p: shape of returned array   = [{:1d},{:1d},{:2d},{:3d}]".format(*Tnew.shape))
-print("  number of timesteps     = {:4d}".format((ntime)))
-print("  number of input levels  = {:4d}".format((T.shape[1])))
-print("  number of output levels = {:4d}".format((output_levels)))
-print("  number of latitudes     = {:4d}".format((nlat)))
-print("  number of longitudes    = {:4d}".format((nlon)))
-
-
 Tnew[Tnew==1e30] = np.NaN
-print(Tnew.mean(axis=3).shape,lats.shape)
-T850=xr.Dataset(
-       {'T850': (('lats','lons'), Tnew[0,0,:,:])},
-       {'lons':  lons,
-       'lats':   lats})
+
+T850=xr.Dataset({'T850': (('lats','lons'), Tnew[0,0,:,:])},
+                {'lons':  lons, 'lats':  lats})
 
 # plot using psyplot
 
@@ -122,10 +111,8 @@ psy.plot.mapplot(T850, name='T850', title='Temperature (K) at 850 mb')
 > > ntime, output_levels, nlat, nlon = UonP.shape
 > > 
 > > UonP[UonP==1e30] = np.NaN
-> > U850=xr.Dataset(
-> >         {'U850': (('lat','lon'), UonP[0,0,:,:])},
-> >         {'lat':  lats,
-> >          'lon':  lons})
+> > U850=xr.Dataset({'U850': (('lat','lon'), UonP[0,0,:,:])},
+> >                 {'lat':  lats, 'lon':  lons})
 > > 
 > > # plot using psyplot
 > > psy.plot.mapplot(U850, name='U850', title='Zonal wind (m/s) at 850 mb')
@@ -171,10 +158,8 @@ Then we average *UonP* along all the longitudes and generate a new array called 
 ~~~
 UonP[UonP==1e30] = np.NaN
 print(UonP.mean(axis=3).shape,lats.shape)
-Umean=xr.Dataset(
-       {'U': (('lev','lat'), UonP.mean(axis=3)[0,:,:])},
-       {'lev':  np.asarray(pnew),
-        'lat':  lats})
+Umean=xr.Dataset({'U': (('lev','lat'), UonP.mean(axis=3)[0,:,:])},
+                 {'lev':  np.asarray(pnew), 'lat':  lats})
 ~~~
 {: .language-python}
 		
@@ -185,8 +170,8 @@ psy.plot.plot2d(Umean, name='U', plot='contourf',
                 title="Georeferenced Latitude-Vertical plot", 
                 clabel="Zonal wind (m/s)",
                 xlabel='latitude',
-                ylabel='pressure (mb)'
-               )
+                ylabel='pressure (mb)')
+                
 plt.ylim(plt.ylim()[::-1])
 plt.yscale('symlog')
 plt.ylim(bottom=1000)
@@ -222,10 +207,8 @@ plt.ylim(top=10)
 > > 
 > > Tnew[Tnew==1e30] = np.NaN
 > >
-> > Tmean=xr.Dataset(
-> >        {'T': (('lev','lat'), Tnew.mean(axis=3)[0,:,:])},
-> >        { 'lev':  np.asarray(pnew),
-> >        'lat':  lats})
+> > Tmean=xr.Dataset({'T': (('lev','lat'), Tnew.mean(axis=3)[0,:,:])},
+> >                  {'lev':  np.asarray(pnew), 'lat':  lats})
 > > 
 > > psy.plot.plot2d(Tmean, name='T', plot='contourf')
 > > # Invert vertical axis
@@ -279,10 +262,9 @@ ds = psy.open_dataset('f2000.T31T31.test.cam.h0.0009-01_pl.nc')
 
 # Create a new dataset over latitudes and levels
 # where we select time=0 and lon=0
-T_cross_section = xr.Dataset(
-    {'T': ds['T'].isel(time=0).mean(dim='lon')},
-    {'lat':  ds.lat, 'lev': ds.lev_p}, 
-    attrs = ds['T'].attrs)
+T_cross_section = xr.Dataset({'T': ds['T'].isel(time=0).mean(dim='lon')},
+                             {'lat':  ds.lat, 'lev': ds.lev_p}, 
+                             attrs = ds['T'].attrs)
 
 
 # Plot
@@ -290,8 +272,7 @@ psy.plot.plot2d(T_cross_section, name='T', plot='contourf',
                 title="Georeferenced Latitude-Vertical plot", 
                 clabel="Temperature (K)",
                 xlabel='latitude',
-                ylabel='pressure (mb)'
-               )
+                ylabel='pressure (mb)')
 
 plt.ylim(plt.ylim()[::-1])
 plt.yscale('symlog')
@@ -305,17 +286,16 @@ plt.ylim(top=10)
 And U:
 
 ~~~
-U_cross_section = xr.Dataset(
-    {'U': ds['U'].isel(time=0).mean(dim='lon')},
-    {'lat':  ds.lat, 'lev': ds.lev_p}, 
-    attrs = ds['U'].attrs)
+U_cross_section = xr.Dataset({'U': ds['U'].isel(time=0).mean(dim='lon')},
+                             {'lat':  ds.lat, 'lev': ds.lev_p}, 
+                             attrs = ds['U'].attrs)
 
 psy.plot.plot2d(U_cross_section, name='U', plot='contourf', 
                 title="Georeferenced Latitude-Vertical plot", 
                 clabel="Zonal wind (m/s)",
                 xlabel='latitude',
-                ylabel='pressure (mb)'
-               )
+                ylabel='pressure (mb)')
+                
 plt.ylim(plt.ylim()[::-1])
 plt.yscale('symlog')
 plt.ylim(bottom=1000)
