@@ -461,17 +461,17 @@ where:
 
 To be able to run these ncl scripts, open a Terminal on the Jupyterhub:
 
-- First copy the entire SPARC directory in your HOME area:
+- First copy the entire SPARC directory in your analysis folder:
 
 ~~~
-cp -R $HOME/GEO4962/SPARC $HOME/.
+cp -R $HOME/GEO4962/SPARC /opt/uio/GEO4962/$USER/analysis/.
 ~~~
 {: .language.bash}
 
 Then go to the new SPARC directory you have copied:
 
 ~~~
-cd $HOME/SPARC
+cd /opt/uio/GEO4962/$USER/analysis/SPARC
 ~~~
 {: .language.bash}
 
