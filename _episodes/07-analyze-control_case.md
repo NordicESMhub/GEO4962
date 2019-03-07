@@ -108,7 +108,8 @@ f2000.T31T31.control.cam.h0.0005-08.nc  f2000.T31T31.control.cam.h0.0010-04.nc  
 ## Analyze and Visualize
 
 The *ending* of the filename gives you some information on its content:
-- **f2000.T31T31.control.cam** is the control experiment name
+- **f2000.T31T31.control** is the control experiment name
+- **cam** corresponds to the atmospheric component of the model
 - **h0**: *h* stands for *history* and all *h0* files contain the same variables, processed in a similar manner but for different times.
 - The 7 digits allow to represent the simulated year and month i.e. **0005-08** means year 5 (from the start of the simulation) and month 8 (August).
 - **.nc** means we have netCDF files only.
