@@ -646,8 +646,6 @@ fig.colorbar(cs, cax=cbar_ax, label=ds.WIND.attrs['units'])
 > > 
 > > %matplotlib inline
 > > 
-> > mpl.rcParams['figure.figsize'] = [10., 8.]
-> > 
 > > filename = "/opt/uio/GEO4962/SPARC/SPARC.wind_temp.nc"
 > > ds = psy.open_dataset(filename)
 > > 
