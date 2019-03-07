@@ -233,6 +233,7 @@ The main advantage of using *ncl* as opposed to the current (non-operational) Py
 > ## First we need to get the ncl script [vertical_interpolation.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl) 
 > For instance using the wget command (on the Jupyterhub Terminal):
 > ~~~
+> cd /opt/uio/GEO4962/$USER/analysis
 > wget https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl
 > ~~~
 > {: .language-bash}
