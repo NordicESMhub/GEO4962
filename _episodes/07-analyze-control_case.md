@@ -583,7 +583,7 @@ plt.xlim(right=Tmean.lat.max())
 
 ### Multiple plots 
 
-Here we give an example to generate 12 subplots (one per month) for the zonal wind:
+Here we give an example to generate 12 subplots (one per month) for the zonal wind using the Python **range(start, stop[, step])** function (remember that the range of integers ends at **stop - 1**):
 
 ~~~
 import xarray as xr
