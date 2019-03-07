@@ -349,7 +349,7 @@ where Ps is the surface pressure and A and B are coefficients defined at each mo
 Let's have a look at the values of A and B:
 
 ~~~
-print(ds.dyam)
+print(ds.hyam)
 ~~~
 {: .language-python}
 
@@ -369,7 +369,7 @@ Attributes:
 
 
 ~~~
-print(ds.dybm)
+print(ds.hybm)
 ~~~
 {: .language-python}
 
