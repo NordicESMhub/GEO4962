@@ -438,7 +438,9 @@ We multiplied A and B by *1000* so that values at the top of the atmosphere are 
 So if we compute the pressure at the lowest model level in Oslo:
 
 ~~~
-PS_oslo = ds['PS'].isel(time=0).sel(lat=60., lon=10.75, method='nearest')/100. # to convert from Pascal to mb
+# Find the surface pressure of the grid cell near Oslo and convert from Pascal to mb
+PS_oslo = ds['PS'].isel(time=0).sel(lat=60., lon=10.75, method='nearest')/100. 
+# Convert the lowest model level from sigma to pressure
 p_bottom_oslo = ds.hyam[29] + ds.hybm[29]*PS_oslo
 print("Oslo (mb)")
 print("PS = ", PS_oslo.values, " Lowest model level = ", p_bottom_oslo.values)
@@ -459,7 +461,9 @@ So the pressure at the lowest model level is not that far from the surface press
 > > ## Solution
 > > 
 > > ~~~
-> > PS_everest = ds['PS'].isel(time=0).sel(lat=28., lon=86.5, method='nearest')/100. # to convert in mb
+> > # First find the value of the surface pressure at Everest and convert in mb
+> > PS_everest = ds['PS'].isel(time=0).sel(lat=28., lon=86.5, method='nearest')/100. 
+> > # Then proceed as for Oslo
 > > print(PS_everest)
 > > ~~~
 > > {: .language-python}
@@ -492,7 +496,7 @@ So the pressure at the lowest model level is not that far from the surface press
 > >     lon      float64 86.25
 > > ~~~
 > > {: .output}
-> > This clearly shows that the lowest pressure value we have at the top of Mount Everest is 744 mb, quite different from the corresponding sigma level.
+> > This clearly shows that the lowest pressure value we have at the top of Mount Everest is 744 mb, quite different from the corresponding sigma level (992.6).
 > {: .solution}
 {: .challenge}
 
