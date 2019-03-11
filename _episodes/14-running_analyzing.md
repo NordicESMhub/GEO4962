@@ -29,9 +29,18 @@ cd ~/cesm_case/f2000.T31T31.$EXPNAME
 ./f2000.T31T31.$EXPNAME.submit
 
 squeue -u $USER
+
+         JOBID       PARTITION  NAME      USER      ST     TIME       NODES NODELIST(REASON)
+         26243157    normal     f2000.T3  bjorngli  R      18:25      7     c14-[3,6,10,13-14],c16-[8,22]
 ~~~
 {: .language-bash}
 
+If you realize after having submitted your job that you forgot something (so that it is not worth wasting CPU time) you can always delete your job using the JOBID obtained with the previous *squeue -u $USER* command (in this example 26243157).
+
+~~~
+scancel 26243157
+~~~
+{: .language-bash}
 
 If your simulation is **unsuccessful** you have to understand what happened!
 
