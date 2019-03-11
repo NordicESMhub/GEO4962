@@ -89,6 +89,10 @@ To create a new case always involve executing the command create_newcase.
 # Adjust EXPNAME depending on your experiment (CO2, rockies, sea_ice, SST, himalaya)
 
 export EXPNAME=CO2
+
+module load cesm/1.2.2
+
+
 #
 # Simulation 2: Long simulation
 #
