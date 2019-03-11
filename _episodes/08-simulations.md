@@ -52,7 +52,7 @@ Each of the 4 experiments is given an explicit name:
 1.  **EXPNAME = CO2**
               Quadrupling of CO2 (change CO2 value to 1467 ppm > change the name list)
 2.  **EXPNAME = rockies**
-              Lowering of Rocky Mountains (set surface Geopotential to 0 from 30N to 50N and 235E to 260E > 
+              Lowering of Rocky Mountains (set surface Geopotential to 0 from 30N to 50N and 235E to 260E  > change the input data set)
 3.  **EXPNAME = sea_ice**
               Melt of Arctic sea ice (set sea ice fraction to zero North of 40N > change the input data set)
 4.  **EXPNAME = SST**
@@ -72,7 +72,7 @@ Here is the list of tasks to perform for the experiment of your choice:
 2.  [Setup experiment duration (1 month)](#Setup-your-new-experiment-duration)
 3.  [Changing namelist or dataset](#Changing-namelist-or-dataset)
 4.  [Long experiment (14 months)](#Long-experiment-(14-months))
-5. Explain what you expect (not having performed any numerical simulation yet) the effect of the change you have picked to be on the general circulation in the atmosphere and send us your text by email.
+5. **Explain what you expect** (not having performed any numerical simulation yet) the effect of the change you have picked to be on the general circulation in the atmosphere and send us your text by email.
 
 ### Create a new case for your experiment
 
