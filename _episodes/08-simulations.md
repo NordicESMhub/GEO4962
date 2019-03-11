@@ -72,6 +72,7 @@ Here is the list of tasks to perform for the experiment of your choice:
 2.  [Setup experiment duration (1 month)](#Setup-your-new-experiment-duration)
 3.  [Changing namelist or dataset](#Changing-namelist-or-dataset)
 4.  [Long experiment (14 months)](#Long-experiment-(14-months))
+5. Explain what you expect (not having performed any numerical simulation yet) the effect of the change you have picked to be on the general circulation in the atmosphere and send us your text by email.
 
 ### Create a new case for your experiment
 
