@@ -129,7 +129,7 @@ cd ~/cesm_case/f2000.T31T31.$EXPNAME
 
 Regularly check your experiment (and any generated output files) and once it is fully done, [store your model outputs on norStore](norstore.html).
 
-# Store model outputs on norStore
+# Store model outputs on norStore (not necessary for these practicals)
 
 First make sure that your run was successful and check all the necessary output files were generated.  
 
