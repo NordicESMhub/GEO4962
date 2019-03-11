@@ -92,7 +92,6 @@ export EXPNAME=CO2
 
 module load cesm/1.2.2
 
-
 #
 # Simulation 2: Long simulation
 #
