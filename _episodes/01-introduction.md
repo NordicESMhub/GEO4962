@@ -84,7 +84,7 @@ ls
 The source code for CAM 6 is located in the "src" and its sub-directories (the main parts are highlighted in bold):
 
 *   **control**: contains several Fortran 90 modules to control CAM 6\. That's a good starting point to explore CAM source code. Look for instance at cam_comp.F90:  
-    The main subroutines for controlling CAM 5 are:
+    The main subroutines for controlling CAM 6 are:
 
     <pre>    .
         .
