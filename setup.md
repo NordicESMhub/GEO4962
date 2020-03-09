@@ -20,7 +20,7 @@ You may try to use other web browser but we cannot guarantee that all functional
 
 You cannot use Safari for the Jupyterhub, so make sure you install a recent version of [google-chrome](https://www.google.com/chrome/).
 
-In order to avoid issues with the local environment language/keyboard variables when login on Abel from your Mac you can either:
+In order to avoid issues with the local environment language/keyboard variables when login on Saga from your Mac you can either:
 
   Option A)
    On your Mac
@@ -32,7 +32,7 @@ In order to avoid issues with the local environment language/keyboard variables 
    *Note that this only affects new terminals, not those that are already open.*
 
   Option B)
-   On Abel
+   On Saga
    - Set the language environment variable with the command **export LC_ALL=$LANG**
 
 ## Windows users

@@ -41,7 +41,7 @@ keypoints:
 {: .callout}
 
 
-First choose your teammate: you will have to work together to set-up and run your experiment so make sure one of you has access to Abel.  
+First choose your teammate: you will have to work together to set-up and run your experiment so make sure one of you has access to Saga.  
 
 ## Experiments
 
@@ -60,7 +60,7 @@ Each of the 4 experiments is given an explicit name:
 5.  **EXPNAME = himalaya**
               Lowering of Himalaya Mountains and Tibetan Plateau (set surface Geopotential to 0 from 30N to 50N and 70E to 100E > change the input data set)
 
-Make sure you define an environment variable EXPNAME, **every time** you login <font color="red">on Abel</font>:  
+Make sure you define an environment variable EXPNAME, **every time** you login <font color="red">on Saga</font>:  
 
     # define an environment variable for your experiment (CO2, rockies, sea_ice, SST or himalaya)
     
@@ -82,7 +82,7 @@ Suggested **EXPNAME** were given above.
 
 To create a new case always involve executing the command create_newcase.  
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>cd $HOME/cesm/cesm1_2_2/scripts
 
@@ -95,12 +95,12 @@ module load cesm/1.2.2
 #
 # Simulation 2: Long simulation
 #
-./create_newcase -case ~/cesm_case/f2000.T31T31.$EXPNAME -res T31_T31 -compset F_2000_CAM5 -mach abel
+./create_newcase -case ~/cesm_case/f2000.T31T31.$EXPNAME -res T31_T31 -compset F_2000_CAM5 -mach saga
 </pre>
 
 Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.$EXPNAME corresponding to your new case.  
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre># Make sure EXPNAME is correctly defined!
 
@@ -109,7 +109,7 @@ cd ~/cesm_case/f2000.T31T31.$EXPNAME
 
 As before we start a hybrid run from the control experiment.
 
-<font color="red">On Abel:</font> 
+<font color="red">On Saga:</font> 
 
 <pre>./xmlchange RUN_TYPE=hybrid
 ./xmlchange RUN_REFCASE=f2000.T31T31.control
@@ -118,7 +118,7 @@ As before we start a hybrid run from the control experiment.
 
 We also need to define the **START DATE** for your experiment (that will make it easier to compare the outputs of the experiment with those of the same month from the control run).
 
-<font color="red">On Abel:</font> 
+<font color="red">On Saga:</font> 
 
 <pre>./xmlchange RUN_STARTDATE=0009-01-01
 </pre>
@@ -131,7 +131,7 @@ You will run 1 month first, check the results and then restart the same experime
 
 Make sure you set the duration of your experiments properly. 
 
-<font color="red">On Abel:</font> 
+<font color="red">On Saga:</font> 
 
 <pre>./xmlchange -file env_run.xml -id STOP_N -val 1
 ./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
@@ -139,7 +139,7 @@ Make sure you set the duration of your experiments properly.
 
 Now we are ready to set-up the model configuration and build the cesm executable.  
 
-<font color="red">On Abel:</font>  
+<font color="red">On Saga:</font>  
 
 <pre>./cesm_setup
 
@@ -158,7 +158,7 @@ For instance to change the history file from monthly average to daily average, w
 
 We also need to copy restart files in your running directory, etc.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>cat >> user_nl_cice << EOF
 grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'

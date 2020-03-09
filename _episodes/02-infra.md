@@ -17,8 +17,8 @@ keypoints:
 *   [An e-infrastructure for Science](#an-e-infrastructure-for-science)
 *   [Notur](#notur)
 	*   [What is Notur?](#what-is-notur)
-	*   [Abel computing facility](#abel-computing-facility)
-	*   [Available Filesystems on Abel](#available-filesystems-on-abel)
+	*   [Saga computing facility](#saga-computing-facility)
+	*   [Available Filesystems on Saga](#available-filesystems-on-saga)
 *   [NorStore](#norstore)
 	*   [What is NorStore?](#what-is-norstore)
 	
@@ -40,7 +40,7 @@ The e-infrastructure for Science in Norway follows the same structure and provid
 resources ([Notur](#notur)) and post-processing and visualization facilities with large storage capacity 
 ([NorStore](#norstore)).  
 
-The picture below introduces the data life cycle from the generation of your model outputs on Notur computing facility (Abel) to the preservation of your model results in the [NorStore archive](https://archive.norstore.no/).  
+The picture below introduces the data life cycle from the generation of your model outputs on Notur computing facility (Saga) to the preservation of your model results in the [NorStore archive](https://archive.norstore.no/).  
 
 ![](../fig/lifecycle.png)  
 
@@ -53,10 +53,10 @@ The HPC-service provides the customer access to facilities and software with a f
 
 For running [CESM CAM-5.3](http://www.cesm.ucar.edu/), such computing facilities are necessary.  
 
-### Abel computing facility
+### Saga computing facility
 
-![Abel HPC](../fig/130px-Abel_small.jpg)  
-Abel is a cluster machine:
+![Saga HPC](../fig/130px-Saga_small.jpg)  
+Saga is a cluster machine:
 
 *   258.0 TFlops peak performance
 *   10000+ cores
@@ -68,24 +68,24 @@ Abel is a cluster machine:
 *   FDR (56 Gbits/s eq 6.78 Gbytes/s) InfiniBand interconnect
 *   OS: Linux Environment, 64 bit Centos 6
 
-Abel is a large machine (cluster) made of more than 10000 nodes (collection of machines linked together via an efficient network). On one single node, there are 16 cores and a total of 64 GB of shared memory. This shared memory can be accessed by all the processors of one single node but a processor on another node cannot access it. The image below attempts to summarize these two concepts (shared vs. distributed memory):  
+Saga is a large machine (cluster) made of more than 10000 nodes (collection of machines linked together via an efficient network). On one single node, there are 16 cores and a total of 64 GB of shared memory. This shared memory can be accessed by all the processors of one single node but a processor on another node cannot access it. The image below attempts to summarize these two concepts (shared vs. distributed memory):  
 ![](../fig/shared_distributedRAM.png)  
 To manage efficiently the machine, it runs under the control of a batch system. The fact is that one single program does not usually use the full machine (1392 CPUs) but many users can fill the machine very quickly with several "small" programs.  
 The opposite of a batch job is interactive processing, in which a user enters individual commands to be processed immediately. This is what you are used to when working on your laptop or any UIO servers (such as sverdrup.uio.no).  
 We need to use a batch system to make sure all the resources are well utilized and this is the role of the job scheduler to decide where to run user "jobs". Its role is to optimize the resources and to try to run as many user jobs as possible. It can be seen as a tetris game (see image below) where each block represents a user job.  
 ![](../fig/tetris.png)  
-All user jobs must be submitted to the cluster through this batch system. Abel uses [SLURM](https://en.wikipedia.org/wiki/Slurm_Workload_Manager) (Portable Batch System). The submitted jobs are then routed into a number of queues (depending on the needed resources, e.g. runtime) and sorted according to some priority scheme.  
+All user jobs must be submitted to the cluster through this batch system. Saga uses [SLURM](https://en.wikipedia.org/wiki/Slurm_Workload_Manager) (Portable Batch System). The submitted jobs are then routed into a number of queues (depending on the needed resources, e.g. runtime) and sorted according to some priority scheme.  
 A job will run when the required resources become available.  
-More information on the Batch system on Abel can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/queue-system.html).  
+More information on the Batch system on Saga can be found [here]().  
 
-### Available Filesystems on Abel
+### Available Filesystems on Saga
 
-The following file systems exist on abel:
+The following file systems exist on Saga:
 
 *   User area (home directories): /home  
-    The file system for user home directories on abel. This file system is currently very small, and it should NOT be used for processing data and running batch jobs (slow access). It has quota enabled, limits can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/data.html) . Files are backed up daily, except for folders called "nobackup" and their sub-folders.
+    The file system for user home directories on Saga. This file system is currently very small, and it should NOT be used for processing data and running batch jobs (slow access). It has quota enabled, limits can be found [here](https://documentation.sigma2.no/storage/clusters.html) . Files are backed up daily, except for folders called "nobackup" and their sub-folders.
 *   Work area (temporary data): /work/users ($USERWORK)  
-    Large external storage shared by all compute nodes on abel. Files are NOT backed up. /work should be used when running jobs since it's much larger than /home and is available on the compute nodes. /work/users is a [BeeGFS](https://en.wikipedia.org/wiki/BeeGFS) parallel file system.
+    Large external storage shared by all compute nodes on Saga. Files are NOT backed up. /work should be used when running jobs since it's much larger than /home and is available on the compute nodes. /work/users is a [BeeGFS](https://en.wikipedia.org/wiki/BeeGFS) parallel file system.
 
 **Note:** the /work/users/* directories are subject to automatic deletion dependent on modification, access time and the total usage in the file system. The oldest files will be deleted first.  
 
@@ -100,8 +100,8 @@ NorStore facility is divided in two parts:
 *   Active data, which are processed or being analysed, are stored in the [Project Area](https://www.sigma2.no/content/project-data-storage).
 *   When the data are no longer expected to change and/or results have been published, the data should normally be made accessible to the public. Data can be transferred to the NorStore Archive from the Project area or directly uploaded.
 
-When running the CAM-5.3 model on abel, the model outputs are generated and stored in the temporary working area (/work/users/$LOGNAME). As mentioned earlier, the working area on Abel is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
-Model outputs will have to be moved from Abel working area (/work/users/$LOGNAME) to the norStore project area. You can use scp to copy your data from Abel to NorStore but the detailed procedure will be explained later.  
+When running the CAM-5.3 model on Saga, the model outputs are generated and stored in the temporary working area (/work/users/$LOGNAME). As mentioned earlier, the working area on Saga is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
+Model outputs will have to be moved from Saga working area (/work/users/$LOGNAME) to the norStore project area. You can use scp to copy your data from Saga to NorStore but the detailed procedure will be explained later.  
 
 ### What is a Research Data Archive?
 

@@ -25,7 +25,7 @@ keypoints:
 	* [Login to the JupyterHub](#login-to-the-jupyterhub)
 	* [Start and stop your server](#start-and-stop-your-server)
 	* [JupyterLab](#jupyterlab)
-*   [Copy your output files from Abel to the virtual machine](#copy-your-output-files-from-abel-to-the-virtual-machine)
+*   [Copy your output files from Saga to the virtual machine](#copy-your-output-files-from-saga-to-the-virtual-machine)
 *   [Map visualization with psyplot](#map-visualization-with-psyplot)
 *   [Customize your maps](#customize-your-plots)
 	* [Set figure size](#set-figure-size)
@@ -144,13 +144,13 @@ Similarly, you can start a new Terminal by clicking on "Terminal" in the Launche
 > anymore in your JupyterLab, you can start a new one in "**File** --> **New Launcher**".
 {: .callout}
 
-# Copy your output files from Abel to the virtual machine
+# Copy your output files from Saga to the virtual machine
 
 Start a new **Terminal** on your JupyterHub (this will be referred to hereafter as your "JupyterHub terminal") and type the following commands.
 
 <font color="blue">On the JupyterHub terminal:</font>
 
-<pre>rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER/f2000.T31T31.test/
+<pre>rsync -avzu --progress YOUR_USER_NAME@saga.sigma2.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER/f2000.T31T31.test/
 </pre>
 
 

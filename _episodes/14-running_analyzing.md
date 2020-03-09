@@ -19,9 +19,9 @@ keypoints:
 
 ### Running your experiment
 
-Now you are ready to submit your simulation on Abel.
+Now you are ready to submit your simulation on Saga.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 cd ~/cesm_case/f2000.T31T31.$EXPNAME
@@ -54,13 +54,13 @@ If your short simulation has **finished without crashing**, check the outputs: w
 
 ### Model timing data
 
-A summary timing output file is produced after every CESM run. On Abel and in our case this file is placed in /work/users/$USER/archive/f2000.T31T31.$EXPNAME/cpl/logs and is nammed cpl.log.$date.gz (where $date is a datestamp set by CESM at runtime).
+A summary timing output file is produced after every CESM run. On Saga and in our case this file is placed in /work/users/$USER/archive/f2000.T31T31.$EXPNAME/cpl/logs and is nammed cpl.log.$date.gz (where $date is a datestamp set by CESM at runtime).
 
 This file contains information which is useful for *load balancing a case* (i.e., to optimize the processor layout for a given model configuration, compset, grid, etc. such that the cost and throughput will be optimal).
 
 For this lesson we will concentrate on the last few lines in the file and in particular the number of simulated years per computational day, which will help us evaluate the wallclock time required for long runs.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 vi cpl.log.190205-144355.gz
@@ -92,7 +92,7 @@ Make sure you set the duration of your experiment properly. Here we wish to run 
 
 *Note that splitting an experiment into small chunks is good practice: this way if something happens and the experiment crashes (disk quota exceeded, hardware issue, etc.) everything will not be lost and it will be possible to resume the run from the latest set of restart files.*
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 # Set EXPNAME properly
@@ -104,7 +104,7 @@ cd ~/cesm_case/f2000.T31T31.$EXPNAME
 
 Since we have already the first month done, we are going to continue the experiment instead of starting from scratch.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 ./xmlchange CONTINUE_RUN=TRUE
@@ -116,7 +116,7 @@ To perform a 14 months experiment, we would need to repeat this one month experi
 
 For this purpose there is a CESM option called RESUBMIT.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 ./xmlchange -file env_run.xml -id RESUBMIT -val 13
@@ -126,7 +126,7 @@ For this purpose there is a CESM option called RESUBMIT.
 
 By setting this option, CAM5 will be running one month of simulation (once submitted) and automatically resubmit the next 12 months.  
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 cd ~/cesm_case/f2000.T31T31.$EXPNAME
@@ -142,13 +142,13 @@ Regularly check your experiment (and any generated output files) and once it is 
 
 First make sure that your run was successful and check all the necessary output files were generated.  
 
-To post-process and visualize your model outputs, it is VERY IMPORTANT you move them from Abel to norStore. Remember that all model outputs are generated in a semi-temporary directory and all your files will be removed after a few weeks!  
+To post-process and visualize your model outputs, it is VERY IMPORTANT you move them from Saga to norStore. Remember that all model outputs are generated in a semi-temporary directory and all your files will be removed after a few weeks!  
 
 If you haven't set-up your [SSH keys](http://www.mn.uio.no/geo/english/services/it/help/using-linux/ssh-tips-and-tricks.html), the next commands (ssh and [rsync](http://www.tecmint.com/rsync-local-remote-file-synchronization-commands/)) will require you to enter your Unix password.  
 
 Make sure you define EXPNAME properly (it depends on your experiment).
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 # If you are running CO2 experiment (otherwise adjust: sea_ice, SST, rocky)
@@ -156,11 +156,11 @@ export EXPNAME=CO2
 ~~~
 {: .language-bash}
 
-Then copy the archived files from abel to the norStore project area.
+Then copy the archived files from Saga to the norStore project area.
 
 *It is sometimes sensible to also copy the run files and even the case directory, but that should not be necessary for this lesson.*
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 ssh login.nird.sigma2.no 'mkdir -p /projects/NS1000K/GEO4962/outputs/$USER/archive'
@@ -179,14 +179,14 @@ You can always compare the results of your experiments to the control run, at an
 
 An easy way to do this is to calculate the difference between for example the surface temperature field issued from the control run and that from your new experiment.
 
-# Copy your output files from Abel to your virtual machine
+# Copy your output files from Saga to your virtual machine
 
-Start a new **Terminal** on your JupyterHub and transfer your data. Do not forget to replace *YOUR_USER_NAME* by your actual user name and *YOUR_EXPERIMENT* by your actual experiment name (you have to do this because the Virtual machine and Abel are different systems, therefore all the environment variables that were defined on Abel are not known here).
+Start a new **Terminal** on your JupyterHub and transfer your data. Do not forget to replace *YOUR_USER_NAME* by your actual user name and *YOUR_EXPERIMENT* by your actual experiment name (you have to do this because the Virtual machine and Saga are different systems, therefore all the environment variables that were defined on Saga are not known here).
 
 <font color="blue">On the JupyterHub terminal:</font>
 
 ~~~
-rsync -avzu --progress YOUR_USER_NAME@abel.uio.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.YOUR_EXPERIMENT/ /opt/uio/GEO4962/$USER/f2000.T31T31.YOUR_EXPERIMENT/
+rsync -avzu --progress YOUR_USER_NAME@saga.sigma2.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.YOUR_EXPERIMENT/ /opt/uio/GEO4962/$USER/f2000.T31T31.YOUR_EXPERIMENT/
 ~~~
 {: .language-bash}
 

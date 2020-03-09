@@ -48,10 +48,10 @@ Some facts about CESM:
 *   To keep track of code changes, CESM developers currently use [subversion](https://subversion.apache.org/). However, some components use [git](https://git-scm.com/).
 *   Fortran Coding standard as well as style rules are enforced and anyone wishing to contribute to the Community Atmosphere Model must comply to these [rules](http://www.cesm.ucar.edu/working_groups/Software/dev_guide/dev_guide/node7.html).
 
-To browse and explore CAM5.3 source code, you can login on abel.  
+To browse and explore CAM5.3 source code, you can login on Saga.  
 From a Linux terminal:
 
-<pre>ssh -Y $LOGNAME@abel.uio.no
+<pre>ssh -Y $LOGNAME@saga.sigma2.no
 </pre>
 
 where $LOGNAME is your UIO username (replace it by your own username!)  
@@ -59,7 +59,7 @@ Documentation on norStore facility can be found [here](https://www.sigma2.no/nod
 
 Please note that these machines are not accessible outside the UIO networks. 
 
-The source code we will be using is stored (on abel) in /projects/NS1000K/GEO4962/cesm1_2_2/models/atm/cam:
+The source code we will be using is stored (on Saga) in /projects/NS1000K/GEO4962/cesm1_2_2/models/atm/cam:
 
 ~~~ 
 module load cesm

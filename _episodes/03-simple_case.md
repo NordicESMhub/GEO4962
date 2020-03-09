@@ -3,22 +3,22 @@ title: "Get familiar with CESM and the computing environment"
 teaching: 30
 exercises: 60
 questions:
-- "How to setup CESM on Abel?"
+- "How to setup CESM on Saga?"
 - "How to run a CESM case?"
 - "How to monitor my CESM case?"
 - "What does CESM produce?"
 - "What is netCDF data format?"
 - "How to quickly inspect and visualize netCDF data files?"
 objectives:
-- "Learn to setup CESM on Abel"
-- "Learn to run and monitor a simple cesm case on Abel"
+- "Learn to setup CESM on Saga"
+- "Learn to run and monitor a simple cesm case on Saga"
 - "Learn about netCDF data format"
 - "Learn to inspect a netCDF file"
 - "Learn to quickly visualize a netCDF file"
 keypoints:
 - "CESM"
 - "High-Performance Computing"
-- "Abel"
+- "Saga"
 - "SLURM"
 - "netCDF"
 - "ncdump"
@@ -30,7 +30,7 @@ keypoints:
 
 <img src="../fig/practicals.jpg">
 
-We do all the practicals on <font color="red">Abel</font>.  
+We do all the practicals on <font color="red">Saga</font>.  
 
 *   [Notur Initialization](#notur-initialization)
 *   [Create a New case](#create-a-new-case)
@@ -46,18 +46,18 @@ We do all the practicals on <font color="red">Abel</font>.
 
 Make sure you have set-up your SSH keys properly and you can transfer files with scp without entering your password. If not go [here](http://www.mn.uio.no/geo/english/services/it/help/using-linux/ssh-tips-and-tricks.html).  
 
-To run CAM-5.3 on abel, we will use:
+To run CAM-5.3 on Saga, we will use:
 
 *   <font color="green">Subversion client (version 1.6.11) to get CESM source code</font>
 *   Fortran and C compilers (intel 2015.0 compilers)
 *   NetCDF library (netcdf4.3.3.1)
 *   MPI (intel openmpi 1.8.3)
 
-To be able to compile and run CESM on abel, no changes to the source code are necessary; we just have to adapt a few scripts for setting the compilers and libraries used by CESM.  
+To be able to compile and run CESM on Saga, no changes to the source code are necessary; we just have to adapt a few scripts for setting the compilers and libraries used by CESM.  
 
 To simplify and allow you to run CESM as quickly as possible, we have prepared a set-up script geo4962_notur.bash.  
 
-<font color="red">On Abel:</font>  
+<font color="red">On Saga:</font>  
 
 ~~~
 cd $HOME
@@ -98,7 +98,7 @@ The basic workflow to run the CESM code is the following:
 To create a new case, we will be using create_newcase script. It is located in $HOME/cesm/cesm1_2_2/scripts.  
 There are many options and we won't discuss all of them. The online help provides information about how get the full usage of create_newcase.
 
-<font color="red">On Abel:</font>  
+<font color="red">On Saga:</font>  
 
 ~~~
 ./create_newcase --help
@@ -107,7 +107,7 @@ There are many options and we won't discuss all of them. The online help provide
 
 The 4 main arguments of create_newcase are explained on the figure below: ![](../fig/newcase.png)  
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 cd $HOME/cesm/cesm1_2_2/scripts
@@ -118,7 +118,7 @@ cd $HOME/cesm/cesm1_2_2/scripts
 
 module load cesm/1.2.2
 
-./create_newcase -case ~/cesm_case/f2000.T31T31.test -res T31_T31 -compset F_2000_CAM5 -mach abel
+./create_newcase -case ~/cesm_case/f2000.T31T31.test -res T31_T31 -compset F_2000_CAM5 -mach saga
 ~~~
 {: .language-bash}
 
@@ -168,11 +168,11 @@ module load cesm/1.2.2
     *   GLC = SGLC: stub land-ice Model
     *   WAV = SWAV: stub ocean-wave model  
 
-*   **mach**: specifies the machine where CESM will be compiled and run. We will be running CESM on abel (a set of scripts for abel can be found in $HOME/cesm/cesm1_2_2/scripts/ccsm_utils/Machines)
+*   **mach**: specifies the machine where CESM will be compiled and run. We will be running CESM on Saga (a set of scripts for Saga can be found in $HOME/cesm/cesm1_2_2/scripts/ccsm_utils/Machines)
 
 Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresponding to our new case.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 cd ~/cesm_case/f2000.T31T31.test
@@ -183,7 +183,7 @@ Check the content of the directory and browse the sub-directories:
 ![](../fig/casedir_test.png)  
 For this tests (and all our simulations), we do not wish to have a "cold" start and we will therefore restart and continue an existing simulation we have previously run.  
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 ./xmlchange RUN_TYPE=hybrid
@@ -194,7 +194,7 @@ For this tests (and all our simulations), we do not wish to have a "cold" start 
 
 We use xmlchange, a small script to update variables (such as RUN_TYPE, RUN_REFCASE, etc.) defined in xml files. All the xml files contained in your test case directory will be used by cesm_setup to generate your configuration setup (Fortran namelist, etc.). 
 
-<font color="red">On Abel:</font>  
+<font color="red">On Saga:</font>  
 
 ~~~
 ls *.xml
@@ -203,7 +203,7 @@ ls *.xml
 
 If we do not want the dates to start from 0001-01-01 we need to specify the starting date of our test simulation.
 
-<font color="red">On Abel:</font>  
+<font color="red">On Saga:</font>  
 
 ~~~
 ./xmlchange RUN_STARTDATE=0009-01-01
@@ -212,7 +212,7 @@ If we do not want the dates to start from 0001-01-01 we need to specify the star
 
 We are also going to change the duration of our test simulation in the file **env_run.xml** and set it to 1 month only.
 
-<font color="red">On Abel:</font>  
+<font color="red">On Saga:</font>  
 
 ~~~
 ./xmlchange -file env_run.xml -id STOP_N -val 1
@@ -222,7 +222,7 @@ We are also going to change the duration of our test simulation in the file **en
 
 Now we are ready to set-up our model configuration and build the cesm executable.  
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 ./cesm_setup
@@ -257,7 +257,7 @@ The coupled CICE model requires a minimum of two files to run:
 
 We therefore need to add two lines to the CAM5 namelist called **user_nl_cice**.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
     cat >> user_nl_cice << EOF
     grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
@@ -268,16 +268,16 @@ We therefore need to add two lines to the CAM5 namelist called **user_nl_cice**.
 
 Finally, we have to copy the control restart files (contains the state of the model at a given time so we can restart it). The files are stored on norStore (they were generated from a previous simulation where the model was run for several years).
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>cp $CESM_DATA/../GEO4962/archive/f2000.T31T31.control/rest/0009-01-01-00000/*  /work/users/$USER/f2000.T31T31.test/run/.
 </pre>
 
-Now we wish to run our model and as it may run for several days, we need to use the batch scheduler (SLURM) from abel. Its role is to dispatch jobs to be run on the cluster. It reads information given in your job command file (named here f2000.T31T31.test.run). This file contains information on the number of processors to use (ntasks), the amount of memory per processor (mem-per-cpu) and the maximum amount of time you wish to allow for your job (time).  
+Now we wish to run our model and as it may run for several days, we need to use the batch scheduler (SLURM) from Saga. Its role is to dispatch jobs to be run on the cluster. It reads information given in your job command file (named here f2000.T31T31.test.run). This file contains information on the number of processors to use (ntasks), the amount of memory per processor (mem-per-cpu) and the maximum amount of time you wish to allow for your job (time).  
 
 Check what is in your current job command file (f2000.T31T31.test.run).
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 ~~~
 #SBATCH --job-name=f2000.T31T31.test
@@ -294,7 +294,7 @@ Check what is in your current job command file (f2000.T31T31.test.run).
 The lines starting with **#SBATCH** are not comments but SLURM directives.  
 You can now submit your test case.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>./f2000.T31T31.test.submit
 </pre>
@@ -302,26 +302,26 @@ You can now submit your test case.
 
 ### Monitor your test run
 
-The script "f2000.T31T31.test.submit" submits a job to the job scheduler on abel. More information can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/).
+The script "f2000.T31T31.test.submit" submits a job to the job scheduler on Saga. More information can be found [here](https://documentation.sigma2.no/quick/saga.html).
 
-To monitor your job on <font color="red">Abel:</font>
+To monitor your job on <font color="red">Saga:</font>
 
 <pre>squeue -u $USER
 </pre>
 
-Full list of available commands and their usage can be found [here](http://www.uio.no/english/services/it/research/hpc/abel/help/user-guide/queue-system.html).
+Full list of available commands and their usage can be found [here](https://documentation.sigma2.no/jobs/managing_jobs.html).
 
 
 ### First look at your 1 month test run
 
-On Abel during your test case run, CAM-5.3 generates outputs in the "run" directory:  
+On Saga during your test case run, CAM-5.3 generates outputs in the "run" directory:  
 
 ![](../fig/rundir_test.png)  
-At the end of your experiment, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On Abel this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
+At the end of your experiment, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On Saga this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
 ![](../fig/archivedir_test.png)  
 Check your run was successful and generated all the necessary files you need for your analysis. 
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>cd /work/users/$USER/f2000.T31T31.test/run
 ls -lrt
@@ -339,7 +339,7 @@ Netcdf stands for “network Common Data Form”. It is self-describing, portabl
 
 NetCDF files are often too big to open directly (with your favorite text editor, for instance), however one can look at the **content** of a netCDF file instead, for example to *dump* the **header** of one of the netCDF history files.
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
 ncdump -h f2000.T31T31.test.cam.h0.0001-01.nc
@@ -375,7 +375,7 @@ variables:
 
 #### A detailed look at one netCDF variable
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
 module load ncl
@@ -397,7 +397,7 @@ ncl 2> printVarSummary(var1)</pre>
 You should see a number of netCDF files (each of them ends with ".nc").  
 You can quickly visualize your data (to make sure your simulation ran OK).
 
-<font color="red">On Abel:</font>
+<font color="red">On Saga:</font>
 
 <pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
 
