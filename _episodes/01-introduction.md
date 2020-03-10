@@ -131,7 +131,7 @@ contains
         .
 ~~~    
 {: .language-bash}
-    
+
 *   **dynamics**: source code for the different dynamical core options.
 *   **physics**: model physics (for instance check physics/cam directory)
 *   **advection**
