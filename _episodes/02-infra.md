@@ -58,17 +58,21 @@ For running [CESM CAM-6](http://www.cesm.ucar.edu/), such computing facilities a
 ![Saga HPC](../fig/130px-Saga_small.jpg)  
 Saga is a cluster machine:
 
-*   258.0 TFlops peak performance
-*   10000+ cores
-*   650+ nodes
-*   650+ Supermicro X9DRT compute nodes
-*   dual Intel E5-2670 (Sandy Bridge) running at 2.6 GHz
-*   16 cores per node
-*   64GB Samsung DDR3 memory operating at 1600 MHz per node (4GB/core)
-*   FDR (56 Gbits/s eq 6.78 Gbytes/s) InfiniBand interconnect
-*   OS: Linux Environment, 64 bit Centos 6
+- **System**:	Hewlett Packard Enterprise - Apollo 2000/6500 Gen10
+- **Number of Cores**:	9824
+- **Number of nodes**:	244
+- **Number of GPUs**:	32
+- **CPU type**:	
+      * Intel Xeon-Gold 6138 2.0 GHz (normal)
+      * Intel Xeon-Gold 6130 2.1 GHz (bigmem)
+      * Intel Xeon-Gold 6126 2.6 GHz (accel)
+- **GPU type**:	NVIDIA P100, 16 GiB RAM (accel)
+- **Total max floating point performance, double**:	645 Teraflop/s (CPUs) + 150 Teraflop/s (GPUs)
+- **Total memory**:	75 TiB
+- **Total NVMe+SSD local disc**:	89 TiB + 60 TiB
+- **Total parallel filesystem capacity**:	1 PB
 
-Saga is a large machine (cluster) made of more than 10000 nodes (collection of machines linked together via an efficient network). On one single node, there are 16 cores and a total of 64 GB of shared memory. This shared memory can be accessed by all the processors of one single node but a processor on another node cannot access it. The image below attempts to summarize these two concepts (shared vs. distributed memory):  
+Saga is a large machine (cluster) made of more than 200 nodes (collection of machines linked together via an efficient network). On one single node, there are 40 cores and a total of 64 GB of shared memory. This shared memory can be accessed by all the processors of one single node but a processor on another node cannot access it. The image below attempts to summarize these two concepts (shared vs. distributed memory):  
 ![](../fig/shared_distributedRAM.png)  
 To manage efficiently the machine, it runs under the control of a batch system. The fact is that one single program does not usually use the full machine (1392 CPUs) but many users can fill the machine very quickly with several "small" programs.  
 The opposite of a batch job is interactive processing, in which a user enters individual commands to be processed immediately. This is what you are used to when working on your laptop or any UIO servers (such as sverdrup.uio.no).  
