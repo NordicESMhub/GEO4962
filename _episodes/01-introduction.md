@@ -55,8 +55,10 @@ To browse and explore CAM6 source code, you can look at [CAM github repository d
 
 From a Linux terminal:
 
-<pre>ssh -Y $LOGNAME@saga.sigma2.no
-</pre>
+~~~ 
+ssh -Y $LOGNAME@saga.sigma2.no
+~~~ 
+{: .language-bash}
 
 where $LOGNAME is your UIO username (replace it by your own username!)  
 Documentation on NIRD facility can be found [here](https://documentation.sigma2.no/storage/nird.html).  
@@ -86,7 +88,8 @@ The source code for CAM 6 is located in the "src" and its sub-directories (the m
 *   **control**: contains several Fortran 90 modules to control CAM 6\. That's a good starting point to explore CAM source code. Look for instance at cam_comp.F90:  
     The main subroutines for controlling CAM 6 are:
 
-    <pre>    .
+~~~    
+        .
         .
         .
 implicit none
@@ -126,8 +129,8 @@ contains
         .
         .
         .
-        </pre>
-
+~~~    
+{: .language-bash}
     
 *   **dynamics**: source code for the different dynamical core options.
 *   **physics**: model physics (for instance check physics/cam directory)

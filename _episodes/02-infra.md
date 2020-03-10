@@ -7,7 +7,7 @@ questions:
 - "What is a High-Performance Computer?"
 - "Where do we store climate model results?"
 objectives:
-- "NIRD, Notur, Norstore, IaaS"
+- "NIRD, Notur"
 keypoints:
 - "Learn about the e-infrastructure we will be using for running and analyzing the model"
 ---
@@ -19,11 +19,11 @@ keypoints:
 	*   [What is Notur?](#what-is-notur)
 	*   [Saga computing facility](#saga-computing-facility)
 	*   [Available Filesystems on Saga](#available-filesystems-on-saga)
-*   [NorStore](#norstore)
-	*   [What is NorStore?](#what-is-norstore)
+*   [NIRD](#nird)
+	*   [What is NIRD?](#what-is-nird)
 	
-*   [IaaS](#iaas)
-	*   [What is IaaS?](#what-is-iaas)
+*   [NREC](#nrec)
+	*   [What is NREC?](#what-is-nrec)
 	*   [Post-processing and visualization facility](#post-processing-and-visualization-facility)
 
 ## An e-infrastructure for Science
@@ -38,9 +38,9 @@ results dissemination, and long-term storage and accessibility of all materials 
 
 The e-infrastructure for Science in Norway follows the same structure and provides users with both computing 
 resources ([Notur](#notur)) and post-processing and visualization facilities with large storage capacity 
-([NorStore](#norstore)).  
+([NIRD](#nird)).  
 
-The picture below introduces the data life cycle from the generation of your model outputs on Notur computing facility (Saga) to the preservation of your model results in the [NorStore archive](https://archive.norstore.no/).  
+The picture below introduces the data life cycle from the generation of your model outputs on Notur computing facility (Saga) to the preservation of your model results in the [NIRD archive](https://archive.sigma2.no/).  
 
 ![](../fig/lifecycle.png)  
 
@@ -51,7 +51,7 @@ The picture below introduces the data life cycle from the generation of your mod
 Through the Notur-project, [UNINETT Sigma2](https://www.sigma2.no/) serves the Norwegian computational science community by providing the infrastructure to individuals or groups involved in education and research at Norwegian universities and colleges, and research and engineering at research institutes and industry who contribute to the funding of Notur.  
 The HPC-service provides the customer access to facilities and software with a far greater capacity than is normally available at department and faculty levels. The service is primarily set up to run simulation calculations for research and educations purposes, designed as batches.  
 
-For running [CESM CAM-5.3](http://www.cesm.ucar.edu/), such computing facilities are necessary.  
+For running [CESM CAM-6](http://www.cesm.ucar.edu/), such computing facilities are necessary.  
 
 ### Saga computing facility
 
@@ -89,19 +89,19 @@ The following file systems exist on Saga:
 
 **Note:** the /work/users/* directories are subject to automatic deletion dependent on modification, access time and the total usage in the file system. The oldest files will be deleted first.  
 
-## NorStore
+## NIRD
 
-### What is NorStore?
+### What is NIRD?
 
-[NorStore](https://www.sigma2.no/node/8) is the Norwegian infrastructure for storing scientific data.  
+[NIRD](https://documentation.sigma2.no/storage/nird.html) is National e-Infrastructure for Research Data for storing scientific data.  
 
-NorStore facility is divided in two parts:
+NIRD facility is divided in two parts:
 
-*   Active data, which are processed or being analysed, are stored in the [Project Area](https://www.sigma2.no/content/project-data-storage).
-*   When the data are no longer expected to change and/or results have been published, the data should normally be made accessible to the public. Data can be transferred to the NorStore Archive from the Project area or directly uploaded.
+*   Active data, which are processed or being analysed, are stored in the [Project Area](https://documentation.sigma2.no/storage/nird.html#project-area).
+*   When the data are no longer expected to change and/or results have been published, the data should normally be made accessible to the public. Data can be transferred to the [NIRD Archive](https://archive.sigma2.no/) from the Project area or directly uploaded.
 
-When running the CAM-5.3 model on Saga, the model outputs are generated and stored in the temporary working area (/work/users/$LOGNAME). As mentioned earlier, the working area on Saga is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
-Model outputs will have to be moved from Saga working area (/work/users/$LOGNAME) to the norStore project area. You can use scp to copy your data from Saga to NorStore but the detailed procedure will be explained later.  
+When running the CAM-6 model on Saga, the model outputs are generated and stored in the temporary working area (/work/users/$LOGNAME). As mentioned earlier, the working area on Saga is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
+Model outputs will have to be moved from Saga working area (/work/users/$LOGNAME) to the NIRD project area. You can use scp to copy your data from Saga to NIRD but the detailed procedure will be explained later.  
 
 ### What is a Research Data Archive?
 
@@ -113,20 +113,20 @@ but also becomes findable and citable via a Digital Object Identifier [DOI](http
 
 This step is very important for publishing scientific results where all data used needs to be kept for about 10 years.
 
-## IaaS
+## NREC
 
-### What is IaaS?
+### What is NREC?
 
-IaaS means Infrastructure as a Service and provides researchers from the University of Oslo or Bergen 
+NREC means Norwegian Research and Education Cloud and provides researchers from the University of Oslo or Bergen 
 with cloud services.
 
-The [UH-IaaS cloud](http://docs.uh-iaas.no/en/latest/index.html) is based on OpenStack, which is a large framework of software components used to deliver an 
+The [NREC cloud](https://docs.nrec.no/) is based on OpenStack, which is a large framework of software components used to deliver an 
 Infrastructure-as-a-Service consisting of compute, networking and storage resources.
 
 ### Post-processing and visualization facility
 
 Once your model run is finished, you can start post-processing and generating plots. 
-The machine you will be using for post-processing and visualizing your data has been created on UH-IaaS. The machine
+The machine you will be using for post-processing and visualizing your data has been created on NREC. The machine
 will be accessed through a web interface using [jupyterhub](https://jupyter.org/hub).
  
 Each attendee will get a username and password so do not panic if you still haven't received anything.
