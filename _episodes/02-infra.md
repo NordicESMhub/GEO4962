@@ -133,7 +133,27 @@ Once your model run is finished, you can start post-processing and generating pl
 The machine you will be using for post-processing and visualizing your data has been created on NREC. The machine
 will be accessed through a web interface using [jupyterhub](https://jupyter.org/hub).
  
-Each attendee will get a username and password so do not panic if you still haven't received anything.
+We will be using [https://climate.uiogeo-apps.sigma2.no/](https://climate.uiogeo-apps.sigma2.no/).
+
+#### Setup instructions for accessing Jupyter notebooks at Sigma2 server:
+
+- You should have received an email message titled "JupyterHub links for GEO4962". If not please request it to the course organizers.
+- Follow "invitation link" in the email message
+- If you don't already have a Feide guest user account (otherwise skip this step), click "Feide guest users".
+    - register a new account (do not use your UiO username as it may be confusing for everyone).
+    - finish the registration process
+    - click again on the "invitation link" in the email
+- Login with "Feide guest users"
+- Accept the different policies
+- Agree to become a member of the **EScience-Abisko**: the browser should display the message "Loading group details"
+- Mow go to [GEO4962 Jupyterhub](https://climate.uiogeo-apps.sigma2.no/)
+- Click "Sign in with Dataporten"
+- Login with Feide Guest User (Not your UiO username)
+- Finally the web browser should display a page with "jupyterlab" on the upper left side
+
+
+For later usage of the notebooks just use the [GEO4962 Jupyterhub link](https://climate.uiogeo-apps.sigma2.no/)
+
  
 The main advantage of using this machine is that your data are directly accessible from anywhere through a web 
 interface and the necessary post-processing and visualization packages we need are already available. 
