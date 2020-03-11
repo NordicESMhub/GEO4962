@@ -86,12 +86,12 @@ More information on the Batch system on Saga can be found [here]().
 
 The following file systems exist on Saga:
 
-*   User area (home directories): /home  
+*   User area (home directories): `/home`  
     The file system for user home directories on Saga. This file system is currently very small, and it should NOT be used for processing data and running batch jobs (slow access). It has quota enabled, limits can be found [here](https://documentation.sigma2.no/storage/clusters.html) . Files are backed up daily, except for folders called "nobackup" and their sub-folders.
-*   Work area (temporary data): /work/users ($USERWORK)  
-    Large external storage shared by all compute nodes on Saga. Files are NOT backed up. /work should be used when running jobs since it's much larger than /home and is available on the compute nodes. /work/users is a [BeeGFS](https://en.wikipedia.org/wiki/BeeGFS) parallel file system.
+*   Work area (temporary data): `/cluster/work/users/$USER`  
+    Large external storage shared by all compute nodes on Saga. Files are NOT backed up. `/cluster/work` should be used when running jobs since it's much larger than `/home` and is available on the compute nodes. `/cluster/work/users` is a parallel file system.
 
-**Note:** the /work/users/* directories are subject to automatic deletion dependent on modification, access time and the total usage in the file system. The oldest files will be deleted first.  
+**Note:** the `/cluster/work/users/*` directories are subject to automatic deletion dependent on modification, access time and the total usage in the file system. The oldest files will be deleted first.  
 
 ## NIRD
 
@@ -104,8 +104,8 @@ NIRD facility is divided in two parts:
 *   Active data, which are processed or being analysed, are stored in the [Project Area](https://documentation.sigma2.no/storage/nird.html#project-area).
 *   When the data are no longer expected to change and/or results have been published, the data should normally be made accessible to the public. Data can be transferred to the [NIRD Archive](https://archive.sigma2.no/) from the Project area or directly uploaded.
 
-When running the CAM-6 model on Saga, the model outputs are generated and stored in the temporary working area (/work/users/$LOGNAME). As mentioned earlier, the working area on Saga is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
-Model outputs will have to be moved from Saga working area (/work/users/$LOGNAME) to the NIRD project area. You can use scp to copy your data from Saga to NIRD but the detailed procedure will be explained later.  
+When running the CAM-6 model on Saga, the model outputs are generated and stored in the temporary working area (/cluster/work/users/$USER). As mentioned earlier, the working area on Saga is a temporary storage area and data must be moved to a more permanent storage area where you will be able to easily post-process and visualize your model results.  
+Model outputs will have to be moved from Saga working area (/cluster/work/users/$USER) to the NIRD project area. You can use scp to copy your data from Saga to NIRD but the detailed procedure will be explained later.  
 
 ### What is a Research Data Archive?
 

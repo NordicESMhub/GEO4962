@@ -46,44 +46,35 @@ We do all the practicals on <font color="red">Saga</font>.
 
 Make sure you have set-up your SSH keys properly and you can transfer files with scp without entering your password. If not go [here](http://www.mn.uio.no/geo/english/services/it/help/using-linux/ssh-tips-and-tricks.html).  
 
-To run CAM-5.3 on Saga, we will use:
+To run CAM-6 on Saga, we will use:
 
-*   <font color="green">Subversion client (version 1.6.11) to get CESM source code</font>
-*   Fortran and C compilers (intel 2015.0 compilers)
-*   NetCDF library (netcdf4.3.3.1)
-*   MPI (intel openmpi 1.8.3)
+*   Fortran and C compilers (intel 2018b compilers)
+*   NetCDF library (netcdf4.4.4)
+*   MPI (intel openmpi 2018b)
 
 To be able to compile and run CESM on Saga, no changes to the source code are necessary; we just have to adapt a few scripts for setting the compilers and libraries used by CESM.  
 
-To simplify and allow you to run CESM as quickly as possible, we have prepared a set-up script geo4962_notur.bash.  
+To simplify and allow you to run CESM as quickly as possible, we have prepared a redy to use version of cesm.  
 
 <font color="red">On Saga:</font>  
 
 ~~~
 cd $HOME
 
-module load git
+module use /cluster/projects/nn1000k/modulefiles
+module load cesm/2.1.0
 
-git clone https://github.com/NordicESMhub/GEO4962.git
-
-cd $HOME/GEO4962
-
-git checkout master
-
-cd setup
-
-chmod u+rwx geo4962_notur.bash
-
-./geo4962_notur.bash
-
+link_dirtree /cluster/projects/nn1000k/cesm/inputdata /cluster/work/users/$USER/inputdata
 ~~~
 {: .language-bash}
 
-The script above copies the source code in $HOME/cesm/cesm_1_2_2 and creates symbolic links for the input data necessary to run our model configuration in /work/users/$USER/inputdata. Input data can be large this is why we create symbolic links instead of making several copies (one per user). The main copy is located in $CESM_DATA (CESM_DATA is an environment variable that is defined when executing geo4962_notur.bash).  
+The commands above allows you to set up your environment (PATH, Libraries, etc.) to use cesm 2.1.0.
+
+All the input data necessary to run our model configuration is in /cluster/work/users/$USER/inputdata (where $USER is your login username on saga). Input data can be large this is why we create symbolic links instead of making several copies (one per user). The main copy is located in `/cluster/projects/nn1000k/cesm/inputdata`.  
 
 ### Create a New case
 
-Now that you have the CESM source code in $HOME/cesm/cesm_1_2_2, you can have a first look at the code.  
+The CESM source code is in `/cluster/projects/nn1000k/cesm/`, and you can have a first look at the code.  
 ![](../fig/tree_source.png)  
 
 We will build and run CAM in its *standalone* configuration i.e. without having all the other components **active**.  
@@ -91,104 +82,116 @@ We will build and run CAM in its *standalone* configuration i.e. without having 
 The basic workflow to run the CESM code is the following:
 
 *   Create a New Case
-*   Invoke cesm_setup
-*   Build the Executable
-*   Run the Model and Output Data Flow
+*   Invoke `case.setup` to setup your newly created case
+*   Build the Executable (`case.build`)
+*   Run the Model and Output Data Flow (`case.submit`)
 
-To create a new case, we will be using create_newcase script. It is located in $HOME/cesm/cesm1_2_2/scripts.  
+To create a new case, we will be using `create_newcase` script.  
 There are many options and we won't discuss all of them. The online help provides information about how get the full usage of create_newcase.
 
 <font color="red">On Saga:</font>  
 
 ~~~
-./create_newcase --help
+create_newcase --help
 ~~~
 {: .language-bash}
+
+> ## Command not found
+> If you get an error when invoking `create_newcase` make sure you have loaded cesm in your environment:
+> ~~~
+> module use /cluster/projects/nn1000k/modulefiles
+> module load cesm/2.1.0
+~~~
+{: .callout}
 
 The 4 main arguments of create_newcase are explained on the figure below: ![](../fig/newcase.png)  
 
 <font color="red">On Saga:</font>
 
 ~~~
-cd $HOME/cesm/cesm1_2_2/scripts
-
 #
 # Simulation 1: short simulation
 #
 
-module load cesm/1.2.2
+module use /cluster/projects/nn1000k/modulefiles
+module load cesm/2.1.0
 
-./create_newcase -case ~/cesm_case/f2000.T31T31.test -res T31_T31 -compset F_2000_CAM5 -mach saga
+create_newcase --case $HOME/cases/F2000climo-f19_g17 --res f19_g17 --compset F2000climo --mach saga --run-unsupported --project nn1000k
 ~~~
 {: .language-bash}
 
 
-*   **case**: specifies the name and location of the case being created. It creates a new case in $HOME/cesm_case and its name is f2000.T32T31.test
+*   **case**: specifies the name and location of the case being created. It creates a new case in `$HOME/cases` and its name is `F2000climo-f19_g17`
 *   **res**: specifies the model resolution (resolution of the grid). Each model resolution can be specified by its alias, short name or long name:
-    *   alias: T31_T31 (atm/lnd_ocn/ice)
-    *   short name: T31_T31
-    *   long name: a%T31_l%T31_oi%T31_r%r05_m%gx3v7_g%null_w%null (atm,lnd,ocn/ice,river,lnd mask, lnd-ice,wave)  
-    The full list of supported grid is given [here](http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/grid.html).
+    *   alias: f19_g17 (atm/lnd_ocn/ice)
+
+-   non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:gx1v7  
+-   mask is: gx1v7
+-   1.9x2.5 is FV 2-deg grid: with domain file(s): 
+-   domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm/lnd)
+-   domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+-   domain.lnd.fv1.9x2.5_gx1v7.181205.nc (only for mask: gx1v7 grid match: atm/lnd)
+-   domain.ocn.fv1.9x2.5_gx1v7.181205.nc (only for mask: gx1v7 grid match: ocnice)
+-   domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
+						         
+-   gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
+-   $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm/lnd)
+-   $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
+    
+The full list of supported grid is given [here](http://www.cesm.ucar.edu/models/cesm2/config/2.0.0/grids.html).
 *   **compset**: specifies the component set, i.e., component models, forcing scenarios and physics options for those models.  
     As for the resolution, the component set can be specified by its alias, short name or long name:
-    *   alias: FC5
-    *   short name: F_2000_CAM5
-    *   long name: 2000_CAM5_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV  
-    The notation for the compset longname is:  
+*   alias: F2000climo
+*   long name: 2000_CAM60_CLM50%SP_CICE%PRES_DOCN%DOM_MOSART_CISM2%NOEVOLVE_SWAV  
 
-    <pre>   TIME_ATM[%phys]_LND[%phys]_ICE[%phys]_OCN[%phys]_ROF[%phys]_GLC[%phys]_WAV[%phys][_BGC%phys]
-    </pre>
 
-    The compset longname has the specified order: **atm, lnd, ice, ocn, river, glc wave cesm-options**.  
+The notation for the compset longname is:  
+
+`TIME_ATM[%phys]_LND[%phys]_ICE[%phys]_OCN[%phys]_ROF[%phys]_GLC[%phys]_WAV[%phys][_BGC%phys]`
+
+The compset longname has the specified order: **atm, lnd, ice, ocn, river, glc wave cesm-options**.  
     
-    Where:
+Where:
 
-    <pre>   TIME = Time period (e.g. 2000, 20TR, RCP8...)
-       ATM  = [CAM4, CAM5, DATM, SATM, XATM]
-       LND  = [CLM40, CLM45, DLND, SLND, XLND]
-       ICE  = [CICE, DICE, SICE, SICE]
-       OCN  = [POP2, DOCN, SOCN, XOCN,AQUAP,MPAS]
-       ROF  = [RTM, DROF, SROF, XROF]
-       GLC  = [CISM1, SGLC, XGLC]
-       WAV  = [WW3, DWAV, SWAV, XWAV]
-       BGC  = optional BGC scenario
-    </pre>
 
-    The OPTIONAL %phys attributes specify submodes of the given system.
+- **Initialization Time**:	2000 
+- **Atmosphere**:	CAM60	CAM cam6 physics
+- **Land**:	CLM50%SP	clm5.0:Satellite phenology
+- **Sea-Ice**:	CICE%PRES	Sea ICE (cice) model version 5 :prescribed cice
+- **Ocean**:	DOCN%DOM	DOCN prescribed ocean mode
+- **River runoff**:	MOSART	MOSART: MOdel for Scale Adaptive River Transport
+- **Land Ice**:	CISM2%NOEVOLVE	cism2 (default, higher-order, can run in parallel):cism ice evolution turned off (this is the standard configuration unless you're explicitly interested in ice evolution):
+- **Wave**:	SWAV	Stub wave component
+
     
-    The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html). 
+    The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html). 
     
-    In our case we have:
-    *   TIME = 2000: we are running our model for present days
-    *   ATM = CAM5: we will be using CAM5 for the atmospheric component
-    *   LND = CLM40%SP: Community Land Model (CLM) 4 with prescribed satellite phenology
-    *   ICE = CICE%PRES: we will be running CESM with prescribed cice (Community Ice CodE)
-    *   OCN = DOCN%DOM: Climatological Data Ocean Model (DOCN) with Data Ocean mode (see more [here](http://www.cesm.ucar.edu/models/ocn-docn/docn4.0/userguide.html))
-    *   ROF = RTM: we will be using the default [River Transport Model](http://www.cesm.ucar.edu/models/cesm1.2/rtm/) (RTM) model
-    *   GLC = SGLC: stub land-ice Model
-    *   WAV = SWAV: stub ocean-wave model  
 
-*   **mach**: specifies the machine where CESM will be compiled and run. We will be running CESM on Saga (a set of scripts for Saga can be found in $HOME/cesm/cesm1_2_2/scripts/ccsm_utils/Machines)
+*   **mach**: specifies the machine where CESM will be compiled and run. We will be running CESM on Saga (a set of scripts for Saga can be found in `/cluster/projects/nn1000k/cesm/cime/config/cesm/machines`)
 
-Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.test corresponding to our new case.
+Now you should have a new directory in `$HOME/cases/F2000climo-f19_g17` corresponding to our new case.
 
 <font color="red">On Saga:</font>
 
 ~~~
-cd ~/cesm_case/f2000.T31T31.test
+cd $HOME/cases/F2000climo-f19_g17
 ~~~
 {: .language-bash}
 
 Check the content of the directory and browse the sub-directories:  
-![](../fig/casedir_test.png)  
+- CaseDocs: namelists or similar
+- SourceMods: this is where you can add local source code changes.
+- Tools: a few utilities (we won't use the directly)
+- Buildconf: configuration for building each component
+
 For this tests (and all our simulations), we do not wish to have a "cold" start and we will therefore restart and continue an existing simulation we have previously run.  
 
 <font color="red">On Saga:</font>
 
 ~~~
 ./xmlchange RUN_TYPE=hybrid
-./xmlchange RUN_REFCASE=f2000.T31T31.control
-./xmlchange RUN_REFDATE=0009-01-01
+./xmlchange RUN_REFCASE=F2000climo.f19_g17.control
+./xmlchange RUN_REFDATE=0014-01-01
 ~~~
 {: .language-bash}
 
@@ -206,17 +209,17 @@ If we do not want the dates to start from 0001-01-01 we need to specify the star
 <font color="red">On Saga:</font>  
 
 ~~~
-./xmlchange RUN_STARTDATE=0009-01-01
+./xmlchange RUN_STARTDATE=0014-01-01
 ~~~
 {: .language-bash}
 
-We are also going to change the duration of our test simulation in the file **env_run.xml** and set it to 1 month only.
+We are also going to change the duration of our test simulation and set it to 1 month only.
 
 <font color="red">On Saga:</font>  
 
 ~~~
-./xmlchange -file env_run.xml -id STOP_N -val 1
-./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
+./xmlchange  STOP_N=1
+./xmlchange  STOP_OPTION=nmonths
 ~~~
 {: .language-bash}
 
@@ -225,13 +228,13 @@ Now we are ready to set-up our model configuration and build the cesm executable
 <font color="red">On Saga:</font>
 
 ~~~
-./cesm_setup
+./case.setup
 
-./f2000.T31T31.test.build
+./case.build
 ~~~
 {: .language-bash}
  
-After building CESM for your configuration, a new directory (and a set of sub-directories) are created in /work/users/$USERS/f2000.T31T31.test:
+After building CESM for your configuration, a new directory (and a set of sub-directories) are created in /cluster/work/users/$USERS/F2000climo-f19_g17:
 
 *   **bld**: contains the object and CESM executable (called **cesm.exe**) for your configuration
 *   **run**: this directory will be used during your simulation run to generate output files, etc.
@@ -250,45 +253,44 @@ However, it is possible to change the output frequency with the namelist variabl
 
 *For instance if we wanted to change the history file from monthly average to daily average, we would have to set the namelist variable **nhtfrq** to -24.*
 
-The coupled CICE model requires a minimum of two files to run:
-
-*    **grid_file** is a binary or netcdf file containing grid information such as the latitude, longitude, grid cell area, etc.
-*    **kmt_file** is a binary or netcdf file containing land mask information. This points to the ocean model KMT file or the depths of the ocean columns.
-
-We therefore need to add two lines to the CAM5 namelist called **user_nl_cice**.
-
-<font color="red">On Saga:</font>
-
-    cat >> user_nl_cice << EOF
-    grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
-    kmt_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
-    EOF
-
 **[cat](http://www.linfo.org/cat.html)** is a unix shell command to display the content of files or combine and create files. Using >> followed by a filename (here user_nl_cam) means we wish to concatenate information to a file. If it does not exist, it is automatically created. Using << followed by a string (here EOF) means that the content we wish to concatenate is not in a file but written after EOF until another EOF is found.  
 
-Finally, we have to copy the control restart files (contains the state of the model at a given time so we can restart it). The files are stored on norStore (they were generated from a previous simulation where the model was run for several years).
-
-<font color="red">On Saga:</font>
-
-<pre>cp $CESM_DATA/../GEO4962/archive/f2000.T31T31.control/rest/0009-01-01-00000/*  /work/users/$USER/f2000.T31T31.test/run/.
-</pre>
-
-Now we wish to run our model and as it may run for several days, we need to use the batch scheduler (SLURM) from Saga. Its role is to dispatch jobs to be run on the cluster. It reads information given in your job command file (named here f2000.T31T31.test.run). This file contains information on the number of processors to use (ntasks), the amount of memory per processor (mem-per-cpu) and the maximum amount of time you wish to allow for your job (time).  
-
-Check what is in your current job command file (f2000.T31T31.test.run).
+Finally, we have to copy the control restart files (contains the state of the model at a given time so we can restart it). The files are stored on NIRD (they were generated from a previous simulation where the model was run for several years).
 
 <font color="red">On Saga:</font>
 
 ~~~
-#SBATCH --job-name=f2000.T31T31.test
-#SBATCH --time=08:59:00
-#SBATCH --ntasks=32
-#SBATCH --account=nn1000k
-#SBATCH --mem-per-cpu=4G
-#SBATCH --cpus-per-task=1
-#SBATCH --output=slurm.out
+cd /cluster/work/users/$USER/cesm/F2000climo-f19_g17/run
+wget https://zenodo.org/record/3702975/files/F2000climo.f19_g17.control.rest.0014-01-01-00000.tar.gz
+tar zxvf F2000climo.f19_g17.control.rest.0014-01-01-00000.tar.gz
+mv 0014-01-01-00000/* .
+~~~ 
+{: .language-bash}
+
+Now we wish to run our model and as it may run for several days, we need to use the batch scheduler (SLURM) from Saga. Its role is to dispatch jobs to be run on the cluster. It reads information given in your job command file (named here .case.run). This file contains information on the number of processors to use (ntasks), the amount of memory per processor (mem-per-cpu) and the maximum amount of time you wish to allow for your job (time).  
+
+Check what is in your current job command file (.case.run).
+
+<font color="red">On Saga:</font>
+
+~~~
+head .case.run
 ~~~
 {: .language-bash}
+
+~~~
+#!/usr/bin/env python
+# Batch system directives
+#SBATCH  --job-name=F2000climo-f19_
+#SBATCH  --nodes=2
+#SBATCH  --ntasks-per-node=40
+#SBATCH  --output=F2000climo-f19_
+#SBATCH  --exclusive
+#SBATCH  --mem-per-cpu=4G
+#SBATCH  --ntasks=80
+#SBATCH  --export=ALL
+~~~
+{: .output}
 
 
 The lines starting with **#SBATCH** are not comments but SLURM directives.  
@@ -296,25 +298,42 @@ You can now submit your test case.
 
 <font color="red">On Saga:</font>
 
-<pre>./f2000.T31T31.test.submit
-</pre>
-
+~~~
+./case.submit
+~~~
+{: .language-bash}
 
 ### Monitor your test run
 
-The script "f2000.T31T31.test.submit" submits a job to the job scheduler on Saga. More information can be found [here](https://documentation.sigma2.no/quick/saga.html).
+The script "case.submit" submits two jobs (one for running the model and one for the short term archive e.g. storing data for future analysis) to the job scheduler on Saga. More information can be found [here](https://documentation.sigma2.no/quick/saga.html).
 
 To monitor your job on <font color="red">Saga:</font>
 
-<pre>squeue -u $USER
-</pre>
+~~~
+squeue -u $USER
+~~~
+{: .language-bash}
+
+It will return something like:
+
+~~~
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+444258    normal F2000cli  annefou PD       0:00      2 (None)
+444259    normal F2000cli  annefou PD       0:00      1 (Dependency)
+~~~
+{: .output}
+
+- **USER**: here you will find your user name (rather than **annefou**)
+- ST**: this is the status of your job. **PD** means pending e.g. the job is waiting in the queue. When running you will get *R*.
+- **NODES**: The number of nodes (here 2 for the first job and 1 for the second).
+- **NODELIST(REASON)**: the list of nodes. It is only effective when your job is running.
 
 Full list of available commands and their usage can be found [here](https://documentation.sigma2.no/jobs/managing_jobs.html).
 
 
 ### First look at your 1 month test run
 
-On Saga during your test case run, CAM-5.3 generates outputs in the "run" directory:  
+On Saga during your test case run, CAM-6 generates outputs in the "run" directory:  
 
 ![](../fig/rundir_test.png)  
 At the end of your experiment, the run directory will only contain files that are needed to continue an existing simulation but all the model outputs are moved to another directory (archive directory). On Saga this directory is semi-temporary which means data will be automatically deleted after a short period of time.  
@@ -323,17 +342,24 @@ Check your run was successful and generated all the necessary files you need for
 
 <font color="red">On Saga:</font>
 
-<pre>cd /work/users/$USER/f2000.T31T31.test/run
+~~~
+cd /cluster/work/users/$USER/cesm/F2000climo-f19_g17/run
 ls -lrt
+~~~
+{: .language-bash}
 
-cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
+
+~~~
+cd /cluster/work/users/$USER/archive/F2000climo-f19_g17/atm/hist/
 ls -lrt
-</pre>
+~~~
+{: .language-bash}
+
 
 #### What is a netCDF file?
 
 Netcdf stands for “network Common Data Form”. It is self-describing, portable, metadata friendly, supported by many languages
-(including fortran, C/C++, Matlab, python, NCL, IDL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in particular NCO and CDO).
+(including python, R, fortran, C/C++, Matlab, NCL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in particular NCO and CDO).
 
 #### Inspect a netCDF file
 
@@ -341,80 +367,38 @@ NetCDF files are often too big to open directly (with your favorite text editor,
 
 <font color="red">On Saga:</font>
 
-<pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
-ncdump -h f2000.T31T31.test.cam.h0.0001-01.nc
+~~~
+module load netCDF/4.6.1-intel-2018b
+cd /cluster/work/users/$USER/archive/F2000climo-f19_g17/atm/hist/
+ncdump -h F2000climo-f19_g17.cam.h0.2000-06.nc
+~~~
+{: .language-bash}
 
-netcdf f2000.T31T31.test.cam.h0.0001-01 {
+~~~
+netcdf F2000climo-f19_g17.cam.h0.2000-06 {
 dimensions:
-	lat = 48 ;
-	lon = 96 ;
+        lat = 96 ;
+	lon = 144 ;
 	time = UNLIMITED ; // (1 currently)
-	nbnd = 2 ;
-	chars = 8 ;
-	lev = 30 ;
-	ilev = 31 ;
+        nbnd = 2 ;
+        chars = 8 ;
+        lev = 32 ;
+        ilev = 33 ;
 variables:
-	double lev(lev) ;
-		lev:long_name = "hybrid level at midpoints (1000*(A+B))" ;
-		lev:units = "level" ;
-		lev:positive = "down" ;
-		lev:standard_name = "atmosphere_hybrid_sigma_pressure_coordinate" ;
-		lev:formula_terms = "a: hyam b: hybm p0: P0 ps: PS" ;
-	double hyam(lev) ;
-		hyam:long_name = "hybrid A coefficient at layer midpoints" ;
-	double hybm(lev) ;
-		hybm:long_name = "hybrid B coefficient at layer midpoints" ;
-	double ilev(ilev) ;
-		ilev:long_name = "hybrid level at interfaces (1000*(A+B))" ;
-		ilev:units = "level" ;
-		ilev:positive = "down" ;
-		ilev:standard_name = "atmosphere_hybrid_sigma_pressure_coordinate" ;
-		ilev:formula_terms = "a: hyai b: hybi p0: P0 ps: PS" ;
+        double lat(lat) ;
+                lat:_FillValue = -900. ;
+                lat:long_name = "latitude" ;
+                lat:units = "degrees_north" ;
+        double lon(lon) ;
+                lon:_FillValue = -900. ;
+                lon:long_name = "longitude" ;
+                lon:units = "degrees_east" ;
+        double gw(lat) ;
+                gw:_FillValue = -900. ;
+                gw:long_name = "latitude weights" ;
     ....
-</pre>
-
-#### A detailed look at one netCDF variable
-
-<font color="red">On Saga:</font>
-
-<pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
-module load ncl
-ncl
-
- Copyright (C) 1995-2014 - All Rights Reserved
- University Corporation for Atmospheric Research
- NCAR Command Language Version 6.2.0
- The use of this software is governed by a License Agreement.
- See http://www.ncl.ucar.edu/ for more details.
-
-ncl 0> f1 = addfile("f2000.T31T31.test.cam.h0.0001-01.nc", "r")
-ncl 1> var1 = f1->TS
-ncl 2> printVarSummary(var1)</pre>
-![](../fig/ncdump-h.png)  
-
-#### Quick visualization of a netCDF file
-
-You should see a number of netCDF files (each of them ends with ".nc").  
-You can quickly visualize your data (to make sure your simulation ran OK).
-
-<font color="red">On Saga:</font>
-
-<pre>cd /work/users/$USER/archive/f2000.T31T31.test/atm/hist
-
-module load ncview
-
-ncview f2000.T31T31.test.cam.h0.0001-01-31-00000.nc
-</pre>
-
-If you click on 3D or 4D to select a variable, your data should appear:  
-
-![](../fig/ncview_D2.png)  
-
-Here, the surface temperature TS (selected among the 2D variables) is displayed.  
-
-Click on the magnification button (**M X4**) to set how much expansion the image undergoes.
-
-Try to plot other variables like the three-dimensional air temperature field **T**, for example, and select the vertical level you want to see between 3.64 hPa (top of the model) and 992.56 hPa (bottom), in this instance.
+~~~
+{: .output}
 
 {% include links.md %}
 
