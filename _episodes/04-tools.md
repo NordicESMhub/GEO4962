@@ -43,8 +43,6 @@ This is what will mostly be used during this course.
 
 - [The Python distribution that we recommend for scientific use is Anaconda](https://www.anaconda.com/distribution/)
 
-- [Interactive data visualization with Python](https://psyplot.readthedocs.io/en/latest/)
-
 - [Example netCDF programs](http://www.unidata.ucar.edu/software/netcdf/examples/programs/)
 
 ### Learn to program with Python

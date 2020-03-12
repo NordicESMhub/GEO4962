@@ -1,5 +1,5 @@
 ---
-title: "Analyze and visualize test model outputs with psyplot using Jupyter notebooks"
+title: "Analyze and visualize test model outputs with python using Jupyter notebooks"
 teaching: 0
 exercises: 0
 questions:
