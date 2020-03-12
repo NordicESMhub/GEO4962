@@ -140,6 +140,7 @@ Similarly, you can start a new Terminal by clicking on "Terminal" in the Launche
 > anymore in your JupyterLab, you can start a new one in "**File** --> **New Launcher**".
 {: .callout}
 
+
 In your terminal (from jupyterhub):
 
 ~~~
