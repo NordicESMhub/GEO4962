@@ -128,6 +128,25 @@ If you click on the "running man" icon, you can see what is currently running on
 
 <img src="../fig/jupyterlab_running.png" width="600">
 
+### Start a new Terminal
+
+Similarly, you can start a new Terminal by clicking on "Terminal" in the Launcher. 
+
+<img src="../fig/jupyterlab_start_terminal.png" width="500">
+
+
+> ## Tips
+> If the **Launcher** tab does not exist 
+> anymore in your JupyterLab, you can start a new one in "**File** --> **New Launcher**".
+{: .callout}
+
+In your terminal (from jupyterhub):
+
+~~~
+source activate pangeo
+python -m ipykernel install --user --name=pangeo
+~~~
+{: .language-bash}
 
 ### Create a new python 3 notebook
 
@@ -153,17 +172,6 @@ We would need to switch to **pangeo** kernel as shown on the figure below.
 
 <img src="../fig/jupyterlab_pangeo_switch.png" width="600">
 
-### Start a new Terminal
-
-Similarly, you can start a new Terminal by clicking on "Terminal" in the Launcher. 
-
-<img src="../fig/jupyterlab_start_terminal.png" width="500">
-
-
-> ## Tips
-> If the **Launcher** tab does not exist 
-> anymore in your JupyterLab, you can start a new one in "**File** --> **New Launcher**".
-{: .callout}
 
 # Copy your output files from Saga to the virtual machine
 
