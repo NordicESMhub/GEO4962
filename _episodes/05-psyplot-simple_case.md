@@ -13,7 +13,7 @@ objectives:
 keypoints:
 - "jupyterlab"
 - "hybrid sigma levels"
-- "psyplot, xarray"
+- "xarray"
 ---
 
 # Post-processing and Visualization
@@ -25,8 +25,8 @@ keypoints:
 	* [Login to the JupyterHub](#login-to-the-jupyterhub)
 	* [Start and stop your server](#start-and-stop-your-server)
 	* [JupyterLab](#jupyterlab)
-*   [Copy your output files from Saga to the virtual machine](#copy-your-output-files-from-saga-to-the-virtual-machine)
-*   [Map visualization with psyplot](#map-visualization-with-psyplot)
+*   [Copy your output files from Saga to the jupyterhub ](#copy-your-output-files-from-saga-to-the-jupyterhub)
+*   [Map visualization with python](#map-visualization-with-python)
 *   [Customize your maps](#customize-your-plots)
 	* [Set figure size](#set-figure-size)
 	* [Plot 4D-fields such as Temperature](#plot-4d-fields-such-as-temperature)
@@ -44,10 +44,22 @@ and corresponding password; please let us know otherwise.
 ## Login to the JupyterHub
 
 
-<img src="../fig/jupyterhub_login.png" width="400">
+<img src="../fig/jupyterhub_login.png" width="500">
 
-Use the username and password you have received and **sign In**.
- 
+- Click on **Dataporten**
+
+<img src="../fig/jupyterhub_login2.png" width="500">
+
+- **Do not use your Feide user account, so click on **Can't find your user account?**
+
+- In **Other login alternatives**, click on **Feide guest users**
+
+<img src="../fig/jupyterhub_feide_guest.png" width="500">
+
+- Use the username and password you have received and **sign In**.
+
+<img src="../fig/jupyterhub_feide_guest2.png" width="500">
+
 > ## Tips
 > Before getting to the username/password login page, your browser may warn you about the security
 > of the website and get a message such as "This site is not secure". In order to bypass this security message,
@@ -78,12 +90,15 @@ When your server is not running, the button "Stop My Server" does not appear and
 
 ## JupyterLab
 
-By default, jupyterhub presents you the standard Jupyter user interface layout but you can also access the new 
-web-based user interface for Project Jupyter that is called [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/).
+By default, you will get the web-based user interface for Project Jupyter that is called [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/).
 
-For this replace **tree?** in the web address you have in your browser tab by **lab**. Then you should get:
 
 <img src="../fig/jupyterlab.png" width="600">
+
+> ## Remark
+> Do not worry if you do not have **pangeo** notebooks. We will see later how to change kernels within JupyterLab.
+>
+{: .callout}
 
 ### Menu Bar
 
@@ -100,6 +115,7 @@ their keyboard shortcuts. The default menus are:
 - **Help**: a list of JupyterLab and kernel help links
 
 ### Left Sidebar
+
 The left sidebar contains a number of commonly-used tabs, such as a file browser, a list of running 
 kernels and terminals, the command palette, and a list of tabs in the main work area:
 
@@ -112,12 +128,6 @@ If you click on the "running man" icon, you can see what is currently running on
 
 <img src="../fig/jupyterlab_running.png" width="600">
 
-> ## Tips
->
-> To access to **Control Panel**, you would need to go back to the standard Jupyter user interface layout which
-> you can access by entering the Jupyterhub address given in the email in your browser tab (i.e. without your username and tree?).
-{: .callout}
-
 
 ### Create a new python 3 notebook
 
@@ -129,8 +139,19 @@ section:
 By default, your new notebook is named as "**Untitled.ipynb**":
 
 - **ipynb** is the extension for any Jupyter notebook and you should make sure all your notebook gets this extension (otherwise it is not recognized as a Jupyter notebook)
-- you can rename your jupyter notebook with the tab "File --> Rename Notebook...".
+- you can rename your jupyter notebook with the tab "File --> Rename Notebook..." or 
+  right click on its name.
 
+### Changing kernel
+
+All the python packages we need to analyzing and visualizing climate data are not available in the default **python 3** kernel.
+
+We would need to switch to **pangeo** kernel as shown on the figure below.
+
+- Click on **Python 3** (top right)
+- Select **pangeo** to switch kernel
+
+<img src="../fig/jupyterlab_pangeo_switch.png" width="600">
 
 ### Start a new Terminal
 
@@ -150,11 +171,13 @@ Start a new **Terminal** on your JupyterHub (this will be referred to hereafter 
 
 <font color="blue">On the JupyterHub terminal:</font>
 
-<pre>rsync -avzu --progress YOUR_USER_NAME@saga.sigma2.no:/work/users/YOUR_USER_NAME/archive/f2000.T31T31.test/ /opt/uio/GEO4962/$USER/f2000.T31T31.test/
-</pre>
+~~~
+rsync -avzu --progress YOUR_USER_NAME@saga.sigma2.no:/cluster/work/users/YOUR_USER_NAME/archive/F2000climo-f19_g17/ .
+~~~
+{: .language-bash}
 
 
-# Map visualization with psyplot
+# Map visualization with xarray
 
 Start a new **python3** notebook on your JupyterHub and type the following commands.
 
