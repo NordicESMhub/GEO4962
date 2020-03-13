@@ -197,35 +197,34 @@ Start a new **python3** notebook on your JupyterHub and type the following comma
 # for instance to get path, environment variables
 import os
 
-# python package for plotting maps, 2D plot, etc.
-import psyplot.project as psy
-
-# the next line is only necessary when running within a Jupyter notebook
-# and allows to inline plots in the Jupyter notebook
-%matplotlib inline
+# Python package that makes working with labelled multi-dimensional arrays simple and efficient
+import xarray as xr
 ~~~
 {: .language-python}
 
-These set of commands are meant to initialize the python 3 notebook with python packages (*os* and *psyplot.project*)
+This set of commands initialize the python 3 notebook with python packages (*os* and *xarray*)
 that we will use for plotting our netCDF model outputs.
 
-Now we can create a map. We plot **TS** (Surface temperature) by specifying the filename and title of our plot 
-and using *psy.plot.mapplot*:
+Now we can create a map. We plot **TS** (Surface temperature) by specifying the filename, opening the dataset, and using the *xarray.DataArray.plot()* function:
 
 ~~~
 # get your username from the environment variable USER
 username = os.getenv('USER')
 # specify the path where your test simulation is stored
-path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.test/atm/hist/'
-filename = path + 'f2000.T31T31.test.cam.h0.0009-01.nc'
+path = 'shared-ns1000k/GEO4962/' + username + '/F2000climo.f19_g17.test/atm/hist/'
+filename = path + 'F2000climo.f19_g17.control.cam.h0.0009-01.nc'
 print(filename)
 
-p = psy.plot.mapplot(filename, name='TS', title="Surface temperature [K]\nF2000_CAM5_T31T31_test-0009-01")
+# load netcdf file into an xarray dataset
+ds = xr.open_dataset(filename, decode_times=False)
+
+# and plot surface temperature
+ds.TS.plot()
 ~~~
 {: .language-python}
 
 
-<img src="../fig/TS_F2000_CAM5_T31T31_test-0009-01.png">
+<img src="../fig/test_0009-01">
 
 
 # Customize your maps
@@ -235,28 +234,41 @@ p = psy.plot.mapplot(filename, name='TS', title="Surface temperature [K]\nF2000_
 ~~~
 import matplotlib as mpl
 mpl.rcParams['figure.figsize'] = [10., 8.]
-p = psy.plot.mapplot(filename, name='TS', title="Surface temperature [K]\nF2000_CAM5_T31T31_test-0009-01")
+ds.TS.plot()
 ~~~ 
 {: .language-python}
 
-<img src="../fig/TS_F2000_CAM5_T31T31_test-0009-01_big.png">
+<img src="../fig/test_0009-01_big.png">
+
+## Use a scientific color map
+Using unscientific color maps like the rainbow (a.k.a. jet) color map distorts, hides, and thereby visually falsifies the underlying data, while often making the figure unreadable to color-blind readers or when printed in black and white. 
+If you want to use a scientific color map (created by Fabio Crameri here at UiO), copy the function in shared-ns1000k/GEO4962/scripts/load_cmap.ipynp into your own notebook and use it as an argument in the plot function.
+For more info about scientific color maps: http://www.fabiocrameri.ch/colourmaps.php
+
+~~~
+ds.TS.plot(cmap=load_cmap('vik'))
+~~~ 
+{: .language-python}
+
+<img src="../fig/test_0009-01_big_cmap.png">
+
+
 
 ## Plot 4D-fields such as Temperature
 		
 In the same way add another cell below the plot and display the variable **T** instead of the surface temperature (TS). 
-
-To show the colorbar label we used the *clabel* format option keyword and one of the predefined labels (*desc* for description). 
+To select which vertical level to plot use the isel() function.
 
 ~~~
-psy.plot.mapplot(filename, name='T', title="F2000_CAM5_T31T31_test-0009-01", clabel='{desc}')
+ds.T.isel(lev=20).plot(cmap=load_cmap('vik'))
 ~~~
 {: .language-python}
 
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_top.png">
+<img src="../fig/test_0009-01_T.png">
 
 
 Contrary to TS which depends only on two horizontal dimensions (namely latitude and longitude)
- plus time, for T there is an additional dimension (along the vertical).
+ plus time, for T there is an additional vertical dimension (lev).
 
 > ## What did we plot?
 >
@@ -274,27 +286,39 @@ As for T, U has an additional dimension (along the vertical), hence we also have
 <font color="green">On jupyter:</font>
 
 ~~~
-u = psy.plot.mapplot(filename, name='U', dims={'lev': 29}, title="F2000_CAM5_T31T31_test-0009-01", clabel='{desc}')
+ds.U.isel(lev=-1).squeeze().plot(cmap=load_cmap('broc'))
 ~~~
 {: .language-python}
 
 
 
-<img src="../fig/U29_F2000_CAM5_T31T31_test-0009-01.png">
+<img src="../fig/test-0009-01_U.png">
 
 
 ## Change map projection
+We can use the Python package Cartopy to produce maps and do other geospatial data analyses.
+We will also use pyplot, a collection of functions that make plotting simpler.
 
 ~~~
-psy.plot.mapplot(filename, name='T', dims={'lev': 29}, projection='moll', 
-                 clabel='{desc}', title="F2000_CAM5_T31T31_test-0009-01")
+import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+ax = plt.axes(projection=ccrs.Miller())
+
+ds.TS.plot(ax=ax, 
+           transform=ccrs.PlateCarree(),
+           cmap=load_cmap('vik') 
+          )
+
+ax.coastlines()
 ~~~
 {: .language-python}
 
 
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_moll.png">
+<img src="../fig/test-0009-01_cartopy.png">
 
-The list of available projections for pysplot is available [here](https://psyplot.readthedocs.io/projects/psy-maps/en/latest/api/psy_maps.plotters.html#psy_maps.plotters.FieldPlotter.projection).
+The list of available cartopy projections is available [here](https://scitools.org.uk/cartopy/docs/latest/crs/projections.html).
 
 
 ## Georeferenced Latitude-Vertical plot 
@@ -302,56 +326,28 @@ The list of available projections for pysplot is available [here](https://psyplo
 
 ### 2D plot for one longitude point
 
-We select *lon=0* and to use psyplot, we create a new *xarray* using latitudes and the levels:
+We use *xarray*'s *sel* to select the data along longitude 0.
 
 ~~~
-import xarray as xr
 
-mpl.rcParams['figure.figsize'] = [10., 8.]
+ds.T.sel(lon=0).plot(cmap=load_cmap('vik'))
 
-ds = psy.open_dataset(filename)
-
-# Create a new dataset over latitudes and levels
-# where we select time=0 and lon=0
-T_cross_section = xr.Dataset(
-    {'T': ds['T'].isel(time=0, lon=0)},
-    {'lat':  ds.lat, 'lev': ds.lev}, 
-    attrs = ds['T'].attrs)
-
-# Plot
-psy.plot.plot2d(T_cross_section, name='T', clabel='{desc}', 
-				xlabel=ds.lat.attrs['long_name'], 
-				ylabel=ds.lev.attrs['long_name'])
 ~~~
 {: .language-python}
 
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_lon0.png">
+<img src="../fig/test-0009-01_T_vert.png">
 
 ### 2D plot over averaged longitudes
-
-We create a new *xarray* as before but instead of selecting one longitude, we average over all the longitudes,
-using *mean* function:
+Now instead of selecting one longitude, we average over all the longitudes,
+using the *mean* function:
 
 ~~~
-# Instead of selecting one longitude, 
-# we can average over all the longitudes
-# We select time=0 and use mean where we specify the dimension
-# over which we want to average ('lon')
-Tmean=xr.Dataset(
-       {'T': ds['T'].isel(time=0).mean(dim='lon')},
-       {'lat':  ds.lat, 'lev': ds.lev}, 
-        attrs = ds['T'].attrs)
-
-print(Tmean)
-
-# Plot the cross section
-psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.attrs['units'],
-               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
+ds.T.mean(dim='lon').plot(cmap=load_cmap('vik'))
 ~~~
 {: .language-python}
 
 
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_mean_lon.png">
+<img src="../fig/test-0009-01_T_vert_mean.png">
 
 ## CESM vertical coordinate system
 
@@ -386,16 +382,18 @@ print(ds.hyam)
 {: .language-python}
 
 ~~~ 
-<xarray.DataArray 'hyam' (lev: 30)>
-array([0.003643, 0.007595, 0.014357, 0.024612, 0.038268, 0.054595, 0.072012,
-       0.087821, 0.103317, 0.121547, 0.142994, 0.168225, 0.178231, 0.170324,
-       0.161023, 0.15008 , 0.137207, 0.122062, 0.104245, 0.084979, 0.066502,
-       0.050197, 0.037189, 0.028432, 0.022209, 0.016407, 0.011075, 0.006255,
-       0.001989, 0.      ])
+<xarray.DataArray 'hyam' (lev: 32)>
+array([0.003643, 0.007595, 0.014357, 0.024612, 0.035923, 0.043194, 0.051677,
+       0.06152 , 0.073751, 0.087821, 0.103317, 0.121547, 0.142994, 0.168225,
+       0.178231, 0.170324, 0.161023, 0.15008 , 0.137207, 0.122062, 0.104245,
+       0.084979, 0.066502, 0.050197, 0.037189, 0.028432, 0.022209, 0.016407,
+       0.011075, 0.006255, 0.001989, 0.      ])
 Coordinates:
   * lev      (lev) float64 3.643 7.595 14.36 24.61 ... 936.2 957.5 976.3 992.6
 Attributes:
     long_name:  hybrid A coefficient at layer midpoints
+
+
 ~~~
 {: .output}
 
@@ -406,12 +404,12 @@ print(ds.hybm)
 {: .language-python}
 
 ~~~ 
-<xarray.DataArray 'hybm' (lev: 30)>
+<xarray.DataArray 'hybm' (lev: 32)>
 array([0.      , 0.      , 0.      , 0.      , 0.      , 0.      , 0.      ,
-       0.      , 0.      , 0.      , 0.      , 0.      , 0.019677, 0.062504,
-       0.112888, 0.172162, 0.241894, 0.323931, 0.420442, 0.5248  , 0.624888,
-       0.713208, 0.78367 , 0.831103, 0.864811, 0.896237, 0.925124, 0.951231,
-       0.974336, 0.992556])
+       0.      , 0.      , 0.      , 0.      , 0.      , 0.      , 0.      ,
+       0.019677, 0.062504, 0.112888, 0.172162, 0.241894, 0.323931, 0.420442,
+       0.5248  , 0.624888, 0.713208, 0.78367 , 0.831103, 0.864811, 0.896237,
+       0.925124, 0.951231, 0.974336, 0.992556])
 Coordinates:
   * lev      (lev) float64 3.643 7.595 14.36 24.61 ... 936.2 957.5 976.3 992.6
 Attributes:
@@ -435,53 +433,58 @@ lev     A          B
 2 7.594819646328688 0.0
 3 14.356632251292467 0.0
 4 24.612220004200935 0.0
-5 38.26829977333546 0.0
-6 54.59547974169254 0.0
-7 72.01245054602623 0.0
-8 87.82123029232025 0.0
-9 103.31712663173676 0.0
-10 121.54724076390266 0.0
-11 142.99403876066208 0.0
-12 168.22507977485657 0.0
-13 178.2306730747223 19.677413627505302
-14 170.32432556152344 62.50429339706898
-15 161.02290898561478 112.8879077732563
-16 150.08028596639633 172.16161638498306
-17 137.20685988664627 241.89404398202896
-18 122.06193804740906 323.93063604831696
-19 104.24471274018288 420.44246196746826
-20 84.97915416955948 524.7995406389236
-21 66.50169566273689 624.8877346515656
-22 50.19678920507431 713.2076919078827
-23 37.188658490777016 783.6697101593018
-24 28.431948274374008 831.1028182506561
-25 22.20897749066353 864.8112714290619
-26 16.40738220885396 896.2371647357941
-27 11.074557900428772 925.1238405704498
-28 6.2549535650759935 951.230525970459
-29 1.9894090946763754 974.3359982967377
-30 0.0                992.556095123291
+5 35.92325001955032 0.0
+6 43.1937500834465 0.0
+7 51.67749896645546 0.0
+8 61.52049824595451 0.0
+9 73.75095784664154 0.0
+10 87.82123029232025 0.0
+11 103.31712663173676 0.0
+12 121.54724076390266 0.0
+13 142.99403876066208 0.0
+14 168.22507977485657 0.0
+15 178.2306730747223 19.677413627505302
+16 170.32432556152344 62.50429339706898
+17 161.02290898561478 112.8879077732563
+18 150.08028596639633 172.16161638498306
+19 137.20685988664627 241.89404398202896
+20 122.06193804740906 323.93063604831696
+21 104.24471274018288 420.44246196746826
+22 84.97915416955948 524.7995406389236
+23 66.50169566273689 624.8877346515656
+24 50.19678920507431 713.2076919078827
+25 37.188658490777016 783.6697101593018
+26 28.431948274374008 831.1028182506561
+27 22.20897749066353 864.8112714290619
+28 16.40738220885396 896.2371647357941
+29 11.074557900428772 925.1238405704498
+30 6.2549535650759935 951.230525970459
+31 1.9894090946763754 974.3359982967377
+32 0.0 992.556095123291
+
 ~~~
 {: .output}
 
 
-We multiplied A and B by *1000* so that values at the top of the atmosphere are in **mb** (3.64mb).
+We multiplied A and B by *1000* so that values are in **hPa**.
 
 So if we compute the pressure at the lowest model level in Oslo:
 
 ~~~
-# Find the surface pressure of the grid cell near Oslo and convert from Pascal to mb
+# Find the surface pressure of the grid cell near Oslo and convert from Pascal to hPa
 PS_oslo = ds['PS'].isel(time=0).sel(lat=60., lon=10.75, method='nearest')/100. 
+
 # Convert the lowest model level from sigma to pressure
-p_bottom_oslo = ds.hyam[29] + ds.hybm[29]*PS_oslo
-print("Oslo (mb)")
+p_bottom_oslo = ds.hyam[-1] + ds.hybm[-1]*PS_oslo
+print("Oslo (hPa)")
 print("PS = ", PS_oslo.values, " Lowest model level = ", p_bottom_oslo.values)
+
 ~~~ 
 {: .language-python}
 
 ~~~
-Oslo (mb)
-PS =  991.536640625  Lowest model level =  984.155736190416
+Oslo (hPa)
+PS =  948.606640625  Lowest model level =  941.545303026773
 ~~~
 {: .output}
 
@@ -493,7 +496,7 @@ So the pressure at the lowest model level is not that far from the surface press
 > > ## Solution
 > > 
 > > ~~~
-> > # First find the value of the surface pressure at Everest and convert in mb
+> > # First find the value of the surface pressure at Everest and convert to hPa
 > > PS_everest = ds['PS'].isel(time=0).sel(lat=28., lon=86.5, method='nearest')/100. 
 > > # Then proceed as for Oslo
 > > print(PS_everest)
@@ -502,89 +505,76 @@ So the pressure at the lowest model level is not that far from the surface press
 > > 
 > > ~~~
 > > <xarray.DataArray 'PS' ()>
-> > array(750.189687)
+> > array(756.7215625)
 > > Coordinates:
-> >     time     object 0009-02-01 00:00:00
-> >     lat      float64 27.83
-> >     lon      float64 86.25
+> >     lat      float64 27.47
+> >     lon      float64 87.5
+> >     time     float64 2.951e+03
 > > ~~~
 > > {: .output}
 > > 
 > > And now we compute the pressure at the lowest model level:
 > > 
 > > ~~~
-> > p_bottom_everest = ds.hyam[29] + ds.hybm[29]*PS_everest
+> > p_bottom_everest = ds.hyam[-1] + ds.hybm[-1]*PS_everest
 > > print(p_bottom_everest)
 > > ~~~
 > > {: .language-python}
 > > 
 > > ~~~
 > > <xarray.DataArray ()>
-> > array(744.605347)
+> > array(751.08859917)
 > > Coordinates:
 > >     lev      float64 992.6
-> >     time     object 0009-02-01 00:00:00
-> >     lat      float64 27.83
-> >     lon      float64 86.25
+> >     lat      float64 27.47
+> >     lon      float64 87.5
+> >     time     float64 2.951e+03
 > > ~~~
 > > {: .output}
-> > This clearly shows that the lowest pressure value we have at the top of Mount Everest is 744 mb, quite different from the corresponding sigma level (992.6).
+> > This clearly shows that the lowest level pressure value we have at the top of Mount Everest is 751 hPa, quite different from the corresponding sigma level (992.6).
 > {: .solution}
 {: .challenge}
 
 More information can be found in [Description of the NCAR Community Atmosphere Model (CAM 3.0)](http://www.cesm.ucar.edu/models/atm-cam/docs/description/description.pdf).
 
-The values at the top of the model are then pressure values (mb) so it is clear that we need to revert the
+Having pressure values (hPa) as the vertical coordinate, it is clear that we need to revert the
 vertical axis to get the lower values at the top and the highest values at the bottom:
 
 ~~~
-# To revert vertical axis
-psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.attrs['units'],
-               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
-
-# Invert vertical axis
-import matplotlib.pyplot as plt
+ds.T.mean(dim='lon').plot(cmap=load_cmap('vik'))
 plt.ylim(plt.ylim()[::-1])
 ~~~
 {: .language-python}
 
 
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_mean_lon_invert_y.png">
+<img src="../fig/test-0009-01_T_reversed.png">
 
 The vertical axis is labelled as "hybrid level at midpoints". Again, not pressure levels but still we 
 usually use the log to plot it as it is more intuitive to analyze. For this, go to the tab "Grid" and 
 change the units of the vertical axis from "scalar" to "Log10". 
 
 ~~~
-psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'], clabel=Tmean.attrs['units'],
-               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
-
-# Invert vertical axis
+ds.T.mean(dim='lon').plot(cmap=load_cmap('vik'))
 plt.ylim(plt.ylim()[::-1])
-# 'symlog' scaling, however, handles negative values nicely
-plt.yscale('symlog')
+plt.yscale('log')
 ~~~
 {: .language-python}
 
 
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_mean_lon_log10.png">
+<img src="../fig/test-0009-01_T_reversed_log.png">
 
 We can also adjust the top of the figure:
 
 ~~~
-psy.plot.plot2d(Tmean, name='T', title=Tmean.attrs['long_name'],plot='contourf', clabel=Tmean.attrs['units'],
-               xlabel=ds.lat.attrs['long_name'], ylabel=ds.lev.attrs['long_name'])
-
-# Invert vertical axis
+ds.T.mean(dim='lon').plot(cmap=load_cmap('vik'))
 plt.ylim(plt.ylim()[::-1])
-# 'symlog' scaling, however, handles negative values nicely
-plt.yscale('symlog')
-plt.ylim(top=3)
+plt.yscale('log')
+plt.ylim(top=10)
 ~~~
 {: .language-python}
 
 
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_mean_lon_log10_adjust.png">
+<img src="../fig/test-0009-01_T_reversed_log_top.png">
 
 {% include links.md %}
 
