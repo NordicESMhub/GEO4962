@@ -224,7 +224,7 @@ ds.TS.plot()
 {: .language-python}
 
 
-<img src="../fig/test_0009-01.png">
+<img src="../fig/test-0009-01.png">
 
 
 # Customize your maps
@@ -238,7 +238,7 @@ ds.TS.plot()
 ~~~ 
 {: .language-python}
 
-<img src="../fig/test_0009-01_big.png">
+<img src="../fig/test-0009-01_big.png">
 
 ## Use a scientific color map
 Using unscientific color maps like the rainbow (a.k.a. jet) color map distorts, hides, and thereby visually falsifies the underlying data, while often making the figure unreadable to color-blind readers or when printed in black and white. 
@@ -250,7 +250,7 @@ ds.TS.plot(cmap=load_cmap('vik'))
 ~~~ 
 {: .language-python}
 
-<img src="../fig/test_0009-01_big_cmap.png">
+<img src="../fig/test-0009-01_big_cmap.png">
 
 
 
@@ -264,7 +264,7 @@ ds.T.isel(lev=20).plot(cmap=load_cmap('vik'))
 ~~~
 {: .language-python}
 
-<img src="../fig/test_0009-01_T.png">
+<img src="../fig/test-0009-01_T.png">
 
 
 Contrary to TS which depends only on two horizontal dimensions (namely latitude and longitude)
