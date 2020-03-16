@@ -224,7 +224,7 @@ ds.TS.plot()
 {: .language-python}
 
 
-<img src="../fig/test_0009-01">
+<img src="../fig/test_0009-01.png">
 
 
 # Customize your maps
