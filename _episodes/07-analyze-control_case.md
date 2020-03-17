@@ -449,7 +449,7 @@ plt.xlim(right=ds.TEMP.lat.max())
 ~~~
 {: .language-python}
 
-<img src="../fig/SPARC_T_py_january.png">
+<img src="../fig/sparc_T_jan.png">
 
 
 ### SPARC climatology: Plot zonal wind
@@ -469,7 +469,7 @@ plt.xlim(right=ds.TEMP.lat.max())
 {: .language-python}
 
 
-<img src="../fig/SPARC_U_jan.png">
+<img src="../fig/sparc_U_jan.png">
 
 ### Multiple plots 
 
@@ -524,7 +524,7 @@ fig.colorbar(cs, cax=cbar_ax, label=ds.WIND.attrs['units'])
 ~~~
 {: .language-python}
 
-<img src="../fig/SPARC_U_all.png">
+<img src="../fig/sparc_U_all.png">
 
 > ## Make a multiple plot for the SPARC temperature
 >
@@ -577,7 +577,7 @@ fig.colorbar(cs, cax=cbar_ax, label=ds.WIND.attrs['units'])
 > > ~~~
 > > {: .language-python}
 > >
-> > <img src="../fig/SPARC_T_all.png">
+> > <img src="../fig/sparc_T_all.png">
 > > 
 > {: .solution}
 >
