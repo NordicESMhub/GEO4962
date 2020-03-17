@@ -90,12 +90,14 @@ To create a new case always involve executing the command create_newcase.
 
 export EXPNAME=CO2
 
-module load cesm/1.2.2
+module use /cluster/projects/nn1000k/modulefiles
+module load cesm/2.1.0
 
 #
 # Simulation 2: Long simulation
 #
-./create_newcase -case ~/cesm_case/f2000.T31T31.$EXPNAME -res T31_T31 -compset F_2000_CAM5 -mach saga
+create_newcase --case $HOME/cases/F2000climo-f19_g17.$EXPNAME --res f19_g17 --compset F2000climo --mach saga --run-unsupported --project nn1000k
+
 </pre>
 
 Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.$EXPNAME corresponding to your new case.  

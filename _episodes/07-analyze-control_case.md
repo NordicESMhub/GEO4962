@@ -1238,7 +1238,7 @@ the control run with the SPARC climatology.
 
 > ## Exercise
 > 
-> <font color="red">How well does CAM5 (T31/L30, control run) represent the SPARC climatology?</font>
+> <font color="red">How well does CAM6 (control run) represent the SPARC climatology?</font>
 > 
 > To answer to this question:
 > - write a Python 3 Jupyter notebook and name it **exercise_sparc_vs_control_YOURNAME.ipynb** where you need to
