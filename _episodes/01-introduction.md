@@ -5,9 +5,9 @@ exercises: 0
 questions:
 - "What is a climate model?"
 objectives:
-- "Learn about atmospheric general circulation models"
+- "Learn about CESM"
 keypoints:
-- "CAM/CESM"
+- "CESM"
 ---
 
 <img src="../fig/img06.jpg">
@@ -78,7 +78,7 @@ ls
 *   **bld**: scripts to generate makefiles and dependencies for compiling CAM5
 *   **chem_proc**: MOZART [chemical preprocessor](http://www.cesm.ucar.edu/working_groups/Chemistry/chemistry.preprocessor.pdf)
 *   **doc**: change log
-*   **src**: source code for CAM6
+*   **src**: source code for CAM5
 *   **test**: CAM testing framework
 *   **tools**: utility to generate or remap terrain dataset
 *   **cime_config**: configuration for running CAM within CESM e.g. number of processors, etc.
