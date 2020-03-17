@@ -5,9 +5,9 @@ exercises: 0
 questions:
 - "What is a climate model?"
 objectives:
-- "Learn about atmospheric general circulation models (CAM)"
+- "Learn about atmospheric general circulation models"
 keypoints:
-- "CAM"
+- "CAM/CESM"
 ---
 
 <img src="../fig/img06.jpg">
