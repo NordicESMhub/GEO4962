@@ -124,7 +124,7 @@ For this purpose there is a CESM option called RESUBMIT.
 {: .language-bash}
 
 
-By setting this option, CAM5 will be running one month of simulation (once submitted) and automatically resubmit the next 12 months.  
+By setting this option, CAM6 will be running one month of simulation (once submitted) and automatically resubmit the next 12 months.  
 
 <font color="red">On Saga:</font>
 
@@ -216,7 +216,7 @@ TSsi = dssi['TS'][0,:,:]
 
 diff = TSc - TSsi
 
-diff.psy.plot.mapplot(title="Surface temperature [K]\nF2000_CAM5_T31T31-0009-01\nControl-Sea_Ice")
+diff.psy.plot.mapplot(title="Surface temperature [K]\nF2000_CAM6_T31T31-0009-01\nControl-Sea_Ice")
 ~~~
 {: .language-python}
 
