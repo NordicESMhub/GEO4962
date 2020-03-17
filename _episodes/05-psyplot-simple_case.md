@@ -242,8 +242,8 @@ ds.TS.plot()
 
 ## Use a scientific color map
 Using unscientific color maps like the rainbow (a.k.a. jet) color map distorts, hides, and thereby visually falsifies the underlying data, while often making the figure unreadable to color-blind readers or when printed in black and white. 
-If you want to use a scientific color map (created by Fabio Crameri here at UiO), copy the function in shared-ns1000k/GEO4962/scripts/load_cmap.ipynp into your own notebook and use it as an argument in the plot function.
-For more info about scientific color maps: http://www.fabiocrameri.ch/colourmaps.php
+If you want to use a scientific color map (created by Fabio Crameri here at UiO), copy the function in `shared-ns1000k/GEO4962/scripts/load_cmap.ipynp` into your own notebook and use it as an argument in the plot function.
+For more info about scientific color maps: [http://www.fabiocrameri.ch/colourmaps.php](http://www.fabiocrameri.ch/colourmaps.php)
 
 ~~~
 ds.TS.plot(cmap=load_cmap('vik'))
