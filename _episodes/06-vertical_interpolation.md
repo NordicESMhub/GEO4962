@@ -3,9 +3,9 @@ title: "From hybrid sigma-pressure (model) levels to pressure levels"
 teaching: 0
 exercises: 0
 questions:
-- "How to interpolate on pressure levels?"
+- "How to interpolate pressure levels?"
 objectives:
-- "Learn to interpolate data on pressure levels"
+- "Learn to interpolate data to pressure levels"
 keypoints:
 - "hybrid sigma levels"
 - "pressure levels"
@@ -15,11 +15,11 @@ keypoints:
 
 ### Interpolate to one pressure level
 
-PyNGL (Python NCL Graphics Library) is a python interface to the same core graphics as NCL (NCAR Command Language) for visualization and data processing.
+PyNGL (Python NCL Graphics Library) is a python interface with the same core graphics as NCL (NCAR Command Language) for visualization and data processing.
 
 PyNIO (Python Interface for Geoscientific Data Input/Output) is a python package that allows read and/or write access to a variety of data formats using an interface modeled on netCDF.
 
-Note: These PyNGL & PyNIO libraries are still under developpement and therefore not yet fully operational (i.e., not all the functionalities were implemented).
+Note: These PyNGL & PyNIO libraries are still under development and therefore not yet fully operational (i.e., not all the functionalities were implemented).
 
 In this section we are going to use [Ngl.vinth2p](https://www.pyngl.ucar.edu/Functions/Ngl.vinth2p.shtml). 
 
