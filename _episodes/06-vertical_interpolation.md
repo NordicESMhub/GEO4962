@@ -3,7 +3,7 @@ title: "From hybrid sigma-pressure (model) levels to pressure levels"
 teaching: 0
 exercises: 0
 questions:
-- "How to interpolate pressure levels?"
+- "How to interpolate data to pressure levels?"
 objectives:
 - "Learn to interpolate data to pressure levels"
 keypoints:
@@ -17,10 +17,6 @@ keypoints:
 
 PyNGL (Python NCL Graphics Library) is a python interface with the same core graphics as NCL (NCAR Command Language) for visualization and data processing.
 
-PyNIO (Python Interface for Geoscientific Data Input/Output) is a python package that allows read and/or write access to a variety of data formats using an interface modeled on netCDF.
-
-Note: These PyNGL & PyNIO libraries are still under development and therefore not yet fully operational (i.e., not all the functionalities were implemented).
-
 In this section we are going to use [Ngl.vinth2p](https://www.pyngl.ucar.edu/Functions/Ngl.vinth2p.shtml). 
 
 - This PyNGL function interpolates CESM hybrid coordinates (i.e., model levels) to pressure coordinates.
@@ -32,67 +28,85 @@ In this section we are going to use [Ngl.vinth2p](https://www.pyngl.ucar.edu/Fun
   - If the input data (i.e., to be interpolated) is on midlevels, then hyam/hybm coefficients should be supplied; 
   - If the input data is on interfaces, then hyai/hybi coefficients should be supplied.
 
-Warning: the unit for psrf *(the surface pressure at each grid point)* is **Pascals (Pa)** whereas the unit for pnew *(lists of output pressure levels)* and p0 *(scalar value equal to surface reference pressure)* is **millibars (mb)**. 
+
+> ## Warning
+> The unit for psrf *(the surface pressure at each grid point)* is **Pascals (Pa)** whereas the unit for pnew *(lists of output pressure levels)* and p0 *(scalar value equal to surface reference pressure)* is **millibars (mb)**. 
+>
+{: .callout}
 
 ~~~
+# Python package that makes working with labelled multi-dimensional arrays simple and efficient
 import Ngl
-import Nio
 import os
 import xarray as xr
 import numpy as np
-import matplotlib as mpl
-
-# python package for plotting maps, 2D plot, etc.
-import psyplot.project as psy
-
-# the next line is only necessary when running within a Jupyter notebook
-# and allows to inline plots in the Jupyter notebook
+import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
 %matplotlib inline
 
-# Set figure size for all our plots
-mpl.rcParams['figure.figsize'] = [10., 8.]
-# get your username from the environment variable USER
-username = os.getenv('USER')
-# specify the path where your test simulation is stored
-path = '/opt/uio/GEO4962/' + username + '/f2000.T31T31.test/atm/hist/'
-filename = path + 'f2000.T31T31.test.cam.h0.0009-01.nc'
+path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.control/atm/hist/'
+filename = path + 'F2000climo.f19_g17.control.cam.h0.0009-01.nc'
 print(filename)
 
-#  Open the netCDF file containing the input data.
-cfile = Nio.open_file(filename,"r")
+# load netcdf file into an xarray dataset
+ds = xr.open_dataset(filename, decode_times=True)
+
+#  Extract the desired variables (need numpy arrays for vertical interpolation)
+hyam = ds["hyam"][:]
+hybm = ds["hybm"][:]
+T    = (ds["T"][:,:,:,:])
+psrf = (ds["PS"][:,:,:])
+P0mb =  0.01*ds["P0"].values
+
+lats = ds["lat"][:]
+lons = ds["lon"][:]
 
 #  Define the output pressure levels.
 pnew = [850.]
-
-#  Extract the desired variables.
-hyam = cfile.variables["hyam"][:]
-hybm = cfile.variables["hybm"][:]
-T    = (cfile.variables["T"][:,:,:,:])
-psrf = (cfile.variables["PS"][:,:,:])
-P0mb =  0.01*cfile.variables["P0"].get_value()
-
-lats = cfile.variables["lat"][:]
-lons = cfile.variables["lon"][:]
-
 #  Do the interpolation.
 intyp = 1                              # 1=linear, 2=log, 3=log-log
 kxtrp = False                          # True=extrapolate (when the output pressure level is outside of the range of psrf)
   
+# Vertical interpolation
+
 Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 
 Tnew[Tnew==1e30] = np.NaN
 
-T850=xr.Dataset({'T850': (('lats','lons'), Tnew[0,0,:,:])},
-                {'lons':  lons, 'lats':  lats})
+# Create new xarray Dataset
 
-# plot using psyplot
+dset_p = xr.Dataset({'T850': (('lat','lon'), Tnew[0,0,:,:])},
+                  {'lon':  lons, 'lat':  lats})
+dset_p.T850.attrs['units'] = 'K'
+dset_p.T850.attrs['long_name'] = "Temperature"
+dset_p.T850.attrs['standard_name'] = 'T'
 
-psy.plot.mapplot(T850, name='T850', title='Temperature (K) at 850 mb')
+# Plotting
+fig = plt.figure(figsize=(15, 5))
+ax = plt.axes(projection=ccrs.PlateCarree())
+
+dset_p.T850.plot(ax=ax, 
+           transform=ccrs.PlateCarree(),
+	   cmap=load_cmap('vik'))
+
+ax.coastlines()
+plt.title(ds.time.values[0].strftime("%B year %Y"))
 ~~~
 {: .language-python}
 
 <img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_850mb.png">
 
+
+> ## Loading colormaps
+> In your jupyter notebook, you can load additional/customized colormap using the following statment:
+> ~~~
+> %run load_cmap.py
+> ~~~
+> {: .language-bash}
+>
+> with [load_cmap.py](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/load_cmap.py).
+>
+{: .callout}
 
 > ## Create a map plot for the zonal wind (U) at **850 mb**
 > 
@@ -100,22 +114,36 @@ psy.plot.mapplot(T850, name='T850', title='Temperature (K) at 850 mb')
 >
 > > ## Solution
 > > ~~~
-> > import xarray as xr
-> > import numpy as np
-> >  
 > > pnew = [850.]
+> >
+> > #  Do the interpolation.
+> > intyp = 1                              # 1=linear, 2=log, 3=log-log
+> > kxtrp = False                          # True=extrapolate (when the output pressure level is outside of the range of psrf)
+> >   
+> > U    = (ds["U"][:,:,:,:])
 > > 
-> > U    = (cfile.variables["U"][:,:,:,:])
 > > UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
-> >  
+> >    
 > > ntime, output_levels, nlat, nlon = UonP.shape
 > > 
 > > UonP[UonP==1e30] = np.NaN
-> > U850=xr.Dataset({'U850': (('lat','lon'), UonP[0,0,:,:])},
-> >                 {'lat':  lats, 'lon':  lons})
 > > 
-> > # plot using psyplot
-> > psy.plot.mapplot(U850, name='U850', title='Zonal wind (m/s) at 850 mb')
+> > dset_p=xr.Dataset({'U850': (('lat','lon'), UonP[0,0,:,:])},
+> >                   {'lat':  lats, 'lon':  lons})
+> > dset_p.U850.attrs['units'] = 'm/s'
+> > dset_p.U850.attrs['long_name'] = "zonal wind"
+> > dset_p.U850.attrs['standard_name'] = 'U'
+> > fig = plt.figure(figsize=(15, 5))
+> > ax = plt.axes(projection=ccrs.PlateCarree())
+> > 
+> > dset_p.U850.plot(ax=ax, 
+> >            transform=ccrs.PlateCarree(),
+> >            cmap=load_cmap('broc') 
+> >            )
+> > 
+> > ax.coastlines()
+> > plt.title(ds.time.values[0].strftime("%B year %Y"))
+> > 
 > > ~~~
 > > {: .language-python}
 > >
@@ -136,7 +164,7 @@ import xarray as xr
 import numpy as np
 import matplotlib.pyplot as plt
 
-pnew = [1000., 900., 850., 700., 600, 500., 400., 300., 100., 30., 10.]
+pnew = [850., 700., 600, 500., 400., 300., 100., 30., 10.]
 
 intyp = 1                             # 1=linear, 2=log, 3=log-log
 kxtrp = True                          # True=extrapolate
@@ -144,7 +172,6 @@ kxtrp = True                          # True=extrapolate
 UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 
 ntime, output_levels, nlat, nlon = UonP.shape
-
 ~~~
 {: .language-python}
 
@@ -160,22 +187,22 @@ UonP[UonP==1e30] = np.NaN
 print(UonP.mean(axis=3).shape,lats.shape)
 Umean=xr.Dataset({'U': (('lev','lat'), UonP.mean(axis=3)[0,:,:])},
                  {'lev':  np.asarray(pnew), 'lat':  lats})
+Umean.U.attrs['units'] = 'm/s'
+Umean.U.attrs['long_name'] = "zonal wind"
+Umean.U.attrs['standard_name'] = 'U'
 ~~~
 {: .language-python}
 		
 We can now plot *Umean*:
 
 ~~~
-psy.plot.plot2d(Umean, name='U', plot='contourf', 
-                title="Georeferenced Latitude-Vertical plot", 
-                clabel="Zonal wind (m/s)",
-                xlabel='latitude',
-                ylabel='pressure (mb)')
-                
+fig = plt.figure(figsize=(8, 6))
+Umean.U.plot.contourf(cmap=load_cmap('vik'))
 plt.ylim(plt.ylim()[::-1])
-plt.yscale('symlog')
-plt.ylim(bottom=1000)
-plt.ylim(top=10)
+plt.yscale('log')
+plt.ylim(top=10.)
+plt.ylim(bottom=850.)
+plt.title("Zonal wind on pressure levels")
 ~~~
 {: .language-python}
 
@@ -200,23 +227,28 @@ plt.ylim(top=10)
 > > 
 > > intyp = 1                             # 1=linear, 2=log, 3=log-log
 > > kxtrp = True                          # True=extrapolate
-> >
+> > 
 > > Tnew = Ngl.vinth2p(T,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 > > 
 > > ntime, output_levels, nlat, nlon = Tnew.shape
 > > 
 > > Tnew[Tnew==1e30] = np.NaN
-> >
+> > 
 > > Tmean=xr.Dataset({'T': (('lev','lat'), Tnew.mean(axis=3)[0,:,:])},
 > >                  {'lev':  np.asarray(pnew), 'lat':  lats})
+> > Tmean.T.attrs['units'] = 'K'
+> > Tmean.T.attrs['long_name'] = "Temperature"
+> > Tmean.T.attrs['standard_name'] = 'T'
 > > 
-> > psy.plot.plot2d(Tmean, name='T', plot='contourf')
+> > fig = plt.figure(figsize=(8, 6))
+> > Tmean.T.plot.contourf(cmap=load_cmap('vik'))
 > > # Invert vertical axis
 > > plt.ylim(plt.ylim()[::-1])
 > > plt.ylim(top=10.)
-> > plt.ylim(bottom=900.)
+> > plt.ylim(bottom=850.)
 > > plt.xlim(left=-90)
 > > plt.xlim(right=90)
+> > plt.title("Georeferenced Latitude-Vertical plot \n Temperature on pressure levels")
 > > ~~~
 > > {: .language-python}
 > >
@@ -224,89 +256,6 @@ plt.ylim(top=10)
 > >
 > {: .solution}
 {: .challenge}
-
-Here, we show you how to use [ncl](https://www.ncl.ucar.edu/Document/Tools/) to interpolate T and U fields to 
-a list of pressure levels and store the resulting field in a new netCDF file.
-
-The main advantage of using *ncl* as opposed to the current (non-operational) PyNGL and PyNIO is that you have access to an improved interpolation routine called *vinth2p_ecmwf* which interpolates CESM hybrid coordinates to pressure coordinates but uses an ECMWF formulation to **extrapolate** values below ground.
-
-> ## First we need to get the ncl script [vertical_interpolation.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl) 
-> For instance using the wget command (on the Jupyterhub Terminal):
-> ~~~
-> (Be careful: do not forget to change directory first by using cd /opt/uio/GEO4962/$USER/analysis)
->
-> wget https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/vertical_interpolation.ncl
-> ~~~
-> {: .language-bash}
->
-{: .callout}
-
-
-~~~
-press = "'lev_p=(/1000.0,900.,850.,700.,500.,300.,200.,100.,50.,20.,10./)'"
-cmd = "ncl " + press + " 'input_filename=" + '"' + filename + '"' 
-cmd = cmd + "' 'output_filename=" + '"f2000.T31T31.test.cam.h0.0009-01_pl.nc"' 
-cmd = cmd + "' vertical_interpolation.ncl"
-
-# run ncl command
-import os
-returned_value = os.system(cmd)
-print(returned_value)
-~~~
-{: .language-python}
-
-A *returned value* different from **0** means that there has been an error somewhere (which will have to be fixed), otherwise we can plot the temperature values read from the newly created file:
-
-~~~
-import xarray as xr
-
-ds = psy.open_dataset('f2000.T31T31.test.cam.h0.0009-01_pl.nc')
-
-# Create a new dataset over latitudes and levels
-# where we select time=0 and lon=0
-T_cross_section = xr.Dataset({'T': ds['T'].isel(time=0).mean(dim='lon')},
-                             {'lat':  ds.lat, 'lev': ds.lev_p}, 
-                             attrs = ds['T'].attrs)
-
-
-# Plot
-psy.plot.plot2d(T_cross_section, name='T', plot='contourf', 
-                title="Georeferenced Latitude-Vertical plot", 
-                clabel="Temperature (K)",
-                xlabel='latitude',
-                ylabel='pressure (mb)')
-
-plt.ylim(plt.ylim()[::-1])
-plt.yscale('symlog')
-plt.ylim(bottom=1000)
-plt.ylim(top=10)
-~~~
-{: .language-python}
-
-<img src="../fig/T_F2000_CAM5_T31T31_test-0009-01_pressure.png"> 
-
-And U:
-
-~~~
-U_cross_section = xr.Dataset({'U': ds['U'].isel(time=0).mean(dim='lon')},
-                             {'lat':  ds.lat, 'lev': ds.lev_p}, 
-                             attrs = ds['U'].attrs)
-
-psy.plot.plot2d(U_cross_section, name='U', plot='contourf', 
-                title="Georeferenced Latitude-Vertical plot", 
-                clabel="Zonal wind (m/s)",
-                xlabel='latitude',
-                ylabel='pressure (mb)')
-                
-plt.ylim(plt.ylim()[::-1])
-plt.yscale('symlog')
-plt.ylim(bottom=1000)
-plt.ylim(top=10)
-~~~
-{: .language-python}
-
-<img src="../fig/U_F2000_CAM5_T31T31_test-0009-01_pressure.png"> 
-
 
 {% include links.md %}
 
