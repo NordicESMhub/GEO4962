@@ -19,7 +19,7 @@ keypoints:
 
 # Introduce model experiments
 
-**Master students will work in pairs** for this practical and are to choose an experiment, adapt the namelist or make dataset changes following one of the predefined scenarii, then **analyze the model outputs in pairs**. 
+**Master students will work in pairs** for this practical and to choose an experiment, adapt the namelist or make dataset changes following one of the predefined scenarios, then **analyze the model outputs in pairs**. 
 
 > ## PhD students only
 >
@@ -29,7 +29,7 @@ keypoints:
 > 
 > The PhD students have to think about the **numerical implementation** of their solution in the model.
 > 
-> PhD students will also work in pairs and will use the **same model version** (CESM1.2.2 with CAM 5.3) but can set-up a more appropriate compset if needed.
+> PhD students will also work in pairs and will use the **same model version** (CESM1.2.2 with CAM 5.3) but can set up a more appropriate compensate if needed.
 > 
 > In a first phase PhD students will have to **investigate several possible options** and assess their likely pros and cons.
 > 
