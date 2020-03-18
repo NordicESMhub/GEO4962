@@ -27,10 +27,10 @@ keypoints:
 
 A control run is a simulation undertaken with a model with known conditions for the ocean, atmosphere, etc.
 
-In our case, the control run will be used as a reference to evaluate the impacts of different scenarii 
-(changes made to the atmospheric composition such CO2 concentration increase, etc.).
+In our case, the control run will be used as a reference to evaluate the impacts of different scenarios 
+(changes are made to the atmospheric composition such as CO2 concentration increase, etc.).
 
-The control run is representative of the conditions in years 2000 i.e. similar to today's climate. The idea was 
+The control run is a representative of the conditions in years 2000 i.e. similar to today's climate. The idea was 
 to generate the restart files (snapshot of the model state at a given point in time) from where you will be able to 
 start your future experiments at year 9 and further compare your simulation outputs with the control run for the following years.
 
@@ -115,7 +115,7 @@ The *ending* of the filename gives you some information on its content:
 - The 7 digits allow to represent the simulated year and month i.e. **0005-08** means year 5 (from the start of the simulation) and month 8 (August).
 - **.nc** means we have netCDF files only.
 
-So in the control directory (*atm/hist* as we are only interested by CAM model outputs), we have 14 years of simulation and
+So in the control directory (*atm/hist* as we are only interested in CAM model outputs), we have 14 years of simulation and
 a file per month. Now let's have a look at a single file.
 
 <font color="green">On jupyterhub in a Python 3 jupyter notebook:</font>
@@ -1240,7 +1240,7 @@ the control run with the SPARC climatology.
 > 
 > <font color="red">How well does CAM6 (control run) represent the SPARC climatology?</font>
 > 
-> To answer to this question:
+> To answer this question:
 > - write a Python 3 Jupyter notebook and name it **exercise_sparc_vs_control_YOURNAME.ipynb** where you need to
 > replace **YOURNAME** by your name!
 > - Follow the methodology given in this lesson and compare the results from the control run and the SPARC climatology.
