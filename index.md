@@ -24,7 +24,7 @@ After finishing this course, students should understand:
 
 > ## Prerequisites
 >
-> This course corresponds to the practicals' part of the GEO4962 "The General 
+> This course corresponds to practical parts of the GEO4962 "The General 
 > Circulation of the Atmosphere" given at the University of Oslo and assumes 
 > students have a basic knowledge of the Climate System.
 >
