@@ -247,23 +247,20 @@ ds.TS.plot(cmap=load_cmap('vik'))
 import numpy as np
 import xarray as xr
 import Ngl
-import Nio
 import matplotlib.pyplot as plt
-#  Open the netCDF file containing the input data.
-cfile = Nio.open_file(filename,"r")
 
 #  Define the output pressure levels.
 pnew = [1000., 900., 850., 700., 600, 500., 400., 300., 100., 30., 10.]
 
-#  Extract the desired variables.
-hyam = cfile.variables["hyam"][:]
-hybm = cfile.variables["hybm"][:]
-U    = (cfile.variables["U"][:,:,:,:])
-psrf = (cfile.variables["PS"][:,:,:])
-P0mb =  0.01*cfile.variables["P0"].get_value()
+#  Extract the desired variables from xarray to numpy array
+hyam = ds["hyam"][:]
+hybm = ds["hybm"][:]
+U    = (ds["U"][:,:,:,:])
+psrf = (ds["PS"][:,:,:])
+P0mb =  0.01*ds["P0"].values
 
-lats = cfile.variables["lat"][:]
-lons = cfile.variables["lon"][:]
+lats = ds["lat"][:]
+lons = ds["lon"][:]
 
 #  Do the interpolation.
 intyp = 1                              # 1=linear, 2=log, 3=log-log
@@ -279,19 +276,20 @@ U_cross_section=xr.Dataset(
        {'U': (('lev','lat'), UonP.mean(axis=3)[0,:,:])},
        {'lev':  np.asarray(pnew),
         'lat':  lats})
+U_cross_section.U.attrs['units'] = 'm/s'
+U_cross_section.U.attrs['long_name'] = "Zonal wind"
+U_cross_section.U.attrs['standard_name'] = 'U'
 
-psy.plot.plot2d(U_cross_section, name='U', plot='contourf', 
-                title="Georeferenced Latitude-Vertical plot", 
-                clabel="Zonal wind (m/s)",
-                xlabel='latitude',
-                ylabel='pressure (mb)'
-               )
+fig = plt.figure(figsize=(8, 6))
+U_cross_section.U.plot.contourf(cmap=load_cmap('vik'))
 plt.ylim(plt.ylim()[::-1])
 plt.yscale('symlog')
 plt.ylim(bottom=1000)
 plt.ylim(top=10)
 plt.xlim(left=-90)
 plt.xlim(right=90)
+plt.ylabel('pressure (hPa)')
+plt.title("Zonal wind on pressure levels")
 ~~~
 {: .language-python}
 
@@ -327,10 +325,7 @@ The monthly zonal wind climatology is derived from the UARS Reference Atmosphere
 
 ## Plotting SPARC climatology
 
-### Plotting SPARC climatology using *ncl*
-
-The SPARC climatology **T** and **U** is stored in a file called **SPARC.wind_temp.nc** and can be found 
-on the Jupyterhub.
+The SPARC climatology **T** and **U** is stored in a file called **SPARC.wind_temp.nc** and can be found on the Jupyterhub.
 
 In the Jupyterhub Terminal:
 
@@ -341,9 +336,7 @@ ls
 {: .language-bash}
 
 ~~~
--rw-r--r-- 1 jupyter-annefou jupyter-annefou   4173 Feb 13 12:40 sparc_2.ncl
 -rw-r--r-- 1 jupyter-annefou jupyter-annefou 131512 Feb 13 12:43 sparc_temp.ascii
--rw-r--r-- 1 jupyter-annefou jupyter-annefou   4764 Feb 13 12:46 sparc_1.ncl
 -rw-r--r-- 1 jupyter-annefou jupyter-annefou 229149 Feb 13 12:47 sparc_wind.ascii
 -rw-r--r-- 1 jupyter-annefou jupyter-annefou 157840 Feb 13 12:47 SPARC.wind_temp.nc
 -rw-r--r-- 1 jupyter-annefou jupyter-annefou 337206 Feb 13 12:47 sparc.000001.png
@@ -354,39 +347,7 @@ ls
 where:
 
 - [sparc_temp.ascii](ftp://sparc-ftp1.ceda.ac.uk/sparc/ref_clim/randel/temp_wind/temp.ascii) and [sparc_wind.ascii](ftp://sparc-ftp1.ceda.ac.uk/sparc/ref_clim/randel/temp_wind/wind.ascii) are two text files containing then temperature and zonal wind, respectively.
-- [sparc_1.ncl](https://www.ncl.ucar.edu/Applications/Scripts/sparc_1.ncl) is an ncl script that reads sparc_temp.ascii and sparc_wind.ascii and write the temperature and zonal wind (U) in a netCDF file called SPARC.wind_temp.nc
-- A ncl script is available in the same directory ([sparc_2.ncl](https://www.ncl.ucar.edu/Applications/Scripts/sparc_2.ncl)) and can be used to generate two plots (png files):
-	- sparc.000001.png contains the Monthly temperature climatology (K)	
-		<img src="../fig/sparc.000001.png">
-		
-	- sparc.000002.png contains the Monthly zonal wind climatology (m/s)
-		<img src="../fig/sparc.000002.png">
-	
-
-To be able to run these ncl scripts, open a Terminal on the Jupyterhub:
-
-- First copy the entire SPARC directory in your analysis folder:
-
-~~~
-cp -R $HOME/GEO4962/SPARC /opt/uio/GEO4962/$USER/analysis/.
-~~~
-{: .language.bash}
-
-Then go to the new SPARC directory you have copied:
-
-~~~
-cd /opt/uio/GEO4962/$USER/analysis/SPARC
-~~~
-{: .language.bash}
-
-and run ncl:
-
-~~~
-ncl sparc_2.ncl
-~~~
-{: .language.bash}
-
-This will generate the two images (png files) that you can open in your jupyterLab to visualize them.
+- `SPARC.wind_temp.nc` netCDF file containing **U** and **T** corresponding to `sparc_temp.ascii` and `sparc_wind.ascii`.
 
 ## Plotting SPARC climatology using *python*
 
@@ -1196,42 +1157,7 @@ dy[['T', 'U','hyam','hybm','PS','PHIS','P0']].to_netcdf("f2000.T31T31.control.ca
 
 ### How to interpolate hybrid sigma pressure levels to pressure levels?
 
-Then you can use [ncl](https://www.ncl.ucar.edu/) and the script [vertical_interpolation_yearly.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/files/vertical_interpolation_yearly.ncl) 
-that we have prepared. 
-
-To make sure the files created by [vertical_interpolation_yearly.ncl](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/files/vertical_interpolation_yearly.ncl) do not exist, we can remove them:
-
-
-In Terminal on Jupyterhub:
-
-~~~
-for i in {1..12}
- do 
-  rm -rf f2000.T31T31.control.cam.h0_TUmean_pl_$i.nc
-done
-~~~
-{: .language-bash}
-
-
-We have used a loop written in *bash* shell. For more about the bash shell, look at the 
-[Carpentries](https://carpentries.org/) lesson on [The Unix Shell](http://swcarpentry.github.io/shell-novice/).
-
-Then, still in the same Terminal on JupyterHub:
-
-
-~~~
-ncl vertical_interpolation_yearly.ncl
-ls f2000.T31T31.control.cam.h0_TUmean_pl_*.nc
-~~~
-{: .language-bash}
-
-~~~
-f2000.T31T31.control.cam.h0_TUmean_pl_1.nc   f2000.T31T31.control.cam.h0_TUmean_pl_2.nc  f2000.T31T31.control.cam.h0_TUmean_pl_6.nc
-f2000.T31T31.control.cam.h0_TUmean_pl_10.nc  f2000.T31T31.control.cam.h0_TUmean_pl_3.nc  f2000.T31T31.control.cam.h0_TUmean_pl_7.nc
-f2000.T31T31.control.cam.h0_TUmean_pl_11.nc  f2000.T31T31.control.cam.h0_TUmean_pl_4.nc  f2000.T31T31.control.cam.h0_TUmean_pl_8.nc
-f2000.T31T31.control.cam.h0_TUmean_pl_12.nc  f2000.T31T31.control.cam.h0_TUmean_pl_5.nc  f2000.T31T31.control.cam.h0_TUmean_pl_9.nc
-~~~
-{: .output}
+Then you can use [Ngl.vinth2p](https://www.pyngl.ucar.edu/Functions/Ngl.vinth2p.shtml).
 
 You are now ready to visualize U and T from your control run and start the exercise which consists in comparing
 the control run with the SPARC climatology.
@@ -1245,17 +1171,12 @@ the control run with the SPARC climatology.
 > replace **YOURNAME** by your name!
 > - Follow the methodology given in this lesson and compare the results from the control run and the SPARC climatology.
 > - send it by email to the instructors/teachers 
-> - if you wish you can also upload it in the private github repository [GEO4962-students-2019](https://github.com/NordicESMhub/GEO4962-students-2019). <font color="red">It is a private repository
-> where only students and instructors from GEO4962 year 2019 have access</font>. It is only used to share assignments within
-> students and teachers and will never become public. 
 >
 {: .challenge}
 
 ### Deadline
 
-<font color="red">Fulfill the first exercise until the next practical on <b>April 11, 2019</b>!</font>
-
-
+<font color="red">Fulfill the first exercise until the next practical on <b>April 11, 2020</b>!</font>
 
 {% include links.md %}
 

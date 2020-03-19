@@ -299,9 +299,15 @@ You can now submit your test case.
 <font color="red">On Saga:</font>
 
 ~~~
+./xmlchange --subgroup case.run JOB_WALLCLOCK_TIME=01:00:00
 ./case.submit
 ~~~
 {: .language-bash}
+
+> ## Why chaning `JOB_WALLCLOCK_TIME`?
+> Adjusting the [wall clock time](https://en.wikipedia.org/wiki/Elapsed_real_time) for short runs (as here for running 1 month) will allow us to reduce the queuing time.
+>
+{: .callout}
 
 ### Monitor your test run
 
