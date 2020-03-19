@@ -174,14 +174,21 @@ We would need to switch to **pangeo** kernel as shown on the figure below.
 <img src="../fig/jupyterlab_pangeo_switch.png" width="600">
 
 
-# Copy your output files from Saga to the virtual machine
+# Copy your output files from Saga to JupyterHub
 
 Start a new **Terminal** on your JupyterHub (this will be referred to hereafter as your "JupyterHub terminal") and type the following commands.
 
 <font color="blue">On the JupyterHub terminal:</font>
 
 ~~~
-rsync -avzu --progress YOUR_USER_NAME@saga.sigma2.no:/cluster/work/users/YOUR_USER_NAME/archive/F2000climo-f19_g17/ .
+# Create a nwe folder for storing mod outputs
+mkdir -p $HOME/outputs/runs
+# Change directory
+cd $HOME/outputs/runs
+# Copy model outputs (remote synchronization)
+rsync -avzu --progress YOUR_USER_NAME@saga.sigma2.no:/cluster/work/users/YOUR_USER_NAME/archive/F2000climo-f19_g17 .
+# Go back to last directory
+cd -
 ~~~
 {: .language-bash}
 
@@ -193,23 +200,19 @@ Start a new **python3** notebook on your JupyterHub and type the following comma
 <font color="green">On jupyter:</font>
 
 ~~~
-# os provides a portable way of using operating system dependent functionality
-# for instance to get path, environment variables
-import os
-
 # Python package that makes working with labelled multi-dimensional arrays simple and efficient
 import xarray as xr
 ~~~
 {: .language-python}
 
-This set of commands initialize the python 3 notebook with python packages (*os* and *xarray*)
+This set of commands initialize the python 3 notebook with python package (*xarray*)
 that we will use for plotting our netCDF model outputs.
 
 Now we can create a map. We plot **TS** (Surface temperature) by specifying the filename, opening the dataset, and using the *xarray.DataArray.plot()* function:
 
 ~~~
-# get your username from the environment variable USER
-username = os.getenv('USER')
+%matplotlib inline
+
 # specify the path where your test simulation is stored
 path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.control/atm/hist'
 filename = path + 'F2000climo.f19_g17.control.cam.h0.0009-01.nc'
@@ -226,6 +229,16 @@ ds.TS.plot()
 
 <img src="../fig/test-0009-01.png">
 
+> ## Remark:
+> To make a plot from a jupyter notebook, you may need to add:
+> ~~~
+> %matplotlib inline
+> ~~~
+> {: .language-python}
+> 
+> This line is only valid in a jupyter notebook and cannot be used otherwise.
+>
+{: .callout}
 
 # Customize your maps
 
@@ -239,6 +252,7 @@ ds.TS.plot()
 {: .language-python}
 
 <img src="../fig/test-0009-01_big.png">
+
 
 ## Use a scientific color map
 Using unscientific color maps like the rainbow (a.k.a. jet) color map distorts, hides, and thereby visually falsifies the underlying data, while often making the figure unreadable to color-blind readers or when printed in black and white. 
@@ -320,6 +334,18 @@ ax.coastlines()
 
 The list of available cartopy projections is available [here](https://scitools.org.uk/cartopy/docs/latest/crs/projections.html).
 
+> ## Plotting your model outputs
+> - Use data from your own experiment `F2000climo-f19_g17` to generate maps for various
+> variables such as T, U and any other variables that may be of interest for your analysis.
+> **Tips**: To read your model outputs, use: 
+>
+> ~~~
+> path = 'outputs/runs/F2000climo-f19_g17/atm/hist/' 
+> filename = path + 'F2000climo-f19_g17.cam.h0.0014-01.nc' 
+> ~~~
+> {: .language-python}
+>
+{: .challenge}
 
 ## Georeferenced Latitude-Vertical plot 
 
@@ -575,6 +601,20 @@ plt.ylim(top=10)
 
 
 <img src="../fig/test-0009-01_T_reversed_log_top.png">
+
+> ## Georeferenced Latitude-Vertical plot with your model outputs
+> - Use data from your own experiment `F2000climo-f19_g17` to generate 
+> georeferenced Latitude-Vertical plot for U and T. 
+>
+> **Tips**: To read your model outputs, use: 
+>
+> ~~~
+> path = 'outputs/runs/F2000climo-f19_g17/atm/hist/' 
+> filename = path + 'F2000climo-f19_g17.cam.h0.0014-01.nc' 
+> ~~~
+> {: .language-python}
+>
+{: .challenge}
 
 {% include links.md %}
 

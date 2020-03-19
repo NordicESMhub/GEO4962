@@ -211,6 +211,7 @@ plt.title("Zonal wind on pressure levels")
 > ## Create a Georeferenced Latitude-Vertical **temperature** plot on the following pressure levels:
 > pnew = [850., 700., 600, 500., 400., 300., 100., 30., 10.]
 > 
+> - Try setting `kxtrp = False` and make another plot with `kxtrp = True`
 > - What do you observe? 
 > - Is there anything wrong?
 >
