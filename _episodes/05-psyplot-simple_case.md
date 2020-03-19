@@ -227,7 +227,7 @@ ds.TS.plot()
 {: .language-python}
 
 
-<img src="../fig/test-0009-01.png">
+<img src="../fig/test-0009-01.png" width="600">
 
 > ## Remark:
 > To make a plot from a jupyter notebook, you may need to add:
@@ -251,20 +251,25 @@ ds.TS.plot()
 ~~~ 
 {: .language-python}
 
-<img src="../fig/test-0009-01_big.png">
+<img src="../fig/test-0009-01_big.png width="800"">
 
 
 ## Use a scientific color map
-Using unscientific color maps like the rainbow (a.k.a. jet) color map distorts, hides, and thereby visually falsifies the underlying data, while often making the figure unreadable to color-blind readers or when printed in black and white. 
-If you want to use a scientific color map (created by Fabio Crameri here at UiO), copy the function in `shared-ns1000k/GEO4962/scripts/load_cmap.ipynp` into your own notebook and use it as an argument in the plot function.
-For more info about scientific color maps: [http://www.fabiocrameri.ch/colourmaps.php](http://www.fabiocrameri.ch/colourmaps.php)
+Using unscientific color maps like the rainbow (a.k.a. jet) color map distorts and hides the underlying data, while often making the figure unreadable to color-blind readers or when printed in black and white. 
+If you want to use a scientific color map (created by Fabio Crameri here at UiO), you can load the function [load_cmap.py](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/load_cmap.py) using the following statment in your Jupyter Notebook:
+~~~
+%run load_cmap.py
+~~~
+{: .language-bash}
+More info about scientific color maps, as well as a list of included color maps [here](http://www.fabiocrameri.ch/colourmaps.php)
 
+The function can now be used as the color map argument when you plot:
 ~~~
 ds.TS.plot(cmap=load_cmap('vik'))
 ~~~ 
 {: .language-python}
 
-<img src="../fig/test-0009-01_big_cmap.png">
+<img src="../fig/test-0009-01_big_cmap.png" width="800">
 
 
 
@@ -278,7 +283,7 @@ ds.T.isel(lev=20).plot(cmap=load_cmap('vik'))
 ~~~
 {: .language-python}
 
-<img src="../fig/test-0009-01_T.png">
+<img src="../fig/test-0009-01_T.png" width="800">
 
 
 Contrary to TS which depends only on two horizontal dimensions (namely latitude and longitude)
@@ -306,7 +311,7 @@ ds.U.isel(lev=-1).squeeze().plot(cmap=load_cmap('broc'))
 
 
 
-<img src="../fig/test-0009-01_U.png">
+<img src="../fig/test-0009-01_U.png" width="800">
 
 
 ## Change map projection
@@ -330,7 +335,7 @@ ax.coastlines()
 {: .language-python}
 
 
-<img src="../fig/test-0009-01_cartopy.png">
+<img src="../fig/test-0009-01_cartopy.png" width="800">
 
 The list of available cartopy projections is available [here](https://scitools.org.uk/cartopy/docs/latest/crs/projections.html).
 
@@ -361,7 +366,7 @@ ds.T.sel(lon=0).plot(cmap=load_cmap('vik'))
 ~~~
 {: .language-python}
 
-<img src="../fig/test-0009-01_T_vert.png">
+<img src="../fig/test-0009-01_T_vert.png" width="800">
 
 ### 2D plot over averaged longitudes
 Now instead of selecting one longitude, we average over all the longitudes,
@@ -373,7 +378,7 @@ ds.T.mean(dim='lon').plot(cmap=load_cmap('vik'))
 {: .language-python}
 
 
-<img src="../fig/test-0009-01_T_vert_mean.png">
+<img src="../fig/test-0009-01_T_vert_mean.png" width="800">
 
 ## CESM vertical coordinate system
 
@@ -573,7 +578,7 @@ plt.ylim(plt.ylim()[::-1])
 {: .language-python}
 
 
-<img src="../fig/test-0009-01_T_reversed.png">
+<img src="../fig/test-0009-01_T_reversed.png" width="800">
 
 The vertical axis is labelled as "hybrid level at midpoints". Again, not pressure levels but still we 
 usually use the log to plot it as it is more intuitive to analyze. For this, go to the tab "Grid" and 
@@ -587,7 +592,7 @@ plt.yscale('log')
 {: .language-python}
 
 
-<img src="../fig/test-0009-01_T_reversed_log.png">
+<img src="../fig/test-0009-01_T_reversed_log.png" width="800">
 
 We can also adjust the top of the figure:
 
@@ -600,7 +605,7 @@ plt.ylim(top=10)
 {: .language-python}
 
 
-<img src="../fig/test-0009-01_T_reversed_log_top.png">
+<img src="../fig/test-0009-01_T_reversed_log_top.png" width="800">
 
 > ## Georeferenced Latitude-Vertical plot with your model outputs
 > - Use data from your own experiment `F2000climo-f19_g17` to generate 
