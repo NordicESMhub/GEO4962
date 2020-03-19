@@ -23,21 +23,8 @@ keypoints:
 
 > ## PhD students only
 >
-> However, for **PhD students** a more challenging exercise will be to define their own **geo-engineering solution** in order to **counteract the effect of doubling CO2**. 
+> **PhD students** will get a more challenging exercise that will be defined later.
 >
-> This original geo-engineering solution must be **scientifically sound**, although it can be “extreme” (to some extent) and does not necessarily have to be feasible in the real world from a practical point of view.
-> 
-> The PhD students have to think about the **numerical implementation** of their solution in the model.
-> 
-> PhD students will also work in pairs and will use the **same model version** (CESM 2.1.0 with CAM 6) but can set up a more appropriate compset ([Component set definitions](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html)) if needed.
-> 
-> In a first phase PhD students will have to **investigate several possible options** and assess their likely pros and cons.
-> 
-> That may require a **sensitivity analysis** and involve running short experiments (no more than 1 month each).
-> 
-> The PhD students will then quickly **present their favorite scenario for approval** before starting the actual simulations.
-> 
-> In a second phase the PhD students will run their experiment for a total of 14 months and analyze their results to evaluate the **effectiveness of the solution tested**, identify a region where the impact is most significant and quantify the changes.
 {: .callout}
 
 
@@ -84,8 +71,7 @@ To create a new case always involve executing the command create_newcase.
 
 <font color="red">On Saga:</font>
 
-<pre>cd $HOME/cesm/cesm1_2_2/scripts
-
+~~~
 # Adjust EXPNAME depending on your experiment (CO2, rockies, sea_ice, SST, himalaya)
 
 export EXPNAME=CO2
@@ -97,33 +83,39 @@ module load cesm/2.1.0
 # Simulation 2: Long simulation
 #
 create_newcase --case $HOME/cases/F2000climo-f19_g17.$EXPNAME --res f19_g17 --compset F2000climo --mach saga --run-unsupported --project nn1000k
+~~~
+{: .language-bash}
 
-</pre>
-
-Now you should have a new directory in $HOME/cesm_case/f2000.T31T31.$EXPNAME corresponding to your new case.  
+Now you should have a new directory in `$HOME/cases/F2000climo-f19_g17.$EXPNAME` corresponding to your new case.  
 
 <font color="red">On Saga:</font>
 
-<pre># Make sure EXPNAME is correctly defined!
+~~~
+# Make sure EXPNAME is correctly defined!
 
-cd ~/cesm_case/f2000.T31T31.$EXPNAME
-</pre>
+cd $HOME/cases/F2000climo-f19_g17.$EXPNAME
+~~~
+{: .language-bash}
 
 As before we start a hybrid run from the control experiment.
 
 <font color="red">On Saga:</font> 
 
-<pre>./xmlchange RUN_TYPE=hybrid
-./xmlchange RUN_REFCASE=f2000.T31T31.control
-./xmlchange RUN_REFDATE=0009-01-01
-</pre>
+~~~
+./xmlchange RUN_TYPE=hybrid
+./xmlchange RUN_REFCASE=F2000climo.f19_g17.control
+./xmlchange RUN_REFDATE=0014-01-01
+~~~
+{: .language-bash}
 
 We also need to define the **START DATE** for your experiment (that will make it easier to compare the outputs of the experiment with those of the same month from the control run).
 
 <font color="red">On Saga:</font> 
 
-<pre>./xmlchange RUN_STARTDATE=0009-01-01
-</pre>
+~~~
+./xmlchange RUN_STARTDATE=0014-01-01
+~~~
+{: .language-bash}
 
 ### Setup your new experiment duration
 
@@ -135,20 +127,22 @@ Make sure you set the duration of your experiments properly.
 
 <font color="red">On Saga:</font> 
 
-<pre>./xmlchange -file env_run.xml -id STOP_N -val 1
-./xmlchange -file env_run.xml -id STOP_OPTION -val nmonths
-</pre>
+~~~
+./xmlchange STOP_N=1
+./xmlchange STOP_OPTION=nmonths
+~~~
+{: .language-bash}
 
 Now we are ready to set-up the model configuration and build the cesm executable.  
 
 <font color="red">On Saga:</font>  
 
-<pre>./cesm_setup
+~~~
+./case.setup
 
-# Make sure EXPNAME is set properly!
-
-./f2000.T31T31.$EXPNAME.build
-</pre>
+./case.build
+~~~
+{: .language-bash}
 
 The default history file from CAM is a monthly average but it is possible to change the output frequency with the namelist variable **nhtfrq**
 
@@ -162,15 +156,16 @@ We also need to copy restart files in your running directory, etc.
 
 <font color="red">On Saga:</font>
 
-<pre>cat >> user_nl_cice << EOF
-grid_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
-kmt_file = '/work/users/$USER/inputdata/share/domains/domain.ocn.48x96_gx3v7_100114.nc'
-EOF
-
+~~~
 # Make sure EXPNAME is set properly!      
 
-cp $CESM_DATA/../GEO4962/archive/f2000.T31T31.control/rest/0009-01-01-00000/* /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
-</pre>
+cd /cluster/work/users/$USER/cesm/F2000climo-f19_g17.$EXPNAME/run
+wget https://zenodo.org/record/3702975/files/F2000climo.f19_g17.control.rest.0014-01-01-00000.tar.gz
+tar zxvf F2000climo.f19_g17.control.rest.0014-01-01-00000.tar.gz
+mv 0014-01-01-00000/* .
+
+~~~
+{: .language-bash}
 
 Now depending on your experiment case, you would have either to change the namelist or to change the input dataset.
 
