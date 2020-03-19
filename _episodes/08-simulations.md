@@ -29,7 +29,7 @@ keypoints:
 > 
 > The PhD students have to think about the **numerical implementation** of their solution in the model.
 > 
-> PhD students will also work in pairs and will use the **same model version** (CESM1.2.2 with CAM 5.3) but can set up a more appropriate compensate if needed.
+> PhD students will also work in pairs and will use the **same model version** (CESM 2.1.0 with CAM 6) but can set up a more appropriate compset ([Component set definitions](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html)) if needed.
 > 
 > In a first phase PhD students will have to **investigate several possible options** and assess their likely pros and cons.
 > 
