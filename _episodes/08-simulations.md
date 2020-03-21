@@ -160,9 +160,9 @@ We also need to copy restart files in your running directory, etc.
 # Make sure EXPNAME is set properly!      
 
 cd /cluster/work/users/$USER/cesm/F2000climo-f19_g17.$EXPNAME/run
-wget https://zenodo.org/record/3702975/files/F2000climo.f19_g17.control.rest.0014-01-01-00000.tar.gz
-tar zxvf F2000climo.f19_g17.control.rest.0014-01-01-00000.tar.gz
-mv 0014-01-01-00000/* .
+https://zenodo.org/record/3721663/files/F2000climo.f19_g17.control.rest.0010-01-01-00000.tar.gz
+tar zxvf F2000climo.f19_g17.control.rest.0010-01-01-00000.tar.gz
+mv 0010-01-01-00000/* .
 
 ~~~
 {: .language-bash}

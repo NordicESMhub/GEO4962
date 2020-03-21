@@ -9,6 +9,7 @@ objectives:
 keypoints:
 - "sea-ice"
 ---
+
 <img src="../fig/Sea_Ice.png">
 
 <h3 id="dataset"><b>Sea-ice</b>: how to update the input dataset?</h3>
@@ -19,51 +20,67 @@ You first need to copy the original SST file to your case directory.
 
 <font color="red">On Saga:</font>
 
-<pre>export EXPNAME=sea_ice
-cd ~/cesm_case/f2000.T31T31.$EXPNAME
+~~~
+export EXPNAME=sea_ice
+cd $HOME/cases/F2000climo-f19_g17.$EXPNAME
 
-cp /work/users/$USER/inputdata/atm/cam/sst/sst_HadOIBl_bc_48x96_clim_c050526.nc .
-</pre>
+cp /cluster/projects/nn1000k/cesm/inputdata/./atm/cam/sst/sst_HadOIBl_bc_1x1_2000climo_c180511.nc .
+~~~
+{: .language-bash}
 
 To change sea-ice fraction surface boundary data, use <a href="http://nco.sourgeforce.net">nco</a> utilities to modify the values in the file.
 
 We will use a function called <a href="http://nco.sourceforge.net/nco.html#ncap2-netCDF-Arithmetic-Processor">ncap2</a> – (netCDF Arithmetic Averager) single line command below:
 
 <font color="red">On Saga:</font>
-<pre>module load nco
 
-ncap2 -O -s 'lat2d[lat,lon]=lat' -s 'omask=(lat2d >= 40.)' -s 'ice_cov=(ice_cov*(1-omask))' sst_HadOIBl_bc_48x96_clim_c050526.nc sst_HadOIBl_bc_48x96_clim_$EXPNAME.nc
-</pre>
+~~~
+module load NCO/4.7.9-intel-2018b
 
-Apply this change using env_run.xml (recommended over user_nl* since also present in docn.streams.txt.prescribed):
+ncap2 -O -s 'lat2d[lat,lon]=lat' -s 'omask=(lat2d >= 40.)' -s 'ice_cov=(ice_cov*(1-omask))' sst_HadOIBl_bc_1x1_2000climo_c180511.nc sst_HadOIBl_bc_1x1_2000climo_c180511_$EXPNAME.nc
+~~~
+{: .language-bash}
+
+<img src="../fig/Sea_Ice_modified.png">
+
+Apply this change:
 
 We have to figure out which namelist variable to change.
 
 <font color="red">On Saga:</font>
 
-<pre>grep sst_ *.xml
-</pre>
+~~~
+grep sst_ *.xml
+~~~
+{: .language-bash}
 
 then change the relevant variable in env_run.xml.
 
 <font color="red">On Saga:</font>
 
-<pre>./xmlchange -file env_run.xml -i SSTICE_DATA_FILENAME -val ./sst_HadOIBl_bc_48x96_clim_sea_ice.nc
-</pre>
+~~~
+./xmlchange SSTICE_DATA_FILENAME=./sst_HadOIBl_bc_48x96_clim_sea_ice.nc
+~~~
+{: .language-bash}
 
-and to process env_run.xml to make the namelist changes effective (i.e., create namelist files).
+and to make the namelist changes effective (i.e., create namelist files).
 
 <font color="red">On Saga:</font>
 
-<pre>./preview_namelists
-</pre>
+~~~
+./preview_namelists
+~~~
+{: .language-bash}
 
 Finally, we can copy the changed SST data file to the run directory.
 
 <font color="red">On Saga:</font>
 
-<pre>cp sst_HadOIBl_bc_48x96_clim_sea_ice.nc /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
-</pre>
+~~~
+cp sst_HadOIBl_bc_1x1_2000climo_c180511_$EXPNAME.nc /cluster/work/users/$USER/F2000climo-f19_g17.$EXPNAME/run/.
+~~~
+{: .language-bash}
+
 
 {% include links.md %}
 
