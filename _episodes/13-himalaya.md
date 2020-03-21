@@ -17,39 +17,49 @@ Copy the original surface geopotential file into your case directory.
 
 <font color="red">On Saga:</font>
 
-<pre>export EXPNAME=himalaya
-cd ~/cesm_case/f2000.T31T31.$EXPNAME
+~~~
+export EXPNAME=himalaya
+cd $HOME/cases/F2000climo-f19_g17.$EXPNAME
 
-cp /work/users/$USER/inputdata/atm/cam/topo/USGS-gtopo30_48x96_c050520.nc .
-</pre>
+cp /cluster/projects/nn1000k/cesm/inputdata/./atm/cam/topo/fv_1.9x2.5_nc3000_Nsw084_Nrs016_Co120_Fi001_ZR_061116.nc .
+~~~
+{: .language-bash}
 
 Use nco utilities to edit the values in the file (http://nco.sourgeforce.net).
 We will use a function called ncap2 – (netCDF Arithmetic Averager) single line command below.
 
 <font color="red">On Saga:</font>
 
-<pre>module load nco
+~~~
+module load NCO/4.7.9-intel-2018b
 
-ncap2 -O -s 'lat2d[lat,lon]=lat ; lon2d[lat,lon]=lon' -s 'omask=(lat2d >= 30.0 && lat2d <= 50.0) && (lon2d >=70.0 && lon2d <= 100.0)' -s 'PHIS=(PHIS*(1-omask))' USGS-gtopo30_48x96_c050520.nc  USGS-gtopo30_48x96_c050520_$EXPNAME.nc
-</pre>
+ncap2 -O -s 'lat2d[lat,lon]=lat ; lon2d[lat,lon]=lon' -s 'omask=(lat2d >= 30.0 && lat2d <= 50.0) && (lon2d >=70.0 && lon2d <= 100.0)' -s 'PHIS=(PHIS*(1-omask))' fv_1.9x2.5_nc3000_Nsw084_Nrs016_Co120_Fi001_ZR_061116.nc fv_1.9x2.5_nc3000_Nsw084_Nrs016_Co120_Fi001_ZR_061116_$EXPNAME.nc
+~~~
+{: .language-bash}
+
+<img src="../fig/Himalaya_modified.png">
 
 Apply this change.
 
 <font color="red">On Saga:</font>
 
-<pre>echo "bnd_topo = './USGS-gtopo30_48x96_c050520_$EXPNAME.nc'" >> user_nl_cam 	
+~~~
+echo "bnd_topo = './fv_1.9x2.5_nc3000_Nsw084_Nrs016_Co120_Fi001_ZR_061116_$EXPNAME.nc'" >> user_nl_cam 	
 
 ./preview_namelists
 
-grep topo /work/users/$USER/f2000.T31T31.$EXPNAME/run/atm_in
-</pre>
+grep topo /cluster/work/users/$USER/cesm/F2000climo-f19_g17.$EXPNAME/run/atm_in
+~~~
+{: .language-bash}
 
 Copy the modified surface geopotential data file into your run directory.
 
 <font color="red">On Saga:</font>
 
-<pre>cp USGS-gtopo30_48x96_c050520_$EXPNAME.nc /work/users/$USER/f2000.T31T31.$EXPNAME/run/.
-</pre>
+~~~
+cp fv_1.9x2.5_nc3000_Nsw084_Nrs016_Co120_Fi001_ZR_061116_$EXPNAME.nc /cluster/work/users/$USER/cesm/F2000climo-f19_g17.$EXPNAME/run/.
+~~~
+{: .language-bash}
 
 
 {% include links.md %}
