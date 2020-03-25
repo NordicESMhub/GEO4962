@@ -44,7 +44,7 @@ We do all the practicals on <font color="red">Saga</font>.
 
 ### Notur Initialization
 
-Make sure you have set-up your SSH keys properly and you can transfer files with scp without entering your password. If not go [here](http://www.mn.uio.no/geo/english/services/it/help/using-linux/ssh-tips-and-tricks.html).  
+Make sure you have set up your SSH keys properly and you can transfer files with scp without entering your password. If not go [here](http://www.mn.uio.no/geo/english/services/it/help/using-linux/ssh-tips-and-tricks.html).  
 
 To run CAM-6 on Saga, we will use:
 
@@ -181,7 +181,7 @@ cd $HOME/cases/F2000climo-f19_g17
 Check the content of the directory and browse the sub-directories:  
 - CaseDocs: namelists or similar
 - SourceMods: this is where you can add local source code changes.
-- Tools: a few utilities (we won't use the directly)
+- Tools: a few utilities (we won't use them directly)
 - Buildconf: configuration for building each component
 
 For this tests (and all our simulations), we do not wish to have a "cold" start and we will therefore restart and continue an existing simulation we have previously run.  
@@ -234,7 +234,7 @@ Now we are ready to set-up our model configuration and build the cesm executable
 ~~~
 {: .language-bash}
  
-After building CESM for your configuration, a new directory (and a set of sub-directories) are created in /cluster/work/users/$USERS/F2000climo-f19_g17:
+After building CESM for your configuration, a new directory (and a set of sub-directories) are created in /cluster/work/users/$USERS/cesm/F2000climo-f19_g17:
 
 *   **bld**: contains the object and CESM executable (called **cesm.exe**) for your configuration
 *   **run**: this directory will be used during your simulation run to generate output files, etc.
