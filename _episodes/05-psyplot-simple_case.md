@@ -214,7 +214,7 @@ Now we can create a map. We plot **TS** (Surface temperature) by specifying the 
 %matplotlib inline
 
 # specify the path where your test simulation is stored
-path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.control/atm/hist'
+path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.control/atm/hist/'
 filename = path + 'F2000climo.f19_g17.control.cam.h0.0009-01.nc'
 print(filename)
 
