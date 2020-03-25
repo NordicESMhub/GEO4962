@@ -251,7 +251,7 @@ ds.TS.plot()
 ~~~ 
 {: .language-python}
 
-<img src="../fig/test-0009-01_big.png" width="800"">
+<img src="../fig/test-0009-01_big.png" width="800">
 
 
 ## Use a scientific color map
