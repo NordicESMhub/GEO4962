@@ -54,7 +54,7 @@ To run CAM-6 on Saga, we will use:
 
 To be able to compile and run CESM on Saga, no changes to the source code are necessary; we just have to adapt a few scripts for setting the compilers and libraries used by CESM.  
 
-To simplify and allow you to run CESM as quickly as possible, we have prepared a redy to use version of cesm.  
+To simplify and allow you to run CESM as quickly as possible, we have prepared a redy to use version of cesm. ?redy or ready
 
 <font color="red">On Saga:</font>  
 
