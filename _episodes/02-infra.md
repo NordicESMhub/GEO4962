@@ -146,7 +146,7 @@ We will be using [https://climate.uiogeo-apps.sigma2.no/](https://climate.uiogeo
 - Login with "Feide guest users"
 - Accept the different policies
 - Agree to become a member of the **EScience-Abisko**: the browser should display the message "Loading group details"
-- Mow go to [GEO4962 Jupyterhub](https://climate.uiogeo-apps.sigma2.no/)
+- Now go to [GEO4962 Jupyterhub](https://climate.uiogeo-apps.sigma2.no/)
 - Click "Sign in with Dataporten"
 - Login with Feide Guest User (Not your UiO username)
 - Finally the web browser should display a page with "jupyterlab" on the upper left side
