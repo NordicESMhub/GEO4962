@@ -12,10 +12,10 @@ The course gives a broad overview about the general circulation of the atmospher
 
 After finishing this course, students should understand:
 
-- Tropospheric Circulation,
-- Brewer Dobson Circulation,
-- Stratospheric Ozone distribution,
-- Dynamics and chemistry of key trace gases,
+- Tropospheric Circulation;
+- Brewer Dobson Circulation;
+- Stratospheric Ozone distribution;
+- Dynamics and chemistry of key trace gases;
 - Climate change and the Ozone Hole.
 
 <!-- this is an html comment -->
