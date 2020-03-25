@@ -82,7 +82,7 @@ module load cesm/2.1.0
 #
 # Simulation 2: Long simulation
 #
-create_newcase --case $HOME/cases/F2000climo-f19_g17.$EXPNAME --res f19_g17 --compset F2000climo --mach saga --run-unsupported --project nn1000k
+./create_newcase --case $HOME/cases/F2000climo-f19_g17.$EXPNAME --res f19_g17 --compset F2000climo --mach saga --run-unsupported --project nn1000k
 ~~~
 {: .language-bash}
 
@@ -160,7 +160,7 @@ We also need to copy restart files in your running directory, etc.
 # Make sure EXPNAME is set properly!      
 
 cd /cluster/work/users/$USER/cesm/F2000climo-f19_g17.$EXPNAME/run
-https://zenodo.org/record/3721663/files/F2000climo.f19_g17.control.rest.0010-01-01-00000.tar.gz
+wget https://zenodo.org/record/3721663/files/F2000climo.f19_g17.control.rest.0010-01-01-00000.tar.gz
 tar zxvf F2000climo.f19_g17.control.rest.0010-01-01-00000.tar.gz
 mv 0010-01-01-00000/* .
 
