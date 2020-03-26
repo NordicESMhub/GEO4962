@@ -258,7 +258,7 @@ ds.TS.plot()
 Using unscientific color maps like the rainbow (a.k.a. jet) color map distorts and hides the underlying data, while often making the figure unreadable to color-blind readers or when printed in black and white. 
 If you want to use a scientific color map (created by Fabio Crameri here at UiO), you can load the function [load_cmap.py](https://raw.githubusercontent.com/NordicESMhub/GEO4962/gh-pages/code/load_cmap.py) using the following statment in your Jupyter Notebook:
 ~~~
-%run load_cmap.py
+%run shared-ns1000k/GEO4962/scripts/load_cmap.ipynb
 ~~~
 {: .language-bash}
 More info about scientific color maps, as well as a list of included color maps [here](http://www.fabiocrameri.ch/colourmaps.php)

@@ -100,7 +100,7 @@ plt.title(ds.time.values[0].strftime("%B year %Y"))
 > ## Loading colormaps
 > In your jupyter notebook, you can load additional/customized colormap using the following statment:
 > ~~~
-> %run load_cmap.py
+> %run shared-ns1000k/GEO4962/scripts/load_cmap.ipynb
 > ~~~
 > {: .language-bash}
 >
