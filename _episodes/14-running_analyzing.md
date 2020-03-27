@@ -450,50 +450,57 @@ import matplotlib.pyplot as plt
 
 %matplotlib inline
 
-username = os.getenv('USER')
+experiment = 'F2000climo.f19_g17'
+username = # your NIRD username here
 
-path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.sea_ice/atm/hist'
+path = 'shared-ns1000k/GEO4962/outputs/' + username + '/archive/F2000climo.f19_g17.CO2/atm/hist/'
+
 
 fig = plt.figure(figsize=[20, 8])
 TSmin = 220
 TSmax = 320
 
-for month in range(1,7):
-    filename = path + 'F2000climo.f19_g17.sea_ice.cam.h0.0010-0' + str(month) + '.nc'
+for month in range(1,4):
+    filename = path + 'F2000climo.f19_g17.CO2.cam.h0.0010-0' + str(month) + '.nc'
     dset = xr.open_dataset(filename, decode_cf=False)
-    TSsi = dset['TS']
+    TSco2 = dset['TS'][0]
     lat = dset['lat']
     lon = dset['lon']
     dset.close()
 
-    TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi.values, coord=TSsi.lon)
-    TSsi_cy = xr.DataArray(TS_cyclic_si, coords={'lat':TSsi.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
-                            attrs = TSsi.attrs )
+    TS_cyclic_si, lon_cyclic = add_cyclic_point(TSco2.values, coord=TSco2.lon)
+    TSco2_cy = xr.DataArray(TS_cyclic_si, coords={'lat':TSco2.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
+                            attrs = TSco2.attrs )
 
-    ax = fig.add_subplot(2, 3, month, projection=ccrs.Mollweide())  # specify (nrows, ncols, axnum)
+    ax = fig.add_subplot(1, 3, month, projection=ccrs.Mollweide())  # specify (nrows, ncols, axnum)
 
-    cs = TSsi_cy.plot.contourf(ax=ax,
-                      transform=ccrs.PlateCarree(), 
-                      extend='max',
-                      cmap='jet', vmin=TSmin, vmax = TSmax, add_colorbar=False)
+    cs = TSco2_cy.plot.contourf(ax=ax,
+                                transform=ccrs.PlateCarree(), 
+                                extend='max',
+                                cmap=load_cmap('vik'), 
+                                vmin=TSmin, vmax = TSmax, 
+                                levels=15,
+                                add_colorbar=False)
 
     ax.set_title( 'month ' + str(month) + '\n')
     ax.coastlines()
     ax.gridlines()
     
 
-fig.suptitle(experiment + '-0010'+'\n' + TSsi.long_name, fontsize=24)
+fig.suptitle(experiment + '-0010'+'\n' + TSco2.long_name, fontsize=24)
     
 # adjust subplots so we keep a bit of space on the right for the colorbar    
 fig.subplots_adjust(right=0.8)
 # Specify where to place the colorbar
-cbar_ax = fig.add_axes([0.85, 0.15, 0.02, 0.7])
+cbar_ax = fig.add_axes([0.12, 0.28, 0.72, 0.03])
+
 # Add a unique colorbar to the figure
-fig.colorbar(cs, cax=cbar_ax, label=TSsi.units)
+fig.colorbar(cs, cax=cbar_ax, label=TSco2.units, 
+             orientation='horizontal')
 ~~~
 {: .language-python}
 
-<img src="../fig/Sea_ice-0009-01-06.png">
+<img src="../fig/several.png">
 
 {% include links.md %}
 
