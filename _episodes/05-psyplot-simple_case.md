@@ -305,7 +305,7 @@ As for T, U has an additional dimension (along the vertical), hence we also have
 <font color="green">On jupyter:</font>
 
 ~~~
-ds.U.isel(lev=-1).squeeze().plot(cmap=load_cmap('broc'))
+ds.U.isel(lev=-1).plot(cmap=load_cmap('broc'))
 ~~~
 {: .language-python}
 
