@@ -209,6 +209,7 @@ import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
 %matplotlib inline
 
+experiment = 'F2000climo.f19_g17'
 month = '0010-01'
 username = # your username on NIRD here
 
@@ -233,7 +234,7 @@ diff.plot(ax=ax,
            )
 
 ax.coastlines()
-plt.title("Surface temperature [K]\nF2000climo.f19_g17-0010-01\n4xCO2 - Control")
+plt.title('Surface temperature [K]\n' + experiment + '-' + month + '\n4xCO2 - Control')
 ~~~
 {: .language-python}
 
@@ -250,7 +251,7 @@ Now we can make a contour plot with a single command.
 <font color="green">On jupyter:</font>
 
 ~~~
-TSsi.plot.contourf()
+TSco2.plot.contourf()
 ~~~
 {: .language-python}
 
@@ -268,17 +269,17 @@ To do that we need to add bit more information.
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=180))
-TSsi.plot.contourf(ax=ax,
+TSco2.plot.contourf(ax=ax,
                    transform=ccrs.PlateCarree())
-ax.set_title(experiment + '-' + month + '\n' + TSsi.long_name)
+ax.set_title(experiment + '-' + month + '\n' + TSco2.long_name)
 ax.coastlines()
 ax.gridlines()
 ~~~
 {: .language-python}
 
-This is a slightly better plot, we are getting closer to what we had with psyplot...
+This is a slightly better plot ...
 
-<img src="../fig/Better-plot.png">
+<img src="../fig/projection.png" width="600">
 
 ### Change the default projection
 
@@ -292,12 +293,15 @@ TSmin = 220
 TSmax = 320
 
 fig = plt.figure(figsize=[8, 8])
-ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  # specify (nrows, ncols, axnum)
+ax = fig.add_subplot(1, 1, 1, 
+                      projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  
 
-TSsi.plot.contourf(ax=ax,
-                      transform=ccrs.PlateCarree(), 
-                      extend='max',
-                      cmap='jet', vmin=TSmin, vmax = TSmax)
+TSco2.plot.contourf(ax=ax,
+                    transform=ccrs.PlateCarree(), 
+                    extend='max',
+                    cmap=load_cmap('vik'), 
+                    levels=15,
+                    vmin=TSmin, vmax = TSmax)
 
 ax.set_title(experiment + '-' + month + '\n')
 ax.coastlines()
@@ -306,7 +310,7 @@ ax.gridlines()
 {: .language-python}
 
 
-<img src="../fig/Sea_ice-0009-01_nowrap.png">
+<img src="../fig/unwrapped.png" width="600">
 
 > ## wrap around longitudes
 > 
@@ -315,30 +319,35 @@ ax.gridlines()
 >
 > ~~~
 > 
-> # get longitude min and max
-> print(TSsi.lon.min(), TSsi.lon.max())
+> # what is longitude min and max?
+> print(TSco2.lon.min(), TSco2.lon.max())
 > ~~~
 > {: .language-python}
 >
 > To fill the gap, we can wrap around longitudes i.e. add a new longitude band at 360. equals to 0.
 >
 > ~~~
+> from cartopy.util import add_cyclic_point
+>
 > TSmin = 220
 > TSmax = 320
 > 
-> # max longitude is 356.25 so we add another longitude 360. (= 0.)  
-> TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi.values, coord=TSsi.lon)
+> # max longitude is 357.5 so we add another longitude 360. (= 0.)  
+> TS_cyclic_co2, lon_cyclic = add_cyclic_point(TSco2.values, coord=TSco2.lon)
 > # Create a new xarray with the new arrays
-> TSsi_cy = xr.DataArray(TS_cyclic_si, coords={'lat':TSsi.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
->                        attrs = TSsi.attrs )
+> TSco2_cy = xr.DataArray(TS_cyclic_co2, coords={'lat':TSco2.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
+>                        attrs = TSco2.attrs )
 > 
 > fig = plt.figure(figsize=[8, 8])
-> ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  # specify (nrows, ncols, axnum)
+> ax = fig.add_subplot(1, 1, 1, 
+>                      projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))
 > 
-> TSsi_cy.plot.contourf(ax=ax,
+> TSco2_cy.plot.contourf(ax=ax,
 >                       transform=ccrs.PlateCarree(), 
 >                       extend='max',
->                       cmap='jet', vmin=TSmin, vmax = TSmax)
+>                       cmap=load_cmap('vik'), 
+>                       levels=15,
+>                       vmin=TSmin, vmax = TSmax)
 > 
 > ax.set_title(experiment + '-' + month + '\n')
 > ax.coastlines()
@@ -348,7 +357,7 @@ ax.gridlines()
 > {: .language-python}
 >
 > 
-> <img src="../fig/Sea_ice-0009-01.png">
+> <img src="../fig/wrapped.png" width="600">
 {: .callout}
 
 
@@ -381,32 +390,36 @@ So far, we used *contourf* to visualize our data but we can also use *pcolormesh
 > > import matplotlib.pyplot as plt
 > > 
 > > %matplotlib inline
-> > 
-> > username = os.getenv('USER')
-> > 
+> >
+> >
+> > experiment = 'F2000climo.f19_g17'
 > > month = '0010-01'
-> > path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.sea_ice/atm/hist'
-> > filename = path + 'F2000climo.f19_g17.sea_ice.cam.h0.' + month + '.nc'
+> > username = 'herfugl' # you NIRD username here
+> >
+> > path = 'shared-ns1000k/GEO4962/outputs/' + username + '/archive/F2000climo.f19_g17.CO2/atm/hist/'
+> > filename = path + 'F2000climo.f19_g17.CO2.cam.h0.' + month + '.nc'
 > > 
-> > dset = xr.open_dataset(filename, decode_cf=False)
-> > TSsi = dset['TS']
+> > dsco2 = xr.open_dataset(filename, decode_cf=False)
+> > TSco2 = dsco2['TS'][0]
 > > 
 > > TSmin = 220
 > > TSmax = 320
 > > 
 > > # max longitude is 356.25 so we add another longitude 360. (= 0.)  
-> > TS_cyclic_si, lon_cyclic = add_cyclic_point(TSsi.values, coord=TSsi.lon)
+> > TS_cyclic_co2, lon_cyclic = add_cyclic_point(TSco2.values, coord=TSco2.lon)
 > > # Create a new xarray with the new arrays
-> > TSsi_cy = xr.DataArray(TS_cyclic_si, coords={'lat':TSsi.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
-> >                        attrs = TSsi.attrs )
+> > TSco2_cy = xr.DataArray(TS_cyclic_co2, coords={'lat':TSco2.lat, 'lon':lon_cyclic}, dims=('lat','lon'), 
+> >                        attrs = TSco2.attrs )
 > > 
 > > fig = plt.figure(figsize=[8, 8])
-> > ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))  # specify (nrows, ncols, axnum)
+> > ax = fig.add_subplot(1, 1, 1, 
+> >                      projection=ccrs.Orthographic(central_longitude=20, central_latitude=40))
 > > 
-> > TSsi_cy.plot.pcolormesh(ax=ax,
+> > TSco2_cy.plot.pcolormesh(ax=ax,
 > >                       transform=ccrs.PlateCarree(), 
 > >                       extend='max',
-> >                       cmap='jet', vmin=TSmin, vmax = TSmax)
+> >                       cmap=load_cmap('vik'), 
+> >                       vmin=TSmin, vmax = TSmax)
 > > 
 > > ax.set_title(experiment + '-' + month + '\n')
 > > ax.coastlines()
@@ -415,7 +428,7 @@ So far, we used *contourf* to visualize our data but we can also use *pcolormesh
 > > {: .language-python}
 > >
 > > 
-> > <img src="../fig/Sea_ice-0009-01_pcolormesh.png">
+> > <img src="../fig/pcolormesh.png">
 > >
 > {: .solution}
 {: .challenge}
