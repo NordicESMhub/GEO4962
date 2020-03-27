@@ -237,7 +237,7 @@ plt.title("Surface temperature [K]\nF2000climo.f19_g17-0010-01\n4xCO2 - Control"
 ~~~
 {: .language-python}
 
-<img src="../fig/CO2-control.png">
+<img src="../fig/CO2-control.png" width="600">
 
 ## Making bespoke graphs with python
 
