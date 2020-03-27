@@ -198,11 +198,9 @@ An easy way to do this is to calculate the difference between for example the su
 
 # Visualization with xarray
 
-Start a new **python3** notebook on your JupyterHub and type the following commands (in this example we assume we have the first month of data from the sea ice experiment).
-
 <font color="green">On jupyterhub:</font>
 
-Start a new **pangeo** notebook on your JupyterHub.
+Start a new **pangeo** notebook on your JupyterHub (in this example we assume we have the first month of data from the 4xCO2 experiment).
 
 ~~~
 import os
@@ -212,34 +210,34 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 
 month = '0010-01'
-username = os.getenv('USER')
+username = # your username on NIRD here
 
-path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.control/atm/hist'
+path = 'shared-ns1000k/GEO4962/outputs/runs/F2000climo.f19_g17.control/atm/hist/'
 filename = path + 'F2000climo.f19_g17.control.cam.h0.' + month + '.nc'
 dsc = xr.open_dataset(filename, decode_cf=False)
-TSc = dsc['TS']
+TSc = dsc['TS'][0] # the [0] is necessary because the two datasets have different time indices
 
-path = 'shared-ns1000k/GEO4962/outputs/' + username + 'F2000climo.f19_g17.sea_ice/atm/hist/'
-filename = path + 'f2000.T31T31.sea_ice.cam.h0.' + month + '.nc'
-dssi = xr.open_dataset(filename, decode_cf=False)
-TSsi = dssi['TS']
+path = 'shared-ns1000k/GEO4962/outputs/' + username + '/archive/F2000climo.f19_g17.CO2/atm/hist/'
+filename = path + 'F2000climo.f19_g17.CO2.cam.h0.' + month + '.nc'
+dsco2 = xr.open_dataset(filename, decode_cf=False)
+TSco2 = dsco2['TS'][0]
 
-diff = TSc - TSsi
+diff = TSco2 - TSc
 
 fig = plt.figure()
 ax = plt.axes(projection=ccrs.Miller())
 
-diff.TS.plot(ax=ax, 
+diff.plot(ax=ax, 
            transform=ccrs.PlateCarree(),
            cmap=load_cmap('vik') 
            )
 
 ax.coastlines()
-plt.title("Surface temperature [K]\nF2000climo.f19_g17-0010-01\nControl-Sea_Ice")
+plt.title("Surface temperature [K]\nF2000climo.f19_g17-0010-01\n4xCO2 - Control")
 ~~~
 {: .language-python}
 
-<img src="../fig/TS_F2000_CAM5_T31T31_control-sea_ice-0009-01.png">
+<img src="../fig/CO2-control.png">
 
 ## Making bespoke graphs with python
 
