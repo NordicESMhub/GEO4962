@@ -52,14 +52,14 @@ print(filename)
 ds = xr.open_dataset(filename, decode_times=True)
 
 #  Extract the desired variables (need numpy arrays for vertical interpolation)
-hyam = ds["hyam"][:]
-hybm = ds["hybm"][:]
-T    = (ds["T"][:,:,:,:])
-psrf = (ds["PS"][:,:,:])
-P0mb =  0.01*ds["P0"].values
+hyam = ds["hyam"]
+hybm = ds["hybm"]
+T    = ds["T"])
+psrf = ds["PS"]
+P0mb =  0.01*ds["P0"]
 
-lats = ds["lat"][:]
-lons = ds["lon"][:]
+lats = ds["lat"]
+lons = ds["lon"]
 
 #  Define the output pressure levels.
 pnew = [850.]
@@ -120,7 +120,7 @@ plt.title(ds.time.values[0].strftime("%B year %Y"))
 > > intyp = 1                              # 1=linear, 2=log, 3=log-log
 > > kxtrp = False                          # True=extrapolate (when the output pressure level is outside of the range of psrf)
 > >   
-> > U    = (ds["U"][:,:,:,:])
+> > U    = ds["U"]
 > > 
 > > UonP = Ngl.vinth2p(U,hyam,hybm,pnew,psrf,intyp,P0mb,1,kxtrp)
 > >    
