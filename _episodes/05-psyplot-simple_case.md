@@ -174,6 +174,25 @@ We would need to switch to **pangeo** kernel as shown on the figure below.
 <img src="../fig/jupyterlab_pangeo_switch.png" width="600">
 
 
+### Getting help in a jupyter notebook
+
+Python (general and available outside jupyter notebook)
+
+In addition to online help, you can use `help` function:
+
+~~~
+import matplotlib
+help(matplotlib)
+~~~
+{: .language-python}
+
+
+The Jupyter Notebook has two ways to get help:
+
+- Place the cursor inside the parentheses of the function, hold down shift, and press tab.
+- Or type a function name with a question mark after it.
+
+
 # Copy your output files from Saga to JupyterHub
 
 Start a new **Terminal** on your JupyterHub (this will be referred to hereafter as your "JupyterHub terminal") and type the following commands.
@@ -336,6 +355,44 @@ ax.coastlines()
 
 
 <img src="../fig/test-0009-01_cartopy.png" width="800">
+
+
+#### Adding lat/lon labels when using projections
+
+As you can see on the figure above, axes labels disappear when you change the map projection. You can add gridlines:
+
+~~~
+ax.gridlines()
+~~~
+{: .language-python}
+
+<img src="../fig/test-0009-01_cartopy-gridlines.png" width="800">
+
+On recent version of cartopy (>= 0.18.0b1), [support for lat/lon labelling has been added for all projections](https://github.com/SciTools/cartopy/pull/1117).
+
+On older versions of cartopy, **PlateCarree** and **Mercator** projections support lat/lon labelling:
+
+~~~
+import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
+
+fig = plt.figure(figsize=(15,10))
+ax = plt.axes(projection=ccrs.Mercator())
+
+ds.TS.plot(ax=ax, 
+           transform=ccrs.PlateCarree(),
+	   cmap=load_cmap('vik') 
+	   )
+
+ax.coastlines()
+ax.gridlines(color='lightgrey', linestyle='-', draw_labels=True)
+
+# to make sure the title does not oveelap longitude labelling
+plt.title("Surface temperature", y=1.08)
+~~~
+{: .language-python}
+
+<img src="../fig/test-0009-01_cartopy-labels.png" width="800">
 
 The list of available cartopy projections is available [here](https://scitools.org.uk/cartopy/docs/latest/crs/projections.html).
 
