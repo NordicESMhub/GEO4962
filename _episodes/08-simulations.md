@@ -104,7 +104,7 @@ As before we start a hybrid run from the control experiment.
 ~~~
 ./xmlchange RUN_TYPE=hybrid
 ./xmlchange RUN_REFCASE=F2000climo.f19_g17.control
-./xmlchange RUN_REFDATE=0014-01-01
+./xmlchange RUN_REFDATE=0010-01-01
 ~~~
 {: .language-bash}
 
@@ -113,7 +113,7 @@ We also need to define the **START DATE** for your experiment (that will make it
 <font color="red">On Saga:</font> 
 
 ~~~
-./xmlchange RUN_STARTDATE=0014-01-01
+./xmlchange RUN_STARTDATE=0010-01-01
 ~~~
 {: .language-bash}
 
