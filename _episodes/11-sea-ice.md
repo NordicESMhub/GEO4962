@@ -59,7 +59,7 @@ then change the relevant variable in env_run.xml.
 <font color="red">On Saga:</font>
 
 ~~~
-./xmlchange SSTICE_DATA_FILENAME=./sst_HadOIBl_bc_1x1_2000climo_c180511.nc
+./xmlchange SSTICE_DATA_FILENAME=./sst_HadOIBl_bc_1x1_2000climo_c180511_$EXPNAME.nc
 ~~~
 {: .language-bash}
 
