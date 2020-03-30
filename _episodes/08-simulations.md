@@ -82,7 +82,7 @@ module load cesm/2.1.0
 #
 # Simulation 2: Long simulation
 #
-./create_newcase --case $HOME/cases/F2000climo-f19_g17.$EXPNAME --res f19_g17 --compset F2000climo --mach saga --run-unsupported --project nn1000k
+create_newcase --case $HOME/cases/F2000climo-f19_g17.$EXPNAME --res f19_g17 --compset F2000climo --mach saga --run-unsupported --project nn1000k
 ~~~
 {: .language-bash}
 
