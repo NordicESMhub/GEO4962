@@ -77,7 +77,7 @@ Finally, we can copy the changed SST data file to the run directory.
 <font color="red">On Saga:</font>
 
 ~~~
-cp sst_HadOIBl_bc_1x1_2000climo_c180511_$EXPNAME.nc /cluster/work/users/$USER/F2000climo-f19_g17.$EXPNAME/run/.
+cp sst_HadOIBl_bc_1x1_2000climo_c180511_$EXPNAME.nc /cluster/work/users/$USER/cesm/F2000climo-f19_g17.$EXPNAME/run/.
 ~~~
 {: .language-bash}
 
