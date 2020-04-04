@@ -54,7 +54,7 @@ ds = xr.open_dataset(filename, decode_times=True)
 #  Extract the desired variables (need numpy arrays for vertical interpolation)
 hyam = ds["hyam"]
 hybm = ds["hybm"]
-T    = ds["T"])
+T    = ds["T"]
 psrf = ds["PS"]
 P0mb =  0.01*ds["P0"]
 
@@ -85,9 +85,7 @@ dset_p.T850.attrs['standard_name'] = 'T'
 fig = plt.figure(figsize=(15, 5))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
-dset_p.T850.plot(ax=ax, 
-           transform=ccrs.PlateCarree(),
-	   cmap=load_cmap('vik'))
+dset_p.T850.plot(ax=ax, transform=ccrs.PlateCarree(), cmap=load_cmap('vik'))
 
 ax.coastlines()
 plt.title(ds.time.values[0].strftime("%B year %Y"))
